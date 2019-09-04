@@ -11,7 +11,7 @@ export const API_GATEWAY = {
 }
 
 export const API_PROXY = {
-	mock: '/mock',
+	mock: '/api',
 	dev: '/api',
 	test: '/api',
 	pro: '/api',

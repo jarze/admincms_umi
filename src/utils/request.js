@@ -28,14 +28,14 @@ export default function request(url, options) {
 		.then(checkStatus)
 		.then(parseJSON)
 		.then(checkResponse)
-		.then(data => ({ data }))
+		.then(data => data)
 		.catch(handleError);
 }
 
 // 返回数据处理
 function checkResponse(data) {
 	let code = data.code;
-	if (code === CODE_SUCCESS) return;
+	if (code === CODE_SUCCESS) return data.data;
 	if (code === CODE_LOGIN_INVALID) {
 		// TODO： 处理登录失效
 		console.log('登录失效=========');

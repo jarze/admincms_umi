@@ -1,3 +1,12 @@
+/**
+ * title: 示例页面
+ * Routes:
+ *   - ./src/routes/a.js
+ *   - ./src/routes/b.js
+ */
+
+// 权限路由
+
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import styles from './style.less';
@@ -10,6 +19,7 @@ const Page = ({ loading, dispatch, text, ...props }) => {
 		});
 	}, [dispatch]);
 
+	console.log('example: ---', props);
 	return <div className={styles.container}>{text}</div>;
 };
 

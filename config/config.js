@@ -1,5 +1,5 @@
 import theme from './theme.config';
-// import routes from './routes.config';
+import routes from './routes.config';
 import path from "path";
 import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_GATEWAY, API_PROXY, API_PROXY_TARGET } from './constant';
 
@@ -23,7 +23,10 @@ export default {
 		['umi-plugin-react', {
 			antd: true,
 			dva: true,
-			dynamicImport: { webpackChunkName: true },
+			dynamicImport: {
+				webpackChunkName: true,
+				loadingComponent: './components/PageLoading/index',
+			},
 			title: 'AdminCms_umi',
 			dll: true,
 			locale: {

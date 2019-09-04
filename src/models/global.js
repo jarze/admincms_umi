@@ -1,4 +1,5 @@
 import { fetchMenu } from '@services/global';
+import { menuToRouteHandle } from "@utils/menuHandle";
 
 export const NS = 'global';
 
@@ -10,16 +11,31 @@ export default {
 			userId: '122432',
 			name: 'jarze'
 		},
-		menu: []
+		menu: [],
+		menuRoute: {}
+	},
+	subscriptions: {
+		setup({ dispatch, history }) {
+			// dispatch({
+			//   type: 'fetchUserInfo',
+			// });
+			// dispatch({
+			//   type: 'fetchPrivileges',
+			// });
+			dispatch({
+				type: 'fetchMenu',
+			});
+		},
 	},
 
 	effects: {
-		*fetch(_, { call, put }) {
+		*fetchMenu(_, { call, put }) {
+			const data = yield call(fetchMenu);
+			const menuRoute = menuToRouteHandle(data);
+			console.log(menuRoute);
 			yield put({
 				type: 'save',
-				payload: {
-					menu: yield call(fetchMenu),
-				},
+				payload: { menu: data || [], menuRoute },
 			});
 		},
 	},
