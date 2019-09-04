@@ -1,0 +1,96 @@
+[
+	{
+		"id": "12",
+		"name": "区域用户管理",
+		"parentId": null,
+		"url": "parkuser",
+		"method": "GET",
+		"sortNo": 2,
+		"icon": "park",
+		"remark": null,
+		"isMenu": 1,
+		"children": [
+			{
+				"id": "124",
+				"name": "用户信息管理",
+				"parentId": "2",
+				"url": "user",
+				"method": "GET",
+				"sortNo": 24,
+				"icon": null,
+				"remark": null,
+				"isMenu": 0
+			}
+		]
+	},
+	{
+		"id": "2",
+		"name": "有序用电需求管理",
+		"parentId": null,
+		"url": "orderlymanage",
+		"method": "GET",
+		"sortNo": 2,
+		"icon": "manager",
+		"remark": null,
+		"isMenu": 1,
+		"children": [
+			{
+				"id": "24",
+				"name": "需求执行",
+				"parentId": "2",
+				"url": "demandperform",
+				"method": "GET",
+				"sortNo": 24,
+				"icon": null,
+				"remark": null,
+				"isMenu": 0
+			},
+			{
+				"id": "25",
+				"name": "用户响应统计",
+				"parentId": "2",
+				"url": "usercall",
+				"method": "GET",
+				"sortNo": 25,
+				"icon": null,
+				"remark": null,
+				"isMenu": 0
+			},
+			{
+				"id": "26",
+				"name": "拉闸限电统计",
+				"parentId": "2",
+				"url": "limitationstat",
+				"method": "GET",
+				"sortNo": 26,
+				"icon": null,
+				"remark": null,
+				"isMenu": 0
+			}
+		]
+	},
+	{
+		"id": "3",
+		"name": "消息中心",
+		"parentId": null,
+		"url": "messagecenter",
+		"method": "GET",
+		"sortNo": 3,
+		"icon": "message",
+		"remark": null,
+		"isMenu": 1,
+		"children": [
+			{
+				"id": "32",
+				"name": "消息中心",
+				"parentId": "3",
+				"url": "message",
+				"method": "GET",
+				"sortNo": 32,
+				"icon": null,
+				"remark": null,
+				"isMenu": 0
+			}
+		]
+	}
+]
