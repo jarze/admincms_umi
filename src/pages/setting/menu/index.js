@@ -1,3 +1,12 @@
+/**
+ * title: 目录配置
+ * Routes:
+ *   - ./src/routes/a.js
+ *   - ./src/routes/b.js
+ */
+
+// 权限路由
+
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import styles from './style.less';
@@ -10,7 +19,6 @@ const Page = ({ loading, dispatch, text, ...props }) => {
 		});
 	}, [dispatch]);
 
-	console.log(loading);
 	return <div className={styles.container}>{text}</div>;
 };
 

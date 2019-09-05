@@ -1,9 +1,9 @@
-import Mock from 'mockjs';
+import { mock } from 'mockjs';
 
 export default {
 	// 拉闸限电统计
 	'GET /api/load-reduction/power-cut/statistic/list': (req, res) => {
-		res.send(Mock.mock({
+		res.send(mock({
 			code: 1001,
 			message: 'success',
 			"data": {

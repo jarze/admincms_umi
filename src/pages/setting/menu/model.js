@@ -1,6 +1,6 @@
 import { getText } from './service';
 
-export const NS = 'list';
+export const NS = 'menu';
 
 export default {
 	namespace: NS,

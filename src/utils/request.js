@@ -1,4 +1,5 @@
 import fetch from 'dva/fetch';
+import { stringify } from 'qs';
 import { message } from 'antd';
 import { CODE_LOGIN_INVALID, CODE_SUCCESS, CODE_MESSAGES, MSG } from '../config/constant';
 
@@ -24,6 +25,21 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
+	// 携带网站cookie信息，用于登录验证
+	// options = { ...options, credentials: 'include' };
+	if (options) {
+		const { method = "GET", body } = options;
+		if (body) {
+			if (method.toUpperCase() === 'POST') {
+				// options.body = JSON.stringify(body);
+				options.body = convertObjToFormData(body);
+			} else {
+				url = `${url}?${stringify(body)}`;
+				delete options.body;
+			}
+		}
+	}
+
 	return fetch(`${API_PREFIX}${url}`, options)
 		.then(checkStatus)
 		.then(parseJSON)
@@ -51,4 +67,13 @@ function handleError(err) {
 	console.log(err);
 	err.message && message.err(err.message);
 	return { err };
+}
+
+/* JSON To FormData */
+function convertObjToFormData(object) {
+	const data = new FormData();
+	for (var key in object) {
+		data.append(key, object[key]);
+	}
+	return data;
 }

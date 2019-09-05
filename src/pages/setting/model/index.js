@@ -1,5 +1,5 @@
 /**
- * title: 示例页面
+ * title: 目录配置
  * Routes:
  *   - ./src/routes/a.js
  *   - ./src/routes/b.js

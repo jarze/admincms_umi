@@ -1,5 +1,27 @@
 [
 	{
+		"id": "1",
+		"name": "项目配置",
+		"url": "setting",
+		"icon": "setting",
+		"children": [
+			{
+				"id": "2",
+				"name": "模型配置",
+				"url": "model",
+				"icon": "deployment-unit",
+				"children": []
+			},
+			{
+				"id": "3",
+				"name": "目录配置",
+				"url": "menu",
+				"icon": "menu",
+				"children": []
+			}
+		]
+	},
+	{
 		"id": "12",
 		"name": "区域用户管理",
 		"parentId": null,
@@ -32,8 +54,8 @@
 				"updateTime": null,
 				"children": [
 					{
-						"id": "124",
-						"name": "用户信息管理",
+						"id": "125",
+						"name": "用户信息详情",
 						"parentId": "2",
 						"url": "user",
 						"method": "GET",
@@ -139,7 +161,7 @@
 		"children": [
 			{
 				"id": "32",
-				"name": "消息中心",
+				"name": "消息详情",
 				"parentId": "3",
 				"url": "message",
 				"method": "GET",

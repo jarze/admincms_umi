@@ -1,4 +1,4 @@
-import { fetchMenu } from '@services/global';
+import { fetchMenu, fetchUserInfo } from '@services/global';
 import { menuToRouteHandle } from "@utils/menuHandle";
 
 export const NS = 'global';
@@ -9,16 +9,16 @@ export default {
 		text: NS,
 		user: {
 			userId: '122432',
-			name: 'jarze'
+			userName: 'jarze'
 		},
 		menu: [],
 		menuRoute: {}
 	},
 	subscriptions: {
 		setup({ dispatch, history }) {
-			// dispatch({
-			//   type: 'fetchUserInfo',
-			// });
+			dispatch({
+				type: 'fetchUserInfo',
+			});
 			// dispatch({
 			//   type: 'fetchPrivileges',
 			// });
@@ -32,10 +32,15 @@ export default {
 		*fetchMenu(_, { call, put }) {
 			const data = yield call(fetchMenu);
 			const menuRoute = menuToRouteHandle(data);
-			console.log(menuRoute);
 			yield put({
 				type: 'save',
 				payload: { menu: data || [], menuRoute },
+			});
+		},
+		*fetchUserInfo(_, { put, call }) {
+			yield put({
+				type: 'save',
+				payload: { user: yield call(fetchUserInfo) },
 			});
 		},
 	},
