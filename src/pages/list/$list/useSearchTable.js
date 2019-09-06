@@ -38,6 +38,10 @@ export default ({ dispatch, dataSource, filterParams, pagination, selectedRowKey
 		});
 	};
 
+	const onValuesChange = (changedValues, allValues) => {
+		console.log(changedValues, allValues, '----onValuesChange');
+	}
+
 	const rowSelection = {
 		selectedRowKeys: selectedRowKeys,
 		onChange: rowKeys => {
@@ -63,7 +67,8 @@ export default ({ dispatch, dataSource, filterParams, pagination, selectedRowKey
 		items: filterItems,
 		data: filterParams,
 		onSubmit: updateFilterParams,
-		onReset: updateFilterParams
+		onReset: updateFilterParams,
+		onValuesChange
 	}
 	return [tbProps, fmProps];
 }

@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { Fragment, useEffect, useState } from 'react';
 import { Form, Input, Button, Divider, Row, Col } from 'antd';
 import style from './index.less';
 
@@ -44,11 +45,19 @@ const CForm = ({
 	okText = '确定',
 	cancelText = '清除',
 	type = 'col',// 'follow' | 'col',
+	onValuesChange,
 	...formProps
 }) => {
 	useEffect(() => {
 		resetFields();
-	}, [data, resetFields]);
+	}, [data]);
+
+	// 初始化缓存组件，以防item失焦点
+	const [[FormContentWap, FormItemWap, ForSubmitItemWap], setWap] = useState(getColWap(type, items.length));
+
+	useEffect(() => {
+		setWap(getColWap(type, items.length));
+	}, [items]);
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -65,7 +74,6 @@ const CForm = ({
 		onReset && onReset({});
 	};
 
-	const [FormContentWap, FormItemWap, ForSubmitItemWap] = getColWap(type, items.length);
 
 	const formContent = items.map(({ key, label, options, render, ...itemProps }) => {
 		if (render === null) return null;
@@ -115,4 +123,8 @@ const CForm = ({
 	);
 };
 
-export default Form.create()(CForm);
+export default Form.create({
+	onValuesChange: ({ onValuesChange, ...props }, changedValues, allValues) => {
+		onValuesChange && onValuesChange(changedValues, allValues);
+	}
+})(CForm);
