@@ -4,7 +4,7 @@ export const NS = 'list';
 
 const defaultPagination = {
 	current: 1,
-	pageSize: 10,
+	pageSize: 20,
 	total: 0,
 };
 
@@ -15,6 +15,7 @@ export default {
 		filterParams: {},
 		dataSource: [],
 		pagination: { ...defaultPagination },
+		selectedRowKeys:[]
 	},
 	subscriptions: {
 		setup({ dispatch, history, ...props }) {
@@ -27,10 +28,20 @@ export default {
 
 	effects: {
 		*fetchData({ payload }, { call, put }) {
+			const { data, pageNum: current, pageSize, total, pages } = yield call(
+				getListData,
+				payload,
+			);
 			yield put({
 				type: 'save',
 				payload: {
-					dataSource: yield call(getListData, payload),
+					dataSource: data,
+					pagination: {
+						current,
+						pageSize,
+						total,
+						pages
+					},
 				},
 			});
 		}

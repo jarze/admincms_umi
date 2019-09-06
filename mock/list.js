@@ -6,11 +6,17 @@ export default {
 		res.send(mock({
 			code: 1001,
 			message: 'success',
-			"data|10-50": [{
-				"id|+1": 1,
-				name: "@cname",
-				title: "@title"
-			}]
+			data: {
+				"pageNum": Number(req.query.pageNo),
+				"pageSize": Number(req.query.pageSize),
+				"pages": "@integer(60, 100)",
+				"total": "@integer(60, 100)",
+				"data|10-50": [{
+					"id|+1": 100,
+					name: "@cname",
+					title: "@title"
+				}]
+			}
 		}));
 	}
 }

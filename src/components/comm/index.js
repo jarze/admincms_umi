@@ -1,4 +1,2 @@
-import Form from './Form';
-import Table from './Table';
-
-export { Form, Table };
+export { default as Form } from './Form';
+export { default as Table } from './Table';

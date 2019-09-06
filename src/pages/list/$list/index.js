@@ -1,45 +1,21 @@
-import React, { useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { connect } from 'dva';
 import { Table, Form } from '@components/comm';
 import { columns, filterItems } from './_logic.js';
-import Link from 'umi/link';
+import useSearchTable from './useSearchTable';
 import { NS } from './model';
 
-const Page = ({ loading, dispatch, text, dataSource, filterParams, ...props }) => {
-	useEffect(() => {
-		dispatch({
-			type: `${NS}/fetchData`,
-			payload: filterParams
-		});
-	}, [dispatch, filterParams]);
-
-	const updateFilterParams = (params) => {
-		dispatch({
-			type: `${NS}/save`,
-			payload: { filterParams: params }
-		})
-	}
-
-	const tbProps = {
-		columns,
-		dataSource,
-	}
-
-	const fmProps = {
-		items: filterItems,
-		data: filterParams,
-		onSubmit: updateFilterParams,
-		onReset: updateFilterParams,
-	}
+const Page = ({ loading, ...props }) => {
+	const [tbProps, fmProps] = useSearchTable(props, NS, columns, filterItems, loading);
 	return (
 		<>
 			<Form {...fmProps} />
-			<Table {...tbProps} />
+			<Table {...tbProps} rowKey='id' selectionShowKey='name' />
 		</>
 	);
 };
 
 export default connect(sto => ({
 	...sto[NS],
-	loading: sto.loading.global
+	loading: sto.loading.effects
 }))(Page);

@@ -42,4 +42,8 @@ export const filterItems = [
 		label: 'd',
 		key: 'd',
 	},
+	{
+		label: 'ee',
+		key: 'e',
+	},
 ];

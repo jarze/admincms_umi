@@ -1,6 +1,38 @@
-import React, { useEffect } from 'react';
-import { Form, Input, Button, Divider } from 'antd';
+import React, { Fragment, useEffect } from 'react';
+import { Form, Input, Button, Divider, Row, Col } from 'antd';
+import style from './index.less';
+
 const FormItem = Form.Item;
+
+/* 获取排列方式 */
+const getColsHandle = (count) => {
+	const cols = {
+		xxl: 6,
+		lg: 8,
+		md: 12,
+		xs: 24,
+	}
+	const handleColumns = (col) => {
+		let columns = (24 / col)
+		return (columns - (count % columns)) * col;
+	}
+	const submitCols = {};
+	Object.keys(cols).forEach((key) => {
+		submitCols[key] = handleColumns(cols[key]);
+	});
+	return { cols, submitCols };
+}
+
+const getColWap = (type, count) => {
+	switch (type) {
+		default:
+			const { cols = { span: 8 }, submitCols = { span: 24 } } = getColsHandle(count);
+			const FormContentWap = (props) => (type === 'col' ? <Row gutter={24} {...props} /> : <Fragment {...props} />);
+			const FormItemWap = (props) => (type === 'col' ? <Col {...cols} {...props} /> : <Fragment {...props} />);
+			const ForSubmitItemWap = (props) => (type === 'col' ? <Col {...submitCols} {...props} /> : <Fragment {...props} />);
+			return [FormContentWap, FormItemWap, ForSubmitItemWap];
+	}
+}
 
 const CForm = ({
 	form: { getFieldDecorator, validateFields, resetFields, getFieldsValue },
@@ -11,23 +43,12 @@ const CForm = ({
 	loading,
 	okText = '确定',
 	cancelText = '清除',
+	type = 'col',// 'follow' | 'col',
 	...formProps
 }) => {
 	useEffect(() => {
 		resetFields();
 	}, [data, resetFields]);
-
-	const formContent = items.map(({ key, label, options, render, ...itemProps }) => {
-		if (render === null) return null;
-		return (
-			<FormItem label={label} key={key} {...itemProps}>
-				{getFieldDecorator(key, {
-					initialValue: data[key],
-					...options,
-				})(render ? render() : <Input type="text" />)}
-			</FormItem>
-		);
-	});
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -44,25 +65,52 @@ const CForm = ({
 		onReset && onReset({});
 	};
 
-	return (
-		<Form layout='inline' onSubmit={handleSubmit} {...formProps}>
-			{formContent}
-			{
-				onSubmit &&
-				<FormItem style={{ float: 'right', marginRight: 0 }}>
-					<Button type="primary" htmlType="submit" loading={loading}>
-						{okText}
-					</Button>
-					{onReset &&
-						<>
-							<Divider type="vertical" />
-							<Button type="cancel" onClick={handleClear}>
-								{cancelText}
-							</Button>
-						</>
-					}
+	const [FormContentWap, FormItemWap, ForSubmitItemWap] = getColWap(type, items.length);
+
+	const formContent = items.map(({ key, label, options, render, ...itemProps }) => {
+		if (render === null) return null;
+		return (
+			<FormItemWap key={key}>
+				<FormItem label={label} key={key} {...itemProps}>
+					{getFieldDecorator(key, {
+						initialValue: data[key],
+						...options,
+					})(render ? render() : <Input type="text" />)}
 				</FormItem>
-			}
+			</FormItemWap>
+		);
+	});
+
+	const formSubmit = (
+		onSubmit &&
+		<ForSubmitItemWap>
+			<FormItem style={{ float: 'right', marginRight: 0 }}>
+				<Button type="primary" htmlType="submit" loading={loading}>
+					{okText}
+				</Button>
+				{onReset &&
+					<>
+						<Divider type="vertical" />
+						<Button type="cancel" onClick={handleClear}>
+							{cancelText}
+						</Button>
+					</>
+				}
+			</FormItem>
+		</ForSubmitItemWap>
+	);
+
+	return (
+		<Form
+			className={style[type === 'col' ? "ant-advanced-search-form" : '']}
+			layout='inline'
+			onSubmit={handleSubmit}
+			{...formProps}
+		>
+			<FormContentWap>
+				{formContent}
+				{formSubmit}
+			</FormContentWap>
 		</Form>
 	);
 };

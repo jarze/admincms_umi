@@ -3,7 +3,6 @@ import User from './_components/User';
 import logo from '@assets/logo.svg';
 import Link from 'umi/link';
 import { connect } from 'dva';
-import setting from './_defaultSetting';
 
 const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 
@@ -12,8 +11,8 @@ const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 	return (
 		<ProLayoutComponents
 			title='CMS'
-			logo={logo}
-			setting={setting}
+			logo={false}
+			fixSiderbar={true}
 			footerRender={() => null}
 			menuItemRender={(menuItemProps, defaultDom) => {
 				return <Link to={menuItemProps.path.toLowerCase()}>{defaultDom}</Link>;
