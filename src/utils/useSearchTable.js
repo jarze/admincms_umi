@@ -1,17 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
 /**
  * @description: 带搜索项Table页面
- * @param 0 model【list】sto + dispatch 
+ * @param 0 model【list】sto + dispatch
  * @param 1 model name
- * @param 2 table columns	
+ * @param 2 table columns
  * @param 3 search items
  * @param 4 umi loading.effects
  * @return: [tbProps: table props, fmProps: searchForm props]
  */
-export default ({ dispatch, dataSource, filterParams, pagination, selectedRowKeys, ...props }, NS, columns, filterItems, loadingEffects) => {
-	const fetchUrl = `${NS}/fetchData`;
+export default ({
+	dispatch,
+	dataSource,
+	filterParams,
+	pagination,
+	selectedRowKeys,
+	...props
+}, NS, columns, filterItems, loadingEffects) => {
+	const fetchUrl=`${NS}/fetchData`;
 
 	useEffect(() => {
 		dispatch({
@@ -24,35 +31,47 @@ export default ({ dispatch, dataSource, filterParams, pagination, selectedRowKey
 		});
 	}, [filterParams]);
 
-	const updateFilterParams = (payload) => {
+	const updateFilterParams=(payload) => {
 		dispatch({
 			type: `${NS}/save`,
-			payload: { filterParams: payload, pagination: { ...pagination, current: 1 } },
+			payload: {
+				filterParams: payload,
+				pagination: {
+					...pagination,
+					current: 1
+				}
+			},
 		})
 	}
 
-	const handlePageChange = (pageNo, pageSize) => {
+	const handlePageChange=(pageNo, pageSize) => {
 		dispatch({
 			type: fetchUrl,
-			payload: { ...filterParams, pageNo, pageSize },
+			payload: {
+				...filterParams,
+				pageNo,
+				pageSize
+			},
 		});
 	};
 
-	const onValuesChange = (changedValues, allValues) => {
+	const onValuesChange=(changedValues, allValues) => {
 		console.log(changedValues, allValues, '----onValuesChange');
 	}
 
-	const rowSelection = {
+	const rowSelection={
 		selectedRowKeys: selectedRowKeys,
 		onChange: rowKeys => {
 			dispatch({
 				type: `${NS}/save`,
-				payload: { selectedRowKeys: rowKeys },
+				payload: {
+					selectedRowKeys: rowKeys
+				},
 			})
 		},
 	}
 
-	const tbProps = {
+	const tbProps={
 		columns,
 		dataSource,
 		loading: loadingEffects[fetchUrl],
@@ -63,7 +82,7 @@ export default ({ dispatch, dataSource, filterParams, pagination, selectedRowKey
 		rowSelection
 	}
 
-	const fmProps = {
+	const fmProps={
 		items: filterItems,
 		data: filterParams,
 		onSubmit: updateFilterParams,

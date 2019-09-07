@@ -1,181 +1,61 @@
-[
-	{
-		"id": "1",
-		"name": "项目配置",
-		"url": "setting",
-		"icon": "setting",
-		"children": [
-			{
-				"id": "2",
-				"name": "模型配置",
-				"url": "model",
-				"icon": "deployment-unit",
-				"children": []
-			},
-			{
-				"id": "3",
-				"name": "目录配置",
-				"url": "menu",
-				"icon": "menu",
-				"children": []
-			}
-		]
-	},
-	{
-		"id": "12",
-		"name": "区域用户管理",
-		"parentId": null,
-		"url": "parkuser",
-		"method": "GET",
-		"sortNo": 2,
-		"icon": "park",
-		"remark": null,
-		"isMenu": 1,
-		"status": 1,
-		"hasPrivilege": 1,
-		"createByName": null,
-		"createTime": null,
-		"updateTime": null,
-		"children": [
-			{
-				"id": "124",
-				"name": "用户信息管理",
-				"parentId": "2",
-				"url": "user",
-				"method": "GET",
-				"sortNo": 24,
-				"icon": null,
-				"remark": null,
-				"isMenu": 0,
-				"status": 1,
-				"hasPrivilege": 1,
-				"createByName": null,
-				"createTime": null,
-				"updateTime": null,
-				"children": [
-					{
-						"id": "125",
-						"name": "用户信息详情",
-						"parentId": "2",
-						"url": "user",
-						"method": "GET",
-						"sortNo": 24,
-						"icon": null,
-						"remark": null,
-						"isMenu": 0,
-						"status": 1,
-						"hasPrivilege": 1,
-						"createByName": null,
-						"createTime": null,
-						"updateTime": null,
-						"children": null
-					}
-				]
-			}
-		]
-	},
-	{
-		"id": "2",
-		"name": "有序用电需求管理",
-		"parentId": null,
-		"url": "orderlymanage",
-		"method": "GET",
-		"sortNo": 2,
-		"icon": "manager",
-		"remark": null,
-		"isMenu": 1,
-		"status": 1,
-		"hasPrivilege": 1,
-		"createByName": null,
-		"createTime": null,
-		"updateTime": null,
-		"children": [
-			{
-				"id": "24",
-				"name": "需求执行",
-				"parentId": "2",
-				"url": "demandperform",
-				"method": "GET",
-				"sortNo": 24,
-				"icon": null,
-				"remark": null,
-				"isMenu": 0,
-				"status": 1,
-				"hasPrivilege": 1,
-				"createByName": null,
-				"createTime": null,
-				"updateTime": null,
-				"children": null
-			},
-			{
-				"id": "25",
-				"name": "用户响应统计",
-				"parentId": "2",
-				"url": "usercall",
-				"method": "GET",
-				"sortNo": 25,
-				"icon": null,
-				"remark": null,
-				"isMenu": 0,
-				"status": 1,
-				"hasPrivilege": 1,
-				"createByName": null,
-				"createTime": null,
-				"updateTime": null,
-				"children": null
-			},
-			{
-				"id": "26",
-				"name": "拉闸限电统计",
-				"parentId": "2",
-				"url": "limitationstat",
-				"method": "GET",
-				"sortNo": 26,
-				"icon": null,
-				"remark": null,
-				"isMenu": 0,
-				"status": 1,
-				"hasPrivilege": 1,
-				"createByName": null,
-				"createTime": null,
-				"updateTime": null,
-				"children": null
-			}
-		]
-	},
-	{
-		"id": "3",
-		"name": "消息中心",
-		"parentId": null,
-		"url": "messagecenter",
-		"method": "GET",
-		"sortNo": 3,
-		"icon": "message",
-		"remark": null,
-		"isMenu": 1,
-		"status": 1,
-		"hasPrivilege": 1,
-		"createByName": null,
-		"createTime": null,
-		"updateTime": null,
-		"children": [
-			{
-				"id": "32",
-				"name": "消息详情",
-				"parentId": "3",
-				"url": "message",
-				"method": "GET",
-				"sortNo": 32,
-				"icon": null,
-				"remark": null,
-				"isMenu": 0,
-				"status": 1,
-				"hasPrivilege": 1,
-				"createByName": null,
-				"createTime": null,
-				"updateTime": null,
-				"children": null
-			}
-		]
-	}
-]
+[{
+    "id": "1",
+    "name": "项目配置",
+    "url": "setting",
+    "icon": "setting",
+    "children": [{
+            "id": "2",
+            "name": "模型配置",
+            "url": "model",
+            "icon": "deployment-unit",
+            "children": []
+        },
+        {
+            "id": "3",
+            "name": "目录配置",
+            "url": "menu",
+            "icon": "menu",
+            "children": []
+        }
+    ]
+}, {
+  "id": "4",
+  "name": "列表",
+  "url": "list",
+  "icon": "list",
+  "children": [{
+      "id": "5",
+      "name": "基本列表",
+      "url": "list",
+      "icon": "deployment-unit",
+      "children": []
+    },
+    {
+      "id": "6",
+      "name": "list1",
+      "url": "list1",
+      "icon": "menu",
+      "children": []
+    }
+  ]
+}, {
+  "id": "7",
+  "name": "列表2",
+  "url": "ex",
+  "icon": "list",
+  "children": [{
+      "id": "8",
+      "name": "列表1",
+      "url": "list",
+      "icon": "deployment-unit",
+      "children": []
+    },
+    {
+      "id": "9",
+      "name": "列表3",
+      "url": "ex",
+      "icon": "menu",
+      "children": []
+    }
+  ]
+}]

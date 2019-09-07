@@ -1,11 +1,24 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/**
+ * title: 示例页面
+ * Routes:
+ *   - ./src/routes/list.js
+ */
+
 import { connect } from 'dva';
 import { Table, Form } from '@components/comm';
 import { columns, filterItems } from './_logic.js';
-import useSearchTable from './useSearchTable';
+import useSearchTable from '@utils/useSearchTable';
 import { NS } from './model';
 
-const Page = ({ loading, ...props }) => {
+const Page = ({ 
+	 loading,
+	 computedMatch: {
+	     params
+	   },
+	   ...props
+ }) => {
+		console.log(props, '=====', params)
+
 	const [tbProps, fmProps] = useSearchTable(props, NS, columns, filterItems, loading);
 	return (
 		<>
