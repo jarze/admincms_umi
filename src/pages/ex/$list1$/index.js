@@ -12,7 +12,6 @@ const Page=({
   }, // 路由参数
   ...props
 }) => {
-  console.log(props, '=====', params)
   const [tbProps, fmProps]=useSearchTable(props, NS, columns, filterItems, loading);
   return <SearchList fmProps={
     fmProps

@@ -45,7 +45,11 @@ export default function request(url, options) {
 		.then(parseJSON)
 		.then(checkResponse)
 		.then(data => data)
-		.catch(handleError);
+		.catch(err => {
+			// 请求失败处理 返回undefined
+			err.message && message.error(err.message);
+			return;
+		});
 }
 
 // 返回数据处理
@@ -62,11 +66,11 @@ function checkResponse(data) {
 	throw error;
 }
 
-// 请求失败处理
+
 function handleError(err) {
-	console.log(err);
-	err.message && message.err(err.message);
-	return { err };
+	console.log('❌', err);
+	err.message && message.error(err.message);
+	// return { err };
 }
 
 /* JSON To FormData */
