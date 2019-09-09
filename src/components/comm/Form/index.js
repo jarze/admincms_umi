@@ -2,6 +2,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Form, Input, Button, Divider, Row, Col } from 'antd';
 import style from './index.less';
+import { cps } from 'redux-saga/effects';
 
 const FormItem = Form.Item;
 
@@ -24,10 +25,10 @@ const getColsHandle = (count) => {
 	return { cols, submitCols };
 }
 
-const getColWap = (type, count) => {
+const getColWap = (type, count, col) => {
 	switch (type) {
 		default:
-			const { cols = { span: 8 }, submitCols = { span: 24 } } = getColsHandle(count);
+			const { cols = { span: 8 }, submitCols = { span: 24 } } = col ? { cols: { span: col }, submitCols: { span: col } } : getColsHandle(count);
 			const FormContentWap = (props) => (type === 'col' ? <Row gutter={24} {...props} /> : <Fragment {...props} />);
 			const FormItemWap = (props) => (type === 'col' ? <Col {...cols} {...props} /> : <Fragment {...props} />);
 			const ForSubmitItemWap = (props) => (type === 'col' ? <Col {...submitCols} {...props} /> : <Fragment {...props} />);
@@ -46,17 +47,22 @@ const CForm = ({
 	cancelText = '清除',
 	type = 'col',// 'follow' | 'col',
 	onValuesChange,
+	col, // 固定排版 24 8
 	...formProps
 }) => {
 	useEffect(() => {
 		resetFields();
 	}, [data]);
 
+	const getWap = () => {
+		return getColWap(type, items.length, col);
+	}
+
 	// 初始化缓存组件，以防item失焦点
-	const [[FormContentWap, FormItemWap, ForSubmitItemWap], setWap] = useState(getColWap(type, items.length));
+	const [[FormContentWap, FormItemWap, ForSubmitItemWap], setWap] = useState(getWap());
 
 	useEffect(() => {
-		setWap(getColWap(type, items.length));
+		setWap(getWap());
 	}, [items]);
 
 	const handleSubmit = e => {
@@ -73,7 +79,6 @@ const CForm = ({
 		resetFields();
 		onReset && onReset({});
 	};
-
 
 	const formContent = items.map(({ key, label, options, render, ...itemProps }) => {
 		if (render === null) return null;
@@ -112,6 +117,7 @@ const CForm = ({
 		<Form
 			className={style[type === 'col' ? "ant-advanced-search-form" : '']}
 			layout='inline'
+			style={{ overflow: 'hidden' }}
 			onSubmit={handleSubmit}
 			{...formProps}
 		>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 
 /**
  * @description: 带搜索项Table页面
@@ -18,7 +18,7 @@ export default ({
 	selectedRowKeys,
 	...props
 }, NS, columns, filterItems, loadingEffects) => {
-	const fetchUrl=`${NS}/fetchData`;
+	const fetchUrl = `${NS}/fetchData`;
 
 	useEffect(() => {
 		dispatch({
@@ -31,7 +31,7 @@ export default ({
 		});
 	}, [filterParams]);
 
-	const updateFilterParams=(payload) => {
+	const updateFilterParams = (payload) => {
 		dispatch({
 			type: `${NS}/save`,
 			payload: {
@@ -44,7 +44,7 @@ export default ({
 		})
 	}
 
-	const handlePageChange=(pageNo, pageSize) => {
+	const handlePageChange = (pageNo, pageSize) => {
 		dispatch({
 			type: fetchUrl,
 			payload: {
@@ -55,11 +55,11 @@ export default ({
 		});
 	};
 
-	const onValuesChange=(changedValues, allValues) => {
-		console.log(changedValues, allValues, '----onValuesChange');
-	}
+	// const onValuesChange=(changedValues, allValues) => {
+	// 	console.log(changedValues, allValues, '----onValuesChange');
+	// }
 
-	const rowSelection={
+	const rowSelection = {
 		selectedRowKeys: selectedRowKeys,
 		onChange: rowKeys => {
 			dispatch({
@@ -71,7 +71,7 @@ export default ({
 		},
 	}
 
-	const tbProps={
+	const tbProps = {
 		columns,
 		dataSource,
 		loading: loadingEffects[fetchUrl],
@@ -82,12 +82,12 @@ export default ({
 		rowSelection
 	}
 
-	const fmProps={
+	const fmProps = {
 		items: filterItems,
 		data: filterParams,
 		onSubmit: updateFilterParams,
 		onReset: updateFilterParams,
-		onValuesChange
+		// onValuesChange
 	}
 	return [tbProps, fmProps];
 }
