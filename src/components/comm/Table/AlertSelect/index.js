@@ -1,12 +1,10 @@
 import { Fragment } from 'react';
-import { Alert, Button, Icon, Popover, Tag, Divider, Checkbox } from 'antd';
+import { Affix, Alert, Button, Icon, Popover, Tag, Divider, Checkbox } from 'antd';
 
 /* table rowSelection,  参数 */
 export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent, rowSelection = {}, dataSource = [], rowKey, selectionShowKey }) => {
 	const { selectedRowKeys = [], onChange } = rowSelection;
 	const count = selectedRowKeys.length;
-
-	// if (count === 0) return <Fragment />;
 
 	const handleRowSelectChange = (checked) => {
 		onRowSelectChange && onRowSelectChange(checked);
@@ -65,10 +63,12 @@ export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent,
 	}
 
 	return (
-		<Alert
-			type='info'
-			message={alert}
-			style={{ marginBottom: '1em', overflow: 'hidden' }}
-		/>
+		<Affix offsetTop={8}>
+			<Alert
+				type='info'
+				message={alert}
+				style={{ marginBottom: '1em', overflow: 'hidden' }}
+			/>
+		</Affix>
 	);
 }
