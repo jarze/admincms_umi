@@ -42,17 +42,27 @@ export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent,
 			<Button type='link' size='small'>{count}</Button>
 	);
 
+	const selectContent = (
+		<Fragment>
+			<span>&nbsp;&nbsp;已选择 {selected} 项</span>
+			<Divider type="vertical" />
+			<Button type='link' size='small' onClick={() => clearSelect([])} disabled={!count}>清空</Button>
+		</Fragment>
+	);
+
 	const alert = (
 		<div>
 			<Fragment>
 				{onRowSelectChange ?
-					<Checkbox checked={onRowSelect} onChange={e => handleRowSelectChange(e.target.checked)} />
+					<Checkbox checked={onRowSelect} onChange={e => handleRowSelectChange(e.target.checked)} >
+						{!onRowSelect ? '批量操作' : selectContent}
+					</Checkbox>
 					:
-					<Icon type="info-circle" theme="twoTone" />
+					<Fragment>
+						<Icon type="info-circle" theme="twoTone" />
+						{selectedRowKeys}
+					</Fragment>
 				}
-				<span>&nbsp;&nbsp;已选择 {selected} 项</span>
-				<Divider type="vertical" />
-				<Button type='link' size='small' onClick={() => clearSelect([])} disabled={!count}>清空</Button>
 			</Fragment>
 			{renderAlertSelectExtraContent && renderAlertSelectExtraContent(selectedRowKeys)}
 		</div>
