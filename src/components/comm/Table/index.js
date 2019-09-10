@@ -4,10 +4,16 @@
  * @Desc: 基于antd Table的封装
  * 1.修改莫分页默认参数
  * 2.增加rowSelect提示框
+ *
  * API： 同antd Table API
- * 增加API： selectionShowKey 用于显示已选择项
+ *
+ * 增加API：
+ * selectionShowKey | string | 可选 | 用于显示已选择项
+ * renderAlertSelectExtraContent | (props: selectedRowKeys) => React.ReactElement | 可选 | 用与显示selectRow更多操作
+ *
  */
 
+import { useState, Fragment } from 'react';
 import { Table } from 'antd';
 import Alert from './AlertSelect';
 
@@ -17,24 +23,31 @@ export const defaultPaginationConfig = {
 };
 
 // 统一默认列表分页表现形式
-export default ({ pagination, ...props }) => {
-	if (!pagination) return <Table {...{ pagination, ...props }} />;
+export default ({ pagination, rowSelection, renderAlertSelectExtraContent, ...props }) => {
 
-	let pg = {
+	const [onRowSelect, setOnRowSelect] = useState(false);
+
+	let pg = pagination ? {
 		...defaultPaginationConfig,
 		onShowSizeChange: pagination.onShowSizeChange || pagination.onChange,
 		...pagination,
-	};
+	} : pagination;
 
 	return (
-		<>
-			{props.rowSelection && <Alert {...props.rowSelection} {...props} />}
+		<Fragment>
+			{rowSelection &&
+				<Alert
+					onRowSelect={onRowSelect}
+					onRowSelectChange={setOnRowSelect}
+					{...{ renderAlertSelectExtraContent, rowSelection, ...props }}
+				/>}
 			<Table
 				rowKey={(_, index) => index}
 				bordered={false}
 				{...props}
 				pagination={pg}
+				rowSelection={onRowSelect ? rowSelection : null}
 			/>
-		</>
+		</Fragment>
 	);
 };

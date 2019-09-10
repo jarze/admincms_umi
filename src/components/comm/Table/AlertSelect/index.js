@@ -1,13 +1,19 @@
 import { Fragment } from 'react';
-import { Alert, Button, Icon, Popover, Tag } from 'antd';
+import { Alert, Button, Icon, Popover, Tag, Divider, Checkbox } from 'antd';
 
-/* table rowSelection 参数 */
-export default ({ selectedRowKeys = [], onChange, dataSource = [], rowKey, selectionShowKey }) => {
+/* table rowSelection,  参数 */
+export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent, rowSelection = {}, dataSource = [], rowKey, selectionShowKey }) => {
+	const { selectedRowKeys = [], onChange } = rowSelection;
 	const count = selectedRowKeys.length;
 
-	if (count === 0) return <Fragment />;
+	// if (count === 0) return <Fragment />;
 
-	const selectedData = dataSource.filter((item) => selectedRowKeys.includes(item[rowKey])).map(item => {
+	const handleRowSelectChange = (checked) => {
+		onRowSelectChange && onRowSelectChange(checked);
+		!checked && onChange && onChange([]);
+	}
+
+	const selectedData = selectionShowKey && dataSource.filter((item) => selectedRowKeys.includes(item[rowKey])).map(item => {
 		const key = item[rowKey];
 		return (
 			<Tag
@@ -27,22 +33,30 @@ export default ({ selectedRowKeys = [], onChange, dataSource = [], rowKey, selec
 	});
 
 	const selected = (
-		selectionShowKey ?
+		selectionShowKey && count > 0 ?
 			<Popover
 				placement="bottom"
 				content={<div style={{ maxWidth: 250 }}>{selectedData}</div>}
 			>
-				<Button type='link'>{count}</Button>
+				<Button type='link' size='small'>{count}</Button>
 			</Popover>
 			:
-			<Button type='link'>{count}</Button>
+			<Button type='link' size='small'>{count}</Button>
 	);
 
 	const alert = (
 		<div>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<span>已选择 {selected} 项</span>
-			<Button type='link' onClick={() => clearSelect([])}>清空</Button>
+			<Fragment>
+				{onRowSelectChange ?
+					<Checkbox checked={onRowSelect} onChange={e => handleRowSelectChange(e.target.checked)} />
+					:
+					<Icon type="info-circle" theme="twoTone" />
+				}
+				<span>&nbsp;&nbsp;已选择 {selected} 项</span>
+				<Divider type="vertical" />
+				<Button type='link' size='small' onClick={() => clearSelect([])} disabled={!count}>清空</Button>
+			</Fragment>
+			{renderAlertSelectExtraContent && renderAlertSelectExtraContent(selectedRowKeys)}
 		</div>
 	);
 
@@ -53,9 +67,8 @@ export default ({ selectedRowKeys = [], onChange, dataSource = [], rowKey, selec
 	return (
 		<Alert
 			type='info'
-			showIcon
-			icon={<Icon type="info-circle" style={{ fontSize: '24px' }} />}
 			message={alert}
+			style={{ marginBottom: '1em', overflow: 'hidden' }}
 		/>
 	);
 }
