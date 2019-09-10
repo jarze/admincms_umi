@@ -44,9 +44,9 @@ export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent,
 
 	const selectContent = (
 		<Fragment>
-			<span>&nbsp;&nbsp;已选择 {selected} 项</span>
+			<span>&nbsp;&nbsp; {selected} 项</span>
 			<Divider type="vertical" />
-			<Button type='link' size='small' onClick={() => clearSelect([])} disabled={!count}>清空</Button>
+			<Button type='link' onClick={() => clearSelect([])} disabled={!count} icon="delete" />
 		</Fragment>
 	);
 
@@ -54,8 +54,18 @@ export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent,
 		<div>
 			<Fragment>
 				{onRowSelectChange ?
-					<Checkbox checked={onRowSelect} onChange={e => handleRowSelectChange(e.target.checked)} >
-						{!onRowSelect ? '批量操作' : selectContent}
+					<Checkbox
+						checked={onRowSelect}
+						onChange={e => handleRowSelectChange(e.target.checked)}
+						style={{ width: 170, whiteSpace: 'nowrap' }}
+					>
+						{!onRowSelect ?
+							<span>批量操作
+								<Divider type="vertical" />
+								<Icon type="edit" />
+							</span>
+							: selectContent
+						}
 					</Checkbox>
 					:
 					<Fragment>
