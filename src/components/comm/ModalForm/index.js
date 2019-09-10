@@ -24,7 +24,7 @@ export default ({ items, children, onOk, ...props }) => {
 		}
 	}
 
-	const onValuesChange = (changedValues, allValues) => {
+	const onValuesChange = (_, allValues) => {
 		setFormData(allValues);
 	}
 

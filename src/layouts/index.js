@@ -7,6 +7,7 @@ import { connect } from 'dva';
 const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 
 	const rightContent = <User user={user} style={{ float: 'right', margin: '0 2em' }} />;
+	const { breadcrumb } = restProps.location.query;
 
 	return (
 		<ProLayoutComponents
@@ -18,15 +19,7 @@ const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 				return <Link to={menuItemProps.path.toLowerCase()}>{defaultDom}</Link>;
 			}}
 			rightContentRender={() => rightContent}
-			breadcrumbRender={(routers = []) => {
-				return [
-					{
-						path: '/',
-						breadcrumbName: 'home',
-					},
-					...routers,
-				];
-			}}
+			breadcrumbRender={(routers = []) => (breadcrumb ? [...routers, { breadcrumbName: breadcrumb }] : routers)}
 			{...restProps}
 			route={menuRoute}
 		>

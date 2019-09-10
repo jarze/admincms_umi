@@ -10,7 +10,7 @@ const menu = (
 			<Link to='/user'><Icon type="user" />个人中心</Link>
 		</Menu.Item>
 		<Menu.Item>
-			<ModalForm items={items} title="修改密码">
+			<ModalForm items={items} title="修改密码" onOk={(values, callBack) => { console.log(values); callBack() }}>
 				<span><Icon type="user" />修改密码</span>
 			</ModalForm>
 		</Menu.Item>

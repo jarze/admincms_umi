@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useMemo } from 'react';
 import { Form, Input, Button, Divider, Row, Col } from 'antd';
 import style from './index.less';
 import { cps } from 'redux-saga/effects';
@@ -54,16 +54,7 @@ const CForm = ({
 		resetFields();
 	}, [data]);
 
-	const getWap = () => {
-		return getColWap(type, items.length, col);
-	}
-
-	// 初始化缓存组件，以防item失焦点
-	const [[FormContentWap, FormItemWap, ForSubmitItemWap], setWap] = useState(getWap());
-
-	useEffect(() => {
-		setWap(getWap());
-	}, [items]);
+	const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(() => getColWap(type, items.length, col), [items]);
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -117,7 +108,7 @@ const CForm = ({
 		<Form
 			className={style[type === 'col' ? "ant-advanced-search-form" : '']}
 			layout='inline'
-			style={{ overflow: 'hidden' }}
+			style={{ overflow: 'hidden', margin: '1em 0' }}
 			onSubmit={handleSubmit}
 			{...formProps}
 		>

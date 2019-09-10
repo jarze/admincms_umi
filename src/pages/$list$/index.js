@@ -1,12 +1,7 @@
-/**
- * title: 示例页面
- * Routes:
- *   - ./src/routes/list.js
- */
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import { connect } from 'dva';
-import { Table, Form } from '@components/comm';
-import { columns, filterItems } from './_logic.js';
+import { SearchList } from '@components/comm';
+import { columns, filterItems } from './_logic';
 import useSearchTable from '@utils/hooks/useSearchTable';
 import { NS } from './model';
 
@@ -14,14 +9,22 @@ const Page = ({
 	loading,
 	computedMatch: {
 		params
-	},
+	}, // 路由参数
 	...props
 }) => {
 	const [tbProps, fmProps] = useSearchTable(props, NS, columns, filterItems, loading);
+
+
 	return (
 		<>
-			<Form {...fmProps} />
-			<Table {...tbProps} rowKey='id' selectionShowKey='name' />
+			<SearchList
+				fmProps={fmProps}
+				tbProps={{
+					...tbProps,
+					rowKey: 'id',
+					rowSelection: null
+				}}
+			/>
 		</>
 	);
 };
