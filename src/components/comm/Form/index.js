@@ -2,7 +2,6 @@
 import React, { Fragment, useEffect, useMemo } from 'react';
 import { Form, Input, Button, Divider, Row, Col } from 'antd';
 import style from './index.less';
-import { cps } from 'redux-saga/effects';
 
 const FormItem = Form.Item;
 
@@ -27,12 +26,13 @@ const getColsHandle = (count) => {
 
 const getColWap = (type, count, col) => {
 	switch (type) {
-		default:
+		default: {
 			const { cols = { span: 8 }, submitCols = { span: 24 } } = col ? { cols: { span: col }, submitCols: { span: col } } : getColsHandle(count);
-			const FormContentWap = (props) => (type === 'col' ? <Row gutter={24} {...props} /> : <Fragment {...props} />);
+			const FormContentWap = (props) => (type === 'col' ? <Row gutter={16} {...props} /> : <Fragment {...props} />);
 			const FormItemWap = (props) => (type === 'col' ? <Col {...cols} {...props} /> : <Fragment {...props} />);
 			const ForSubmitItemWap = (props) => (type === 'col' ? <Col {...submitCols} {...props} /> : <Fragment {...props} />);
 			return [FormContentWap, FormItemWap, ForSubmitItemWap];
+		}
 	}
 }
 

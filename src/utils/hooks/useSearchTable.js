@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 /**
  * @description: 带搜索项Table页面
@@ -31,29 +31,33 @@ export default ({
 		});
 	}, [filterParams]);
 
-	const updateFilterParams = (payload) => {
-		dispatch({
-			type: `${NS}/save`,
-			payload: {
-				filterParams: payload,
-				pagination: {
-					...pagination,
-					current: 1
-				}
-			},
-		})
-	}
+	const [updateFilterParams, handlePageChange] = useMemo(() => {
+		const updateFilterParams = (payload) => {
+			dispatch({
+				type: `${NS}/save`,
+				payload: {
+					filterParams: payload,
+					pagination: {
+						...pagination,
+						current: 1
+					}
+				},
+			})
+		}
 
-	const handlePageChange = (pageNo, pageSize) => {
-		dispatch({
-			type: fetchUrl,
-			payload: {
-				...filterParams,
-				pageNo,
-				pageSize
-			},
-		});
-	};
+		const handlePageChange = (pageNo, pageSize) => {
+			dispatch({
+				type: fetchUrl,
+				payload: {
+					...filterParams,
+					pageNo,
+					pageSize
+				},
+			});
+		};
+		return [updateFilterParams, handlePageChange];
+	}, [NS]);
+
 
 	// const onValuesChange=(changedValues, allValues) => {
 	// 	console.log(changedValues, allValues, '----onValuesChange');

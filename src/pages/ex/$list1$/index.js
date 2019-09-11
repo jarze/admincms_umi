@@ -16,8 +16,8 @@ const Page = ({
 
 	const fp = {
 		...fmProps,
-		col: 24,
-		layout: 'horizontal',
+		// col: 24,
+		// layout: 'horizontal',
 		labelCol: { span: 4 },
 		wrapperCol: { span: 20 },
 	}
