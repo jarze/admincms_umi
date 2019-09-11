@@ -16,20 +16,34 @@ export default ({
 	filterParams,
 	pagination,
 	selectedRowKeys,
+	computedMatch: { params },
 	...props
 }, NS, columns, filterItems, loadingEffects) => {
 	const fetchUrl = `${NS}/fetchData`;
 
 	useEffect(() => {
+		fetchData();
+	}, [filterParams]);
+
+	// 切换匹配路由重置参数
+	useEffect(() => {
+		dispatch({
+			type: `${NS}/restPageFilter`
+		});
+	}, [params]);
+
+	const fetchData = (payload) => {
 		dispatch({
 			type: fetchUrl,
 			payload: {
 				...filterParams,
 				pageNo: pagination.current,
 				pageSize: pagination.pageSize,
+				matchParams: params,
+				...payload
 			}
 		});
-	}, [filterParams]);
+	}
 
 	const [updateFilterParams, handlePageChange] = useMemo(() => {
 		const updateFilterParams = (payload) => {
@@ -46,18 +60,10 @@ export default ({
 		}
 
 		const handlePageChange = (pageNo, pageSize) => {
-			dispatch({
-				type: fetchUrl,
-				payload: {
-					...filterParams,
-					pageNo,
-					pageSize
-				},
-			});
+			fetchData({ pageNo, pageSize });
 		};
 		return [updateFilterParams, handlePageChange];
 	}, [NS]);
-
 
 	// const onValuesChange=(changedValues, allValues) => {
 	// 	console.log(changedValues, allValues, '----onValuesChange');

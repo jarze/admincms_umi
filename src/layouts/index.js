@@ -8,11 +8,10 @@ const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 
 	const rightContent = <User user={user} style={{ float: 'right', margin: '0 2em' }} />;
 	const { breadcrumb } = restProps.location.query;
-
 	return (
 		<ProLayoutComponents
 			title='CMS'
-			logo={false}
+			logo={logo}
 			fixSiderbar={true}
 			footerRender={() => null}
 			menuItemRender={(menuItemProps, defaultDom) => {

@@ -13,9 +13,6 @@ import { NS } from './model';
 
 const Page = ({
 	loading,
-	computedMatch: {
-		params
-	},
 	...props
 }) => {
 

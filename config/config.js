@@ -49,7 +49,7 @@ export default {
 
 
 	// 路由 优先使用配置式路由，且约定式路由会不生效
-	// routes: [],
+	routes,
 	// 禁用 redirect 上提
 	// disableRedirectHoist: true,
 	// 指定 history 类型，可选 browser、hash 和 memory; 默认browser。

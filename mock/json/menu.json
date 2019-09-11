@@ -1,61 +1,68 @@
-[{
-    "id": "1",
-    "name": "项目配置",
-    "url": "setting",
-    "icon": "setting",
-    "children": [{
-            "id": "2",
-            "name": "模型配置",
-            "url": "model",
-            "icon": "deployment-unit",
-            "children": []
-        },
-        {
-            "id": "3",
-            "name": "目录配置",
-            "url": "menu",
-            "icon": "menu",
-            "children": []
-        }
-    ]
-}, {
-  "id": "4",
-  "name": "列表",
-  "url": "list",
-  "icon": "list",
-  "children": [{
-      "id": "5",
-      "name": "基本列表",
-      "url": "list",
-      "icon": "deployment-unit",
-      "children": []
-    },
-    {
-      "id": "6",
-      "name": "list1",
-      "url": "list1",
-      "icon": "menu",
-      "children": []
-    }
-  ]
-}, {
-  "id": "7",
-  "name": "列表2",
-  "url": "ex",
-  "icon": "list",
-  "children": [{
-      "id": "8",
-      "name": "列表1",
-      "url": "list",
-      "icon": "deployment-unit",
-      "children": []
-    },
-    {
-      "id": "9",
-      "name": "列表3",
-      "url": "ex",
-      "icon": "menu",
-      "children": []
-    }
-  ]
-}]
+[
+	{
+		"id": "1",
+		"name": "项目配置",
+		"url": "setting",
+		"icon": "setting",
+		"children": [
+			{
+				"id": "2",
+				"name": "模型配置",
+				"url": "model",
+				"icon": "deployment-unit",
+				"model": "11"
+			},
+			{
+				"id": "3",
+				"name": "目录配置",
+				"url": "menu",
+				"icon": "menu",
+				"model": "22"
+			}
+		]
+	},
+	{
+		"id": "4",
+		"name": "列表",
+		"url": "list",
+		"icon": "list",
+		"children": [
+			{
+				"id": "5",
+				"name": "基本列表",
+				"url": "list",
+				"icon": "deployment-unit",
+				"children": []
+			},
+			{
+				"id": "6",
+				"name": "list1",
+				"url": "list1",
+				"icon": "menu",
+				"children": []
+			}
+		]
+	},
+	{
+		"id": "7",
+		"name": "列表2",
+		"url": "ex",
+		"icon": "list",
+		"children": [
+			{
+				"id": "8",
+				"name": "列表1",
+				"url": "list",
+				"icon": "deployment-unit",
+				"children": []
+			},
+			{
+				"id": "9",
+				"name": "列表3",
+				"url": "ex",
+				"icon": "menu",
+				"children": []
+			}
+		]
+	}
+]

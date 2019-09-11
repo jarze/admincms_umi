@@ -5,17 +5,28 @@ export const menuToRouteHandle = (menu, path) => {
 
 const menuHandle = (data = [], pid) => {
 	return data.map(item => {
-		let path = item.url;
-		let va = pid ? `${pid}/${path}` : `/${path}`;
+
+		const { id, name, icon, model, children } = item;
+		let va = pid ? `${pid}/${id}` : `/${id}`;
+		let type = MODEL_TYPES[model] || '';
+		let key = model ? (type ? `${va}/${model}/${type}` : `${va}/${model}`) : va;
 		let unit = {
-			id: item.id,
-			key: va,
-			name: item.name,
-			path: va,
-			icon: item.icon,
+			id: id,
+			key: key,
+			name: name,
+			path: key,
+			icon: icon,
 			// exact: true
 		};
-		item.children && (unit.children = menuHandle(item.children, va));
+		children && (unit.children = menuHandle(children, va));
 		return unit;
 	});
 };
+
+
+
+const MODEL_TYPES = {
+	'11': 'list',
+	'22': 'list',
+
+}
