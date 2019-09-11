@@ -2,7 +2,7 @@
 import { connect } from 'dva';
 import { SearchList } from '@components/comm';
 import { columns, filterItems } from './_logic';
-import useSearchTable from '@utils/hooks/useSearchTable';
+import useSearchTable from '@/pages/_hooks/useSearchTable';
 import { NS } from './model';
 
 const Page = ({

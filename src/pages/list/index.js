@@ -7,7 +7,7 @@ import { Fragment } from 'react';
 import { connect } from 'dva';
 import { Table, Form } from '@components/comm';
 import { Button } from 'antd';
-import useSearchTable from '@utils/hooks/useSearchTable';
+import useSearchTable from '@/pages/_hooks/useSearchTable';
 import { NS } from './model';
 
 const Page = ({
