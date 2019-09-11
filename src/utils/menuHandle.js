@@ -5,7 +5,6 @@ export const menuToRouteHandle = (menu, path) => {
 
 const menuHandle = (data = [], pid) => {
 	return data.map(item => {
-
 		const { id, name, icon, model, children } = item;
 		let va = pid ? `${pid}/${id}` : `/${id}`;
 		let type = MODEL_TYPES[model] || '';
@@ -23,10 +22,7 @@ const menuHandle = (data = [], pid) => {
 	});
 };
 
-
-
 const MODEL_TYPES = {
 	'11': 'list',
 	'22': 'list',
-
 }

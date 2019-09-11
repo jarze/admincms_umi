@@ -9,6 +9,10 @@ export const columns = [
 	},
 	{
 		title: '标题',
+		dataIndex: 'content',
+	},
+	{
+		title: '标题',
 		dataIndex: 'title',
 	},
 ];
@@ -21,29 +25,5 @@ export const filterItems = [
 	{
 		label: '用户名称',
 		key: 'name',
-	},
-	{
-		label: '标题',
-		key: 'title',
-	},
-	{
-		label: 'a',
-		key: 'a',
-	},
-	{
-		label: 'b',
-		key: 'b',
-	},
-	{
-		label: 'c',
-		key: 'c',
-	},
-	{
-		label: 'd',
-		key: 'd',
-	},
-	{
-		label: 'ee',
-		key: 'e',
-	},
+	}
 ];

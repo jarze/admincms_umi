@@ -1,11 +1,11 @@
 // import useSearchTable from '@utils/useSearchTable';
+import { useMemo, cloneElement } from 'react';
 
 export default (props) => {
-	console.log(props, '---route list');
-	return (
-		<div>
-			<div>PrivateRoute (routes/a.js)</div>
-			{props.children}
-		</div>
-	);
+	const { match: { params } } = props;
+	const logicParams = useMemo(() => {
+		return require(`@/pages/_logic/list/${params.modelId}.js`);
+	}, [params]);
+
+	return cloneElement(props.children, logicParams);
 }

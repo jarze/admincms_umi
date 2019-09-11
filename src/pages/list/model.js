@@ -61,6 +61,7 @@ export default {
 			return {
 				...state,
 				filterParams: {},
+				selectedRowKeys: [],
 				pagination: { ...defaultPagination },
 				...payload,
 			};

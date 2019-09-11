@@ -7,15 +7,15 @@ import { Fragment } from 'react';
 import { connect } from 'dva';
 import { Table, Form } from '@components/comm';
 import { Button } from 'antd';
-import { columns, filterItems } from './_logic.js';
 import useSearchTable from '@utils/hooks/useSearchTable';
 import { NS } from './model';
 
 const Page = ({
 	loading,
+	columns,
+	filterItems,
 	...props
 }) => {
-
 	const [tbProps, fmProps] = useSearchTable(props, NS, columns, filterItems, loading);
 	return (
 		<>
