@@ -14,6 +14,7 @@ function checkStatus(response) {
 	}
 	const error = new Error(CODE_MESSAGES(status) || response.statusText);
 	error.response = response;
+	error.status = status;
 	throw error;
 }
 
@@ -28,7 +29,7 @@ export default function request(url, options, errToast) {
 	// 携带网站cookie信息，用于登录验证
 	// options = { ...options, credentials: 'include' };
 	if (options) {
-		const { method = "GET", body } = options;
+		const { method = 'GET', body } = options;
 		if (body) {
 			if (method.toUpperCase() === 'POST') {
 				// options.body = JSON.stringify(body);
@@ -52,24 +53,24 @@ export default function request(url, options, errToast) {
 }
 
 // 返回数据处理
-function checkResponse(data) {
-	let code = data.code;
-	if (code === CODE_SUCCESS) return data.data;
-	if (code === CODE_LOGIN_INVALID) {
-		// TODO： 处理登录失效
-		console.log('登录失效=========');
+function checkResponse(response) {
+	let code = response.code;
+	if (code === CODE_SUCCESS) return response.data;
 
-	}
-	const error = new Error(data[MSG] || CODE_MESSAGES[code]);
-	error.response = data;
+	const error = new Error(response[MSG] || CODE_MESSAGES[code]);
+	error.response = response;
+	error.status = code;
 	throw error;
 }
-
 
 function handleError(err, errToast) {
 	console.log('❌', err);
 	errToast && err.message && message.error(err.message);
-	// return { err };
+	// TODO: 登录失效处理
+	if (err.status === CODE_LOGIN_INVALID) {
+		// TODO： 处理登录失效
+		console.log('登录失效=========');
+	}
 }
 
 /* JSON To FormData */
