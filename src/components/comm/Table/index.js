@@ -13,7 +13,7 @@
  *
  */
 
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { Table } from 'antd';
 import Alert from './AlertSelect';
 
@@ -24,8 +24,11 @@ export const defaultPaginationConfig = {
 
 // 统一默认列表分页表现形式
 export default ({ pagination, rowSelection, renderAlertSelectExtraContent, ...props }) => {
-
 	const [onRowSelect, setOnRowSelect] = useState(false);
+
+	useEffect(() => {
+		setOnRowSelect(false);
+	}, [props.columns]);
 
 	let pg = pagination ? {
 		...defaultPaginationConfig,

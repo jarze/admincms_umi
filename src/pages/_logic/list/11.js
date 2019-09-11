@@ -1,3 +1,6 @@
+import { Button, Divider } from 'antd';
+import Link from 'umi/link';
+
 export const columns = [
 	{
 		title: 'id',
@@ -11,6 +14,19 @@ export const columns = [
 		title: '标题',
 		dataIndex: 'title',
 	},
+	{
+		title: '操作',
+		key: 'operation',
+		dataIndex: 'operation',
+		render: (_, record) => (
+			<>
+				<Link to={`?id=${record.id}`}>编辑</Link>
+				<Button type='link'>编辑</Button>
+				<Divider type="vertical" />
+				<Button type='link'>删除</Button>
+			</>
+		)
+	}
 ];
 
 export const filterItems = [
