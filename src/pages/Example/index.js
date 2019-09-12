@@ -15,7 +15,7 @@ import { NS } from './model';
 const Page = ({ loading, dispatch, text, ...props }) => {
 	useEffect(() => {
 		dispatch({
-			type: `${NS}fetch`,
+			type: `${NS}/fetch`,
 		});
 	}, [dispatch]);
 

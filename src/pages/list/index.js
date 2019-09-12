@@ -12,18 +12,18 @@ import { NS } from './model';
 
 const Page = ({
 	loading,
-	columns,
+	tableConfig,// table定义
 	filterItems,
+	otherFilterParams = {},
+	children,
 	...props
 }) => {
-	const [tbProps, fmProps] = useSearchTable(props, NS, columns, filterItems, loading);
+	const [tbProps, fmProps] = useSearchTable(props, NS, tableConfig, filterItems, loading, otherFilterParams);
 	return (
 		<>
 			<Form {...fmProps} />
 			<Table
 				{...tbProps}
-				rowKey='id'
-				selectionShowKey='name'
 				renderAlertSelectExtraContent={(keys = []) => {
 					return (
 						<Fragment >
@@ -32,6 +32,7 @@ const Page = ({
 					);
 				}}
 			/>
+			{children}
 		</>
 	);
 };

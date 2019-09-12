@@ -18,14 +18,14 @@ export default {
 		selectedRowKeys: []
 	},
 	subscriptions: {
-		setup({ dispatch, history, ...props }) {
+		// setup({ dispatch, history, ...props }) {
 
-			history.listen(location => {
-				// 处理网管注销跳转/logout代理问题
-				console.log(location, '------list')
+		// 	history.listen(location => {
+		// 		// 处理网管注销跳转/logout代理问题
+		// 		console.log(location, '------list')
 
-			});
-		},
+		// 	});
+		// },
 	},
 
 	effects: {
@@ -63,6 +63,7 @@ export default {
 				filterParams: {},
 				selectedRowKeys: [],
 				pagination: { ...defaultPagination },
+				dataSource: null,
 				...payload,
 			};
 		},

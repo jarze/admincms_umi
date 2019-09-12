@@ -4,10 +4,11 @@ import { useEffect, useMemo } from 'react';
 /**
  * @description: 带搜索项Table页面
  * @param 0 model【list】sto + dispatch
- * @param 1 model name
- * @param 2 table columns
- * @param 3 search items
+ * @param 1 model name | string
+ * @param 2 table columns | []
+ * @param 3 search items | []
  * @param 4 umi loading.effects
+ * @param 5 {} 	其他列表参数
  * @return: [tbProps: table props, fmProps: searchForm props]
  */
 export default ({
@@ -16,9 +17,9 @@ export default ({
 	filterParams,
 	pagination,
 	selectedRowKeys,
-	computedMatch: { params },
+	computedMatch: { params: matchParams },
 	...props
-}, NS, columns, filterItems, loadingEffects) => {
+}, NS, tableConfig, filterItems, loadingEffects, otherFilterParams) => {
 	const fetchUrl = `${NS}/fetchData`;
 
 	useEffect(() => {
@@ -30,7 +31,7 @@ export default ({
 		dispatch({
 			type: `${NS}/restPageFilter`
 		});
-	}, [params]);
+	}, [matchParams]);
 
 	const fetchData = (payload) => {
 		dispatch({
@@ -39,8 +40,9 @@ export default ({
 				...filterParams,
 				pageNo: pagination.current,
 				pageSize: pagination.pageSize,
-				matchParams: params,
-				...payload
+				matchParams,
+				...payload,
+				...otherFilterParams
 			}
 		});
 	}
@@ -82,7 +84,7 @@ export default ({
 	}
 
 	const tbProps = {
-		columns,
+		...tableConfig,
 		dataSource,
 		loading: loadingEffects[fetchUrl],
 		pagination: {

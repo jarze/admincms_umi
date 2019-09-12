@@ -11,7 +11,7 @@ export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent,
 		!checked && onChange && onChange([]);
 	}
 
-	const selectedData = selectionShowKey && dataSource.filter((item) => selectedRowKeys.includes(item[rowKey])).map(item => {
+	const selectedData = selectionShowKey && dataSource && dataSource.filter((item) => selectedRowKeys.includes(item[rowKey])).map(item => {
 		const key = item[rowKey];
 		return (
 			<Tag

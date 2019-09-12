@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin } from 'antd'; // loading components from code split
 
-const PageLoding = () => (
+export default () => (
 	<div
 		style={{
 			paddingTop: 100,
@@ -11,5 +11,3 @@ const PageLoding = () => (
 		<Spin size="large" />
 	</div>
 );
-
-export default PageLoding;

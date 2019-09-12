@@ -1,19 +1,20 @@
-import { getText } from './service';
+import { getPageData } from './service';
 
-export const NS = 'profile';
+export const NS = 'page';
 
 export default {
 	namespace: NS,
 	state: {
 		text: NS,
+		data: {}
 	},
 
 	effects: {
-		*fetch(_, { call, put }) {
+		*fetchData({ payload }, { call, put }) {
 			yield put({
 				type: 'save',
 				payload: {
-					text: yield call(getText),
+					data: yield call(getPageData, payload),
 				},
 			});
 		},

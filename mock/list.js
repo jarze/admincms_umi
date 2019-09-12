@@ -1,7 +1,7 @@
 import { mock } from 'mockjs';
 
 export default {
-	// 获取当前用户菜单
+	// 获取列表信息
 	'GET /api/list/:id': (req, res) => {
 		res.send(mock({
 			code: 1001,
@@ -16,6 +16,18 @@ export default {
 					name: "@cname",
 					title: "@title"
 				}]
+			}
+		}));
+	},
+	'GET /api/page/:modelId/:id': (req, res) => {
+		res.send(mock({
+			code: 1001,
+			message: 'success',
+			data: {
+				name: '@cname',
+				title: '@ctitle',
+				content: '@paragraph',
+				...req.query
 			}
 		}));
 	}

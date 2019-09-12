@@ -1,25 +1,26 @@
-/**
- * title: 示例页面
- * Routes:
- *   - ./src/routes/a.js
- *   - ./src/routes/b.js
- */
-
-// 权限路由
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import styles from './style.less';
 import { NS } from './model';
+import { SinglePage } from '@components/comm';
 
-const Page = ({ loading, dispatch, text, ...props }) => {
+const Page = ({
+	dispatch,
+	text,
+	computedMatch: { params: matchParams },
+	...props }) => {
 	useEffect(() => {
 		dispatch({
-			type: `${NS}fetch`,
+			type: `${NS}/fetchData`,
+			payload: {
+				matchParams
+			}
 		});
-	}, [dispatch]);
+	}, []);
 
-	return <div className={styles.container}>{text}</div>;
+	console.log(props, '=====');
+
+	return <SinglePage {...props} />;
 };
 
 export default connect(sto => ({

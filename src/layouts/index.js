@@ -29,6 +29,7 @@ const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 			//extraContent={'extraContent'}
 			//subTitle="This is a subtitle"
 			/>
+			<br />
 			{children}
 		</ProLayoutComponents>
 	);
