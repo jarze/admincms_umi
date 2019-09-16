@@ -1,5 +1,6 @@
 // import useSearchTable from '@utils/useSearchTable';
 import { useMemo, cloneElement } from 'react';
+import { Card } from 'antd';
 
 export default (props) => {
 	const { match: { params } } = props;
@@ -7,5 +8,10 @@ export default (props) => {
 		return require(`@/pages/_logic/list/${params.modelId}.js`);
 	}, [params]);
 
-	return cloneElement(props.children, logicParams);
+	return (
+		<Card>
+			{cloneElement(props.children, logicParams)}
+		</Card>
+	);
+	// return cloneElement(props.children, logicParams);
 }

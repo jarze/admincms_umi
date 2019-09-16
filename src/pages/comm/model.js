@@ -1,4 +1,4 @@
-import { getListData } from './service';
+import { getListData, deleteListItems } from './service';
 
 export const NS = 'list';
 
@@ -46,6 +46,20 @@ export default {
 					},
 				},
 			});
+		},
+		*deleteItems({ payload }, { call, put }) {
+			const res = yield call(
+				deleteListItems,
+				payload,
+			);
+			if (res) {
+				yield put({
+					type: 'restPageFilter'
+				});
+			}
+		},
+		*fetchItemInfo() { 
+			
 		}
 	},
 

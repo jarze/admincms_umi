@@ -5,7 +5,7 @@ export default [
 		routes: [
 			{
 				path: '*/:cateId/:modelId/list',
-				component: './list/index.js',
+				component: './comm/list/index.js',
 				Routes: ['./src/routes/list.js'],
 				// routes: [
 				// 	{
@@ -17,7 +17,7 @@ export default [
 			},
 			{
 				path: '*/:cateId/:modelId/list/page/:id',
-				component: './formPage/index.js',
+				component: './comm/formPage/index.js',
 				Routes: ['./src/routes/list.js'],
 			},
 		],

@@ -44,7 +44,7 @@ export default function request(url, options, errToast) {
 	return fetch(`${API_PREFIX}${url}`, options)
 		.then(checkStatus)
 		.then(parseJSON)
-		.then(checkResponse)
+		.then(res => checkResponse(res, (options || {}).method))
 		.then(data => data)
 		.catch(err => {
 			// 请求失败处理 返回undefined
@@ -53,11 +53,16 @@ export default function request(url, options, errToast) {
 }
 
 // 返回数据处理
-function checkResponse(response) {
-	let code = response.code;
+function checkResponse(response, method) {
+	let { code, message } = response;
+
+	if (['DELETE', 'PUT'].includes(method) && message) {
+		message.success(message);
+	}
+
 	if (code === CODE_SUCCESS) return response.data;
 
-	const error = new Error(response[MSG] || CODE_MESSAGES[code]);
+	const error = new Error(message || CODE_MESSAGES[code]);
 	error.response = response;
 	error.status = code;
 	throw error;

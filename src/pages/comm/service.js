@@ -9,3 +9,14 @@ export function getListData(payload) {
 		body: params
 	});
 }
+
+export function deleteListItems(payload) {
+	const { matchParams, ...params } = payload;
+
+	console.log('list请求路由参数:', matchParams);
+	return request('/delete/1', {
+		method: 'DELETE',
+		body: params
+	});
+}
+

@@ -12,6 +12,7 @@ import debounce from 'lodash.debounce';
  * @param 5 {} 	其他列表参数
  * @return: [tbProps: table props, fmProps: searchForm props]
  */
+
 export default ({
 	dispatch,
 	dataSource,
@@ -40,7 +41,7 @@ export default ({
 			type: fetchUrl,
 			payload: {
 				...filterParams,
-				pageNo: pagination.current,
+				pageNo: pagination.current || 1,
 				pageSize: pagination.pageSize,
 				matchParams,
 				...payload,

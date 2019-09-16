@@ -19,6 +19,13 @@ export default {
 			}
 		}));
 	},
+	'DELETE /api/delete/:id': (req, res) => {
+		res.send(mock({
+			code: 1001,
+			message: 'success',
+			data: null
+		}));
+	},
 	'GET /api/page/:modelId/:id': (req, res) => {
 		res.send(mock({
 			code: 1001,

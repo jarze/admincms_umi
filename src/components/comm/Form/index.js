@@ -110,7 +110,7 @@ const CForm = ({
 		<Form
 			className={style[type === 'col' ? "ant-advanced-search-form" : '']}
 			layout='inline'
-			style={{ overflow: 'hidden', margin: '1em 0' }}
+			style={{ overflow: 'hidden', marginBottom: '1em' }}
 			onSubmit={handleSubmit}
 			{...formProps}
 		>

@@ -22,7 +22,6 @@ const columns = [
 		dataIndex: 'operation',
 		render: (_, record) => (
 			<>
-				<Link to={`?id=${record.id}`}>编辑</Link>
 				<Link to={`./list/page/${record.id}?breadcrumb=${record.name}`}>查看详情</Link>
 				<Button type='link'>编辑</Button>
 				<Divider type="vertical" />
