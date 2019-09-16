@@ -1,6 +1,8 @@
-import { getListData, deleteListItems } from './service';
+import { getListData, deleteListItems, getItemInfo, editItem } from './service';
+import router from 'umi/router';
 
 export const NS = 'list';
+
 
 const defaultPagination = {
 	current: 1,
@@ -12,20 +14,24 @@ export default {
 	namespace: NS,
 	state: {
 		text: NS,
+
+		// list
 		filterParams: {},
 		dataSource: [],
 		pagination: { ...defaultPagination },
-		selectedRowKeys: []
+		selectedRowKeys: [],
+
+		// item
+		itemInfo: {},
 	},
 	subscriptions: {
-		// setup({ dispatch, history, ...props }) {
+		setup({ dispatch, history, ...props }) {
 
-		// 	history.listen(location => {
-		// 		// 处理网管注销跳转/logout代理问题
-		// 		console.log(location, '------list')
+			history.listen(location => {
+				// 处理网管注销跳转/logout代理问题
 
-		// 	});
-		// },
+			});
+		},
 	},
 
 	effects: {
@@ -47,20 +53,38 @@ export default {
 				},
 			});
 		},
-		*deleteItems({ payload }, { call, put }) {
+		*fetchItemInfo({ payload }, { call, put }) {
+			const data = yield call(
+				getItemInfo,
+				payload,
+			);
+			yield put({
+				type: 'save',
+				payload: {
+					itemInfo: data || {}
+				},
+			});
+		},
+		*editItem({ payload }, { call, put }) {
+			const res = yield call(
+				editItem,
+				payload,
+			);
+			if (res !== undefined) {
+				router.goBack();
+			}
+		},
+		*deleteItem({ payload }, { call, put }) {
 			const res = yield call(
 				deleteListItems,
 				payload,
 			);
-			if (res) {
+			if (res !== undefined) {
 				yield put({
 					type: 'restPageFilter'
 				});
 			}
 		},
-		*fetchItemInfo() { 
-			
-		}
 	},
 
 	reducers: {

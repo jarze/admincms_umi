@@ -29,12 +29,13 @@ export default ({
 		fetchData();
 	}, [filterParams]);
 
-	// 切换匹配路由重置参数
-	useEffect(() => {
-		dispatch({
-			type: `${NS}/restPageFilter`
-		});
-	}, [matchParams]);
+	// TODO: 切换匹配路由重置参数
+	// useEffect(() => {
+	// 	dispatch({
+	// 		type: `${NS}/restPageFilter`
+	// 	});
+	// 	console.log('restPageFilter', '---------------', matchParams)
+	// }, [matchParams]);
 
 	const fetchData = (payload) => {
 		dispatch({

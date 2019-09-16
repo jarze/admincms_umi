@@ -1,7 +1,7 @@
 import fetch from 'dva/fetch';
 import { stringify } from 'qs';
 import { message } from 'antd';
-import { CODE_LOGIN_INVALID, CODE_SUCCESS, CODE_MESSAGES, MSG } from '../config/constant';
+import { CODE_LOGIN_INVALID, CODE_SUCCESS, CODE_MESSAGES, MSG } from '@config/constant';
 
 function parseJSON(response) {
 	return response.json();
@@ -32,8 +32,8 @@ export default function request(url, options, errToast) {
 		const { method = 'GET', body } = options;
 		if (body) {
 			if (method.toUpperCase() === 'POST') {
-				// options.body = JSON.stringify(body);
-				options.body = convertObjToFormData(body);
+				options.body = JSON.stringify(body);
+				// options.body = convertObjToFormData(body);
 			} else {
 				url = `${url}?${stringify(body)}`;
 				delete options.body;
@@ -56,11 +56,12 @@ export default function request(url, options, errToast) {
 function checkResponse(response, method) {
 	let { code, message } = response;
 
-	if (['DELETE', 'PUT'].includes(method) && message) {
-		message.success(message);
-	}
-
-	if (code === CODE_SUCCESS) return response.data;
+	if (code === CODE_SUCCESS) {
+		if (['DELETE', 'POST'].includes(method) && message) {
+			message.success(message);
+		}
+		return response.data
+	};
 
 	const error = new Error(message || CODE_MESSAGES[code]);
 	error.response = response;
@@ -68,7 +69,7 @@ function checkResponse(response, method) {
 	throw error;
 }
 
-function handleError(err, errToast) {
+function handleError(err, errToast = true) {
 	console.log('❌', err);
 	errToast && err.message && message.error(err.message);
 	// TODO: 登录失效处理

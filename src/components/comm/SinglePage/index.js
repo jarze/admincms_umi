@@ -10,7 +10,7 @@ import { Descriptions } from 'antd';
 
 const { Item } = Descriptions;
 
-export default ({ items = [], data = {}, ...props }) => {
+export default ({ items = [], itemInfo: data = {}, ...props }) => {
 
 	const content = items.map(({ key, label, render, ...props }) => {
 		return (

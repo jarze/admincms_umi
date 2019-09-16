@@ -19,13 +19,6 @@ export default {
 			}
 		}));
 	},
-	'DELETE /api/delete/:id': (req, res) => {
-		res.send(mock({
-			code: 1001,
-			message: 'success',
-			data: null
-		}));
-	},
 	'GET /api/page/:modelId/:id': (req, res) => {
 		res.send(mock({
 			code: 1001,
@@ -37,5 +30,19 @@ export default {
 				...req.query
 			}
 		}));
-	}
+	},
+	'DELETE /api/delete/:id': (req, res) => {
+		res.send(mock({
+			code: 1001,
+			message: '删除成功',
+			data: null
+		}));
+	},
+	'POST /api/edit/:id': (req, res) => {
+		res.send(mock({
+			"code": 1001,
+			message: '编辑成功',
+			data: null
+		}));
+	},
 }

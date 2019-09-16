@@ -39,7 +39,7 @@ const getColWap = (type, count, col) => {
 const CForm = ({
 	form: { getFieldDecorator, validateFields, resetFields, getFieldsValue },
 	items = [], // [{key, label, ...}]
-	data = {},
+	data,
 	onSubmit, // 确定按钮
 	onReset, // 取消按钮
 	loading,
@@ -51,7 +51,9 @@ const CForm = ({
 	...formProps
 }) => {
 	useEffect(() => {
-		resetFields();
+		if (data) {
+			resetFields();
+		}
 	}, [data]);
 
 	const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(() => getColWap(type, items.length, col), [items]);
@@ -77,7 +79,7 @@ const CForm = ({
 			<FormItemWap key={key}>
 				<FormItem label={label} key={key} {...itemProps}>
 					{getFieldDecorator(key, {
-						initialValue: data[key],
+						initialValue: data && data[key],
 						...options,
 					})(render ? render() : <Input type="text" />)}
 				</FormItem>

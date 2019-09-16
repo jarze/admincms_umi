@@ -5,10 +5,11 @@
  */
 import { Fragment } from 'react';
 import { connect } from 'dva';
-import { Table, Form } from '@components/comm';
+import { Table, Form, ModalForm } from '@components/comm';
 import { Button } from 'antd';
 import useSearchTable from '@/pages/_hooks/useSearchTable';
 import { NS } from '../model';
+import router from 'umi/router';
 
 const Page = ({
 	loading,
@@ -19,11 +20,19 @@ const Page = ({
 	...props
 }) => {
 	const [tbProps, fmProps] = useSearchTable(props, NS, tableConfig, formConfig, loading, otherFilterParams);
+
+	const { computedMatch: { params: matchParams } } = props;
+	const editId = matchParams.id;
+	const modalProps = {
+		title: editId !== 'add' ? '编辑' : '添加',
+		visible: editId ? true : false,
+		items: props.editItems
+	}
 	return (
 		<>
 			<Form {...fmProps} />
 			<div>
-				<Button icon='plus' type="primary">添加</Button>
+				<Button icon='plus' type='primary' onClick={() => { router.push('./list/add') }}>添加</Button>
 			</div>
 			<br />
 			<Table
@@ -36,7 +45,7 @@ const Page = ({
 					);
 				}}
 			/>
-			{children}
+			<ModalForm {...modalProps} />
 		</>
 	);
 };

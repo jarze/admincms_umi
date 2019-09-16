@@ -1,4 +1,4 @@
-import { Button, Divider } from 'antd';
+import { Button, Divider, AutoComplete } from 'antd';
 import Link from 'umi/link';
 
 const rowKey = 'id';
@@ -23,7 +23,8 @@ const columns = [
 		render: (_, record) => (
 			<>
 				<Link to={`./list/page/${record.id}?breadcrumb=${record.name}`}>查看详情</Link>
-				<Button type='link'>编辑</Button>
+				<Divider type="vertical" />
+				<Link to={`./list/edit/${record.id}?breadcrumb=${record.name}`}>编辑</Link>
 				<Divider type="vertical" />
 				<Button type='link'>删除</Button>
 			</>
@@ -78,17 +79,18 @@ export const formConfig = {
 	items: filterItems,
 };
 
+// 	查看页面
 export const items = [
 	{
-		label: 'id',
-		key: 'id',
+		label: '模型名',
+		key: 'modelName',
 	},
 	{
-		label: '用户名称',
+		label: '操作权限',
 		key: 'name',
 	},
 	{
-		label: '标题',
+		label: '备注',
 		key: 'title',
 	},
 	{
@@ -96,4 +98,27 @@ export const items = [
 		key: 'content',
 		span: 3
 	}
+];
+
+// 添加编辑页面
+export const editItems = [
+	{
+		label: '模型名',
+		key: 'modelName'
+	},
+	{
+		label: '操作权限',
+		key: 'name',
+		render: () => (
+			<AutoComplete dataSource={['查看', '编辑', '删除']} />
+		)
+	},
+	{
+		label: '表名',
+		key: 'tableName',
+	},
+	{
+		label: '备注',
+		key: 'content',
+	},
 ]; 
