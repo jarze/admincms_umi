@@ -5,7 +5,7 @@
  */
 import { Fragment } from 'react';
 import { connect } from 'dva';
-import { Table, Form, ModalForm } from '@components/comm';
+import { TableSelect, Form, ModalForm } from '@components/comm';
 import { Button } from 'antd';
 import useSearchTable from '@/pages/_hooks/useSearchTable';
 import { NS } from '../model';
@@ -35,7 +35,7 @@ const Page = ({
 				<Button icon='plus' type='primary' onClick={() => { router.push('./list/add') }}>添加</Button>
 			</div>
 			<br />
-			<Table
+			<TableSelect
 				{...tbProps}
 				renderAlertSelectExtraContent={(keys = []) => {
 					return (

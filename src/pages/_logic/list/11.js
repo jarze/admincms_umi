@@ -36,7 +36,7 @@ export const tableConfig = {
 	rowKey,
 	columns,
 	selectionShowKey: 'name',
-	rowSelection: false
+	rowSelection: null
 };
 
 const filterItems = [
