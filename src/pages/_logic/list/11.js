@@ -3,34 +3,38 @@ import Link from 'umi/link';
 
 const rowKey = 'id';
 
-const columns = [
-	{
-		title: 'id',
-		dataIndex: 'id',
-	},
-	{
-		title: '用户名称',
-		dataIndex: 'name',
-	},
-	{
-		title: '标题',
-		dataIndex: 'title',
-	},
-	{
-		title: '操作',
-		key: 'operation',
-		dataIndex: 'operation',
-		render: (_, record) => (
-			<>
-				<Link to={`./list/page/${record.id}?breadcrumb=${record.name}`}>查看详情</Link>
-				<Divider type="vertical" />
-				<Link to={`./list/edit/${record.id}?breadcrumb=${record.name}`}>编辑</Link>
-				<Divider type="vertical" />
-				<Button type='link'>删除</Button>
-			</>
-		)
-	}
-];
+const columns = (onItemAction) => (
+	[
+		{
+			title: 'id',
+			dataIndex: 'id',
+		},
+		{
+			title: '用户名称',
+			dataIndex: 'name',
+		},
+		{
+			title: '标题',
+			dataIndex: 'title',
+		},
+		{
+			title: '操作',
+			key: 'operation',
+			dataIndex: 'operation',
+			render: (_, record) => (
+				<>
+					<Link to={`./list/page/${record.id}?breadcrumb=${record.name}`}>查看详情</Link>
+					<Divider type="vertical" />
+					<Link to={`./list/edit/${record.id}?breadcrumb=${record.name}`}>编辑</Link>
+					<Divider type="vertical" />
+					<Button type='link' onClick={() => onItemAction('edit', record)}>编辑</Button>
+					<Divider type="vertical" />
+					<Button type='link' onClick={() => onItemAction('delete', record)}>删除</Button>
+				</>
+			)
+		}
+	]
+);
 
 export const tableConfig = {
 	rowKey,

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /**
  * title: 示例页面
  * Routes:
@@ -5,34 +6,31 @@
  */
 import { Fragment } from 'react';
 import { connect } from 'dva';
-import { TableSelect, Form, ModalForm } from '@components/comm';
+import { TableSelect, Form, ModalForm, } from '@components/comm';
 import { Button } from 'antd';
 import useSearchTable from '@/pages/_hooks/useSearchTable';
+import useModalForm from '@/pages/_hooks/useModalForm';
+
 import { NS } from '../model';
-import router from 'umi/router';
 
 const Page = ({
 	loading,
 	tableConfig,// table定义
 	formConfig,
-	otherFilterParams = {},
+	editItems,
+	otherFilterParams,
 	children,
 	...props
 }) => {
 	const [tbProps, fmProps] = useSearchTable(props, NS, tableConfig, formConfig, loading, otherFilterParams);
 
-	const { computedMatch: { params: matchParams } } = props;
-	const editId = matchParams.id;
-	const modalProps = {
-		title: editId !== 'add' ? '编辑' : '添加',
-		visible: editId ? true : false,
-		items: props.editItems
-	}
+	const [modalProps, setEditId] = useModalForm(props, NS, editItems, loading);
+
 	return (
 		<>
 			<Form {...fmProps} />
 			<div>
-				<Button icon='plus' type='primary' onClick={() => { router.push('./list/add') }}>添加</Button>
+				<Button icon='plus' type='primary' onClick={() => setEditId('add')}>添加</Button>
 			</div>
 			<br />
 			<TableSelect

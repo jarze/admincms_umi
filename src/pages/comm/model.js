@@ -23,6 +23,7 @@ export default {
 
 		// item
 		itemInfo: {},
+		editId: null, // null | add | record.id
 	},
 	subscriptions: {
 		setup({ dispatch, history, ...props }) {

@@ -27,7 +27,7 @@ export default ({
 
 	useEffect(() => {
 		fetchData();
-	}, [filterParams]);
+	}, [filterParams, otherFilterParams]);
 
 	// TODO: 切换匹配路由重置参数
 	// useEffect(() => {
@@ -51,7 +51,7 @@ export default ({
 		});
 	}
 
-	const [updateFilterParams, handlePageChange, onValuesChange] = useMemo(() => {
+	const [updateFilterParams, handlePageChange, onValuesChange, onItemAction] = useMemo(() => {
 		const updateFilterParams = (payload) => {
 			dispatch({
 				type: `${NS}/save`,
@@ -73,7 +73,30 @@ export default ({
 			updateFilterParams(allValues);
 		}, 0.8e3);
 
-		return [updateFilterParams, handlePageChange, onValuesChange];
+		const onItemAction = (type, payload) => {
+			switch (type) {
+				case 'edit':
+					dispatch({
+						type: `${NS}/save`,
+						payload: { editId: payload[tableConfig.rowKey], itemInfo: payload }
+					})
+
+					break;
+				case 'delete':
+					dispatch({
+						type: `${NS}/deleteItem`,
+						payload: { editId: payload[tableConfig.rowKey] }
+					})
+					break;
+				default:
+					dispatch({
+						type: `${NS}/${type}Item`,
+						payload: payload
+					})
+					break;
+			}
+		}
+		return [updateFilterParams, handlePageChange, onValuesChange, onItemAction];
 	}, [NS]);
 
 	if (formConfig.onValuesChange === true) {
@@ -90,6 +113,10 @@ export default ({
 				},
 			})
 		},
+	}
+
+	if (typeof tableConfig.columns === 'function') {
+		tableConfig.columns = tableConfig.columns(onItemAction);
 	}
 
 	const tbProps = {

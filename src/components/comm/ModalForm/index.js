@@ -1,11 +1,20 @@
-import { useState, Fragment, useRef } from 'react';
+import { useState, Fragment, useRef, useEffect } from 'react';
 import { Modal } from 'antd';
 import { Form } from '@components/comm';
 
-export default ({ items, children, onOk, ...props }) => {
+export default ({ items, children, onOk, onCancel, data, ...props }) => {
+	// 有children时可以通过children点击自我控制visible显示
 	const [visible, setVisible] = useState(false);
-	const [formData, setFormData] = useState({});
+
+	const [formData, setFormData] = useState(data || {});
+
 	const t = useRef(null);
+
+	useEffect(() => {
+		if (data) {
+			setFormData(data);
+		}
+	}, [data]);
 
 	const onOkCallBack = (e) => {
 		if (e) e.stopPropagation();
@@ -22,6 +31,7 @@ export default ({ items, children, onOk, ...props }) => {
 		if (!vs) {
 			setFormData({});
 		}
+		onCancel && onCancel();
 	}
 
 	const onValuesChange = (_, allValues) => {
@@ -40,7 +50,7 @@ export default ({ items, children, onOk, ...props }) => {
 
 	return (
 		<Fragment>
-			<span onClick={() => handleVisible(true)}>{children}</span>
+			{children && <span onClick={() => handleVisible(true)}>{children}</span>}
 			<Modal
 				visible={visible}
 				maskClosable={false}
