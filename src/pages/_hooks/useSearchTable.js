@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo } from 'react';
+import debounce from 'lodash.debounce';
 
 /**
  * @description: 带搜索项Table页面
@@ -19,7 +20,8 @@ export default ({
 	selectedRowKeys,
 	computedMatch: { params: matchParams },
 	...props
-}, NS, tableConfig, filterItems, loadingEffects, otherFilterParams) => {
+}, NS, tableConfig = {}, formConfig = {}, loadingEffects, otherFilterParams) => {
+
 	const fetchUrl = `${NS}/fetchData`;
 
 	useEffect(() => {
@@ -47,7 +49,7 @@ export default ({
 		});
 	}
 
-	const [updateFilterParams, handlePageChange] = useMemo(() => {
+	const [updateFilterParams, handlePageChange, onValuesChange] = useMemo(() => {
 		const updateFilterParams = (payload) => {
 			dispatch({
 				type: `${NS}/save`,
@@ -64,12 +66,17 @@ export default ({
 		const handlePageChange = (pageNo, pageSize) => {
 			fetchData({ pageNo, pageSize });
 		};
-		return [updateFilterParams, handlePageChange];
+
+		const onValuesChange = debounce((changedValues, allValues) => {
+			updateFilterParams(allValues);
+		}, 0.8e3);
+
+		return [updateFilterParams, handlePageChange, onValuesChange];
 	}, [NS]);
 
-	// const onValuesChange=(changedValues, allValues) => {
-	// 	console.log(changedValues, allValues, '----onValuesChange');
-	// }
+	if (formConfig.onValuesChange === true) {
+		formConfig.onValuesChange = onValuesChange;
+	}
 
 	const rowSelection = {
 		selectedRowKeys: selectedRowKeys,
@@ -84,22 +91,21 @@ export default ({
 	}
 
 	const tbProps = {
-		...tableConfig,
+		rowSelection,
 		dataSource,
 		loading: loadingEffects[fetchUrl],
 		pagination: {
 			...pagination,
 			onChange: handlePageChange,
 		},
-		rowSelection
+		...tableConfig
 	}
 
 	const fmProps = {
-		items: filterItems,
 		data: filterParams,
 		onSubmit: updateFilterParams,
 		onReset: updateFilterParams,
-		// onValuesChange
+		...formConfig
 	}
 	return [tbProps, fmProps];
 }

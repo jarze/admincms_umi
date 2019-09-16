@@ -1,8 +1,10 @@
 import { Fragment } from 'react';
 import { Affix, Alert, Button, Icon, Popover, Tag, Divider, Checkbox } from 'antd';
 
-/* table rowSelection,  参数 */
-export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent, rowSelection = {}, dataSource = [], rowKey, selectionShowKey }) => {
+/* table 参数 | onRowSelect | onRowSelectChange */
+export default ({ onRowSelect, onRowSelectChange, ...props }) => {
+	// Table API 参数
+	const { rowSelection = {}, dataSource = [], rowKey, renderAlertSelectExtraContent, selectionShowKey } = props;
 	const { selectedRowKeys = [], onChange } = rowSelection;
 	const count = selectedRowKeys.length;
 
@@ -46,7 +48,7 @@ export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent,
 		<Fragment>
 			<span>&nbsp;&nbsp; {selected} 项</span>
 			<Divider type="vertical" />
-			<Button type='link' onClick={() => clearSelect([])} disabled={!count} icon="delete" />
+			<Button type='link' onClick={() => clearSelect([])} disabled={!count} icon="delete" size='small' />
 		</Fragment>
 	);
 
@@ -62,7 +64,10 @@ export default ({ onRowSelect, onRowSelectChange, renderAlertSelectExtraContent,
 						{!onRowSelect ?
 							<span>批量操作
 								<Divider type="vertical" />
-								<Icon type="edit" />
+								<Button type='link' icon="edit" onClick={(e) => {
+									e.preventDefault();
+									handleRowSelectChange(true);
+								}} size='small' />
 							</span>
 							: selectContent
 						}

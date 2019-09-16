@@ -32,9 +32,14 @@ const columns = [
 	}
 ];
 
-export const tableConfig = { rowKey, columns, selectionShowKey: 'name' };
+export const tableConfig = {
+	rowKey,
+	columns,
+	selectionShowKey: 'name',
+	rowSelection: false
+};
 
-export const filterItems = [
+const filterItems = [
 	{
 		label: 'id',
 		key: 'id',
@@ -68,6 +73,11 @@ export const filterItems = [
 		key: 'e',
 	},
 ];
+
+
+export const formConfig = {
+	items: filterItems,
+};
 
 export const items = [
 	{

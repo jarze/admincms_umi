@@ -63,7 +63,7 @@ export default {
 				filterParams: {},
 				selectedRowKeys: [],
 				pagination: { ...defaultPagination },
-				dataSource: null,
+				// dataSource: null,
 				...payload,
 			};
 		},

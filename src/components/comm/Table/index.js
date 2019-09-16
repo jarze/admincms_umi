@@ -15,7 +15,7 @@
 
 import { useState, Fragment, useEffect } from 'react';
 import { Table } from 'antd';
-import Alert from './AlertSelect';
+import Alert from '../AlertSelect';
 
 export const defaultPaginationConfig = {
 	pageSizeOptions: ['10', '20', '30', '40'],
@@ -23,7 +23,7 @@ export const defaultPaginationConfig = {
 };
 
 // 统一默认列表分页表现形式
-export default ({ pagination, rowSelection, renderAlertSelectExtraContent, ...props }) => {
+export default ({ pagination, rowSelection, ...props }) => {
 	const [onRowSelect, setOnRowSelect] = useState(false);
 
 	useEffect(() => {
@@ -42,7 +42,7 @@ export default ({ pagination, rowSelection, renderAlertSelectExtraContent, ...pr
 				<Alert
 					onRowSelect={onRowSelect}
 					onRowSelectChange={setOnRowSelect}
-					{...{ renderAlertSelectExtraContent, rowSelection, ...props }}
+					{...{ rowSelection, ...props }}
 				/>}
 			<Table
 				rowKey={(_, index) => index}

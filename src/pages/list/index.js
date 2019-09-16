@@ -13,12 +13,12 @@ import { NS } from './model';
 const Page = ({
 	loading,
 	tableConfig,// table定义
-	filterItems,
+	formConfig,
 	otherFilterParams = {},
 	children,
 	...props
 }) => {
-	const [tbProps, fmProps] = useSearchTable(props, NS, tableConfig, filterItems, loading, otherFilterParams);
+	const [tbProps, fmProps] = useSearchTable(props, NS, tableConfig, formConfig, loading, otherFilterParams);
 	return (
 		<>
 			<Form {...fmProps} />

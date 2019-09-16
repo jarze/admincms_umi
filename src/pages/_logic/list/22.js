@@ -1,4 +1,4 @@
-export const columns = [
+const columns = [
 	{
 		title: 'id',
 		dataIndex: 'id',
@@ -17,7 +17,10 @@ export const columns = [
 	},
 ];
 
-export const filterItems = [
+export const tableConfig = { rowKey: 'id', columns, selectionShowKey: 'name' };
+
+
+const filterItems = [
 	{
 		label: 'id',
 		key: 'id',
@@ -27,3 +30,10 @@ export const filterItems = [
 		key: 'name',
 	}
 ];
+
+
+export const formConfig = {
+	items: filterItems,
+	onValuesChange: true,
+	onSubmit: false
+}

@@ -86,15 +86,17 @@ const CForm = ({
 	});
 
 	const formSubmit = (
-		onSubmit &&
+		(onSubmit || onReset) &&
 		<ForSubmitItemWap>
 			<FormItem style={{ float: 'right', marginRight: 0 }}>
-				<Button type="primary" htmlType="submit" loading={loading}>
-					{okText}
-				</Button>
+				{onSubmit &&
+					<Button type="primary" htmlType="submit" loading={loading}>
+						{okText}
+					</Button>
+				}
 				{onReset &&
 					<>
-						<Divider type="vertical" />
+						{onSubmit && <Divider type="vertical" />}
 						<Button type="cancel" onClick={handleClear}>
 							{cancelText}
 						</Button>
