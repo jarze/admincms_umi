@@ -102,7 +102,8 @@ export default {
 				filterParams: {},
 				selectedRowKeys: [],
 				pagination: { ...defaultPagination },
-				// dataSource: null,
+				editId: null,
+				itemInfo: {},
 				...payload,
 			};
 		},

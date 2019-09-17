@@ -4,7 +4,7 @@ export default [
 		component: '../layouts/index',
 		routes: [
 			{
-				path: '*/:cateId/:modelId/list/:id?',
+				path: '*/:cateId/:modelId/list',
 				component: './comm/list/index.js',
 				Routes: ['./src/routes/list.js'],
 				// routes: [
@@ -16,7 +16,7 @@ export default [
 				// ],
 			},
 			{
-				path: '*/:cateId/:modelId/list/page/:id',
+				path: '*/:cateId/:modelId/list/page/:id?',
 				component: './comm/infoPage/index.js',
 				Routes: ['./src/routes/list.js'],
 			},

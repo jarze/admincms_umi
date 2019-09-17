@@ -45,9 +45,9 @@ const CForm = ({
 	loading,
 	okText = '确定',
 	cancelText = '清除',
-	type = 'col',// 'follow' | 'col',
+	type = 'col',// 'follow' | 'col' | 'center',
 	onValuesChange,
-	col, // 固定排版 24 8
+	col, // 固定排版 24 8,type = 'col'时有效
 	...formProps
 }) => {
 	useEffect(() => {
@@ -90,7 +90,10 @@ const CForm = ({
 	const formSubmit = (
 		(onSubmit || onReset) &&
 		<ForSubmitItemWap>
-			<FormItem style={{ float: 'right', marginRight: 0 }}>
+			<FormItem
+				style={type === 'center' ? { textAlign: 'center' } : { float: 'right', marginRight: 0 }}
+				wrapperCol={type === 'center' ? { offset: (formProps.labelCol || {}).span, ...formProps.wrapperCol } : {}}
+			>
 				{onSubmit &&
 					<Button type="primary" htmlType="submit" loading={loading}>
 						{okText}
@@ -107,6 +110,10 @@ const CForm = ({
 			</FormItem>
 		</ForSubmitItemWap>
 	);
+
+	if (items.length === 0) {
+		return <Fragment />;
+	}
 
 	return (
 		<Form

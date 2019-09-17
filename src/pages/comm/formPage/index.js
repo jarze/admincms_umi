@@ -24,8 +24,7 @@ const Page = ({
 	}, [id]);
 
 	const formProps = {
-		type: 'normal',
-		col: 24,
+		type: 'center',
 		labelCol: { span: 6 },
 		wrapperCol: { span: 16 },
 		layout: 'horizontal',

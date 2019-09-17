@@ -13,15 +13,16 @@ import debounce from 'lodash.debounce';
  * @return: [tbProps: table props, fmProps: searchForm props]
  */
 
-export default ({
-	dispatch,
-	dataSource,
-	filterParams,
-	pagination,
-	selectedRowKeys,
-	computedMatch: { params: matchParams },
-	...props
-}, NS, tableConfig = {}, formConfig = {}, loadingEffects, otherFilterParams) => {
+export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, otherFilterParams) => {
+
+	const {
+		dispatch,
+		dataSource,
+		filterParams,
+		pagination,
+		selectedRowKeys,
+		computedMatch: { params: matchParams }
+	} = props;
 
 	const fetchUrl = `${NS}/fetchData`;
 
@@ -78,20 +79,20 @@ export default ({
 				case 'edit':
 					dispatch({
 						type: `${NS}/save`,
-						payload: { editId: payload[tableConfig.rowKey], itemInfo: payload }
+						payload: { editId: payload[tableConfig.rowKey], itemInfo: payload, matchParams }
 					})
 
 					break;
 				case 'delete':
 					dispatch({
 						type: `${NS}/deleteItem`,
-						payload: { editId: payload[tableConfig.rowKey] }
+						payload: { editId: payload[tableConfig.rowKey], matchParams }
 					})
 					break;
 				default:
 					dispatch({
 						type: `${NS}/${type}Item`,
-						payload: payload
+						payload: { ...payload, matchParams }
 					})
 					break;
 			}
@@ -116,7 +117,7 @@ export default ({
 	}
 
 	if (typeof tableConfig.columns === 'function') {
-		tableConfig.columns = tableConfig.columns(onItemAction);
+		tableConfig.columns = tableConfig.columns(onItemAction, props);
 	}
 
 	const tbProps = {
@@ -136,5 +137,6 @@ export default ({
 		onReset: updateFilterParams,
 		...formConfig
 	}
+
 	return [tbProps, fmProps];
 }
