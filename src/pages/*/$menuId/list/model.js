@@ -13,6 +13,8 @@ export default {
 	state: {
 		text: NS,
 
+		menuId: null,
+
 		// list
 		filterParams: {},
 		dataSource: [],

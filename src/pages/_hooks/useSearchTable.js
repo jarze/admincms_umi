@@ -26,17 +26,19 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 
 	const fetchUrl = `${NS}/fetchData`;
 
+	// 请求列表数据
 	useEffect(() => {
 		fetchData();
 	}, [filterParams, otherFilterParams]);
 
-	// TODO: 切换匹配路由重置参数
-	// useEffect(() => {
-	// 	dispatch({
-	// 		type: `${NS}/restPageFilter`
-	// 	});
-	// 	console.log('restPageFilter', '---------------', matchParams)
-	// }, [matchParams]);
+	// 切换匹配路由 不同目录重置参数
+	useEffect(() => {
+		if (props.menuId === matchParams.menuId) return;
+		dispatch({
+			type: `${NS}/restPageFilter`,
+			payload: { menuId: matchParams.menuId }
+		});
+	}, [matchParams]);
 
 	const fetchData = (payload) => {
 		dispatch({
@@ -97,7 +99,9 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 					break;
 			}
 		}
+
 		return [updateFilterParams, handlePageChange, onValuesChange, onItemAction];
+
 	}, [NS]);
 
 	if (formConfig.onValuesChange === true) {
