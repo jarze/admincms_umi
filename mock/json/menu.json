@@ -7,15 +7,13 @@
         "id": "2",
         "name": "模型配置",
         "url": "model",
-        "icon": "deployment-unit",
-        "model": "11"
+        "icon": "deployment-unit"
       },
       {
         "id": "3",
         "name": "目录配置",
         "url": "menu",
-        "icon": "menu",
-        "model": "22"
+        "icon": "menu"
       }
     ]
   },
@@ -28,15 +26,32 @@
         "id": "5",
         "name": "基本列表",
         "url": "list",
-        "icon": "more",
-        "model": "5"
+        "icon": "more"
+      },
+      {
+        "id": "15",
+        "name": "基本列表",
+        "url": "list",
+        "icon": "more"
       },
       {
         "id": "6",
         "name": "list1",
         "url": "list1",
         "icon": "more",
-        "model": "6"
+        "children": [{
+            "id": "7",
+            "name": "list3",
+            "url": "list",
+            "icon": "more"
+          },
+          {
+            "id": "8",
+            "name": "list4",
+            "url": "list1",
+            "icon": "more"
+          }
+        ]
       }
     ]
   }

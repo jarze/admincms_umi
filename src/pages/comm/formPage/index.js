@@ -21,7 +21,7 @@ const Page = ({
 				}
 			});
 		}
-	}, [id]);
+	}, []);
 
 	const formProps = {
 		type: 'center',
@@ -36,7 +36,7 @@ const Page = ({
 				payload: {
 					matchParams,
 					...values
-				}
+				},
 			})
 		},
 		data: id && itemInfo

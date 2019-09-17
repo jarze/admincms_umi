@@ -1,4 +1,4 @@
-import listModel from '@/pages/list/$list/model';
+import listModel from '@/pages/comm/model';
 
 export const defaultPagination = {
 	current: 1,
@@ -15,10 +15,10 @@ const {
 /* 继承list model */
 
 /**
- * @description: 
+ * @description:
  * @param 0 model 本身
- * @param 1 获取列表方法  
- * @return: 
+ * @param 1 获取列表方法
+ * @return:
  */
 export const extendsListModel = ({
 	state,

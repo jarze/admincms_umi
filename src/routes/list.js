@@ -5,7 +5,7 @@ import { Card } from 'antd';
 export default (props) => {
 	const { match: { params } } = props;
 	const logicParams = useMemo(() => {
-		return require(`@/pages/_logic/list/${params.modelId}.js`);
+		return require(`@/pages/_logic/list/${params.cateId}.js`);
 	}, [params]);
 
 	return (

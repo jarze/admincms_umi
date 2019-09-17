@@ -17,9 +17,6 @@ const Page = ({
 			}
 		});
 	}, []);
-
-	console.log(props, '=====');
-
 	return <SinglePage {...props} />;
 };
 
