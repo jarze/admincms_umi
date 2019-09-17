@@ -1,8 +1,7 @@
 import { getListData, deleteListItems, getItemInfo, editItem } from './service';
-import router from 'umi/router';
+// import router from 'umi/router';
 
 export const NS = 'list';
-
 
 const defaultPagination = {
 	current: 1,
@@ -66,13 +65,32 @@ export default {
 				},
 			});
 		},
-		*editItem({ payload }, { call, put }) {
+		*editItem({ payload }, { call, put, select }) {
 			const res = yield call(
 				editItem,
 				payload,
 			);
+
 			if (res !== undefined) {
-				router.goBack();
+				const { filterParams, editId } = yield select(state => state[NS]);
+				// router.goBack();
+				// 区分添加编辑， 添加刷新搜索参数|编辑只刷新当前页
+				if (editId) {
+					yield put({
+						type: 'save',
+						payload: {
+							editId: null,
+							filterParams: { ...filterParams }
+						},
+					});
+				} else {
+					yield put({
+						type: 'restPageFilter',
+						payload: {
+							editId: null
+						},
+					});
+				}
 			}
 		},
 		*deleteItem({ payload }, { call, put }) {

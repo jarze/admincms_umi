@@ -19,6 +19,13 @@ export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchPara
 					id: editId
 				}
 			});
+		} else {
+			dispatch({
+				type: `${NS}/save`,
+				payload: {
+					itemInfo: {}
+				}
+			});
 		}
 	}, [editId]);
 
@@ -27,7 +34,7 @@ export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchPara
 		visible: editId ? true : false,
 		items: editItems,
 		data: itemInfo,
-		onOk: (values, cb) => {
+		onOk: (values) => {
 			dispatch({
 				type: `${NS}/editItem`,
 				payload: {
@@ -36,8 +43,6 @@ export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchPara
 					...values
 				}
 			});
-			setEditId(null);
-			cb();
 		},
 		onCancel: () => {
 			setEditId(null);

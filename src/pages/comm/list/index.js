@@ -10,7 +10,7 @@ import { TableSelect, Form, ModalForm, } from '@components/comm';
 import { Button } from 'antd';
 import useSearchTable from '@/pages/_hooks/useSearchTable';
 import useModalForm from '@/pages/_hooks/useModalForm';
-import router from 'umi/router';
+// import router from 'umi/router';
 
 import { NS } from '../model';
 
@@ -32,7 +32,7 @@ const Page = ({
 			{formConfig && <Form {...fmProps} />}
 			<div>
 				<Button icon='plus' type='primary' onClick={() => setEditId('add')}>添加</Button>
-				<Button icon='plus' type='primary' onClick={() => router.push('./list/edit?breadcrumb=添加')}>添加</Button>
+				{/* <Button icon='plus' type='primary' onClick={() => router.push('./list/edit?breadcrumb=添加')}>添加</Button> */}
 			</div>
 			<br />
 			<TableSelect

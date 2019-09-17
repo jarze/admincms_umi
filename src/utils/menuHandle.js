@@ -25,4 +25,6 @@ const menuHandle = (data = [], pid) => {
 const MODEL_TYPES = {
 	'11': 'list',
 	'22': 'list',
+	'5': 'list',
+	'6': 'list'
 }
