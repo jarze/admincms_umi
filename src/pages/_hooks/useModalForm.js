@@ -41,7 +41,8 @@ export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchPara
 					matchParams,
 					id: editId !== 'add' ? editId : null,
 					...values
-				}
+				},
+				editId
 			});
 		},
 		onCancel: () => {

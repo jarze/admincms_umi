@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import { NS } from '../model';
 import { Form } from '@components/comm';
+import router from 'umi/router';
 
 const Page = ({
   dispatch,
@@ -35,13 +36,16 @@ const Page = ({
     layout: 'horizontal',
     items: editItems,
     onSubmit: (values) => {
-      console.log(values);
       dispatch({
         type: `${NS}/editItem`,
         payload: {
           matchParams,
           ...values
         },
+        editId: id,
+        callback: () => {
+          router.goBack();
+        }
       })
     },
     data: id && itemInfo

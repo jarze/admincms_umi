@@ -33,7 +33,7 @@ const Page = ({
 			{formConfig && <Form {...fmProps} />}
 			<div>
 				<Button icon='plus' type='primary' onClick={() => setEditId('add')}>添加</Button>
-				<Button icon='plus' type='primary' onClick={() => router.push('./list/edit?breadcrumb=添加')}>添加</Button>
+				<Button icon='plus' type='primary' onClick={() => router.push('./list/edit/1?breadcrumb=添加')}>添加</Button>
 			</div>
 			<br />
 			<TableSelect

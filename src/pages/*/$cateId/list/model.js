@@ -1,5 +1,4 @@
 import { getListData, deleteListItems, getItemInfo, editItem } from './service';
-// import router from 'umi/router';
 
 export const NS = 'list';
 
@@ -22,12 +21,11 @@ export default {
 
 		// item
 		itemInfo: {},
-		editId: null, // null | add | record.id
+		editId: null, // null | add / undefined :添加 | record.id:编辑
 	},
 	subscriptions: {
 		setup({ dispatch, history, ...props }) {
 			history.listen(location => {
-
 			});
 		},
 	},
@@ -63,29 +61,31 @@ export default {
 				},
 			});
 		},
-		*editItem({ payload }, { call, put, select }) {
+		*editItem({ payload, editId, callback }, { call, put, select }) {
 			const res = yield call(
 				editItem,
 				payload,
 			);
 
 			if (res !== undefined) {
-				const { filterParams, editId } = yield select(state => state[NS]);
-				// router.goBack();
+				const { filterParams } = yield select(state => state[NS]);
+				callback && callback();
 				// 区分添加编辑， 添加刷新搜索参数|编辑只刷新当前页
-				if (editId) {
+				if (editId === 'add' || editId === undefined) {
+					console.log('添加成功');
+					yield put({
+						type: 'restPageFilter',
+						payload: {
+							editId: null
+						},
+					});
+				} else {
+					console.log('编辑成功');
 					yield put({
 						type: 'save',
 						payload: {
 							editId: null,
 							filterParams: { ...filterParams }
-						},
-					});
-				} else {
-					yield put({
-						type: 'restPageFilter',
-						payload: {
-							editId: null
 						},
 					});
 				}
