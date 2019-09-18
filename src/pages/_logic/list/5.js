@@ -1,7 +1,5 @@
 import { Button, Divider, AutoComplete } from 'antd';
 
-const rowKey = 'id';
-
 const arrayColumns = [
 	{
 		title: 'id',
@@ -54,7 +52,7 @@ const functionColumns = (onItemAction) => (
 );
 
 export const tableConfig = {
-	rowKey,
+	rowKey: 'id',
 	columns: functionColumns,
 	// selectionShowKey: 'name',
 	// rowSelection: null,
@@ -133,7 +131,9 @@ export const editConfig = {
 			label: '备注',
 			key: 'content',
 		},
-	]
+	],
+	// 根据tableConfig的isPush参数决定参数是哪个
+	width: 800
 }
 
 export const actions = (onItemAction, props) => {
