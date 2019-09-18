@@ -1,0 +1,39 @@
+[{
+    "id": "1",
+    "name": "List",
+    "icon": "table"
+  },
+  {
+    "id": "4",
+    "name": "Page-List 示例",
+    "icon": "table",
+    "children": [{
+        "id": "5",
+        "name": "基本列表",
+        "icon": "more"
+      },
+      {
+        "id": "15",
+        "name": "基本列表",
+        "icon": "more"
+      },
+      {
+        "id": "6",
+        "name": "list1",
+        "icon": "more",
+        "children": [{
+            "id": "7",
+            "name": "list3",
+            "icon": "more"
+          },
+          {
+            "id": "8",
+            "name": "list4",
+            "icon": "more"
+          }
+        ]
+      }
+    ]
+  }
+
+]

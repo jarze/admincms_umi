@@ -6,7 +6,7 @@ export default {
 		res.send(mock({
 			code: 1001,
 			message: 'success',
-			data: require('./json/menu.json')
+			data: require('./json/menuList.json')
 		}));
 	},
 	// 获取当前登录用户信息
