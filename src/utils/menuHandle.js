@@ -1,3 +1,4 @@
+import { getMenuType } from '@config/page';
 
 export const menuToRouteHandle = (menu, path) => {
 	return { path: path || '/', routes: menuHandle(menu, path) };
@@ -7,12 +8,12 @@ const menuHandle = (data = [], pid) => {
 	return data.map(item => {
 		const { id, name, icon, children } = item;
 		let va = pid ? `${pid}/${id}` : `/${id}`;
-		let type = MODEL_TYPES[id] || '';
+		let type = getMenuType(id) || '';
 		let key = type && !children ? `${va}/${type}` : `${va}`;
 		let unit = {
 			id: id,
 			key: key,
-			name: name,
+			name: name + '-' + id,
 			path: key,
 			icon: icon,
 			// exact: true
@@ -22,10 +23,4 @@ const menuHandle = (data = [], pid) => {
 	});
 };
 
-const MODEL_TYPES = {
-	'11': 'list',
-	'22': 'list',
-	'5': 'list',
-	'6': 'list',
-	'8': 'list'
-}
+
