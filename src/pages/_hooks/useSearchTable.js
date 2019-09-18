@@ -36,6 +36,13 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 
 	// 切换匹配路由 不同目录重置参数
 	useEffect(() => {
+
+		// TODO：
+		// dispatch({
+		// 	type: `${NS}/updateMatchParams`,
+		// 	matchParams
+		// });
+
 		if (props.menuId === matchParams.menuId) return;
 		dispatch({
 			type: `${NS}/restPageFilter`,

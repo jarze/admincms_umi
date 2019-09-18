@@ -116,6 +116,16 @@ export default {
 				});
 			}
 		},
+
+		// TODO: 切换菜单操作
+		// *updateMatchParams({ matchParams }, { call, put, select }) {
+		// 	const { menuId } = yield select(state => state[NS]);
+		// 	if (menuId === matchParams.menuId) return;
+		// 	yield put({
+		// 		type: 'restPageFilter',
+		// 		payload: { ...matchParams }
+		// 	});
+		// },
 	},
 
 	reducers: {

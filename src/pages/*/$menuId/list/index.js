@@ -23,7 +23,7 @@ const Page = ({
 	...props
 }) => {
 
-	const { isPush } = tableConfig;
+	const { isPush } = tableConfig || {};
 
 	const [tbProps, fmProps, onItemAction] = useSearchTable(props, NS, tableConfig, formConfig, loading, otherFilterParams);
 
@@ -31,16 +31,19 @@ const Page = ({
 
 	return (
 		<Fragment>
-			<SearchList fmProps={fmProps} tbProps={tbProps}>
-				{actions && (
-					<Fragment>
-						<div>
-							{actions(onItemAction, props)}
-						</div>
-						<br />
-					</Fragment>
-				)}
-			</SearchList>
+			{tableConfig ?
+				<SearchList fmProps={fmProps} tbProps={tbProps}>
+					{actions && (
+						<Fragment>
+							<div>
+								{actions(onItemAction, props)}
+							</div>
+							<br />
+						</Fragment>
+					)}
+				</SearchList> :
+				<div>请检查！！ 缺少相关配置文件</div>
+			}
 			{!isPush && editConfig && <ModalForm {...modalProps} />}
 		</Fragment>
 	);

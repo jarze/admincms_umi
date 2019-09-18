@@ -56,7 +56,7 @@ export const tableConfig = {
 	columns: functionColumns,
 	// selectionShowKey: 'name',
 	// rowSelection: null,
-	// isPush: true
+	isPush: true
 };
 
 export const formConfig = {
