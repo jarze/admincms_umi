@@ -115,5 +115,8 @@ export default {
 			"changeOrigin": true,
 			"pathRewrite": { "^/api": "" }
 		}
-	}
+	},
+	block: {
+		closeFastGithub: true
+	},
 };
