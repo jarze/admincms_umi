@@ -11,9 +11,10 @@ import { SinglePage } from '@components/comm';
 
 const Page = ({
   dispatch,
-  text,
   computedMatch: { params: matchParams },
-  ...props }) => {
+  pageConfig,
+  ...props
+}) => {
   useEffect(() => {
     dispatch({
       type: `${NS}/fetchItemInfo`,
@@ -22,7 +23,7 @@ const Page = ({
       }
     });
   }, []);
-  return <SinglePage {...props} />;
+  return <SinglePage {...props} {...pageConfig} />;
 };
 
 export default connect(sto => ({

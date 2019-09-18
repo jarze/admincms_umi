@@ -1,9 +1,27 @@
 import { Button, Divider, AutoComplete } from 'antd';
-import Link from 'umi/link';
 
 const rowKey = 'id';
 
-const columns = (onItemAction) => (
+const arrayColumns = [
+	{
+		title: 'id',
+		dataIndex: 'id',
+	},
+	{
+		title: '用户名称',
+		dataIndex: 'name',
+	},
+	{
+		title: '标题',
+		dataIndex: 'content',
+	},
+	{
+		title: '标题',
+		dataIndex: 'title',
+	},
+];
+
+const functionColumns = (onItemAction) => (
 	[
 		{
 			title: 'id',
@@ -24,7 +42,7 @@ const columns = (onItemAction) => (
 			dataIndex: 'operation',
 			render: (_, record) => (
 				<>
-					<Link to={`./list/page/${record.id}?breadcrumb=${record.name}`}>查看详情</Link>
+					<Button type='link' onClick={() => onItemAction('detail', record)}>查看详情</Button>
 					<Divider type="vertical" />
 					<Button type='link' onClick={() => onItemAction('edit', record)}>编辑</Button>
 					<Divider type="vertical" />
@@ -37,91 +55,95 @@ const columns = (onItemAction) => (
 
 export const tableConfig = {
 	rowKey,
-	columns,
+	columns: functionColumns,
 	// selectionShowKey: 'name',
-	rowSelection: null
+	// rowSelection: null,
+	// isPush: true
 };
 
-const filterItems = [
-	{
-		label: 'id',
-		key: 'id',
-	},
-	{
-		label: '用户名称',
-		key: 'name',
-	},
-	{
-		label: '标题',
-		key: 'title',
-	},
-	{
-		label: 'a',
-		key: 'a',
-	},
-	{
-		label: 'b',
-		key: 'b',
-	},
-	{
-		label: 'c',
-		key: 'c',
-	},
-	{
-		label: 'd',
-		key: 'd',
-	},
-	{
-		label: 'ee',
-		key: 'e',
-	},
-];
-
-
 export const formConfig = {
-	items: filterItems,
+	items: [
+		{
+			label: 'id',
+			key: 'id',
+		},
+		{
+			label: '用户名称',
+			key: 'name',
+		},
+		{
+			label: '标题',
+			key: 'title',
+		},
+		{
+			label: 'a',
+			key: 'a',
+		},
+		{
+			label: 'b',
+			key: 'b',
+		}
+	],
+	onValuesChange: true,
+	onSubmit: false
 };
 
 // 	查看页面
-export const items = [
-	{
-		label: '模型名',
-		key: 'modelName',
-	},
-	{
-		label: '操作权限',
-		key: 'name',
-	},
-	{
-		label: '备注',
-		key: 'title',
-	},
-	{
-		label: '内容',
-		key: 'content',
-		span: 3
-	}
-];
+export const pageConfig = {
+	items: [
+		{
+			label: '模型名',
+			key: 'modelName',
+		},
+		{
+			label: '操作权限',
+			key: 'name',
+		},
+		{
+			label: '备注',
+			key: 'title',
+		},
+		{
+			label: '内容',
+			key: 'content',
+			span: 3
+		}
+	]
+};
 
 // 添加编辑页面
-export const editItems = [
-	{
-		label: '模型名',
-		key: 'modelName'
-	},
-	{
-		label: '操作权限',
-		key: 'name',
-		render: () => (
-			<AutoComplete dataSource={['查看', '编辑', '删除']} />
-		)
-	},
-	{
-		label: '表名',
-		key: 'tableName',
-	},
-	{
-		label: '备注',
-		key: 'content',
-	},
-];
+export const editConfig = {
+	items: [
+		{
+			label: '模型名',
+			key: 'modelName'
+		},
+		{
+			label: '操作权限',
+			key: 'name',
+			render: () => (
+				<AutoComplete dataSource={['查看', '编辑', '删除']} />
+			)
+		},
+		{
+			label: '表名',
+			key: 'tableName',
+		},
+		{
+			label: '备注',
+			key: 'content',
+		},
+	]
+}
+
+export const actions = (onItemAction, props) => {
+	return (
+		<>
+			<Button icon='plus' type='primary' onClick={() => onItemAction('add')}>添加</Button>
+			<Divider type="vertical" />
+			<Button type='danger' disabled={props.selectedRowKeys.length === 0} onClick={() => onItemAction('delete', { ids: props.selectedRowKeys })}>批量删除</Button>
+			<Divider type="vertical" />
+			<Button disabled={props.selectedRowKeys.length === 0} onClick={() => onItemAction('action', { ids: props.selectedRowKeys })}>禁用</Button>
+		</>
+	);
+}

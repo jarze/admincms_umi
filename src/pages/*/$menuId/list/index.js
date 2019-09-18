@@ -7,40 +7,42 @@
 
 import { Fragment } from 'react';
 import { connect } from 'dva';
-import { TableSelect, Form, ModalForm, } from '@components/comm';
-import { Button } from 'antd';
+import { SearchList, ModalForm, } from '@components/comm';
 import useSearchTable from '@/pages/_hooks/useSearchTable';
 import useModalForm from '@/pages/_hooks/useModalForm';
-import router from 'umi/router';
-
 import { NS } from './model';
 
 const Page = ({
 	loading,
 	tableConfig,// table定义
-	formConfig,
-	editItems,
+	formConfig,// search定义
+	editConfig,
 	otherFilterParams,
 	children,
+	actions,
 	...props
 }) => {
-	const [tbProps, fmProps] = useSearchTable(props, NS, tableConfig, formConfig, loading, otherFilterParams);
 
-	const [modalProps, setEditId] = useModalForm(props, NS, editItems, loading);
+	const { isPush } = tableConfig;
+
+	const [tbProps, fmProps, onItemAction] = useSearchTable(props, NS, tableConfig, formConfig, loading, otherFilterParams);
+
+	const [modalProps] = useModalForm(props, NS, editConfig, loading);
 
 	return (
-		<>
-			{formConfig && <Form {...fmProps} />}
-			<div>
-				<Button icon='plus' type='primary' onClick={() => setEditId('add')}>添加</Button>
-				<Button icon='plus' type='primary' onClick={() => router.push('./list/edit/1?breadcrumb=添加')}>添加</Button>
-			</div>
-			<br />
-			<TableSelect
-				{...tbProps}
-			/>
-			<ModalForm {...modalProps} />
-		</>
+		<Fragment>
+			<SearchList fmProps={fmProps} tbProps={tbProps}>
+				{actions && (
+					<Fragment>
+						<div>
+							{actions(onItemAction, props)}
+						</div>
+						<br />
+					</Fragment>
+				)}
+			</SearchList>
+			{!isPush && editConfig && <ModalForm {...modalProps} />}
+		</Fragment>
 	);
 };
 

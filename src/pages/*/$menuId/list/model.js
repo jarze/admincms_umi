@@ -1,4 +1,4 @@
-import { getListData, deleteListItems, getItemInfo, editItem } from './service';
+import { getListData, deleteListItems, getItemInfo, editItem, actionItems } from './service';
 
 export const NS = 'list';
 
@@ -97,6 +97,18 @@ export default {
 			const res = yield call(
 				deleteListItems,
 				payload,
+			);
+			if (res !== undefined) {
+				yield put({
+					type: 'restPageFilter'
+				});
+			}
+		},
+		*actionItem({ payload, action }, { call, put }) {
+			const res = yield call(
+				actionItems,
+				payload,
+				action
 			);
 			if (res !== undefined) {
 				yield put({

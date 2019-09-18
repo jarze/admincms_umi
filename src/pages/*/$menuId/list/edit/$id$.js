@@ -14,7 +14,7 @@ const Page = ({
   dispatch,
   itemInfo,
   computedMatch: { params: matchParams },
-  editItems,
+  editConfig,
   ...props
 }) => {
   const { id } = matchParams;
@@ -34,7 +34,7 @@ const Page = ({
     labelCol: { span: 6 },
     wrapperCol: { span: 16 },
     layout: 'horizontal',
-    items: editItems,
+    ...editConfig,
     onSubmit: (values) => {
       dispatch({
         type: `${NS}/editItem`,

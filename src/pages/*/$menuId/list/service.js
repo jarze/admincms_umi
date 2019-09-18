@@ -1,9 +1,10 @@
 import request from '@utils/request';
+import { notification } from 'antd';
+
 
 export function getListData(payload) {
 	const { matchParams, ...params } = payload;
-	console.log('list请求路由参数:', matchParams, payload);
-
+	devAlert('list请求路由参数:', matchParams, params);
 	return request('/list/1', {
 		method: 'GET',
 		body: params
@@ -12,7 +13,7 @@ export function getListData(payload) {
 
 export function getItemInfo(payload) {
 	const { matchParams, ...params } = payload;
-	console.log('page请求路由参数:', matchParams);
+	devAlert('page请求路由参数:', matchParams, params);
 	return request(`/page/${matchParams.modelId}/${matchParams.id}`, {
 		method: 'GET',
 		body: params
@@ -21,19 +22,34 @@ export function getItemInfo(payload) {
 
 export function editItem(payload) {
 	const { matchParams, ...params } = payload;
-	console.log('edit请求路由参数:', matchParams);
+	devAlert('edit请求路由参数:', matchParams, params);
 	return request('/edit/1', {
 		method: 'POST',
 		body: params
 	});
 }
 
-
 export function deleteListItems(payload) {
 	const { matchParams, ...params } = payload;
-	console.log('delete请求路由参数:', matchParams);
+	devAlert('delete请求路由参数:', matchParams, params);
 	return request('/delete/1', {
 		method: 'DELETE',
 		body: params
+	});
+}
+
+export function actionItems(payload, action) {
+	const { matchParams, ...params } = payload;
+	devAlert(`${action}请求路由参数:`, matchParams, params);
+	return request('/action/1', {
+		method: 'POST',
+		body: params
+	});
+}
+
+const devAlert = (title, matchParams, params) => {
+	notification.info({
+		message: `${title}\n${JSON.stringify(matchParams)}`,
+		description: `${JSON.stringify(params)}`,
 	});
 }

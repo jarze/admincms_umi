@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo } from 'react';
 import debounce from 'lodash.debounce';
+import router from 'umi/router';
 
 /**
  * @description: 带搜索项Table页面
@@ -25,6 +26,8 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 	} = props;
 
 	const fetchUrl = `${NS}/fetchData`;
+
+	const { isPush } = tableConfig;
 
 	// 请求列表数据
 	useEffect(() => {
@@ -76,32 +79,48 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 			updateFilterParams(allValues);
 		}, 0.8e3);
 
-		const onItemAction = (type, payload) => {
+		const onItemAction = (type, payload = {}) => {
+			let id = payload[tableConfig.rowKey];
 			switch (type) {
+				case 'detail':
+					router.push(`./list/page/${id}`);
+					break;
+				case 'add':
+					if (isPush) {
+						router.push(`./list/edit`);
+					} else {
+						dispatch({
+							type: `${NS}/save`,
+							payload: { editId: 'add', matchParams }
+						})
+					}
+					break;
 				case 'edit':
-					dispatch({
-						type: `${NS}/save`,
-						payload: { editId: payload[tableConfig.rowKey], itemInfo: payload, matchParams }
-					})
-
+					if (isPush) {
+						router.push(`./list/edit/${id}`);
+					} else {
+						dispatch({
+							type: `${NS}/save`,
+							payload: { editId: id, itemInfo: payload, matchParams }
+						})
+					}
 					break;
 				case 'delete':
 					dispatch({
 						type: `${NS}/deleteItem`,
-						payload: { editId: payload[tableConfig.rowKey], matchParams }
+						payload: { ...payload, matchParams }
 					})
 					break;
 				default:
 					dispatch({
-						type: `${NS}/${type}Item`,
-						payload: { ...payload, matchParams }
+						type: `${NS}/actionItem`,
+						payload: { ...payload, matchParams },
+						action: type
 					})
 					break;
 			}
 		}
-
 		return [updateFilterParams, handlePageChange, onValuesChange, onItemAction];
-
 	}, [NS]);
 
 	if (formConfig.onValuesChange === true) {
@@ -142,5 +161,5 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 		...formConfig
 	}
 
-	return [tbProps, fmProps];
+	return [tbProps, fmProps, onItemAction];
 }

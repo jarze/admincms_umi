@@ -45,4 +45,11 @@ export default {
 			data: null
 		}));
 	},
+	'POST /api/action/:id': (req, res) => {
+		res.send(mock({
+			"code": 1001,
+			message: 'action成功',
+			data: null
+		}));
+	},
 }

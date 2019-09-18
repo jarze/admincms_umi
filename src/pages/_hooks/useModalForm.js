@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 
-export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchParams } }, NS, editItems, loadingEffects) => {
+export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchParams } }, NS, editConfig, loadingEffects) => {
 
 	const setEditId = (id) => {
 		dispatch({
@@ -32,7 +32,7 @@ export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchPara
 	const modalProps = {
 		title: editId !== 'add' ? '编辑' : '添加',
 		visible: editId ? true : false,
-		items: editItems,
+		...editConfig,
 		data: itemInfo,
 		onOk: (values) => {
 			dispatch({
