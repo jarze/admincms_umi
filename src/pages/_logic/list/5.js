@@ -55,7 +55,7 @@ export const tableConfig = {
 	rowKey: 'id',
 	columns: functionColumns,
 	// selectionShowKey: 'name',
-	// rowSelection: null,
+	rowSelection: true,
 	isPush: true
 };
 
@@ -82,8 +82,8 @@ export const formConfig = {
 			key: 'b',
 		}
 	],
-	onValuesChange: true,
-	onSubmit: false
+	// onValuesChange: true,
+	// onSubmit: false
 };
 
 // 	查看页面

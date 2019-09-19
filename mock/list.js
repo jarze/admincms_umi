@@ -14,7 +14,14 @@ export default {
 				"data|10-50": [{
 					"id|+1": Number(req.query.pageNo * req.query.pageSize) + 100,
 					name: "@cname",
-					title: "@title"
+					title: "@title",
+					a: '@ctitle',
+					b: '@word',
+					c: '@word',
+					d: '@word',
+					e: '@word',
+					f: '@word',
+					g: '@word',
 				}]
 			}
 		}));

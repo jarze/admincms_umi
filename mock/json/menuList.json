@@ -1,11 +1,22 @@
 [{
     "id": "1",
     "name": "List",
-    "icon": "table"
+    "icon": "table",
+    "children": [{
+        "id": "2",
+        "name": "a",
+        "icon": "more"
+      },
+      {
+        "id": "3",
+        "name": "b",
+        "icon": "more"
+      }
+    ]
   },
   {
     "id": "4",
-    "name": "Page-List 示例",
+    "name": "List",
     "icon": "table",
     "children": [{
         "id": "5",
@@ -14,7 +25,7 @@
       },
       {
         "id": "15",
-        "name": "基本列表",
+        "name": "list",
         "icon": "more"
       },
       {
