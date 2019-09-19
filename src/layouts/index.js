@@ -19,6 +19,9 @@ const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 			}}
 			rightContentRender={() => rightContent}
 			breadcrumbRender={(routers = []) => (breadcrumb ? [...routers, { breadcrumbName: breadcrumb }] : routers)}
+			itemRender={(route) => {
+				return <Link to={route.path}>{route.breadcrumbName}</Link>;
+			}}
 			{...restProps}
 			route={menuRoute}
 		>
