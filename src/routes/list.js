@@ -9,7 +9,7 @@ export default (props) => {
 			return require(`@/pages/_logic/list/${params.menuId}.js`);
 		}
 		catch (err) {
-			alert(err, '\n 请配置相关文件') // 可执行
+			//alert(err, '\n 请配置相关文件') // 可执行
 		}
 	}, [params]);
 

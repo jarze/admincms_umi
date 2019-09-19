@@ -3,13 +3,6 @@ import { useEffect } from 'react';
 
 export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchParams } }, NS, editConfig, loadingEffects) => {
 
-	const setEditId = (id) => {
-		dispatch({
-			type: `${NS}/save`,
-			payload: { editId: id }
-		})
-	}
-
 	useEffect(() => {
 		if (editId && editId !== 'add') {
 			dispatch({
@@ -46,9 +39,12 @@ export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchPara
 			});
 		},
 		onCancel: () => {
-			setEditId(null);
+			dispatch({
+				type: `${NS}/save`,
+				payload: { editId: null }
+			})
 		},
 		confirmLoading: loadingEffects[`${NS}/editItem`]
 	}
-	return [modalProps, setEditId];
+	return [modalProps];
 }

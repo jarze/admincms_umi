@@ -22,7 +22,11 @@ const Page = ({
         matchParams
       }
     });
-  }, []);
+	}, []);
+	
+	if (typeof pageConfig.items === 'function') {
+		pageConfig.items = pageConfig.items(props);
+	}
   return <SinglePage {...props} {...pageConfig} />;
 };
 

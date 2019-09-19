@@ -27,7 +27,11 @@ const Page = ({
         }
       });
     }
-  }, []);
+	}, []);
+	
+	if (typeof editConfig.items === 'function') {
+		editConfig.items = editConfig.items(props);
+	}
 
   const formProps = {
     type: 'center',

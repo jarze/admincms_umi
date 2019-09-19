@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useMemo } from 'react';
+import {
+	useEffect
+} from 'react';
 import debounce from 'lodash.debounce';
 import router from 'umi/router';
 
@@ -64,86 +66,77 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 		});
 	}
 
-	const [updateFilterParams, handlePageChange, onValuesChange, onItemAction] = useMemo(() => {
-		const updateFilterParams = (payload) => {
-			dispatch({
-				type: `${NS}/save`,
-				payload: {
-					filterParams: payload,
-					pagination: {
-						...pagination,
-						current: 1
-					}
-				},
-			})
-		}
-
-		const handlePageChange = (pageNo, pageSize) => {
-			fetchData({ pageNo, pageSize });
-		};
-
-		const onValuesChange = debounce((changedValues, allValues) => {
-			updateFilterParams(allValues);
-		}, 0.8e3);
-
-		const onItemAction = (type, payload = {}) => {
-			let id = payload[tableConfig.rowKey];
-			switch (type) {
-				case 'detail':
-					router.push(`./list/page/${id}`);
-					break;
-				case 'add':
-					if (isPush) {
-						router.push(`./list/edit`);
-					} else {
-						dispatch({
-							type: `${NS}/save`,
-							payload: { editId: 'add', matchParams }
-						})
-					}
-					break;
-				case 'edit':
-					if (isPush) {
-						router.push(`./list/edit/${id}`);
-					} else {
-						dispatch({
-							type: `${NS}/save`,
-							payload: { editId: id, itemInfo: payload, matchParams }
-						})
-					}
-					break;
-				case 'delete':
-					dispatch({
-						type: `${NS}/deleteItem`,
-						payload: { ...payload, matchParams }
-					})
-					break;
-				default:
-					dispatch({
-						type: `${NS}/actionItem`,
-						payload: { ...payload, matchParams },
-						action: type
-					})
-					break;
-			}
-		}
-		return [updateFilterParams, handlePageChange, onValuesChange, onItemAction];
-	}, [NS]);
-
-	if (formConfig.onValuesChange === true) {
-		formConfig.onValuesChange = onValuesChange;
+	const updateFilterParams = (payload) => {
+		dispatch({
+			type: `${NS}/save`,
+			payload: {
+				filterParams: payload,
+				pagination: {
+					...pagination,
+					current: 1
+				}
+			},
+		})
 	}
 
-	const rowSelection = {
-		selectedRowKeys: selectedRowKeys,
-		onChange: rowKeys => {
-			dispatch({
-				type: `${NS}/save`,
-				payload: {
-					selectedRowKeys: rowKeys
-				},
-			})
-		},
+	const handlePageChange = (pageNo, pageSize) => {
+		fetchData({ pageNo, pageSize });
+	};
+
+	const onItemAction = (type, payload = {}) => {
+		let id = payload[tableConfig.rowKey];
+		switch (type) {
+			case 'detail':
+				router.push(`./list/page/${id}`);
+				break;
+			case 'add':
+				if (isPush) {
+					router.push(`./list/edit`);
+				} else {
+					dispatch({
+						type: `${NS}/save`,
+						payload: { editId: 'add', matchParams }
+					})
+				}
+				break;
+			case 'edit':
+				if (isPush) {
+					router.push(`./list/edit/${id}`);
+				} else {
+					dispatch({
+						type: `${NS}/save`,
+						payload: { editId: id, itemInfo: payload, matchParams }
+					})
+				}
+				break;
+			case 'delete':
+				dispatch({
+					type: `${NS}/deleteItem`,
+					payload: { ...payload, matchParams }
+				})
+				break;
+			default:
+				dispatch({
+					type: `${NS}/actionItem`,
+					payload: { ...payload, matchParams },
+					action: type
+				})
+				break;
+		}
+	}
+
+	if (tableConfig.rowSelection) { 
+		tableConfig.rowSelection = {
+			selectedRowKeys: selectedRowKeys,
+			onChange: rowKeys => {
+				dispatch({
+					type: `${NS}/save`,
+					payload: {
+						selectedRowKeys: rowKeys
+					},
+				})
+			},
+		}
 	}
 
 	if (typeof tableConfig.columns === 'function') {
@@ -151,7 +144,6 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 	}
 
 	const tbProps = {
-		rowSelection,
 		dataSource,
 		loading: loadingEffects[fetchUrl],
 		pagination: {
@@ -159,6 +151,16 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 			onChange: handlePageChange,
 		},
 		...tableConfig
+	}
+
+	if (typeof formConfig.items === 'function') {
+		formConfig.items = formConfig.items(props);
+	}
+
+	if (formConfig.onValuesChange === true) {
+		formConfig.onValuesChange = debounce((changedValues, allValues) => {
+			updateFilterParams(allValues);
+		}, 0.8e3);;
 	}
 
 	const fmProps = {
