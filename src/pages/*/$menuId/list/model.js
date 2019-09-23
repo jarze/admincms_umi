@@ -12,6 +12,7 @@ export default {
 	namespace: NS,
 	state: {
 		text: NS,
+		// cacheData: {menuId: sto},
 
 		menuId: null,
 
