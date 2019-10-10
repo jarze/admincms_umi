@@ -56,7 +56,7 @@ export const tableConfig = {
 	columns: functionColumns,
 	// selectionShowKey: 'name',
 	rowSelection: true,
-	isPush: true
+	// isPush: true
 };
 
 export const formConfig = {
@@ -100,6 +100,7 @@ export const pageConfig = {
 		{
 			label: '备注',
 			key: 'title',
+			render: (text, record, data) => <b>{JSON.stringify(data)}</b>
 		},
 		{
 			label: '内容',
@@ -133,7 +134,10 @@ export const editConfig = {
 		},
 	],
 	// 根据tableConfig的isPush参数决定参数是哪个
-	width: 800
+	width: 800,
+	onValuesChange: (changedValues, allValues, props) => {
+		console.log(changedValues, allValues, props);
+	}
 }
 
 export const actions = (onItemAction, props) => {
