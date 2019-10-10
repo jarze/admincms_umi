@@ -1,7 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
+import debounce from 'lodash.debounce';
 
-export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchParams } }, NS, editConfig, loadingEffects) => {
+export default (props, NS, editConfig = {}, loadingEffects) => {
+	const {
+		dispatch,
+		editId,
+		itemInfo,
+		computedMatch: { params: matchParams }
+	} = props;
 
 	useEffect(() => {
 		if (editId && editId !== 'add') {
@@ -22,11 +29,14 @@ export default ({ dispatch, editId, itemInfo, computedMatch: { params: matchPara
 		}
 	}, [editId]);
 
+	const onValuesChange = editConfig.onValuesChange && debounce((changedValues, allValues) => editConfig.onValuesChange(changedValues, allValues, props), 0.8e3);
+
 	const modalProps = {
 		title: editId !== 'add' ? '编辑' : '添加',
 		visible: editId ? true : false,
 		...editConfig,
 		data: itemInfo,
+		onValuesChange,
 		onOk: (values) => {
 			dispatch({
 				type: `${NS}/editItem`,

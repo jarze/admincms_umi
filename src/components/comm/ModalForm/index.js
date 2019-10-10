@@ -2,7 +2,7 @@ import { useState, Fragment, useRef, useEffect } from 'react';
 import { Modal } from 'antd';
 import { Form } from '@components/comm';
 
-export default ({ items, children, onOk, onCancel, data, ...props }) => {
+export default ({ items, children, onOk, onCancel, data, onValuesChange, ...props }) => {
 	// 有children时可以通过children点击自我控制visible显示
 	const [visible, setVisible] = useState(false);
 
@@ -34,8 +34,9 @@ export default ({ items, children, onOk, onCancel, data, ...props }) => {
 		onCancel && onCancel();
 	}
 
-	const onValuesChange = (_, allValues) => {
+	const handleValuesChange = (changedValues, allValues) => {
 		setFormData(allValues);
+		onValuesChange && onValuesChange(changedValues, allValues);
 	}
 
 	const fmProps = {
@@ -45,7 +46,7 @@ export default ({ items, children, onOk, onCancel, data, ...props }) => {
 		wrapperCol: { span: 20 },
 		col: 24,
 		data: formData,
-		onValuesChange,
+		onValuesChange: handleValuesChange,
 	};
 
 	return (

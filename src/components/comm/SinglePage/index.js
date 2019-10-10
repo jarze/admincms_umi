@@ -12,9 +12,10 @@ const { Item } = Descriptions;
 
 export default ({ items = [], itemInfo: data = {}, ...props }) => {
 
-	const content = items.map(({ key, label, render, ...props }) => {
+	const content = items.map((item) => {
+		let { key, label, render, ...props } = item
 		return (
-			<Item key={key} label={label} {...props}>{render ? render() : data[key]}</Item>
+			<Item key={key} label={label} {...props}>{render ? render(data[key], item, data) : data[key]}</Item>
 		);
 	})
 
