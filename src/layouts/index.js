@@ -25,15 +25,9 @@ const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 			{...restProps}
 			route={menuRoute}
 		>
-			<PageHeaderWrapper
-				title={false}
-				onBack={() => window.history.back()}
-			//content={'content'}
-			//extraContent={'extraContent'}
-			//subTitle="This is a subtitle"
-			/>
-			<br />
-			{children}
+			<PageHeaderWrapper title={false} onBack={() => window.history.back()}>
+				{children}
+			</PageHeaderWrapper>
 		</ProLayoutComponents>
 	);
 }
