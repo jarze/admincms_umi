@@ -1,40 +1,67 @@
+[TOC]
 
 # 路由规则
 
-# Pages | List
+> <mark>`menuId`</mark> 唯一标志页面
+
+## 路由配置
+### [`list`](#list配置相关)
+
+``` javascript
+	routes: [
+			{
+				path: '*/:menuId/list',
+				component: './*/$menuId/list/index.js',
+				Routes: ['./src/routes/list.js'],
+			},
+			{
+				path: '*/:menuId/list/page/:id',
+				component: './*/$menuId/list/page/$id.js',
+				Routes: ['./src/routes/list.js'],
+			},
+			{
+				path: '*/:menuId/list/edit/:id?',
+				component: './*/$menuId/list/edit/$id$.js',
+				Routes: ['./src/routes/list.js'],
+			},
+		],
+```
+
+
+# Pages
 
 ## `list` 配置相关
 
 | 参数 | 说明 | 类型 | 组件 | 默认值 |
 | --- | --- | --- | --- | --- |
-| [`tableConfig` ](#tableConfig)| 表格显示配置 | `object` | `Table` | - |
-| [`formConfig` ](#formConfig)| 表格上面搜索项 | `object` | `Form` | - |
-| [`pageConfig`](#pageConfig) | 查看显示项 | `object` | `SinglePage` | - |
-| [`editConfig`](#editConfig) | 添加编辑配置项 | `object` |`Form`, `ModalForm` | - |
+| [`tableConfig` ](#tableConfig)| 表格显示配置 | `object` | [`Table`](#Table) | - |
+| [`formConfig` ](#formConfig)| 表格上面搜索项 | `object` | [`Form`](#Form) | - |
+| [`pageConfig`](#pageConfig) | 查看显示项 | `object` | [`SinglePage`](#SinglePage) | - |
+| [`editConfig`](#editConfig) | 添加编辑配置项 | `object` |[`Form`](#Form), [`ModalForm`](#ModalForm) | - |
 | `actions` | 操作区域配置 | `Function(onItemAction:Function(type:string, payload:object), listProps: object)` | 自定义 |  |
 
 
 ### `tableConfig` 
-> `Table`  ->  `antd`[`Table`](https://ant.design/components/table-cn/)
+> [`Table`](#Table)
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | `isPush` | 编辑是弹框还是跳转新页面 | `bool` | false |
 | `columns` | 表格列配置描述，`ColumnProps`[]同[`antd Column`](https://ant.design/components/table-cn/#Column) | `ColumnProps[] \  Function(onItemAction:Function(type:string, payload:object), listProps:object):ColumnProps[]` | - |
 | `rowSelection` | 是否有row select | `true` | - |
-| 其他 | 同自定义封装组件Table API |  |  |
+| 其他 | 同自定义封装组件[`Table API`](#Table) |  |  |
 
 ### `formConfig` 
-> `Form` -> `antd`[`Form`](https://ant.design/components/form-cn/)
+> [`Form`](#Form) 
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `items` | 搜索项 | `ItemProps[] \ Function(listProps: object):ItemProps[]` | - |
+| `items` | 搜索项 | [`FormItemProps[]`](#FormItemProps)`\ Function(listProps: object):`[`FormItemProps[]`](#FormItemProps) | - |
 | `onValuesChange` | 表单值变化，设为true则自动监听变化更新列表 | `true \ Function（changedValues，allValues）` |   |
-| 其他 | 同自定义组件Form API |  |  |
+| 其他 | 同自定义组件[`Form API`](#Form)|  |  |
 
 ### `pageConfig` 
-> `SinglePage` -> `antd`[`Descriptions`](https://ant.design/components/descriptions-cn/)
+> [`SinglePage`](#SinglePage)
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -52,18 +79,34 @@
 | 其他 \ `isPush: true` | 同自定义组件[`Modal API`](https://ant.design/components/modal-cn/#API) |  |  |
 
 
-
-
-
 # components
 
-## Table
+## `Table`
+> ->  `antd`[`Table`](https://ant.design/components/table-cn/)
 
-## Form
+## `Form`
+> `antd`[`Form`](https://ant.design/components/form-cn/)
 
-## ModalForm
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| `items` | 数据项 | [`FormItemProps`](#FormItemProps) `[]` | - |
+| `onSubmit` | 数据验证成功后回调事件 | `Function(values:object)` | - |
+| `onReset` | 清除表单数据 | `Function({})` | - |
+| `onValuesChange` | 任一表单域的值发生改变时的回调 | `(changedValues:object, allValues:object) => void` | - |
+| `data` | 表单初始值 | `object` | - |
+| `type` | 表单布局 | `'follow' \ 'col' \ 'center'` |  |
+| `okText` | 提交按钮文案 | `string` | `确定` |
+| `cancelText` | 清除按钮文案 | `string` | `清除` |
+| `col` | 表单布局排版，在`type: col`时有效 | `number` `(0-24)` | 8 |
+| 其他 | 同[`Form API`](https://ant.design/components/form-cn/#API) |  |  |
+
+### `FormItemProps`
+> 同 `antd` [`FormItem`](https://ant.design/components/form-cn/#FormItem)
+
+## `ModalForm`
 
 ## `SinglePage`
+>  -> `antd`[`Descriptions`](https://ant.design/components/descriptions-cn/)
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -77,6 +120,6 @@
 | --- | --- | --- | --- |
 | ``key`` | key标志唯一 | <font face="monospace">string</font> | - |
 | `render` | 渲染组件 | `Function(text, record, data){}` |  |
-| <font face="monospace">`other`</font> | 同[`DescriptionItem`](https://ant.design/components/descriptions-cn/#DescriptionItem) |   | - |
+| `other` | 同[`DescriptionItem`](https://ant.design/components/descriptions-cn/#DescriptionItem) |   | - |
 
 
