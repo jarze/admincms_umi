@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-	useEffect
-} from 'react';
+import { useEffect } from 'react';
 import debounce from 'lodash.debounce';
 import router from 'umi/router';
 
@@ -16,15 +14,21 @@ import router from 'umi/router';
  * @return: [tbProps: table props, fmProps: searchForm props]
  */
 
-export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, otherFilterParams) => {
-
+export default (
+	props,
+	NS,
+	tableConfig = {},
+	formConfig = {},
+	loadingEffects,
+	otherFilterParams,
+) => {
 	const {
 		dispatch,
 		dataSource,
 		filterParams,
 		pagination,
 		selectedRowKeys,
-		computedMatch: { params: matchParams }
+		computedMatch: { params: matchParams },
 	} = props;
 
 	const fetchUrl = `${NS}/fetchData`;
@@ -38,46 +42,43 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 
 	// 切换匹配路由 不同目录重置参数
 	useEffect(() => {
-
-		// TODO：
-		// dispatch({
-		// 	type: `${NS}/updateMatchParams`,
-		// 	matchParams
-		// });
-
-		if (props.menuId === matchParams.menuId) return;
 		dispatch({
-			type: `${NS}/restPageFilter`,
-			payload: { menuId: matchParams.menuId }
+			type: `${NS}/updateMatchParams`,
+			matchParams
 		});
 	}, [matchParams]);
 
-	const fetchData = (payload) => {
+	const fetchData = payload => {
+		let params = {
+			...filterParams,
+			pageNo: pagination.current || 1,
+			pageSize: pagination.pageSize,
+			matchParams,
+			...payload,
+			...otherFilterParams,
+		};
+		if (tableConfig.pagination === false) {
+			delete params.pageNo;
+			delete params.pageSize;
+		}
 		dispatch({
 			type: fetchUrl,
-			payload: {
-				...filterParams,
-				pageNo: pagination.current || 1,
-				pageSize: pagination.pageSize,
-				matchParams,
-				...payload,
-				...otherFilterParams
-			}
+			payload: { ...params }
 		});
-	}
+	};
 
-	const updateFilterParams = (payload) => {
+	const updateFilterParams = payload => {
 		dispatch({
 			type: `${NS}/save`,
 			payload: {
 				filterParams: payload,
 				pagination: {
 					...pagination,
-					current: 1
-				}
+					current: 1,
+				},
 			},
-		})
-	}
+		});
+	};
 
 	const handlePageChange = (pageNo, pageSize) => {
 		fetchData({ pageNo, pageSize });
@@ -95,8 +96,8 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 				} else {
 					dispatch({
 						type: `${NS}/save`,
-						payload: { editId: 'add', matchParams }
-					})
+						payload: { editId: 'add', matchParams },
+					});
 				}
 				break;
 			case 'edit':
@@ -105,25 +106,25 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 				} else {
 					dispatch({
 						type: `${NS}/save`,
-						payload: { editId: id, itemInfo: payload, matchParams }
-					})
+						payload: { editId: id, itemInfo: payload, matchParams },
+					});
 				}
 				break;
 			case 'delete':
 				dispatch({
 					type: `${NS}/deleteItem`,
-					payload: { ...payload, matchParams }
-				})
+					payload: { ...payload, matchParams },
+				});
 				break;
 			default:
 				dispatch({
 					type: `${NS}/actionItem`,
 					payload: { ...payload, matchParams },
-					action: type
-				})
+					action: type,
+				});
 				break;
 		}
-	}
+	};
 
 	if (tableConfig.rowSelection) {
 		tableConfig.rowSelection = {
@@ -132,11 +133,11 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 				dispatch({
 					type: `${NS}/save`,
 					payload: {
-						selectedRowKeys: rowKeys
+						selectedRowKeys: rowKeys,
 					},
-				})
+				});
 			},
-		}
+		};
 	}
 
 	if (typeof tableConfig.columns === 'function') {
@@ -151,8 +152,8 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 			onChange: handlePageChange,
 		},
 		onItemAction,
-		...tableConfig
-	}
+		...tableConfig,
+	};
 
 	if (typeof formConfig.items === 'function') {
 		formConfig.items = formConfig.items(props);
@@ -161,15 +162,15 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 	if (formConfig.onValuesChange === true) {
 		formConfig.onValuesChange = debounce((changedValues, allValues) => {
 			updateFilterParams(allValues);
-		}, 0.8e3);;
+		}, 0.8e3);
 	}
 
 	const fmProps = {
 		data: filterParams,
 		onSubmit: updateFilterParams,
 		onReset: updateFilterParams,
-		...formConfig
-	}
+		...formConfig,
+	};
 
 	return [tbProps, fmProps, onItemAction];
-}
+};

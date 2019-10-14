@@ -25,20 +25,18 @@ export default {
 		// item
 		itemInfo: {},
 		editId: null, // null | add / undefined :添加 | record.id:编辑
+
+		cached: {}
 	},
 	subscriptions: {
 		setup({ dispatch, history, ...props }) {
-			history.listen(location => {
-			});
+			// history.listen(location => {});
 		},
 	},
 
 	effects: {
 		*fetchData({ payload }, { call, put }) {
-			const { data, pageNum: current, pageSize, total, pages } = yield call(
-				getListData,
-				payload,
-			);
+			const { data, pageNum: current, pageSize, total, pages } = yield call(getListData, payload);
 			yield put({
 				type: 'save',
 				payload: {
@@ -47,28 +45,22 @@ export default {
 						current,
 						pageSize,
 						total,
-						pages
+						pages,
 					},
 				},
 			});
 		},
 		*fetchItemInfo({ payload }, { call, put }) {
-			const data = yield call(
-				getItemInfo,
-				payload,
-			);
+			const data = yield call(getItemInfo, payload);
 			yield put({
 				type: 'save',
 				payload: {
-					itemInfo: data || {}
+					itemInfo: data || {},
 				},
 			});
 		},
 		*editItem({ payload, editId, callback }, { call, put, select }) {
-			const res = yield call(
-				editItem,
-				payload,
-			);
+			const res = yield call(editItem, payload);
 
 			if (res !== undefined) {
 				const { filterParams } = yield select(state => state[NS]);
@@ -79,7 +71,7 @@ export default {
 					yield put({
 						type: 'restPageFilter',
 						payload: {
-							editId: null
+							editId: null,
 						},
 					});
 				} else {
@@ -88,45 +80,46 @@ export default {
 						type: 'save',
 						payload: {
 							editId: null,
-							filterParams: { ...filterParams }
+							filterParams: { ...filterParams },
 						},
 					});
 				}
 			}
 		},
 		*deleteItem({ payload }, { call, put }) {
-			const res = yield call(
-				deleteListItems,
-				payload,
-			);
+			const res = yield call(deleteListItems, payload);
 			if (res !== undefined) {
 				yield put({
-					type: 'restPageFilter'
+					type: 'restPageFilter',
 				});
 			}
 		},
 		*actionItem({ payload, action }, { call, put }) {
-			const res = yield call(
-				actionItems,
-				payload,
-				action
-			);
+			const res = yield call(actionItems, payload, action);
 			if (res !== undefined) {
 				yield put({
-					type: 'restPageFilter'
+					type: 'restPageFilter',
 				});
 			}
 		},
 
-		// TODO: 切换菜单操作
-		// *updateMatchParams({ matchParams }, { call, put, select }) {
-		// 	const { menuId } = yield select(state => state[NS]);
-		// 	if (menuId === matchParams.menuId) return;
-		// 	yield put({
-		// 		type: 'restPageFilter',
-		// 		payload: { ...matchParams }
-		// 	});
-		// },
+		// TODO: 切换菜单操作(缓存数据)
+		*updateMatchParams({ matchParams = {} }, { call, put, select }) {
+			if (!matchParams.menuId) return;
+			const state = yield select(state => state[NS]);
+			const { menuId } = state;
+			if ((menuId === matchParams.menuId)) return;
+
+			const { cached } = state;
+			menuId && (cached[menuId] = { ...state, cached: {} });
+			const data = cached[matchParams.menuId];
+
+			yield put({
+				type: 'restPageFilter',
+				payload: { ...data, menuId: matchParams.menuId, cached: { ...cached } },
+			});
+			console.log(cached)
+		}
 	},
 
 	reducers: {
