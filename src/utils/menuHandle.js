@@ -1,4 +1,4 @@
-import { getMenuType } from '@config/page';
+import { getMenuType, getTabs } from '@config/page';
 
 export const menuToRouteHandle = (menu, path) => {
 	return { path: path || '/', routes: menuHandle(menu, path) };

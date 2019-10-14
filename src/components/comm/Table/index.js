@@ -8,9 +8,10 @@
  * API： 同antd Table API
  *
  * 增加API：
+ * selectAlert: {
  * selectionShowKey | string | 可选 | 用于显示已选择项
- * renderAlertSelectExtraContent | (props: selectedRowKeys) => React.ReactElement | 可选 | 用与显示selectRow更多操作
- *
+ * extraContent | (props: selectedRowKeys, listProps) => React.ReactElement | 可选 | 用与显示selectRow更多操作
+ * }
  */
 
 import { useState, Fragment, useEffect } from 'react';
@@ -23,7 +24,7 @@ export const defaultPaginationConfig = {
 };
 
 // 统一默认列表分页表现形式
-export default ({ pagination, rowSelection, ...props }) => {
+export default ({ pagination, rowSelection, selectAlert, ...props }) => {
 	const [onRowSelect, setOnRowSelect] = useState(false);
 
 	useEffect(() => {
@@ -42,6 +43,7 @@ export default ({ pagination, rowSelection, ...props }) => {
 				<Alert
 					onRowSelect={onRowSelect}
 					onRowSelectChange={setOnRowSelect}
+					selectAlert={selectAlert}
 					{...{ rowSelection, ...props }}
 				/>}
 			<Table

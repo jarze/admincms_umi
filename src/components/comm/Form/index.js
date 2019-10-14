@@ -36,7 +36,7 @@ const getColWap = (type, count, col) => {
 	}
 }
 
-const CForm = ({
+export const CForm = ({
 	form: { getFieldDecorator, validateFields, resetFields, getFieldsValue },
 	items = [], // [{key, label, ...}]
 	data,

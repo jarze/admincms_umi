@@ -125,7 +125,7 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 		}
 	}
 
-	if (tableConfig.rowSelection) { 
+	if (tableConfig.rowSelection) {
 		tableConfig.rowSelection = {
 			selectedRowKeys: selectedRowKeys,
 			onChange: rowKeys => {
@@ -150,6 +150,7 @@ export default (props, NS, tableConfig = {}, formConfig = {}, loadingEffects, ot
 			...pagination,
 			onChange: handlePageChange,
 		},
+		onItemAction,
 		...tableConfig
 	}
 

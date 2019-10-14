@@ -1,13 +1,24 @@
-import { useState, Fragment } from 'react';
-import { Modal, Form } from 'antd';
-import { CForm } from '@components/comm/Form';
+import { useState, Fragment, useRef, useEffect } from 'react';
+import { Modal } from 'antd';
+import { Form } from '@components/comm';
 
-const ModalForm = ({ items, children, onOk, onCancel, data, form, ...props }) => {
+export default ({ items, children, onOk, onCancel, data, onValuesChange, ...props }) => {
 	// 有children时可以通过children点击自我控制visible显示
 	const [visible, setVisible] = useState(false);
 
+	const [formData, setFormData] = useState(data || {});
+
+	const t = useRef(null);
+
+	useEffect(() => {
+		if (data) {
+			setFormData(data);
+		}
+	}, [data]);
+
 	const onOkCallBack = (e) => {
 		if (e) e.stopPropagation();
+		const { current: form } = t;
 		form.validateFields((err, values) => {
 			if (!err) {
 				onOk && onOk(values, handleVisible);
@@ -17,7 +28,15 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, ...props }) =>
 
 	const handleVisible = (vs) => {
 		setVisible(vs);
+		if (!vs) {
+			setFormData({});
+		}
 		onCancel && onCancel();
+	}
+
+	const handleValuesChange = (changedValues, allValues) => {
+		setFormData(allValues);
+		onValuesChange && onValuesChange(changedValues, allValues);
 	}
 
 	const fmProps = {
@@ -26,7 +45,8 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, ...props }) =>
 		labelCol: { span: 4 },
 		wrapperCol: { span: 20 },
 		col: 24,
-		data: data,
+		data: formData,
+		onValuesChange: handleValuesChange,
 	};
 
 	return (
@@ -39,14 +59,8 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, ...props }) =>
 				onCancel={() => handleVisible(false)}
 				{...props}
 			>
-				<CForm form={form} {...fmProps} />
+				<Form ref={t} {...fmProps} />
 			</Modal>
 		</Fragment>
 	);
 }
-
-export default Form.create({
-	onValuesChange: ({ onValuesChange }, changedValues, allValues) => {
-		onValuesChange && onValuesChange(changedValues, allValues);
-	}
-})(ModalForm);

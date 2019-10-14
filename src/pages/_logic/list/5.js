@@ -54,7 +54,20 @@ const functionColumns = (onItemAction) => (
 export const tableConfig = {
 	rowKey: 'id',
 	columns: functionColumns,
-	// selectionShowKey: 'name',
+	selectAlert: {
+		selectionShowKey: 'name',
+		extraContent: (selectedRowKeys, { onItemAction }) => {
+			return (
+				<>
+					<Button type='link' onClick={() => onItemAction('detail', 1)}>查看详情</Button>
+					<Divider type="vertical" />
+					<Button type='link' onClick={() => onItemAction('edit', 1)}>编辑</Button>
+					<Divider type="vertical" />
+					<Button type='link' onClick={() => onItemAction('delete', 1)}>删除</Button>
+				</>
+			);
+		}
+	},
 	rowSelection: true,
 	// isPush: true
 };

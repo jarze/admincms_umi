@@ -2,11 +2,13 @@ import { Fragment } from 'react';
 import { Affix, Alert, Button, Icon, Popover, Tag, Divider, Checkbox } from 'antd';
 
 /* table 参数 | onRowSelect | onRowSelectChange */
-export default ({ onRowSelect, onRowSelectChange, ...props }) => {
+export default ({ onRowSelect, onRowSelectChange, selectAlert = {}, ...props }) => {
 	// Table API 参数
-	const { rowSelection = {}, dataSource = [], rowKey, renderAlertSelectExtraContent, selectionShowKey } = props;
+	const { rowSelection = {}, dataSource = [], rowKey } = props;
 	const { selectedRowKeys = [], onChange } = rowSelection;
 	const count = selectedRowKeys.length;
+
+	const { selectionShowKey, extraContent } = selectAlert;
 
 	const handleRowSelectChange = (checked) => {
 		onRowSelectChange && onRowSelectChange(checked);
@@ -79,7 +81,7 @@ export default ({ onRowSelect, onRowSelectChange, ...props }) => {
 					</Fragment>
 				}
 			</Fragment>
-			{renderAlertSelectExtraContent && renderAlertSelectExtraContent(selectedRowKeys)}
+			{extraContent && extraContent(selectedRowKeys, props)}
 		</div>
 	);
 
