@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import router from 'umi/router';
 import debounce from 'lodash.debounce';
 
-export default (props, NS, formConfig, loadingEffects) => {
+export default (props, NS, editConfig = {}, loadingEffects) => {
 	const {
 		dispatch,
 		itemInfo,
@@ -22,18 +22,18 @@ export default (props, NS, formConfig, loadingEffects) => {
 		}
 	}, [NS, dispatch, id, matchParams]);
 
-	if (typeof formConfig.items === 'function') {
-		formConfig.items = formConfig.items(props);
+	if (typeof editConfig.items === 'function') {
+		editConfig.items = editConfig.items(props);
 	}
 
-	const onValuesChange = formConfig.onValuesChange && debounce((changedValues, allValues) => formConfig.onValuesChange(changedValues, allValues, props), 0.8e3);
+	const onValuesChange = editConfig.onValuesChange && debounce((changedValues, allValues) => editConfig.onValuesChange(changedValues, allValues, props), 0.8e3);
 
 	const formProps = {
 		type: 'center',
 		labelCol: { span: 6 },
 		wrapperCol: { span: 16 },
 		layout: 'horizontal',
-		...formConfig,
+		...editConfig,
 		onValuesChange,
 		onSubmit: (values) => {
 			dispatch({

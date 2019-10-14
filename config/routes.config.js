@@ -4,7 +4,7 @@ export default [
 		component: '../layouts/index',
 		routes: [
 			{
-				path: '*/:menuId/list/:tabKey?',
+				path: '*/:menuId/list',
 				component: './*/$menuId/list/index.js',
 				Routes: ['./src/routes/list.js'],
 			},
