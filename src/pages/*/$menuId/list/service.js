@@ -47,6 +47,31 @@ export function actionItems(payload, action) {
 	});
 }
 
+export function exportData(payload) {
+  const { matchParams = {}, ...params } = payload;
+  devAlert(`请求路由参数:`, matchParams, params);
+  const { menuId } = matchParams;
+  let url;
+  let body;
+  switch (menuId) {
+    default:
+      break;
+  }
+  return (
+    url &&
+    request(`${url}`, {
+      method: 'POST',
+      body: body || params,
+      responseType: 'arraybuffer',
+    })
+      .then(res => {
+        return true;
+      })
+      .catch(err => console.log(err))
+  );
+}
+
+
 const devAlert = (title, matchParams, params) => {
 	notification.info({
 		message: `${title}\n${JSON.stringify(matchParams)}`,

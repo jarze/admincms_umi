@@ -15,162 +15,187 @@ import router from 'umi/router';
  */
 
 export default (
-	props,
-	NS,
-	tableConfig = {},
-	formConfig = {},
-	loadingEffects,
-	otherFilterParams,
+  props,
+  NS,
+  tableConfig = {},
+  formConfig = {},
+  loadingEffects,
+  otherFilterParams,
 ) => {
-	const {
-		dispatch,
-		dataSource,
-		filterParams,
-		pagination,
-		selectedRowKeys,
-		computedMatch: { params: matchParams },
-	} = props;
+  const {
+    dispatch,
+    dataSource = [],
+    filterParams,
+    pagination = {},
+    selectedRowKeys,
+    computedMatch,
+    preEditId,
+  } = props;
+  const { params: matchParams } = computedMatch || {};
 
-	const fetchUrl = `${NS}/fetchData`;
+  const fetchUrl = `${NS}/fetchData`;
 
-	const { isPush } = tableConfig;
+  const { isPush } = tableConfig;
 
-	// 请求列表数据
-	useEffect(() => {
-		fetchData();
-	}, [filterParams, otherFilterParams]);
+  // 请求列表数据
+  useEffect(() => {
+    fetchData();
+  }, [filterParams, otherFilterParams]);
 
-	// 切换匹配路由 不同目录重置参数
-	useEffect(() => {
-		dispatch({
-			type: `${NS}/updateMatchParams`,
-			matchParams
-		});
-	}, [matchParams]);
+  // 切换匹配路由 不同目录重置参数
+  useEffect(() => {
+    dispatch({
+      type: `${NS}/updateMatchParams`,
+      matchParams,
+    });
+    return () => {
+      if (!window.location.pathname.includes((props.location || {}).pathname)) {
+        // 若切换栏目，重置列表参数
+        dispatch({
+          type: `${NS}/restPageFilter`,
+        });
+      }
+    };
+  }, [matchParams]);
 
-	const fetchData = payload => {
-		let params = {
-			...filterParams,
-			pageNo: pagination.current || 1,
-			pageSize: pagination.pageSize,
-			matchParams,
-			...payload,
-			...otherFilterParams,
-		};
-		if (tableConfig.pagination === false) {
-			delete params.pageNo;
-			delete params.pageSize;
-		}
-		dispatch({
-			type: fetchUrl,
-			payload: { ...params }
-		});
-	};
+  const fetchData = payload => {
+    let params = {
+      ...filterParams,
+      pageNo: pagination.current || 1,
+      pageSize: pagination.pageSize,
+      matchParams,
+      ...payload,
+      ...otherFilterParams,
+    };
+    if (tableConfig.pagination === false) {
+      delete params.pageNo;
+      delete params.pageSize;
+    }
+    dispatch({
+      type: fetchUrl,
+      payload: { ...params },
+    });
+  };
 
-	const updateFilterParams = payload => {
-		dispatch({
-			type: `${NS}/save`,
-			payload: {
-				filterParams: payload,
-				pagination: {
-					...pagination,
-					current: 1,
-				},
-			},
-		});
-	};
+  const updateFilterParams = payload => {
+    dispatch({
+      type: `${NS}/save`,
+      payload: {
+        filterParams: payload,
+        pagination: {
+          ...pagination,
+          current: 1,
+        },
+      },
+    });
+  };
 
-	const handlePageChange = (pageNo, pageSize) => {
-		fetchData({ pageNo, pageSize });
-	};
+  const handlePageChange = (pageNo, pageSize) => {
+    fetchData({ pageNo, pageSize });
+  };
 
-	const onItemAction = (type, payload = {}) => {
-		let id = payload[tableConfig.rowKey];
-		switch (type) {
-			case 'detail':
-				router.push(`./list/page/${id}`);
-				break;
-			case 'add':
-				if (isPush) {
-					router.push(`./list/edit`);
-				} else {
-					dispatch({
-						type: `${NS}/save`,
-						payload: { editId: 'add', matchParams },
-					});
-				}
-				break;
-			case 'edit':
-				if (isPush) {
-					router.push(`./list/edit/${id}`);
-				} else {
-					dispatch({
-						type: `${NS}/save`,
-						payload: { editId: id, itemInfo: payload, matchParams },
-					});
-				}
-				break;
-			case 'delete':
-				dispatch({
-					type: `${NS}/deleteItem`,
-					payload: { ...payload, matchParams },
-				});
-				break;
-			default:
-				dispatch({
-					type: `${NS}/actionItem`,
-					payload: { ...payload, matchParams },
-					action: type,
-				});
-				break;
-		}
-	};
+  // TODO: export 导出功能加入
+  const onItemAction = (type, payload = {}, breadcrumb) => {
+    let id = payload[tableConfig.rowKey];
+    switch (type) {
+      case 'detail':
+        router.push(`./list/page/${id}`);
+        break;
+      case 'add':
+        if (isPush) {
+          router.push(`./list/edit?breadcrumb=${breadcrumb || '添加'}`);
+        } else {
+          dispatch({
+            type: `${NS}/save`,
+            payload: { editId: 'add', matchParams },
+          });
+        }
+        break;
+      case 'edit':
+        if (isPush) {
+          router.push(`./list/edit/${id}?breadcrumb=${breadcrumb || '编辑'}`);
+        } else {
+          dispatch({
+            type: `${NS}/save`,
+            payload: { editId: id, itemInfo: payload, matchParams },
+          });
+        }
+        break;
+      case 'delete':
+        dispatch({
+          type: `${NS}/deleteItem`,
+          payload: { ...payload, matchParams },
+        });
+        break;
+      case 'export':
+        dispatch({
+          type: `${NS}/exportData`,
+          payload: { ...payload, matchParams },
+        });
+        break;
+      case 'search':
+        updateFilterParams(payload);
+        break;
+      default:
+        dispatch({
+          type: `${NS}/actionItem`,
+          payload: { ...payload, matchParams },
+          action: type,
+        });
+        break;
+    }
+  };
 
-	if (tableConfig.rowSelection) {
-		tableConfig.rowSelection = {
-			selectedRowKeys: selectedRowKeys,
-			onChange: rowKeys => {
-				dispatch({
-					type: `${NS}/save`,
-					payload: {
-						selectedRowKeys: rowKeys,
-					},
-				});
-			},
-		};
-	}
+  if (tableConfig.rowSelection) {
+    tableConfig.rowSelection = {
+      ...tableConfig.rowSelection,
+      selectedRowKeys: selectedRowKeys,
+      onChange: rowKeys => {
+        dispatch({
+          type: `${NS}/save`,
+          payload: {
+            selectedRowKeys: rowKeys,
+          },
+        });
+      },
+    };
+  }
 
-	if (typeof tableConfig.columns === 'function') {
-		tableConfig.columns = tableConfig.columns(onItemAction, props);
-	}
+  if (typeof tableConfig.columns === 'function') {
+    tableConfig.columns = tableConfig.columns(onItemAction, props);
+  }
 
-	const tbProps = {
-		dataSource,
-		loading: loadingEffects[fetchUrl],
-		pagination: {
-			...pagination,
-			onChange: handlePageChange,
-		},
-		onItemAction,
-		...tableConfig,
-	};
+  const tbProps = {
+    dataSource,
+    loading: loadingEffects[fetchUrl],
+    pagination: {
+      ...pagination,
+      onChange: handlePageChange,
+    },
+    rowClassName: (record, index) =>
+      preEditId && String(preEditId) === String(record[tableConfig.rowKey])
+        ? 'table-row-visited'
+        : '',
+    onItemAction,
+    ...tableConfig,
+  };
 
-	if (typeof formConfig.items === 'function') {
-		formConfig.items = formConfig.items(props);
-	}
+  if (typeof formConfig.items === 'function') {
+    formConfig.items = formConfig.items(props);
+  }
 
-	if (formConfig.onValuesChange === true) {
-		formConfig.onValuesChange = debounce((changedValues, allValues) => {
-			updateFilterParams(allValues);
-		}, 0.8e3);
-	}
+  if (formConfig.onValuesChange === true) {
+    formConfig.onValuesChange = debounce((changedValues, allValues) => {
+      updateFilterParams(allValues);
+    }, 0.8e3);
+  }
 
-	const fmProps = {
-		data: filterParams,
-		onSubmit: updateFilterParams,
-		onReset: updateFilterParams,
-		...formConfig,
-	};
+  const fmProps = {
+    data: filterParams,
+    onSubmit: updateFilterParams,
+    onReset: updateFilterParams,
+    ...formConfig,
+  };
 
-	return [tbProps, fmProps, onItemAction];
+  return [tbProps, fmProps, onItemAction];
 };
