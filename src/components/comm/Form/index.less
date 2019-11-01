@@ -1,14 +1,38 @@
 .ant-advanced-search-form {
+  &:global(.ant-form-horizontal),
+  &:global(.ant-form-inline) {
+    :global {
+      .ant-form-item {
+        display: flex;
+        margin-right: 0;
+      }
+
+      .ant-form-item-control-wrapper {
+        flex: 1;
+      }
+    }
+  }
 
   :global {
-    .ant-form-item {
-      display: flex;
-      margin-right: 0;
+    td {
+      .ant-form-item {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .ant-form-explain {
+        position: absolute;
+      }
     }
 
-    .ant-form-item-control-wrapper {
-      flex: 1;
+    .ant-input-number {
+      width: 100%;
     }
 
+    .ant-col {
+      .ant-form-explain {
+        position: absolute;
+      }
+    }
   }
 }

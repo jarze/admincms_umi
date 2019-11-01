@@ -19,40 +19,45 @@ import { Table } from 'antd';
 import Alert from '../AlertSelect';
 
 export const defaultPaginationConfig = {
-	pageSizeOptions: ['10', '20', '30', '40'],
-	showQuickJumper: true,
+  pageSizeOptions: ['50', '100', '150'],
+  showQuickJumper: true,
+  showSizeChanger: true,
+  showTotal: total => `共 ${total} 条`,
 };
 
 // 统一默认列表分页表现形式
 export default ({ pagination, rowSelection, selectAlert, ...props }) => {
-	const [onRowSelect, setOnRowSelect] = useState(false);
+  const [onRowSelect, setOnRowSelect] = useState(false);
 
-	useEffect(() => {
-		setOnRowSelect(false);
-	}, [props.columns]);
+  useEffect(() => {
+    setOnRowSelect(false);
+  }, [props.columns]);
 
-	let pg = pagination ? {
-		...defaultPaginationConfig,
-		onShowSizeChange: pagination.onShowSizeChange || pagination.onChange,
-		...pagination,
-	} : pagination;
+  let pg = pagination
+    ? {
+        ...defaultPaginationConfig,
+        onShowSizeChange: pagination.onShowSizeChange || pagination.onChange,
+        ...pagination,
+      }
+    : pagination;
 
-	return (
-		<Fragment>
-			{rowSelection &&
-				<Alert
-					onRowSelect={onRowSelect}
-					onRowSelectChange={setOnRowSelect}
-					selectAlert={selectAlert}
-					{...{ rowSelection, ...props }}
-				/>}
-			<Table
-				rowKey={(_, index) => index}
-				bordered={false}
-				{...props}
-				pagination={pg}
-				rowSelection={onRowSelect ? rowSelection : null}
-			/>
-		</Fragment>
-	);
+  return (
+    <Fragment>
+      {rowSelection && (
+        <Alert
+          onRowSelect={onRowSelect}
+          onRowSelectChange={setOnRowSelect}
+          selectAlert={selectAlert}
+          {...{ rowSelection, ...props }}
+        />
+      )}
+      <Table
+        rowKey={(_, index) => index}
+        bordered={false}
+        {...props}
+        pagination={pg}
+        rowSelection={onRowSelect ? rowSelection : null}
+      />
+    </Fragment>
+  );
 };
