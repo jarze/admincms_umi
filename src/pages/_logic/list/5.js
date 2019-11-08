@@ -120,7 +120,9 @@ export const pageConfig = {
 			key: 'content',
 			span: 3
 		}
-	]
+	],
+	bordered: true,
+	layout: 'horizontal'
 };
 
 // 添加编辑页面

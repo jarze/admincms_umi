@@ -87,7 +87,6 @@ export default {
         callback && callback();
         // 区分添加编辑， 添加刷新搜索参数|编辑只刷新当前页
         if (editId === 'add' || editId === undefined) {
-          console.log('添加成功');
           yield put({
             type: 'restPageFilter',
             payload: {
@@ -96,7 +95,6 @@ export default {
             },
           });
         } else {
-          console.log('编辑成功');
           yield put({
             type: 'save',
             payload: {
@@ -164,9 +162,8 @@ export default {
 
       yield put({
         type: 'restPageFilter',
-        payload: { ...data, menuId: matchParams.menuId, cached: { ...cached } },
+        payload: { dataSource: [], ...data, menuId: matchParams.menuId, cached: { ...cached } },
       });
-      console.log(cached);
     },
   },
 

@@ -10,27 +10,27 @@ import { NS } from '../model';
 import { SinglePage } from '@components/comm';
 
 const Page = ({
-  dispatch,
-  computedMatch: { params: matchParams },
-  pageConfig,
-  ...props
+	dispatch,
+	computedMatch: { params: matchParams },
+	pageConfig,
+	...props
 }) => {
-  useEffect(() => {
-    dispatch({
-      type: `${NS}/fetchItemInfo`,
-      payload: {
-        matchParams
-      }
-    });
+	useEffect(() => {
+		dispatch({
+			type: `${NS}/fetchItemInfo`,
+			payload: {
+				matchParams
+			}
+		});
 	}, []);
-	
-	if (typeof pageConfig.items === 'function') {
+
+	if (pageConfig && (typeof pageConfig.items === 'function')) {
 		pageConfig.items = pageConfig.items(props);
 	}
-  return <SinglePage {...props} {...pageConfig} />;
+	return <SinglePage {...props} {...pageConfig} />;
 };
 
 export default connect(sto => ({
-  ...sto[NS],
-  loading: sto.loading.global
+	...sto[NS],
+	loading: sto.loading.global
 }))(Page);
