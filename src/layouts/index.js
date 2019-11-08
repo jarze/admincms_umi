@@ -4,6 +4,28 @@ import logo from '@assets/logo.svg';
 import Link from 'umi/link';
 import { connect } from 'dva';
 
+const isDirectory = (data = [], currentPath) => {
+	let find = false;
+	for (let item of data) {
+		let { path, children, hideChildrenInMenu } = item;
+		if (path === currentPath) {
+			if (hideChildrenInMenu) {
+				find = !hideChildrenInMenu;
+				break;
+			}
+			find = !!children;
+			break;
+		} else if (currentPath.startsWith(path) && children) {
+			if (hideChildrenInMenu) {
+				find = !hideChildrenInMenu;
+				break;
+			}
+			find = isDirectory(children, currentPath);
+		}
+	}
+	return find;
+};
+
 const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 
 	const rightContent = <User user={user} style={{ float: 'right', margin: '0 2em' }} />;
@@ -19,13 +41,13 @@ const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
 			}}
 			rightContentRender={() => rightContent}
 			breadcrumbRender={(routers = []) => (breadcrumb ? [...routers, { breadcrumbName: breadcrumb }] : routers)}
-			itemRender={route => {
-				return route.path ? (
-					<Link to={route.path}>{route.breadcrumbName}</Link>
+			itemRender={route => (
+				!route.path || isDirectory(menuRoute.routes, route.path) ? (
+					route.breadcrumbName
 				) : (
-						route.breadcrumbName
-					);
-			}}
+						<Link to={route.path}>{route.breadcrumbName}</Link>
+					)
+			)}
 			{...restProps}
 			route={menuRoute}
 		>
