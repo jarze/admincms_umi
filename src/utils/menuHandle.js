@@ -7,9 +7,10 @@ export const menuToRouteHandle = (menu, path) => {
 const menuHandle = (data = [], pid) => {
 	return data.map(item => {
 		const { id, name, icon, children } = item;
-		let va = pid ? `${pid}/${id}` : `/${id}`;
+		let va = `${pid || ''}/${id}`;
 		let type = getMenuType(id);
 		let key = type ? `${va}/${type}` : `${va}`;
+		(type && !pid) && (key = `/-${key}`); // 通配符至少匹配一级目录
 
 		let unit = {
 			id: id,

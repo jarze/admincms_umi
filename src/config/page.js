@@ -1,5 +1,5 @@
 // 定义属于list的menus
-const LIST_MENUS = ['2', '5', '7', '15',];
+const LIST_MENUS = ['2', '5', '7', '15', '9'];
 const PAGE_MENUS = ['3'];
 
 // 获取menu类型
