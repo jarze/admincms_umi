@@ -1,6 +1,4 @@
-// import useSearchTable from '@utils/useSearchTable';
 import { useMemo, cloneElement } from 'react';
-import { Card } from 'antd';
 
 export default (props) => {
 	const { match: { params } } = props;
@@ -11,12 +9,7 @@ export default (props) => {
 		catch (err) {
 			//alert(err, '\n 请配置相关文件') // 可执行
 		}
-	}, [params]);
+	}, [params.menuId]);
 
-	return (
-		<Card>
-			{cloneElement(props.children, logicParams)}
-		</Card>
-	);
-	// return cloneElement(props.children, logicParams);
+	return logicParams ? cloneElement(props.children, logicParams) : '请检查！！ 缺少相关配置文件';
 }

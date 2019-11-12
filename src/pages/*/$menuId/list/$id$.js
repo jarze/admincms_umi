@@ -29,7 +29,7 @@ const Page = ({
 
 	return (
 		<Fragment>
-			{tableConfig ?
+			{tableConfig &&
 				<SearchList fmProps={fmProps} tbProps={tbProps}>
 					{actions && (
 						<Fragment>
@@ -39,8 +39,7 @@ const Page = ({
 							<br />
 						</Fragment>
 					)}
-				</SearchList> :
-				<div>请检查！！ 缺少相关配置文件</div>
+				</SearchList>
 			}
 			{!isPush && editConfig && <ModalEdit {...{ NS, editConfig, loading, ...props }} />}
 		</Fragment>
