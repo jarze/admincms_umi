@@ -7,9 +7,9 @@
 
 import { Fragment } from 'react';
 import { connect } from 'dva';
-import { SearchList, ModalForm, } from '@components/comm';
+import { SearchList } from '@components/comm';
+import ModalEdit from './_components/ModalEdit';
 import useSearchTable from '@/pages/_hooks/useSearchTable';
-import useModalForm from '@/pages/_hooks/useModalForm';
 import { NS } from './model';
 
 const Page = ({
@@ -27,8 +27,6 @@ const Page = ({
 
 	const [tbProps, fmProps, onItemAction] = useSearchTable(props, NS, tableConfig, formConfig, loading, otherFilterParams);
 
-	const [modalProps] = useModalForm(props, NS, editConfig, loading);
-
 	return (
 		<Fragment>
 			{tableConfig ?
@@ -44,7 +42,7 @@ const Page = ({
 				</SearchList> :
 				<div>请检查！！ 缺少相关配置文件</div>
 			}
-			{!isPush && editConfig && <ModalForm {...modalProps} />}
+			{!isPush && editConfig && <ModalEdit {...{ NS, editConfig, loading, ...props }} />}
 		</Fragment>
 	);
 };

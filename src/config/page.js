@@ -9,6 +9,7 @@ export const getMenuType = (menuId) => {
 	return null;
 }
 
+//{pid: [] }
 const MENU_TABS = {
 	'7': [{
 		key: '1',
@@ -21,6 +22,20 @@ const MENU_TABS = {
 		tab: 'tab3',
 	}]
 };
+
 export const getTabs = (menuId) => {
 	return MENU_TABS[menuId];
 }
+
+// menu 之外的深层级页面（不显示在menu,会显示在面包屑上 {pid: [{name, children}]}
+export const EXTRA_ROUTES = {
+	//example
+	"7": [{
+		id: 'aa',
+		name: '添加设备',
+		children: [{
+			id: 'das',
+			name: '详情查看',
+		}]
+	}]
+};

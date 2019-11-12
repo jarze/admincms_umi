@@ -1,4 +1,4 @@
-import { getMenuType, getTabs } from '@config/page';
+import { getMenuType, EXTRA_ROUTES } from '@config/page';
 
 export const menuToRouteHandle = (menu, path) => {
 	return { path: path || '/', routes: menuHandle(menu, path) };
@@ -31,17 +31,6 @@ const menuHandle = (data = [], pid) => {
 	});
 };
 
-// menu 之外的深层级页面（不显示在menu,会显示在面包屑上 {pid: [{name, children}]}
-const EXTRA_ROUTES = {
-	//example
-	"7": [{
-		id: 'aa',
-		name: '添加设备',
-		children: [{
-			id: 'das',
-			name: '详情查看',
-		}]
-	}]
-};
+
 
 
