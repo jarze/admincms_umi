@@ -3,6 +3,8 @@ import { Menu, Dropdown, Icon } from 'antd';
 import Link from 'umi/link';
 import { items } from './_logic';
 import { ModalForm } from '@components/comm';
+import { handleLogout } from '@utils/auth';
+
 
 const menu = (
 	<Menu>
@@ -16,7 +18,7 @@ const menu = (
 		</Menu.Item>
 		<Menu.Divider />
 		<Menu.Item>
-			<Link to='/logout'><Icon type="logout" />退出登录</Link>
+			<div onClick={handleLogout}><Icon type="logout" />退出登录</div>
 		</Menu.Item>
 	</Menu>
 );

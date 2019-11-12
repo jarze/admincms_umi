@@ -1,3 +1,8 @@
+/**
+ * Routes:
+ *   - ./src/routes/auth.js
+ */
+
 import { BasicLayout as ProLayoutComponents, PageHeaderWrapper } from '@ant-design/pro-layout';
 import User from './_components/User';
 import logo from '@assets/logo.svg';
@@ -27,7 +32,9 @@ const isDirectory = (data = [], currentPath) => {
 };
 
 const BasicLayout = ({ children, menuRoute, user, ...restProps }) => {
-
+	if (restProps.location.pathname === '/login') {
+		return children;
+	}
 	const rightContent = <User user={user} style={{ float: 'right', margin: '0 2em' }} />;
 	const { breadcrumb } = restProps.location.query;
 	return (
