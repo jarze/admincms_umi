@@ -1,7 +1,8 @@
 import theme from './theme.config';
 // import routes from './routes.config';
-import path from "path";
+
 import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_GATEWAY, API_PROXY, API_PROXY_TARGET } from './constant';
+const resolve = require('path').resolve;
 
 // 当前环境相关配置  dev | test | pro
 const env = process.env.API_ENV;
@@ -100,13 +101,13 @@ export default {
 	//   "react-dom": "window.ReactDOM"
 	// }
 	alias: {
-		'@': path.resolve(__dirname, '../src'),
-		'@components': path.resolve(__dirname, '../src/components'),
-		'@services': path.resolve(__dirname, '../src/services'),
-		'@utils': path.resolve(__dirname, '../src/utils'),
-		'@assets': path.resolve(__dirname, '../src/assets'),
-		'@request': path.resolve(__dirname, '../src/utils/request.js'),
-		'@config': path.resolve(__dirname, '../src/config'),
+		'@': resolve(__dirname, '../src/'),
+		'@components': resolve(__dirname, '../src/components'),
+		'@services': resolve(__dirname, '../src/services'),
+		'@utils': resolve(__dirname, '../src/utils'),
+		'@assets': resolve(__dirname, '../src/assets'),
+		'@request': resolve(__dirname, '../src/utils/request.js'),
+		'@config': resolve(__dirname, '../src/config'),
 	},
 
 	"proxy": {
