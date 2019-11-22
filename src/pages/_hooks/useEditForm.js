@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import router from 'umi/router';
 import debounce from 'lodash.debounce';
 
@@ -22,12 +22,16 @@ export default (props, NS, formConfig = {}, loadingEffects) => {
     }
   }, [NS, dispatch, id, matchParams]);
 
-  const onValuesChange =
+  const handleValuesChange = useCallback(
     formConfig.onValuesChange &&
-    debounce(
-      (changedValues, allValues) => formConfig.onValuesChange(changedValues, allValues, props),
-      0.8e3,
-    );
+      debounce(
+        (changedValues, allValues) => formConfig.onValuesChange(changedValues, allValues, props),
+        0.8e3,
+      ),
+    [],
+  );
+
+  const onValuesChange = formConfig.onValuesChange && handleValuesChange;
 
   const { handleFormValues, items, ...fmProps } = formConfig;
   const realItems =

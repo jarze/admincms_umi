@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 import router from 'umi/router';
 
@@ -35,11 +35,13 @@ export default (
 
   const fetchUrl = `${NS}/fetchData`;
 
-  const { isPush } = tableConfig;
+  const isPush = tableConfig ? tableConfig.isPush : true;
+
+  const { pathname } = props.location || {};
 
   // 请求列表数据
   useEffect(() => {
-    fetchData();
+    tableConfig && fetchData();
   }, [filterParams, otherFilterParams]);
 
   // 切换匹配路由 不同目录重置参数
@@ -94,30 +96,29 @@ export default (
     fetchData({ pageNo, pageSize });
   };
 
-  // TODO: export 导出功能加入
-  const onItemAction = (type, payload = {}, breadcrumb) => {
+  const onItemAction = (type, payload = {}, breadcrumb, callback) => {
     let id = payload[tableConfig.rowKey];
     switch (type) {
       case 'detail':
-        router.push(`./list/page/${id}`);
+        router.push(`${pathname || '.'}/page/${id}`);
         break;
       case 'add':
         if (isPush) {
-          router.push(`./list/edit?breadcrumb=${breadcrumb || '添加'}`);
+          router.push(`${pathname || '.'}/edit?breadcrumb=${breadcrumb || '添加'}`);
         } else {
           dispatch({
             type: `${NS}/save`,
-            payload: { editId: 'add', matchParams },
+            payload: { editId: 'add' },
           });
         }
         break;
       case 'edit':
         if (isPush) {
-          router.push(`./list/edit/${id}?breadcrumb=${breadcrumb || '编辑'}`);
+          router.push(`${pathname || '.'}/edit/${id}?breadcrumb=${breadcrumb || '编辑'}`);
         } else {
           dispatch({
             type: `${NS}/save`,
-            payload: { editId: id, itemInfo: payload, matchParams },
+            payload: { editId: id, itemInfo: payload },
           });
         }
         break;
@@ -131,10 +132,14 @@ export default (
         dispatch({
           type: `${NS}/exportData`,
           payload: { ...payload, matchParams },
+          callback,
         });
         break;
       case 'search':
         updateFilterParams(payload);
+        break;
+      case 'refresh':
+        fetchData();
         break;
       default:
         dispatch({
@@ -165,7 +170,7 @@ export default (
     tableConfig.columns = tableConfig.columns(onItemAction, props);
   }
 
-  const tbProps = {
+  const tbProps = tableConfig && {
     dataSource,
     loading: loadingEffects[fetchUrl],
     pagination: {
@@ -184,13 +189,18 @@ export default (
     formConfig.items = formConfig.items(props);
   }
 
-  if (formConfig.onValuesChange === true) {
-    formConfig.onValuesChange = debounce((changedValues, allValues) => {
+  const handleValuesChange = useCallback(
+    debounce((changedValues, allValues) => {
       updateFilterParams(allValues);
-    }, 0.8e3);
+    }, 0.8e3),
+    [],
+  );
+
+  if (formConfig.onValuesChange === true) {
+    formConfig.onValuesChange = handleValuesChange;
   }
 
-  const fmProps = {
+  const fmProps = formConfig && {
     data: filterParams,
     onSubmit: updateFilterParams,
     onReset: updateFilterParams,
