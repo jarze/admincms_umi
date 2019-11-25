@@ -10,7 +10,7 @@ import { connect } from 'dva';
 import { SearchList } from '@components/comm';
 import ModalEdit from './_components/ModalEdit';
 import useSearchTable from '@/pages/_list/hooks/useSearchTable';
-import { NS } from './model';
+import { NS as NormalListModel } from './model';
 
 
 const Page = ({
@@ -21,6 +21,7 @@ const Page = ({
 	otherFilterParams,
 	children,
 	actions,
+	NS,
 	...props
 }) => {
 	const { isPush } = tableConfig || {};
@@ -49,8 +50,9 @@ const Page = ({
 	);
 };
 
-export default connect(sto => ({
+export default connect((sto, { NS = NormalListModel }) => ({
 	...sto[NS],
+	NS,
 	loading: sto.loading.effects,
 }))(Page);
 

@@ -6,13 +6,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
-import { NS } from '../model';
 import { SinglePage } from '@components/comm';
+import { NS as NormalListModel } from '../model';
 
 const Page = ({
 	dispatch,
 	computedMatch: { params: matchParams },
 	pageConfig,
+	NS,
 	...props
 }) => {
 	useEffect(() => {
@@ -30,7 +31,8 @@ const Page = ({
 	return <SinglePage {...props} {...pageConfig} />;
 };
 
-export default connect(sto => ({
+export default connect((sto, { NS = NormalListModel }) => ({
 	...sto[NS],
-	loading: sto.loading.global
+	NS,
+	loading: sto.loading.effects,
 }))(Page);

@@ -1,6 +1,8 @@
-// import service from './service';
+
+import * as service from '@/pages/_list/services/2.js';
+
 import extendsListModel from '@/pages/_list/_models/list.js';
-export const NS = 'list';
+export const NS = 'otherModel';
 
 export default extendsListModel({
 	namespace: NS,
@@ -10,5 +12,5 @@ export default extendsListModel({
 	// },
 	// effects: {},
 	// reducers: {},
-});
+}, service);
 

@@ -29,7 +29,7 @@ export default {
 				loadingComponent: './components/PageLoading/index',
 			},
 			title: 'AdminCms_umi',
-			dll: true,
+			// dll: true,
 			locale: {
 				enable: true,
 				default: 'zh-CN',

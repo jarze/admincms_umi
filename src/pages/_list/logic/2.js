@@ -18,3 +18,5 @@ export const formConfig = {
 export const actions = (onItemAction, props) => {
 	return (<span>actions --- a</span>);
 }
+
+export const NS = 'otherModel';

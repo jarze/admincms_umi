@@ -4,7 +4,7 @@
  * @Desc: 基础列表model 封装
  */
 
-export const NS = 'list';
+import normalService, { combineServices } from './service';
 
 // 定义service时方法名
 //获取列表
@@ -26,10 +26,9 @@ const defaultPagination = {
 	total: 0,
 };
 
-const listCommonModel = (service) => ({
+const listCommonModel = (service, NS = 'list') => ({
 	namespace: NS,
 	state: {
-		text: NS,
 
 		menuId: null,
 
@@ -199,9 +198,14 @@ const listCommonModel = (service) => ({
  * @param {server} {deleteListItems, getItemInfo, editItem, actionItems, exportData,}:object
  * @return: model
  */
-export default (model, service) => {
+export default (model, service = normalService) => {
 	let newModel = { ...model };
-	let listModel = listCommonModel(service);
+	let listModel;
+	if (typeof service === 'object') {
+		listModel = listCommonModel(combineServices(service), newModel.namespace);
+	} else {
+		listModel = listCommonModel(service, newModel.namespace);
+	}
 	Object.keys(listModel).forEach(key => {
 		let va = listModel[key];
 		if (typeof va === 'object') {
