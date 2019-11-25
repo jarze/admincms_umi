@@ -2,8 +2,6 @@
 export const CODE_LOGIN_INVALID = 401;
 export const CODE_SUCCESS = 1001;
 
-export const MSG = 'message';
-
 export const CODE_MESSAGES = {
 	200: '服务器成功返回请求的数据。',
 	201: '新建或修改数据成功。',

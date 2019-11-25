@@ -1,5 +1,5 @@
-import * as service from './service';
-import extendsListModel from '@/pages/_models/list.js';
+import service from './service';
+import extendsListModel from '@/pages/_list/_models/list.js';
 export const NS = 'list';
 
 export default extendsListModel({

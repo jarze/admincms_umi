@@ -1,13 +1,13 @@
 import theme from './theme.config';
 // import routes from './routes.config';
 
-import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_GATEWAY, API_PROXY, API_PROXY_TARGET } from './constant';
+import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_GATEWAY, API_PROXY_TARGET } from './constant';
 const resolve = require('path').resolve;
 
 // 当前环境相关配置  dev | test | pro
 const env = process.env.API_ENV;
 const api_gateway = API_GATEWAY[env];
-const api_proxy = API_PROXY[env];
+const API_PROXY = '/api';
 const api_proxy_target = API_PROXY_TARGET[env];
 
 export default {
@@ -88,7 +88,8 @@ export default {
 
 	define: {
 		API_ENV: env,
-		API_PREFIX: `${api_proxy}${api_gateway}`,
+		API_PROXY,
+		API_PREFIX: `${API_PROXY}${api_gateway}`,
 		API_ENV_MOCK: ENV_MOCK,
 		API_ENV_DEV: ENV_DEV,
 		API_ENV_TEST: ENV_TEST,
@@ -111,10 +112,10 @@ export default {
 	},
 
 	"proxy": {
-		"/api": {
+		[API_PROXY]: {
 			"target": api_proxy_target,
 			"changeOrigin": true,
-			"pathRewrite": { "^/api": "" }
+			"pathRewrite": { [`^${API_PROXY}`]: "" }
 		}
 	},
 	block: {

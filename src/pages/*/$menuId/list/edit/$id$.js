@@ -8,7 +8,7 @@ import { connect } from 'dva';
 import { NS } from '../model';
 import { Spin } from 'antd';
 import { Form } from '@components/comm';
-import useEditForm from '@/pages/_hooks/useEditForm';
+import useEditForm from '@/pages/_list/hooks/useEditForm';
 
 const Page = ({ loading, editConfig, ...props }) => {
 	const [{ fetchLoading, ...formProps }] = useEditForm(props, NS, editConfig, loading);

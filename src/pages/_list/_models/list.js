@@ -6,6 +6,20 @@
 
 export const NS = 'list';
 
+// 定义service时方法名
+//获取列表
+export const SERVICE_FETCH_LIST = 'getListData';
+//获取单个item数据
+export const SERVICE_FETCH_ITEM_INFO = 'getItemInfo';
+//添加编辑item
+export const SERVICE_EDIT_ITEM = 'editItem';
+//删除item
+export const SERVICE_DELETE_LIST_ITEMS = 'deleteListItems';
+//其他操作
+export const SERVICE_ACTION_ITEMS = 'actionItems';
+//导出item
+export const SERVICE_EXPORT_DATA = 'exportData';
+
 const defaultPagination = {
 	current: 1,
 	pageSize: 50,
@@ -46,7 +60,8 @@ const listCommonModel = (service) => ({
 	effects: {
 		*fetchData({ payload }, { call, put }) {
 			const { data, pageNum: current, pageSize, total, pages, ...others } = yield call(
-				service.getListData,
+				service,
+				SERVICE_FETCH_LIST,
 				payload,
 			);
 			yield put({
@@ -64,14 +79,14 @@ const listCommonModel = (service) => ({
 			});
 		},
 		*fetchItemInfo({ payload }, { call, put }) {
-			const data = yield call(service.getItemInfo, payload);
+			const data = yield call(service, SERVICE_FETCH_ITEM_INFO, payload);
 			yield put({
 				type: 'save',
 				payload: { itemInfo: data || {} },
 			});
 		},
 		*editItem({ payload, editId, callback }, { call, put, select }) {
-			const res = yield call(service.editItem, payload);
+			const res = yield call(service, SERVICE_EDIT_ITEM, payload);
 			if (res !== undefined) {
 				const { filterParams } = yield select(state => state[NS]);
 				callback && callback();
@@ -97,7 +112,7 @@ const listCommonModel = (service) => ({
 			}
 		},
 		*deleteItem({ payload }, { call, put }) {
-			const res = yield call(service.deleteListItems, payload);
+			const res = yield call(service, SERVICE_DELETE_LIST_ITEMS, payload);
 			if (res !== undefined) {
 				yield put({
 					type: 'restPageFilter',
@@ -106,7 +121,7 @@ const listCommonModel = (service) => ({
 		},
 		*actionItem({ payload, action }, { call, put, select }) {
 			const { isResetPage, ...params } = payload;
-			const res = yield call(service.actionItems, params, action);
+			const res = yield call(service, SERVICE_ACTION_ITEMS, params, action);
 			if (res !== undefined) {
 				// 是否重置页面参数
 				if (isResetPage) {
@@ -125,7 +140,7 @@ const listCommonModel = (service) => ({
 			}
 		},
 		*exportData({ payload, callback }, { call, put }) {
-			const res = yield call(service.exportData, payload, callback);
+			const res = yield call(service, SERVICE_EXPORT_DATA, payload, callback);
 			if (res) {
 				yield put({
 					type: 'save',

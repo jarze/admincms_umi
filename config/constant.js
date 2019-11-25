@@ -10,13 +10,6 @@ export const API_GATEWAY = {
 	pro: '',
 }
 
-export const API_PROXY = {
-	mock: '/api',
-	dev: '/api',
-	test: '/api',
-	pro: '/api',
-}
-
 export const API_PROXY_TARGET = {
 	mock: '',
 	dev: 'http://172.16.11.85:36908',

@@ -1,11 +1,12 @@
 import { fetch } from 'dva';
 import { stringify } from 'qs';
 import { message } from 'antd';
-import { CODE_LOGIN_INVALID, CODE_SUCCESS, CODE_MESSAGES, MSG } from '@config/constant';
+import { CODE_LOGIN_INVALID, CODE_SUCCESS, CODE_MESSAGES } from '@config/constant';
 
-function parseJSON(response) {
-	return response.json();
-}
+const File_Buffer = 'arrayBuffer';
+// function parseJSON(response) {
+// 	return response.json();
+// }
 
 function checkStatus(response) {
 	let status = response.status;
@@ -43,7 +44,13 @@ export default function request(url, options, errToast) {
 
 	return fetch(`${API_PREFIX}${url}`, options)
 		.then(checkStatus)
-		.then(parseJSON)
+		.then(response => {
+			if (options && options.type === File_Buffer) return response;
+			if (response.status === 204) {
+				return response.text();
+			}
+			return response.json();
+		})
 		.then(res => checkResponse(res, (options || {}).method))
 		.then(data => data)
 		.catch(err => {
@@ -54,13 +61,13 @@ export default function request(url, options, errToast) {
 
 // 返回数据处理
 function checkResponse(response, method) {
-	let { code, message } = response;
-
+	if (typeof response !== 'object') return response;
+	let { code, message, data } = response;
 	if (code === CODE_SUCCESS) {
 		if (['DELETE', 'POST'].includes(method) && message) {
 			message.success(message);
 		}
-		return response.data
+		return data
 	};
 
 	const error = new Error(message || CODE_MESSAGES[code]);
@@ -80,10 +87,70 @@ function handleError(err, errToast = true) {
 }
 
 /* JSON To FormData */
-function convertObjToFormData(object) {
+export function convertObjToFormData(object) {
 	const data = new FormData();
 	for (var key in object) {
 		data.append(key, object[key]);
 	}
 	return data;
+}
+
+
+// 导出下载
+export const exportDownload = (url, payload) => {
+	return request(`${url}`, {
+		method: 'GET',
+		body: payload,
+		type: File_Buffer,
+	})
+		.then(download)
+		.catch(e => handleError(e));
+};
+
+export const formatDownloadRequest = (url, params) => {
+	return params ? `${API_PREFIX}${url}?${stringify(params)}` : `${API_PREFIX}${url}`;
+};
+
+/**
+ * @export
+ * @param {*} response 注意不要传入url，将request.js 返回的 response直接传入。
+ */
+export async function download(response) {
+	if (!response.headers) {
+		throw new Error('文件有误！！');
+	}
+	const fileName =
+		response.headers.get('content-disposition') &&
+		response.headers.get('content-disposition').match(/filename=(.*)/)[1];
+	const res = await response.blob();
+	downloadFile(res, fileName);
+}
+
+export function downloadFile(data, filename) {
+	var blob = new Blob([data]);
+	if (typeof window.navigator.msSaveBlob !== 'undefined') {
+		// IE workaround for "HTML7007: One or more blob URLs were
+		// revoked by closing the blob for which they were created.
+		// These URLs will no longer resolve as the data backing
+		// the URL has been freed."
+		window.navigator.msSaveBlob(blob, decodeURI(filename));
+	} else {
+		var blobURL = window.URL.createObjectURL(blob);
+		var tempLink = document.createElement('a');
+		tempLink.style.display = 'none';
+		tempLink.href = blobURL;
+		tempLink.setAttribute('download', decodeURI(filename));
+		// Safari thinks _blank anchor are pop ups. We only want to set _blank
+		// target if the browser does not support the HTML5 download attribute.
+		// This allows you to download files in desktop safari if pop up blocking
+		// is enabled.
+		if (typeof tempLink.download === 'undefined') {
+			tempLink.setAttribute('target', '_blank');
+		}
+
+		document.body.appendChild(tempLink);
+		tempLink.click();
+		document.body.removeChild(tempLink);
+		window.URL.revokeObjectURL(blobURL);
+	}
 }

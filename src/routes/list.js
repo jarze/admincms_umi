@@ -4,7 +4,7 @@ export default (props) => {
 	const { match: { params } } = props;
 	const logicParams = useMemo(() => {
 		try {
-			return require(`@/pages/_logic/list/${params.menuId}.js`);
+			return require(`@/pages/_list/logic/${params.menuId}.js`);
 		}
 		catch (err) {
 			//alert(err, '\n 请配置相关文件') // 可执行
