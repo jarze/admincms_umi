@@ -80,8 +80,7 @@ export const tableConfig = {
 			);
 		},
 	},
-	rowKey: 'id',
-	isPush: true,
+	rowKey: 'id'
 };
 
 export const actions = (onItemAction, props) => {

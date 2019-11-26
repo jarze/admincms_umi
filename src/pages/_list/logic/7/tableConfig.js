@@ -20,5 +20,4 @@ export default {
   ],
   selectionShowKey: 'name',
   rowSelection: null,
-  isPush: true
 };

@@ -11,7 +11,7 @@
 	routes: [
 			{
 				path: '*/:menuId/list',
-				component: './*/$menuId/list/index.js',
+				component: './*/$menuId/list/$id$.js',
 				Routes: ['./src/routes/list.js'],
 			},
 			{
@@ -39,6 +39,8 @@
 | [`pageConfig`](#pageConfig) | 查看显示项 | `object` | [`SinglePage`](#SinglePage) | - |
 | [`editConfig`](#editConfig) | 添加编辑配置项 | `object` |[`Form`](#Form), [`ModalForm`](#ModalForm) | - |
 | `actions` | 操作区域配置 | `Function(onItemAction:Function(type:string, payload:object), listProps: object)` | 自定义 |  |
+| `NS` | 使用`model`名 | `string` |  | `list` |
+| `isPush` | 编辑是弹框还是跳转新页面 | `bool`| | `false` |
 
 
 ### `tableConfig` 
@@ -46,7 +48,7 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `isPush` | 编辑是弹框还是跳转新页面 | `bool` | false |
+
 | `columns` | 表格列配置描述，`ColumnProps`[]同[`antd Column`](https://ant.design/components/table-cn/#Column) | `ColumnProps[] \  Function(onItemAction:Function(type:string, payload:object), listProps:object):ColumnProps[]` | - |
 | `rowSelection` | 是否有row select | `true` | - |
 | 其他 | 同自定义封装组件[`Table API`](#Table) |  |  |

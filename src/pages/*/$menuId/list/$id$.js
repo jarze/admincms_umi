@@ -13,27 +13,14 @@ import useSearchTable from '@/pages/_list/hooks/useSearchTable';
 import { NS as NormalListModel } from './model';
 
 
-const Page = ({
-	loading,
-	tableConfig, // table定义
-	formConfig, // search定义
-	editConfig,
-	otherFilterParams,
-	children,
-	actions,
-	NS,
-	...props
-}) => {
-	const { isPush } = tableConfig || {};
+const Page = (props) => {
+	const {
+		editConfig,
+		actions,
+		isPush = false
+	} = props;
 
-	const [tbProps, fmProps, onItemAction] = useSearchTable(
-		props,
-		NS,
-		tableConfig,
-		formConfig,
-		loading,
-		otherFilterParams,
-	);
+	const [tbProps, fmProps, onItemAction] = useSearchTable(props);
 
 	return (
 		<Fragment>
@@ -45,7 +32,7 @@ const Page = ({
 					</Fragment>
 				)}
 			</SearchList>
-			{!isPush && editConfig && <ModalEdit {...{ NS, editConfig, loading, ...props }} />}
+			{!isPush && editConfig && <ModalEdit {...props} />}
 		</Fragment>
 	);
 };
@@ -53,6 +40,6 @@ const Page = ({
 export default connect((sto, { NS = NormalListModel }) => ({
 	...sto[NS],
 	NS,
-	loading: sto.loading.effects,
+	loadingEffects: sto.loading.effects,
 }))(Page);
 

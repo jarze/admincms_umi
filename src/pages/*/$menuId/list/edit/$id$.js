@@ -10,8 +10,8 @@ import { Form } from '@components/comm';
 import useEditForm from '@/pages/_list/hooks/useEditForm';
 import { NS as NormalListModel } from '../model';
 
-const Page = ({ loading, editConfig, NS, ...props }) => {
-	const [{ fetchLoading, ...formProps }] = useEditForm(props, NS, editConfig, loading);
+const Page = (props) => {
+	const [{ fetchLoading, ...formProps }] = useEditForm(props);
 	return (
 		<Spin spinning={fetchLoading}>
 			<Form {...formProps} />
@@ -22,5 +22,5 @@ const Page = ({ loading, editConfig, NS, ...props }) => {
 export default connect((sto, { NS = NormalListModel }) => ({
 	...sto[NS],
 	NS,
-	loading: sto.loading.effects,
+	loadingEffects: sto.loading.effects,
 }))(Page);

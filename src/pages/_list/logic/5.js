@@ -68,9 +68,10 @@ export const tableConfig = {
 			);
 		}
 	},
-	rowSelection: true,
-	// isPush: true
+	rowSelection: true
 };
+
+export const isPush = true;
 
 export const formConfig = {
 	items: [
