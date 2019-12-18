@@ -1,43 +1,43 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { Fragment, useEffect, useMemo } from 'react';
-import { Form, Input, Button, Divider, Row, Col } from 'antd';
-import style from './index.less';
+import React, { Fragment, useEffect, useMemo } from 'react'
+import { Form, Input, Button, Divider, Row, Col } from 'antd'
+import style from './index.less'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 /* 获取排列方式 */
 const getColsHandle = count => {
-  const cols = { xxl: 6, lg: 8, md: 12, xs: 24 };
+  const cols = { xxl: 6, lg: 8, md: 12, xs: 24 }
   const handleColumns = col => {
-    let columns = 24 / col;
-    return (columns - (count % columns)) * col;
-  };
-  const submitCols = {};
+    let columns = 24 / col
+    return (columns - (count % columns)) * col
+  }
+  const submitCols = {}
   Object.keys(cols).forEach(key => {
-    submitCols[key] = handleColumns(cols[key]);
-  });
-  return { cols, submitCols };
-};
+    submitCols[key] = handleColumns(cols[key])
+  })
+  return { cols, submitCols }
+}
 
 const getColWap = (type, count, col, submitCol) => {
   switch (type) {
     default: {
       let { cols = { span: 8 }, submitCols = { span: 24 } } = col
         ? { cols: { span: col }, submitCols: { span: col } }
-        : getColsHandle(count);
+        : getColsHandle(count)
       if (submitCol) {
-        submitCols = { span: submitCol };
+        submitCols = { span: submitCol }
       }
       const FormContentWap = props =>
-        type === 'col' ? <Row gutter={16} {...props} /> : <Fragment {...props} />;
+        type === 'col' ? <Row gutter={16} {...props} /> : <Fragment {...props} />
       const FormItemWap = props =>
-        type === 'col' ? <Col {...cols} {...props} /> : <Fragment {...props} />;
+        type === 'col' ? <Col {...cols} {...props} /> : <Fragment {...props} />
       const ForSubmitItemWap = props =>
-        type === 'col' ? <Col {...submitCols} {...props} /> : <Fragment {...props} />;
-      return [FormContentWap, FormItemWap, ForSubmitItemWap];
+        type === 'col' ? <Col {...submitCols} {...props} /> : <Fragment {...props} />
+      return [FormContentWap, FormItemWap, ForSubmitItemWap]
     }
   }
-};
+}
 
 export const CForm = ({
   form,
@@ -46,7 +46,7 @@ export const CForm = ({
   onSubmit, // 确定按钮
   onReset, // 取消按钮
   loading,
-  okText = '确定',
+  okText = '搜索',
   cancelText = '清除',
   type = 'col', // 'follow' | 'col' | 'center',
   onValuesChange,
@@ -54,32 +54,32 @@ export const CForm = ({
   submitCol,
   ...formProps
 }) => {
-  const { getFieldDecorator, validateFields, resetFields } = form;
+  const { getFieldDecorator, validateFields, resetFields } = form
   useEffect(() => {
     if (data) {
-      resetFields();
+      resetFields()
     }
-  }, [data]);
+  }, [data])
 
   const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(
     () => getColWap(type, items.length, col, submitCol),
-    [],
-  );
+    [items.length, type]
+  )
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     validateFields((err, values) => {
       if (!err) {
-        onSubmit && onSubmit(values);
+        onSubmit && onSubmit(values)
       }
-    });
-  };
+    })
+  }
 
   const handleClear = e => {
-    e.preventDefault();
-    resetFields();
-    onReset && onReset({});
-  };
+    e.preventDefault()
+    resetFields()
+    onReset && onReset({})
+  }
 
   const formContent = items.map(
     (
@@ -94,15 +94,15 @@ export const CForm = ({
         disabled = false,
         ...itemProps
       },
-      index,
+      index
     ) => {
-      if (render === null) return null;
+      if (render === null || (render && render(form, data) === null)) return null
       return (
         <FormItemWap key={key || index} {...cols}>
           {key ? (
             <FormItem label={label} key={key} {...itemProps}>
               {getFieldDecorator(key, {
-                initialValue: (data && data[key]) || defaultValue,
+                initialValue: data && data[key] !== undefined ? data[key] : defaultValue,
                 ...options,
               })(
                 render ? (
@@ -113,7 +113,7 @@ export const CForm = ({
                     disabled={disabled}
                     placeholder={placeholder || (label ? `输入${label}` : '')}
                   />
-                ),
+                )
               )}
             </FormItem>
           ) : (
@@ -121,9 +121,9 @@ export const CForm = ({
           ) // 不指定key， 直接渲染render内容
           }
         </FormItemWap>
-      );
-    },
-  );
+      )
+    }
+  )
 
   const formSubmit = (onSubmit || onReset) && (
     <ForSubmitItemWap>
@@ -150,10 +150,10 @@ export const CForm = ({
         )}
       </FormItem>
     </ForSubmitItemWap>
-  );
+  )
 
   if (items.length === 0) {
-    return <Fragment />;
+    return <Fragment />
   }
 
   return (
@@ -169,17 +169,19 @@ export const CForm = ({
         {formSubmit}
       </FormContentWap>
     </Form>
-  );
-};
+  )
+}
+
+export const validateMessages = {
+  required: () => '必填',
+  string: {
+    max: (a, b) => `不超过${b}个字符`,
+  },
+}
 
 export default Form.create({
   onValuesChange: ({ onValuesChange, ...props }, changedValues, allValues) => {
-    onValuesChange && onValuesChange(changedValues, allValues);
+    onValuesChange && onValuesChange(changedValues, allValues)
   },
-  validateMessages: {
-    required: '%s 必填',
-    string: {
-      max: '%s 不操过 %s 个字符',
-    },
-  },
-})(CForm);
+  validateMessages,
+})(CForm)

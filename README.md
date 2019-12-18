@@ -40,6 +40,7 @@
 | [`editConfig`](#editConfig) | 添加编辑配置项 | `object` |[`Form`](#Form), [`ModalForm`](#ModalForm) | - |
 | `actions` | 操作区域配置 | `Function(onItemAction:Function(type:string, payload:object), listProps: object)` | 自定义 |  |
 | `NS` | 使用`model`名 | `string` |  | `list` |
+| `otherModels` | 其他绑定`model` | `string[]` |  | - |
 | `isPush` | 编辑是弹框还是跳转新页面 | `bool`| | `false` |
 
 

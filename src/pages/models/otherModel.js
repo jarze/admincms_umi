@@ -1,5 +1,5 @@
 
-import * as service from '@/pages/_list/services/2.js';
+import * as service from '@/pages/_list/services/55.js';
 
 import extendsListModel from '@/pages/_list/_models/list.js';
 export const NS = 'otherModel';

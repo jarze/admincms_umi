@@ -34,14 +34,13 @@ export default ({ NS, editConfig = {}, loadingEffects = {}, ...props }) => {
 		[],
 	);
 
-	const onValuesChange = editConfig.onValuesChange && handleValuesChange;
-
 	const modalProps = {
 		title: editId !== 'add' ? '编辑' : '添加',
 		visible: editId ? true : false,
 		...editConfig,
+		items: typeof editConfig.items === 'function' ? editConfig.items(props) : editConfig.items,
 		data: itemInfo,
-		onValuesChange,
+		onValuesChange: editConfig.onValuesChange && handleValuesChange,
 		onOk: values => {
 			let payload = {
 				matchParams,

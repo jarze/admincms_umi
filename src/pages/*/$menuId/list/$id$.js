@@ -37,9 +37,10 @@ const Page = (props) => {
 	);
 };
 
-export default connect((sto, { NS = NormalListModel }) => ({
+export default connect((sto, { NS = NormalListModel, otherModels = [] }) => ({
 	...sto[NS],
 	NS,
 	loadingEffects: sto.loading.effects,
-}))(Page);
+	...(otherModels || []).reduce((res, item) => ({ ...res, [item]: sto[item] }), {}),
+}))(Page)
 

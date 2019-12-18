@@ -34,22 +34,11 @@ export default ({ NS, formConfig = {}, loadingEffects = {}, ...props }) => {
 	const onValuesChange = formConfig.onValuesChange && handleValuesChange;
 
 	const { handleFormValues, items, ...fmProps } = formConfig;
-	const realItems =
-		typeof items === 'function'
-			? items({
-				...props,
-				updateData: payload => {
-					dispatch({
-						type: `${NS}/save`,
-						payload,
-					});
-				},
-			})
-			: items;
+
 	const formProps = {
 		layout: 'horizontal',
-		items: realItems,
 		...fmProps,
+		items: typeof items === 'function' ? items(props) : items,
 		onValuesChange,
 		onSubmit: values => {
 			let va = handleFormValues ? handleFormValues(values) : values;

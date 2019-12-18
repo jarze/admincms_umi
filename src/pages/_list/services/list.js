@@ -14,7 +14,7 @@ export function getItemInfo(payload, routeParams) {
 	});
 }
 
-export function editItem(payload, routeParams) {
+export function editItem(payload, routeParams, editId) {
 	return request(`/edit/${routeParams.id}`, {
 		method: routeParams.id ? 'PUT' : 'POST',
 		body: payload
