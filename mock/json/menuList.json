@@ -50,5 +50,10 @@
     "id": "7",
     "name": "list",
     "icon": "more"
+  },
+  {
+    "id": "55",
+    "name": "menu",
+    "icon": "more"
   }
 ]

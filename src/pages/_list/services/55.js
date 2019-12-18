@@ -1,7 +1,7 @@
 import request from '@utils/request';
 
 export function getListData(payload) {
-	return request('/list/2', {
+	return request('/menu/55', {
 		method: 'GET',
 		body: payload
 	});

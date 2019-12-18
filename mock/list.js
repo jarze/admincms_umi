@@ -26,7 +26,7 @@ export default {
 			}
 		}));
 	},
-	'GET /api/page/:modelId/:id': (req, res) => {
+	'GET /api/page/:id': (req, res) => {
 		res.send(mock({
 			code: 1001,
 			message: 'success',
@@ -57,6 +57,15 @@ export default {
 			"code": 1001,
 			message: 'action成功',
 			data: null
+		}));
+	},
+	'GET /api/menu/55': (req, res) => {
+		res.send(mock({
+			code: 1001,
+			message: 'success',
+			data: {
+				data: require('./json/menu_privilege.json').children
+			}
 		}));
 	},
 }
