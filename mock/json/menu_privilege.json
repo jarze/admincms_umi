@@ -1,0 +1,586 @@
+{
+  "applicationName": "iot-service-v1",
+  "displayName": "益物联",
+  "url": "",
+  "sortNumber": 2,
+  "icon": "",
+  "menuFlag": false,
+  "children": [{
+      "displayName": "采集管理",
+      "url": "terminal",
+      "sortNumber": 2,
+      "icon": "laptop",
+      "menuFlag": true,
+      "children": [{
+          "displayName": "ID生成器",
+          "url": "id",
+          "sortNumber": 1,
+          "icon": "cluster",
+          "menuFlag": true,
+          "children": [{
+              "displayName": "ID生成",
+              "url": "id_add",
+              "sortNumber": 1,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/id-generator/"
+              }]
+            },
+            {
+              "displayName": "ID查询",
+              "url": "id_list",
+              "sortNumber": 2,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                  "method": "GET",
+                  "url": "/id-generator/sum"
+                },
+                {
+                  "method": "GET",
+                  "url": "/id-generator/"
+                }
+              ]
+            },
+            {
+              "displayName": "ID导出",
+              "url": "id_export",
+              "sortNumber": 3,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/id-generator/export/{batch-id}"
+              }]
+            },
+            {
+              "displayName": "ID详情",
+              "url": "id_detail",
+              "sortNumber": 4,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/id-generator/{batch-id}"
+              }]
+            }
+          ]
+        },
+        {
+          "displayName": "数据模板",
+          "url": "template",
+          "sortNumber": 2,
+          "icon": "layout",
+          "menuFlag": true,
+          "children": [{
+              "displayName": "添加模板",
+              "url": "template_add",
+              "sortNumber": 1,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/device-template/"
+              }, {
+                "method": "GET",
+                "url": "/common/enum/point"
+              }]
+            },
+            {
+              "displayName": "编辑模板",
+              "url": "template_edit",
+              "sortNumber": 2,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "PUT",
+                "url": "/device-template/{id}"
+              }, {
+                "method": "GET",
+                "url": "/common/enum/point"
+              }, {
+                "method": "GET",
+                "url": "/device-template/{id}"
+              }]
+            },
+            {
+              "displayName": "重命名模板",
+              "url": "template_rename",
+              "sortNumber": 3,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "PUT",
+                "url": "/device-template/{id}/rename"
+              }]
+            },
+            {
+              "displayName": "删除模板",
+              "url": "template_delete",
+              "sortNumber": 4,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "DELETE",
+                "url": "/device-template/"
+              }]
+            },
+            {
+              "displayName": "查询模板",
+              "url": "template_list",
+              "sortNumber": 5,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/device-template/"
+              }]
+            }
+          ]
+        },
+        {
+          "displayName": "设备管理",
+          "url": "device",
+          "sortNumber": 3,
+          "icon": "apartment",
+          "menuFlag": true,
+          "children": [{
+              "displayName": "添加设备",
+              "url": "device_add",
+              "sortNumber": 1,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/sense-device/"
+              }, {
+                "method": "GET",
+                "url": "/sense-device/{senseDeviceId}/xs"
+              }, {
+                "method": "GET",
+                "url": "/sense-device/{senseDeviceId}/xspoint"
+              }, {
+                "method": "GET",
+                "url": "/device/id/gen"
+              }, {
+                "method": "GET",
+                "url": "/dict/"
+              }, {
+                "method": "GET",
+                "url": "/device-group/tree"
+              }, {
+                "method": "GET",
+                "url": "/device-template/{id}"
+              }, {
+                "method": "GET",
+                "url": "/device-template/"
+              }, {
+                "method": "GET",
+                "url": "/common/enum/point"
+              }]
+            },
+            {
+              "displayName": "查询设备",
+              "url": "device_list",
+              "sortNumber": 2,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                  "method": "GET",
+                  "url": "/device/"
+                },
+                {
+                  "method": "GET",
+                  "url": "/device-group/tree"
+                }
+              ]
+            },
+            {
+              "displayName": "编辑设备",
+              "url": "device_edit",
+              "sortNumber": 3,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/sense-device/"
+              }, {
+                "method": "GET",
+                "url": "/sense-device/{senseDeviceId}/xs"
+              }, {
+                "method": "GET",
+                "url": "/sense-device/{senseDeviceId}/xspoint"
+              }, {
+                "method": "GET",
+                "url": "/device/{id}"
+              }, {
+                "method": "GET",
+                "url": "/dict/"
+              }, {
+                "method": "GET",
+                "url": "/device-group/tree"
+              }, {
+                "method": "GET",
+                "url": "/device-template/{id}"
+              }, {
+                "method": "GET",
+                "url": "/device-template/"
+              }, {
+                "method": "GET",
+                "url": "/common/enum/point"
+              }]
+            },
+            {
+              "displayName": "开关采集设备",
+              "url": "device_collect_status_change",
+              "sortNumber": 4,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/device/store-switch"
+              }]
+            },
+            {
+              "displayName": "开关传感设备",
+              "url": "device_sense_status_change",
+              "sortNumber": 5,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/device/enable-switch"
+              }]
+            },
+            {
+              "displayName": "批量应用模板",
+              "url": "device_template_apply",
+              "sortNumber": 6,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                  "method": "GET",
+                  "url": "/device-template/"
+                },
+                {
+                  "method": "POST",
+                  "url": "/device/config"
+                }
+              ]
+            },
+            {
+              "displayName": "批量开关指标监控",
+              "url": "",
+              "sortNumber": 7,
+              "icon": "",
+              "menuFlag": false,
+              "children": []
+            },
+            {
+              "displayName": "批量开关采集监控",
+              "url": "",
+              "sortNumber": 8,
+              "icon": "",
+              "menuFlag": false,
+              "children": []
+            },
+            {
+              "displayName": "查询设备操作记录",
+              "url": "device_operate_record",
+              "sortNumber": 9,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/device/reply"
+              }]
+            },
+            {
+              "displayName": "查看数据",
+              "url": "device_data_check",
+              "sortNumber": 10,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                  "method": "GET",
+                  "url": "/device-data/{id}"
+                },
+                {
+                  "method": "GET",
+                  "url": "/device-data/{id}/history"
+                },
+                {
+                  "method": "GET",
+                  "url": "/device-data/{id}/connect/history"
+                },
+                {
+                  "method": "GET",
+                  "url": "/device-data/{id}/connect/arg"
+                },
+                {
+                  "method": "GET",
+                  "url": "/device/{id}/bind-history"
+                }
+              ]
+            },
+            {
+              "displayName": "设备重启",
+              "url": "device_reboot",
+              "sortNumber": 11,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/device/reboot"
+              }]
+            },
+            {
+              "displayName": "设备关机",
+              "url": "device_shutdown",
+              "sortNumber": 12,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/device/shutdown"
+              }]
+            },
+            {
+              "displayName": "固件升级",
+              "url": "device_version_change",
+              "sortNumber": 13,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                  "method": "POST",
+                  "url": "/device/upgrade"
+                },
+                {
+                  "method": "GET",
+                  "url": "/device-firmware/"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "设置",
+      "url": "setting",
+      "sortNumber": 3,
+      "icon": "setting",
+      "menuFlag": true,
+      "children": [{
+          "displayName": "类型字段",
+          "url": "materiel",
+          "sortNumber": 1,
+          "icon": "warning",
+          "menuFlag": true,
+          "children": [{
+              "displayName": "查询传感/采集设备",
+              "url": "materiel_device_list",
+              "sortNumber": 1,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/dict/"
+              }]
+            },
+            {
+              "displayName": "新增传感设备类型",
+              "url": "materiel_device_add",
+              "sortNumber": 2,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/dict/"
+              }]
+            },
+            {
+              "displayName": "删除传感设备类型",
+              "url": "materiel_device_delete",
+              "sortNumber": 3,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "DELETE",
+                "url": "/dict/{id}"
+              }]
+            },
+            {
+              "displayName": "编辑传感设备类型",
+              "url": "materiel_device_edit",
+              "sortNumber": 4,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "PUT",
+                "url": "/dict/"
+              }]
+            }
+          ]
+        },
+        {
+          "displayName": "固件版本",
+          "url": "firmware",
+          "sortNumber": 2,
+          "icon": "block",
+          "menuFlag": true,
+          "children": [{
+              "displayName": "新增发布",
+              "url": "firmware_add",
+              "sortNumber": 1,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/device-firmware/upload"
+              }]
+            },
+            {
+              "displayName": "编辑发布描述",
+              "url": "firmware_edit",
+              "sortNumber": 2,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "PUT",
+                "url": "/device-firmware/{id}"
+              }]
+            },
+            {
+              "displayName": "删除发布版本",
+              "url": "firmware_delete",
+              "sortNumber": 3,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "DELETE",
+                "url": "/device-firmware/{id}"
+              }]
+            },
+            {
+              "displayName": "查询发布信息",
+              "url": "firmware_list",
+              "sortNumber": 4,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/device-firmware/"
+              }]
+            }
+          ]
+        },
+        {
+          "displayName": "维护分组",
+          "url": "device-group",
+          "sortNumber": 3,
+          "icon": "gold",
+          "menuFlag": true,
+          "children": [{
+              "displayName": "查询分组",
+              "url": "devicegroup_list",
+              "sortNumber": 1,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "GET",
+                "url": "/device-group/tree"
+              }]
+            },
+            {
+              "displayName": "编辑分组",
+              "url": "devicegroup_edit",
+              "sortNumber": 2,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "PUT",
+                "url": "/device-group/{id}"
+              }]
+            },
+            {
+              "displayName": "新增分组",
+              "url": "devicegroup_add",
+              "sortNumber": 3,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "POST",
+                "url": "/device-group/"
+              }]
+            },
+            {
+              "displayName": "删除分组",
+              "url": "devicegroup_delete",
+              "sortNumber": 4,
+              "icon": "",
+              "menuFlag": false,
+              "children": [],
+              "backendUrls": [{
+                "method": "DELETE",
+                "url": "/device-group/{id}"
+              }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "操作历史",
+      "url": "log",
+      "sortNumber": 4,
+      "icon": "file-text",
+      "menuFlag": true,
+      "children": [{
+        "displayName": "查询操作历史",
+        "url": "log_list",
+        "sortNumber": 1,
+        "icon": "",
+        "menuFlag": false,
+        "children": [],
+        "backendUrls": [{
+          "method": "GET",
+          "url": "/audit-log/list"
+        }]
+      }]
+    }
+  ]
+}

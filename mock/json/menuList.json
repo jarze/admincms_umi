@@ -1,0 +1,59 @@
+[{
+    "id": "1",
+    "name": "List",
+    "icon": "table",
+    "children": [{
+        "id": "2",
+        "name": "a",
+        "icon": "more"
+      },
+      {
+        "id": "3",
+        "name": "b",
+        "icon": "more"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "List",
+    "icon": "table",
+    "children": [{
+        "id": "5",
+        "name": "基本列表",
+        "icon": "more"
+      },
+      {
+        "id": "15",
+        "name": "list",
+        "icon": "more"
+      },
+      {
+        "id": "6",
+        "name": "list1",
+        "icon": "more",
+        "children": [{
+            "id": "7",
+            "name": "list3",
+            "icon": "more"
+          },
+          {
+            "id": "8",
+            "name": "list4",
+            "icon": "more"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "list",
+    "icon": "more"
+  },
+  {
+    "id": "55",
+    "name": "menu",
+    "icon": "more"
+  }
+]

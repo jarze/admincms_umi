@@ -1,0 +1,59 @@
+[{
+    "id": "1",
+    "name": "项目配置",
+    "url": "setting",
+    "icon": "setting",
+    "children": [{
+        "id": "2",
+        "name": "模型配置",
+        "url": "model",
+        "icon": "deployment-unit"
+      },
+      {
+        "id": "3",
+        "name": "目录配置",
+        "url": "menu",
+        "icon": "menu"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Page-List 示例",
+    "url": "list",
+    "icon": "table",
+    "children": [{
+        "id": "5",
+        "name": "基本列表",
+        "url": "list",
+        "icon": "more"
+      },
+      {
+        "id": "15",
+        "name": "基本列表",
+        "url": "list",
+        "icon": "more"
+      },
+      {
+        "id": "6",
+        "name": "list1",
+        "url": "list1",
+        "icon": "more",
+        "children": [{
+            "id": "7",
+            "name": "list3",
+            "url": "list",
+            "icon": "more"
+          },
+          {
+            "id": "8",
+            "name": "list4",
+            "url": "list1",
+            "icon": "more"
+          }
+        ]
+      }
+    ]
+  }
+
+]
