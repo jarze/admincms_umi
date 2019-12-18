@@ -52,7 +52,6 @@
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-
 | `columns` | 表格列配置描述，`ColumnProps`[]同[`antd Column`](https://ant.design/components/table-cn/#Column) | `ColumnProps[] \  Function(onItemAction:Function(type:string, payload:object), listProps:object):ColumnProps[]` | - |
 | `rowSelection` | 是否有row select | `true` | - |
 | 其他 | 同自定义封装组件[`Table API`](#Table) |  |  |
