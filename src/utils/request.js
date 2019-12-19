@@ -26,7 +26,7 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options, errToast) {
+export default function request(url, options = {}, errToast) {
 	// 携带网站cookie信息，用于登录验证
 	// options = { ...options, credentials: 'include' };
 	if (options) {
@@ -51,7 +51,7 @@ export default function request(url, options, errToast) {
 			}
 			return response.json();
 		})
-		.then(res => checkResponse(res, (options || {}).method))
+		.then(res => checkResponse(res, (options || {}).method), options.type)
 		.then(data => data)
 		.catch(err => {
 			// 请求失败处理 返回undefined
@@ -60,8 +60,8 @@ export default function request(url, options, errToast) {
 }
 
 // 返回数据处理
-function checkResponse(response, method) {
-	if (typeof response !== 'object') return response;
+function checkResponse(response, method, type) {
+	if (typeof response !== 'object' || type === File_Buffer) return response;
 	let { code, message, data } = response;
 	if (code === CODE_SUCCESS) {
 		if (['DELETE', 'POST'].includes(method) && message) {
