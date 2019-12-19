@@ -4,7 +4,7 @@ import EditableCell from './EditableCell';
 
 // 需要传入form
 const EditableTable = props => {
-	const { editable, form, columns, dataSource, rowKey = 'index', ...restProps } = props;
+	const { editable, form, columns = [], dataSource = [], rowKey = 'index', ...restProps } = props;
 
 	const handleColumn = useCallback((data = []) => {
 		return data.map(({ children, ...col }) => ({

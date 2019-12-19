@@ -15,6 +15,7 @@ export default {
 					"id|+1": Number(req.query.pageNo * req.query.pageSize) + 100,
 					name: "@cname",
 					title: "@title",
+					desc: "@ctitle",
 					a: '@ctitle',
 					b: '@word',
 					c: '@word',
