@@ -2,7 +2,7 @@ import { useEffect, useCallback } from 'react';
 import router from 'umi/router';
 import debounce from 'lodash.debounce';
 
-export default ({ NS, formConfig = {}, loadingEffects = {}, ...props }) => {
+export default ({ NS, editConfig = {}, loadingEffects = {}, ...props }) => {
 	const {
 		dispatch,
 		itemInfo,
@@ -23,17 +23,17 @@ export default ({ NS, formConfig = {}, loadingEffects = {}, ...props }) => {
 	}, [NS, dispatch, id, matchParams]);
 
 	const handleValuesChange = useCallback(
-		formConfig.onValuesChange &&
+		editConfig.onValuesChange &&
 		debounce(
-			(changedValues, allValues) => formConfig.onValuesChange(changedValues, allValues, props),
+			(changedValues, allValues) => editConfig.onValuesChange(changedValues, allValues, props),
 			0.8e3,
 		),
 		[],
 	);
 
-	const onValuesChange = formConfig.onValuesChange && handleValuesChange;
+	const onValuesChange = editConfig.onValuesChange && handleValuesChange;
 
-	const { handleFormValues, items, ...fmProps } = formConfig;
+	const { handleFormValues, items, ...fmProps } = editConfig;
 
 	const formProps = {
 		layout: 'horizontal',
