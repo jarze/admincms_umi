@@ -31,6 +31,7 @@ export default ({
     selectedRowKeys,
     computedMatch,
     preEditId,
+    menuId
   } = props
   const { params: matchParams } = computedMatch || {}
 
@@ -38,8 +39,12 @@ export default ({
 
   const { pathname } = props.location || {}
 
+  // 列表复用，menu数据还没更新
+  const isPreData = menuId && menuId !== matchParams.menuId;
+
   // 请求列表数据
   useEffect(() => {
+    if (isPreData) return;
     tableConfig && fetchData()
   }, [filterParams, otherFilterParams])
 
@@ -140,6 +145,12 @@ export default ({
       case 'refresh':
         fetchData(payload)
         break
+      case 'update':
+        dispatch({
+          type: `${NS}/save`,
+          payload: { ...payload },
+        });
+        break;
       default:
         dispatch({
           type: `${NS}/actionItem`,
@@ -167,7 +178,7 @@ export default ({
   }
 
   const tbProps = tableConfig && {
-    dataSource,
+    dataSource: isPreData ? [] : dataSource,
     loading: loadingEffects[fetchUrl],
     pagination: {
       ...pagination,

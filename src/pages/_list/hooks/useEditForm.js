@@ -31,15 +31,13 @@ export default ({ NS, editConfig = {}, loadingEffects = {}, ...props }) => {
 		[],
 	);
 
-	const onValuesChange = editConfig.onValuesChange && handleValuesChange;
-
 	const { handleFormValues, items, ...fmProps } = editConfig;
 
 	const formProps = {
 		layout: 'horizontal',
 		...fmProps,
 		items: typeof items === 'function' ? items(props) : items,
-		onValuesChange,
+		onValuesChange: editConfig.onValuesChange && handleValuesChange,
 		onSubmit: values => {
 			let va = handleFormValues ? handleFormValues(values) : values;
 			if (va === null) return;

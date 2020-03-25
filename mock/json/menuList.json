@@ -55,5 +55,10 @@
     "id": "55",
     "name": "menu",
     "icon": "more"
+  },
+  {
+    "id": "model",
+    "name": "模型表管理",
+    "icon": "more"
   }
 ]
