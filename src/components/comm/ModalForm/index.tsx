@@ -1,0 +1,71 @@
+import React, { useState, Fragment } from 'react'
+import { Modal, Form } from 'antd'
+import { BaseFormProps, BaseFormItemProps, CForm, validateMessages } from '../Form'
+import { BaseModalProps } from '../Modal'
+import { WrappedFormUtils } from 'antd/lib/form/Form'
+export interface BaseModalFormProps extends BaseModalProps {
+  form?: WrappedFormUtils
+  items: BaseFormItemProps[]
+  data?: object[] // 表单值
+  formProps?: BaseFormProps
+  cancelReset?: boolean // 弹窗消失是否重置表单
+  onOk?: (value: object, callback: any) => void // 确定提交表单重置
+}
+// 默认表单样式， 可被formProps覆盖
+export const defaultFormProps: BaseFormProps = {
+  layout: 'horizontal',
+  labelCol: { span: 4 },
+  wrapperCol: { span: 20 },
+  col: 24,
+}
+
+const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, cancelReset = true, ...props }: BaseModalFormProps) => {
+  // 有children时可以通过children点击自我控制visible显示
+  const [visible, setVisible] = useState(false)
+
+  const onOkCallBack = (e: any) => {
+    if (e) e.stopPropagation()
+    form!.validateFields((err, values) => {
+      if (!err) {
+        onOk && onOk(values, handleVisible)
+      }
+    })
+  }
+
+  const handleVisible = (vs?: boolean) => {
+    setVisible(!!vs)
+    cancelReset && form!.resetFields()
+  }
+
+  const fmProps: BaseFormProps = {
+    items,
+    data,
+    ...defaultFormProps,
+    ...formProps,
+  }
+
+  return (
+    <Fragment>
+      {children && <span onClick={() => handleVisible(true)}>{children}</span>}
+      <Modal
+        visible={visible}
+        maskClosable={false}
+        onOk={onOkCallBack}
+        onCancel={() => {
+          onCancel && onCancel()
+          handleVisible(false)
+        }}
+        {...props}
+      >
+        <CForm form={form} {...fmProps} />
+      </Modal>
+    </Fragment>
+  )
+}
+
+export default Form.create({
+  onValuesChange: ({ onValuesChange }: any, changedValues, allValues) => {
+    onValuesChange && onValuesChange(changedValues, allValues)
+  },
+  validateMessages,
+})(ModalForm)

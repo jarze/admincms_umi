@@ -1,14 +1,14 @@
-import theme from './theme.config';
-import routes from './routes.js';
+import theme from './theme'
+import routes from './routes.js'
 
-import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_GATEWAY, API_PROXY_TARGET } from './constant';
-const resolve = require('path').resolve;
+import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_GATEWAY, API_PROXY_TARGET } from './constant'
+const resolve = require('path').resolve
 
 // 当前环境相关配置  dev | test | pro
-const env = process.env.API_ENV;
-const api_gateway = API_GATEWAY[env];
-const API_PROXY = '/api';
-const api_proxy_target = API_PROXY_TARGET[env];
+const env = process.env.API_ENV
+const api_gateway = API_GATEWAY[env]
+const API_PROXY = '/api'
+const api_proxy_target = API_PROXY_TARGET[env]
 
 export default {
   treeShaking: true,
@@ -39,13 +39,7 @@ export default {
 
         // 路由
         routes: {
-          exclude: [
-            /models\//,
-            /services\//,
-            /model\.(t|j)sx?$/,
-            /service\.(t|j)sx?$/,
-            /components\//,
-          ],
+          exclude: [/models\//, /services\//, /model\.(t|j)sx?$/, /service\.(t|j)sx?$/, /components\//],
         },
       },
     ],
@@ -122,4 +116,4 @@ export default {
   block: {
     closeFastGithub: true,
   },
-};
+}

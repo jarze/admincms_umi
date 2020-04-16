@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useCallback } from 'react'
 import debounce from 'lodash.debounce'
 import router from 'umi/router'
@@ -31,7 +30,7 @@ export default ({
     selectedRowKeys,
     computedMatch,
     preEditId,
-    menuId
+    menuId,
   } = props
   const { params: matchParams } = computedMatch || {}
 
@@ -40,11 +39,11 @@ export default ({
   const { pathname } = props.location || {}
 
   // 列表复用，menu数据还没更新
-  const isPreData = menuId && menuId !== matchParams.menuId;
+  const isPreData = menuId && menuId !== matchParams.menuId
 
   // 请求列表数据
   useEffect(() => {
-    if (isPreData) return;
+    if (isPreData) return
     tableConfig && fetchData()
   }, [filterParams, otherFilterParams])
 
@@ -149,8 +148,8 @@ export default ({
         dispatch({
           type: `${NS}/save`,
           payload: { ...payload },
-        });
-        break;
+        })
+        break
       default:
         dispatch({
           type: `${NS}/actionItem`,
@@ -200,7 +199,7 @@ export default ({
     debounce((changedValues, allValues) => {
       updateFilterParams(allValues)
     }, 0.8e3),
-    []
+    [],
   )
 
   if (formConfig.onValuesChange === true) {

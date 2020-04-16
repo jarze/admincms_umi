@@ -10,12 +10,7 @@
     "baseUrl": ".",
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "allowJs": true,
-    "experimentalDecorators": true,
     "paths": {
       "@/*": [
         "src/*"
@@ -42,8 +37,5 @@
         "./src/styles/*"
       ]
     }
-  },
-  "include": [
-    "./src"
-  ],
+  }
 }
