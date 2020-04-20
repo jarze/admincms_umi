@@ -1,8 +1,15 @@
-[{
+[
+  {
+    "id": "example",
+    "name": "List",
+    "icon": "table"
+  },
+  {
     "id": "1",
     "name": "List",
     "icon": "table",
-    "children": [{
+    "children": [
+      {
         "id": "2",
         "name": "a",
         "icon": "more"
@@ -18,7 +25,8 @@
     "id": "4",
     "name": "List",
     "icon": "table",
-    "children": [{
+    "children": [
+      {
         "id": "5",
         "name": "基本列表",
         "icon": "more"
@@ -32,7 +40,8 @@
         "id": "6",
         "name": "list1",
         "icon": "more",
-        "children": [{
+        "children": [
+          {
             "id": "7",
             "name": "list3",
             "icon": "more"

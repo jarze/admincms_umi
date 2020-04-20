@@ -28,10 +28,10 @@ export interface BaseFormProps extends FormProps {
   submitCol?: number // 提交按钮固定排版, type = 'col'时有效
   okText?: string // 确定按钮
   cancelText?: string // 取消按钮
-  data?: object[] // 表单值
+  data?: { [k: string]: any } // 表单值
   items?: BaseFormItemProps[]
   onValuesChange?: (changedValues: any, allValues: any) => void
-  onSubmit?: (values: {}) => void
+  onSubmit?: (values: { [k: string]: any }) => void
   onReset?: VoidFunction
 }
 
