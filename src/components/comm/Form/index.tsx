@@ -31,8 +31,8 @@ export interface BaseFormProps extends FormProps {
   data?: { [k: string]: any } // 表单值
   items?: BaseFormItemProps[]
   onValuesChange?: (changedValues: any, allValues: any) => void
-  onSubmit?: (values: { [k: string]: any }) => void
-  onReset?: VoidFunction
+  onSubmit?: (values: { [k: string]: any }, ...others: any[]) => void
+  onReset?: (...others: any[]) => void
 }
 
 export const CForm = ({

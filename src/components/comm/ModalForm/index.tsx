@@ -10,6 +10,7 @@ export interface BaseModalFormProps extends BaseModalProps {
   formProps?: BaseFormProps
   cancelReset?: boolean // 弹窗消失是否重置表单
   onOk?: (value: object, callback: any) => void // 确定提交表单重置
+  onValuesChange?: (changedValues: any, allValues: any) => void
 }
 // 默认表单样式， 可被formProps覆盖
 export const defaultFormProps: BaseFormProps = {
@@ -38,10 +39,10 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, can
   }
 
   const fmProps: BaseFormProps = {
-    items,
     data,
     ...defaultFormProps,
     ...formProps,
+    items,
   }
 
   return (
@@ -52,8 +53,8 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, can
         maskClosable={false}
         onOk={onOkCallBack}
         onCancel={() => {
-          onCancel && onCancel()
           handleVisible(false)
+          onCancel && onCancel()
         }}
         {...props}
       >

@@ -1,3 +1,4 @@
+import { BaseModalFormProps } from './../../components/comm/ModalForm/index'
 import { BaseFormProps, BaseFormItemProps } from '@components/comm/Form'
 import { BaseTableProps, ColumnProps } from '@components/comm/TableSelect'
 export { BaseModalFormProps } from '@components/comm/ModalForm'
@@ -5,118 +6,86 @@ export { BaseFormProps } from '@components/comm/Form'
 export { BaseTableProps } from '@components/comm/TableSelect'
 import RouterTypes from 'umi/routerTypes'
 import { DispatchProp } from 'react-redux'
-import { Model, EffectsMapObject, Effect, EffectWithType } from 'dva'
-import React, { ReactNode } from 'react'
-// import { Action, ActionCreator, AnyAction, Dispatch, Store } from 'redux'
-// declare interface ListModel {
-//   namespace: string
-//   currentTime: Date
-//   // tick(): any
-// }
-// export class DigitalClock implements ListModel {
-// 	constructor(h: number, m: number) { }
-// 	tick() {
-// 			console.log("beep beep");
-// 	}
-// }
-// export type ListConfigKeys = 'tableConfig' | 'formConfig'
-// interface StringArray {
-//   [configKey: ListConfigKeys]: SearchListFormConfig | SearchListTableConfig | SearchListActionConfig;
-// }
+import { Model, Effect, EffectWithType } from 'dva'
+import { ReactNode } from 'react'
 
-// config
-interface SearchListFormConfig extends BaseFormProps {
+// ---------- Logic Config ----------
+// 列表搜索项表单配置
+export interface SearchListFormConfig extends Omit<BaseFormProps, 'items' | 'onValuesChange'> {
+  items?: ((props: any, onItemAction?: ActionFunction) => BaseFormItemProps[]) | BaseFormItemProps[]
+  onValuesChange?: ((changedValues: any, allValues: any, props: any) => null | { values: { [k: string]: any } }) | boolean
+}
+// 列表table配置
+export interface SearchListTableConfig extends Omit<BaseTableProps<any>, 'columns'> {
+  columns?: (onItemAction: ActionFunction, props: any) => ColumnProps<any>[] | ColumnProps<any>[]
+}
+// 跳转表单配置
+export interface EditFormConfig extends Omit<BaseFormProps, 'items' | 'onValuesChange'> {
   items?: ((props: any, onItemAction?: ActionFunction) => BaseFormItemProps[]) | BaseFormItemProps[]
   onValuesChange?: ((changedValues: any, allValues: any, props: any) => null | { values: { [k: string]: any } }) | boolean
   handleFormValues?: (values: { [k: string]: any }) => null | { [k: string]: any }
+}
+// 弹窗表单配置
+export interface EditModalFormConfig extends Omit<BaseModalFormProps, 'items' | 'onValuesChange'> {
+  items?: ((props: any, onItemAction?: ActionFunction) => BaseFormItemProps[]) | BaseFormItemProps[]
+  onValuesChange?: ((changedValues: any, allValues: any, props: any) => null | { values: { [k: string]: any } }) | boolean
   isFetchData?: boolean // 弹窗Edit是否请求ItemInfo
 }
 
-interface SearchListTableConfig extends BaseTableProps<any> {
-  columns?: (onItemAction: ActionFunction, props: any) => ColumnProps<any>[] | ColumnProps<any>[]
-}
-
-// interface SearchListActionConfig {
-//   (props: any, onItemAction: ActionFunction): ReactNode
-// }
-
+// 列表通用配置
 export interface ListPageConfig {
-  tableConfig?: SearchListTableConfig
-  formConfig?: SearchListFormConfig
-  editConfig?: SearchListFormConfig
-  actions?: (props: any, onItemAction: ActionFunction) => ReactNode
-  otherModels?: string[] // 其他绑定的model
-  isPush?: boolean // 添加编辑是否跳转新页面
-  NS?: string // 绑定model名，默认list
+  tableConfig?: SearchListTableConfig // 列表配置
+  formConfig?: SearchListFormConfig // 列表搜索项配置
+  editConfig?: EditModalFormConfig | EditFormConfig // 弹窗或新页面，取决于isPush
+  actions?: (props: any, onItemAction: ActionFunction) => ReactNode // 其他操作区域配置
+  isPush?: boolean // 添加编辑是否跳转新页面或弹窗
+  NS?: string // 绑定model名，默认list，绑定的Model必须是ListModel
+  otherModels?: string[] // 其他绑定的model，可以在配置是从参数里获取到其他model的sto
 }
 
-// Model
+// ---------- Model ----------
+// list model state
 export interface ListModelState {
-  dataSource?: object[]
-  filterParams?: {}
+  dataSource?: object[] // 列表数据
+  filterParams?: {} // 搜索条件
   pagination?: {
+    // 分页数据
     current?: any
     pageSize?: any
     [key: string]: any
   }
-  selectedRowKeys?: any[]
-  menuId?: string
-  editId?: null | 'add' | string
+  selectedRowKeys?: any[] // 列表选择
+  menuId?: string // 列表唯一标记key
+  editId?: null | 'add' | string // 当前编辑
   preEditId?: null | string
-  itemInfo?: {}
-  others?: {}
+  itemInfo?: {} // 当前编辑数据
+  others?: {} // 其他数据， 列表请求返回的而外数据会存在other里面
   [key: string]: any
 }
 
-// declare enum ListModelEffect {
-//   getListData,
-//   getItemInfo,
-//   editItem,
-//   deleteListItems,
-//   actionItems,
-//   exportData,
-// }
-
+// list service 请求方法名
 export type ListModelServers = 'getListData' | 'getItemInfo' | 'editItem' | 'deleteListItems' | 'actionItems' | 'exportData'
-
-// export declare enum ListModelFunc {
-//   fetchData = 'fetchData',
-//   fetchItemInfo = 'fetchItemInfo',
-//   editItem = 'editItem',
-//   deleteItem = 'deleteItem',
-//   actionItem = 'actionItem',
-//   exportData = 'exportData',
-//   updateMatchParams = 'updateMatchParams',
-//   save = 'save',
-//   restPageFilter = 'restPageFilter',
-// }
-
-// ListModelFunc.actionItem
-
-// export declare type ListModelFuncC = (typeof ListModelFunc)[]
-
-// export interface EffectsMapObject {
-//   [key: string]: Effect | EffectWithType,
-// }
-
-export type ListEffectsMapObject = {
-  [key in ListModelServers]: Effect | EffectWithType
-  // getListData: Effect | EffectWithType
-}
+// list model effects 方法名
+export type ListModelServersEffects = 'fetchData' | 'fetchItemInfo' | 'editItem' | 'deleteItem' | 'actionItem' | 'exportData' | 'updateMatchParams'
+// list model reducers 方法名
+export type ListModelServersReducers = 'save' | 'restPageFilter'
+// list model
 export interface ListModel extends Model {
   state?: ListModelState
-  effects?: ListEffectsMapObject
+  effects?: {
+    [key in ListModelServersEffects | string]: Effect | EffectWithType
+  }
   // reducers?:
 }
 
-// HOOKS
+// ---------- HOOKS ----------
 // 搜索列表自定义操作方法Type
-export type ActionType = 'detail' | 'add' | 'edit' | 'delete' | 'export' | 'search' | 'refresh' | 'update' | string
+export type ActionType = 'detail' | 'add' | 'edit' | 'delete' | 'export' | 'search' | 'refresh' | 'update'
 export interface ActionFunction {
   (
-    type: ActionType,
-    payload: {},
-    props: {
+    type: ActionType | string,
+    payload?: {},
+    props?: {
       breadcrumb?: string | null | undefined // 面包屑
       callback?: Function // 回调函数
       id?: string
@@ -128,11 +97,3 @@ export interface BaseListHooksProps extends ListPageConfig, ListModelState, Rout
   loadingEffects?: {}
   otherFilterParams?: {}
 }
-
-// export interface ListHooksProps extends BaseListHooksProps {}
-
-// // export interface SearchHooks<T> {
-// //   (props: ListHooksProps): [BaseTableProps<T>, BaseFormProps, ActionFunction]
-// // }
-
-// export interface ListEditHooksProps extends BaseListHooksProps {}

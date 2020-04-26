@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react'
 import debounce from 'lodash.debounce'
 import router from 'umi/router'
-import { BaseListHooksProps, ActionType, ActionFunction, BaseTableProps, BaseFormProps } from '../list-types'
+import { BaseListHooksProps, ActionType, ActionFunction, BaseTableProps, BaseFormProps, E } from '../list-types'
 
 function useSearchList<T extends object = any>({
   NS,
@@ -61,9 +61,9 @@ function useSearchList<T extends object = any>({
   const stringRowKey = typeof tableConfig.rowKey === 'string' ? tableConfig.rowKey : null
 
   const onItemAction: ActionFunction = function(
-    type: ActionType,
+    type: ActionType | string,
     payload = {},
-    params: { breadcrumb?: string | null; callback?: Function; id?: string },
+    params?: { breadcrumb?: string | null; callback?: Function; id?: string },
   ) {
     const { breadcrumb, callback, id = stringRowKey && payload[stringRowKey] } = params || {}
     switch (type) {
@@ -90,16 +90,20 @@ function useSearchList<T extends object = any>({
       case 'export':
         dispatch({ type: `${NS}/exportData`, payload: { ...payload, matchParams }, callback })
         break
+      // 更新搜索条件为参数，自动触发列表请求更新
       case 'search':
         updateFilterParams(payload)
         break
+      // 刷新当前搜索下列表请求， 参数覆盖当前请求参数【搜索，分页】
       case 'refresh':
         fetchData(payload)
         break
+      // 更新列表state
       case 'update':
         dispatch({ type: `${NS}/save`, payload: { ...payload } })
         break
       default:
+        // 自定义操作
         dispatch({ type: `${NS}/actionItem`, payload: { ...payload, matchParams }, action: type, callback })
         break
     }
@@ -134,6 +138,21 @@ function useSearchList<T extends object = any>({
     [],
   )
 
+  // 配置参数处理转换
+  const handleProps: { [k: string]: any } = {}
+  if (typeof formConfig.onSubmit === 'function') {
+    handleProps.onSubmit = (values: any) => formConfig.onSubmit!(values, props, onItemAction)
+  }
+  if (typeof formConfig.onReset === 'function') {
+    handleProps.onReset = (values: any) => formConfig.onReset!(values, props, onItemAction)
+  }
+  if (formConfig.onValuesChange) {
+    handleProps.onValuesChange = handleValuesChange
+  }
+  if (typeof formConfig.items === 'function') {
+    handleProps.items = formConfig.items(props, onItemAction)
+  }
+
   const fmProps =
     formConfig &&
     ({
@@ -141,8 +160,7 @@ function useSearchList<T extends object = any>({
       onSubmit: updateFilterParams,
       onReset: updateFilterParams,
       ...formConfig,
-      onValuesChange: formConfig.onValuesChange && handleValuesChange,
-      items: typeof formConfig.items === 'function' ? formConfig.items(props, onItemAction) : formConfig.items,
+      ...handleProps,
     } as BaseFormProps)
 
   return [tbProps, fmProps, onItemAction]

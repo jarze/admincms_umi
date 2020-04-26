@@ -1,64 +1,66 @@
-import { useState, useEffect } from 'react';
-import { EditableTable } from '@components/comm';
-import { Button, Popconfirm } from 'antd';
+import { useState, useEffect } from 'react'
+import { EditableTable } from '@components/comm'
+import { Button, Popconfirm } from 'antd'
 //import Upload from '../Upload';
-import { columnsFn } from './_logic';
-import TbAlert from '@components/comm/TbAlert';
+import { columnsFn } from './_logic'
+import { TableSelect } from '@components/comm'
 
-const rowKey = 'index';
+const { SelectAlert } = TableSelect
+
+const rowKey = 'index'
 
 export default props => {
-  const { data, constant = {} } = props;
-  const { permissions = [], ctpt = [] } = constant;
+  const { data, constant = {} } = props
+  const { permissions = [], ctpt = [] } = constant
 
-  const [dataSource, setDataSource] = useState([]);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [dataSource, setDataSource] = useState([])
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   useEffect(() => {
     data &&
       data.length &&
       setDataSource(
         data.map(item => {
-          const { base, factor, rangeFloor, rangeCeil } = item;
+          const { base, factor, rangeFloor, rangeCeil } = item
           return {
             'base&factor': { base, factor },
             'rangeFloor&rangeCeil': { rangeFloor, rangeCeil },
             ...item,
-          };
+          }
         }),
-      );
-  }, [data]);
+      )
+  }, [data])
 
   const handleAdd = () => {
-    setDataSource([...dataSource, {}]);
-  };
+    setDataSource([...dataSource, {}])
+  }
 
   const handleDelete = (ids = []) => {
-    setDataSource([...dataSource.filter(item => !ids.includes(item[rowKey]))]);
-    rowSelection.onChange([]);
-  };
+    setDataSource([...dataSource.filter(item => !ids.includes(item[rowKey]))])
+    rowSelection.onChange([])
+  }
 
   const handlePointSelect = (points, indexKey) => {
     // 根据点位选择自动填充表单相关内容
     setDataSource(
       dataSource.map(item => {
         if (item[rowKey] === indexKey) {
-          item[rowKey] = undefined; // 删除标记，更新表单内容
-          return { ...item, ...points };
+          item[rowKey] = undefined // 删除标记，更新表单内容
+          return { ...item, ...points }
         }
-        return item;
+        return item
       }),
-    );
-  };
+    )
+  }
 
-  let isEdit = !(props.editable === false);
-  let rowSelection;
+  let isEdit = !(props.editable === false)
+  let rowSelection
 
   if (isEdit) {
     rowSelection = {
       selectedRowKeys,
       onChange: rowKeys => setSelectedRowKeys(rowKeys),
-    };
+    }
   }
 
   const tbProps = {
@@ -71,7 +73,7 @@ export default props => {
     size: 'middle',
     scroll: { y: 'calc(100vh - 300px)' },
     ...props,
-  };
+  }
 
   return (
     <>
@@ -85,19 +87,15 @@ export default props => {
         </div>
       )}
       <br />
-      <TbAlert rowSelection={rowSelection}>
-        <Popconfirm
-          title="确定删除？"
-          disabled={!(selectedRowKeys.length > 0)}
-          onConfirm={() => handleDelete(selectedRowKeys)}
-        >
+      <SelectAlert rowSelection={rowSelection}>
+        <Popconfirm title="确定删除？" disabled={!(selectedRowKeys.length > 0)} onConfirm={() => handleDelete(selectedRowKeys)}>
           <Button type="link" disabled={!(selectedRowKeys.length > 0)}>
             删除
           </Button>
         </Popconfirm>
-      </TbAlert>
+      </SelectAlert>
       <EditableTable {...tbProps} />
       <br />
     </>
-  );
-};
+  )
+}

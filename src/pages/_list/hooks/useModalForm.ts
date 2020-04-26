@@ -1,14 +1,13 @@
 import { useEffect, useCallback } from 'react'
 import debounce from 'lodash.debounce'
-import { BaseListHooksProps, BaseModalFormProps } from '../list-types'
+import { BaseListHooksProps, BaseModalFormProps, EditModalFormConfig } from '../list-types'
 
 function useModalForm({ NS, editConfig = {}, loadingEffects = {}, ...props }: BaseListHooksProps): [BaseModalFormProps] {
   const { dispatch, editId, itemInfo, computedMatch } = props
   const { params: matchParams } = computedMatch || {}
-
   useEffect(() => {
     if (editId && editId !== 'add') {
-      editConfig.isFetchData && dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
+      (editConfig as EditModalFormConfig).isFetchData && dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
     } else {
       dispatch({ type: `${NS}/save`, payload: { itemInfo: {} } })
     }

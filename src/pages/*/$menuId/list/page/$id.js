@@ -3,37 +3,22 @@
  *   - ./src/routes/list.js
  */
 
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { connect } from 'dva';
-import { SinglePage } from '@components/comm';
-import { NS as NormalListModel } from '../model';
+import React, { useEffect } from 'react'
+import { SinglePage } from '@components/comm'
+import { connectList } from '../_logic'
 
-const Page = ({
-	dispatch,
-	computedMatch: { params: matchParams },
-	pageConfig,
-	NS,
-	...props
-}) => {
-	useEffect(() => {
-		dispatch({
-			type: `${NS}/fetchItemInfo`,
-			payload: {
-				matchParams
-			}
-		});
-	}, []);
+export default connectList(({ dispatch, computedMatch: { params: matchParams }, pageConfig, NS, ...props }) => {
+  useEffect(() => {
+    dispatch({
+      type: `${NS}/fetchItemInfo`,
+      payload: {
+        matchParams,
+      },
+    })
+  }, [])
 
-	if (pageConfig && (typeof pageConfig.items === 'function')) {
-		pageConfig.items = pageConfig.items(props);
-	}
-	return <SinglePage {...props} {...pageConfig} />;
-};
-
-export default connect((sto, { NS = NormalListModel, otherModels = [] }) => ({
-  ...sto[NS],
-  NS,
-  loadingEffects: sto.loading.effects,
-  ...(otherModels || []).reduce((res, item) => ({ ...res, [item]: sto[item] }), {}),
-}))(Page)
+  if (pageConfig && typeof pageConfig.items === 'function') {
+    pageConfig.items = pageConfig.items(props)
+  }
+  return <SinglePage {...props} {...pageConfig} />
+})

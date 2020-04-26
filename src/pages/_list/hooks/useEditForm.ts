@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react'
 import router from 'umi/router'
 import debounce from 'lodash.debounce'
-import { BaseListHooksProps, BaseFormProps } from '../list-types'
+import { BaseListHooksProps, BaseFormProps, EditFormConfig } from '../list-types'
 
 function useEditForm({
   NS,
@@ -32,7 +32,7 @@ function useEditForm({
     [],
   )
 
-  const { handleFormValues, items, ...fmProps } = editConfig
+  const { handleFormValues, items, ...fmProps } = editConfig as EditFormConfig
 
   const formProps = {
     layout: 'vertical',
