@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react'
 import router from 'umi/router'
-import debounce from 'lodash.debounce'
+import { debounce } from 'lodash'
 import { BaseListHooksProps, BaseFormProps, EditFormConfig } from '../list-types'
 
 function useEditForm({
@@ -23,12 +23,11 @@ function useEditForm({
   }, [NS, dispatch, id])
 
   const handleValuesChange = useCallback(
-    editConfig.onValuesChange &&
-      debounce((changedValues: any, allValues: any) => {
-        if (typeof editConfig.onValuesChange === 'function') {
-          editConfig.onValuesChange(changedValues, allValues, props)
-        }
-      }, 0.8e3),
+    debounce((changedValues: any, allValues: any) => {
+      if (typeof editConfig.onValuesChange === 'function') {
+        editConfig.onValuesChange(changedValues, allValues, props)
+      }
+    }, 0.8e3),
     [],
   )
 

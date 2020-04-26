@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react'
-import debounce from 'lodash.debounce'
+import { debounce } from 'lodash'
 import { BaseListHooksProps, BaseModalFormProps, EditModalFormConfig } from '../list-types'
 
 function useModalForm({ NS, editConfig = {}, loadingEffects = {}, ...props }: BaseListHooksProps): [BaseModalFormProps] {
@@ -7,19 +7,18 @@ function useModalForm({ NS, editConfig = {}, loadingEffects = {}, ...props }: Ba
   const { params: matchParams } = computedMatch || {}
   useEffect(() => {
     if (editId && editId !== 'add') {
-      (editConfig as EditModalFormConfig).isFetchData && dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
+      ;(editConfig as EditModalFormConfig).isFetchData && dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
     } else {
       dispatch({ type: `${NS}/save`, payload: { itemInfo: {} } })
     }
   }, [editId])
 
   const handleValuesChange = useCallback(
-    editConfig.onValuesChange &&
-      debounce((changedValues: any, allValues: any) => {
-        if (typeof editConfig.onValuesChange === 'function') {
-          editConfig.onValuesChange(changedValues, allValues, props)
-        }
-      }, 0.8e3),
+    debounce((changedValues: any, allValues: any) => {
+      if (typeof editConfig.onValuesChange === 'function') {
+        editConfig.onValuesChange(changedValues, allValues, props)
+      }
+    }, 0.8e3),
     [],
   )
 

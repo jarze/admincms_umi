@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react'
-import debounce from 'lodash.debounce'
+import { debounce } from 'lodash'
 import router from 'umi/router'
-import { BaseListHooksProps, ActionType, ActionFunction, BaseTableProps, BaseFormProps, E } from '../list-types'
+import { BaseListHooksProps, ActionType, ActionFunction, BaseTableProps, BaseFormProps } from '../list-types'
 
 function useSearchList<T extends object = any>({
   NS,

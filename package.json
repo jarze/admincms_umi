@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^4.5.14",
+    "@types/lodash": "^4.14.150",
     "antd": "^3.19.2",
     "cross-env": "^5.2.1",
     "dva": "^2.6.0-beta.4",
