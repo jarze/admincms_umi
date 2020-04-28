@@ -18,7 +18,7 @@ export interface BaseFormItemProps extends FormItemProps {
   defaultValue?: any
   disabled?: boolean
   cols?: ColProps
-  render?: (form?: WrappedFormUtils, data?: {}) => ReactNode
+  render?: (form?: WrappedFormUtils, data?: { [key: string]: any }) => ReactNode
 }
 
 export interface BaseFormProps extends FormProps {
@@ -60,7 +60,7 @@ export const CForm = ({
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    form!.validateFields((err: Error, values: {}) => {
+    form!.validateFields((err: Error, values: any) => {
       if (!err) {
         onSubmit && onSubmit(values)
       }

@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react'
-import { SinglePage } from '@components/comm'
+import { SinglePage } from '@/components/comm'
 import { connectList } from '../_logic'
 
 export default connectList(({ dispatch, computedMatch: { params: matchParams }, pageConfig, NS, ...props }) => {

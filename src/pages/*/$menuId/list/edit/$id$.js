@@ -4,7 +4,7 @@
  */
 
 import { Spin } from 'antd'
-import { Form } from '@components/comm'
+import { Form } from '@/components/comm'
 import useEditForm from '@/pages/_list/hooks/useEditForm'
 import { connectList } from '../_logic'
 

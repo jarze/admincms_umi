@@ -7,7 +7,7 @@ export interface SearchListProps<T> {
   children?: ReactChild
 }
 
-export default ({ fmProps, tbProps, children }: SearchListProps<object>) => {
+export default ({ fmProps, tbProps, children }: SearchListProps<any>) => {
   return (
     <Fragment>
       {fmProps && <Form {...fmProps} />}

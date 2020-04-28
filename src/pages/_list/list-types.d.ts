@@ -1,9 +1,9 @@
 import { BaseModalFormProps } from './../../components/comm/ModalForm/index'
-import { BaseFormProps, BaseFormItemProps } from '@components/comm/Form'
-import { BaseTableProps, ColumnProps } from '@components/comm/TableSelect'
-export { BaseModalFormProps } from '@components/comm/ModalForm'
-export { BaseFormProps } from '@components/comm/Form'
-export { BaseTableProps } from '@components/comm/TableSelect'
+import { BaseFormProps, BaseFormItemProps } from '@/components/comm/Form'
+import { BaseTableProps, ColumnProps } from '@/components/comm/TableSelect'
+export { BaseModalFormProps } from '@/components/comm/ModalForm'
+export { BaseFormProps } from '@/components/comm/Form'
+export { BaseTableProps } from '@/components/comm/TableSelect'
 import RouterTypes from 'umi/routerTypes'
 import { DispatchProp } from 'react-redux'
 import { Model, Effect, EffectWithType } from 'dva'
@@ -47,7 +47,7 @@ export interface ListPageConfig {
 // list model state
 export interface ListModelState {
   dataSource?: object[] // 列表数据
-  filterParams?: {} // 搜索条件
+  filterParams?: { [key: string]: any } // 搜索条件
   pagination?: {
     // 分页数据
     current?: any
@@ -55,28 +55,30 @@ export interface ListModelState {
     [key: string]: any
   }
   selectedRowKeys?: any[] // 列表选择
-  menuId?: string // 列表唯一标记key
+  menuId?: null | string // 列表唯一标记key
   editId?: null | 'add' | string // 当前编辑
   preEditId?: null | string
-  itemInfo?: {} // 当前编辑数据
-  others?: {} // 其他数据， 列表请求返回的而外数据会存在other里面
-  [key: string]: any
+  itemInfo?: { [key: string]: any } // 当前编辑数据
+  others?: { [key: string]: any } // 其他数据， 列表请求返回的以外数据会存在other里面
+  cached?: { [key: string]: any } // 缓存数据
 }
 
-// list service 请求方法名
-export type ListModelServers = 'getListData' | 'getItemInfo' | 'editItem' | 'deleteListItems' | 'actionItems' | 'exportData'
 // list model effects 方法名
 export type ListModelServersEffects = 'fetchData' | 'fetchItemInfo' | 'editItem' | 'deleteItem' | 'actionItem' | 'exportData' | 'updateMatchParams'
 // list model reducers 方法名
-export type ListModelServersReducers = 'save' | 'restPageFilter'
+// export type ListModelServersReducers = 'save' | 'restPageFilter'
 // list model
 export interface ListModel extends Model {
   state?: ListModelState
   effects?: {
     [key in ListModelServersEffects | string]: Effect | EffectWithType
   }
-  // reducers?:
 }
+
+// ---------- List Service ----------
+// 定义列表基础service方法名
+export type ListModelServices = 'getListData' | 'getItemInfo' | 'editItem' | 'deleteListItems' | 'actionItems' | 'exportData'
+export type ListService = (type: ListModelServices, payload?: { [key: string]: any }, action?: any) => Promise<any>
 
 // ---------- HOOKS ----------
 // 搜索列表自定义操作方法Type
@@ -84,7 +86,7 @@ export type ActionType = 'detail' | 'add' | 'edit' | 'delete' | 'export' | 'sear
 export interface ActionFunction {
   (
     type: ActionType | string,
-    payload?: {},
+    payload?: { [key: string]: any },
     props?: {
       breadcrumb?: string | null | undefined // 面包屑
       callback?: Function // 回调函数
@@ -94,6 +96,6 @@ export interface ActionFunction {
 }
 
 export interface BaseListHooksProps extends ListPageConfig, ListModelState, RouterTypes, DispatchProp {
-  loadingEffects?: {}
-  otherFilterParams?: {}
+  loadingEffects?: { [key: string]: boolean }
+  otherFilterParams?: { [key: string]: any }
 }

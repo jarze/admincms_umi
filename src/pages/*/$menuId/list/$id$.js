@@ -4,7 +4,7 @@
  */
 
 import { Fragment } from 'react'
-import { SearchList, ModalForm } from '@components/comm'
+import { SearchList, ModalForm } from '@/components/comm'
 import useSearchTable from '@/pages/_list/hooks/useSearchTable'
 import useModalForm from '@/pages/_list/hooks/useModalForm'
 import { connectList } from './_logic'

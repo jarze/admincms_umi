@@ -1,7 +1,7 @@
 import { fetch } from 'dva'
 import { stringify } from 'qs'
 import { message } from 'antd'
-import { CODE_LOGIN_INVALID, CODE_SUCCESS, CODE_MESSAGES } from '@config/constant'
+import { CODE_LOGIN_INVALID, CODE_SUCCESS, CODE_MESSAGES } from '@/config/constant'
 
 const File_Buffer = 'arrayBuffer'
 // function parseJSON(response) {

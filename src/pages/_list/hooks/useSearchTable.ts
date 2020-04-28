@@ -155,13 +155,13 @@ function useSearchList<T extends object = any>({
 
   const fmProps =
     formConfig &&
-    ({
+    (({
       data: filterParams,
       onSubmit: updateFilterParams,
       onReset: updateFilterParams,
       ...formConfig,
       ...handleProps,
-    } as BaseFormProps)
+    } as unknown) as BaseFormProps)
 
   return [tbProps, fmProps, onItemAction]
 }

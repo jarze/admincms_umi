@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { EditableTable } from '@components/comm'
+import { EditableTable } from '@/components/comm'
 import { Button, Popconfirm } from 'antd'
 //import Upload from '../Upload';
 import { columnsFn } from './_logic'
-import { TableSelect } from '@components/comm'
+import { TableSelect } from '@/components/comm'
 
 const { SelectAlert } = TableSelect
 

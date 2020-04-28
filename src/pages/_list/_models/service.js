@@ -22,6 +22,7 @@ export default (type, payload, action) => {
   return service && service(params, matchParams, action)
 }
 
+// 处理参数转化
 export const combineServices = services => (type, payload, action) => {
   const { matchParams, ...params } = payload
   const service = services[type]

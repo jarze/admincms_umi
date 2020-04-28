@@ -6,7 +6,7 @@ export interface PageItemProps extends DescriptionsItemProps {
   render?: (value: any, item: object, data: object) => ReactNode
 }
 export interface BasePageProps extends DescriptionsProps {
-  itemInfo?: {}
+  itemInfo?: { [key: string]: any }
   items?: PageItemProps[]
 }
 

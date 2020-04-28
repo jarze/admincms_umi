@@ -6,7 +6,7 @@ import { WrappedFormUtils } from 'antd/lib/form/Form'
 export interface BaseModalFormProps extends BaseModalProps {
   form?: WrappedFormUtils
   items: BaseFormItemProps[]
-  data?: object[] // 表单值
+  data?: { [k: string]: any } // 表单值
   formProps?: BaseFormProps
   cancelReset?: boolean // 弹窗消失是否重置表单
   onOk?: (value: object, callback: any) => void // 确定提交表单重置

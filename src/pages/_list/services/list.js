@@ -1,4 +1,4 @@
-import request, { exportDownload } from '@utils/request'
+import request, { exportDownload } from '@/utils/request'
 // Example 通用列表请求
 export function getListData(payload) {
   return request('/list/1', {
