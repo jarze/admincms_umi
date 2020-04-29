@@ -4,7 +4,6 @@ import router from 'umi/router'
 import { BaseListHooksProps, ActionType, ActionFunction, BaseTableProps, BaseFormProps } from '../list-types'
 
 function useSearchList<T extends object = any>({
-  NS,
   tableConfig = {},
   formConfig = {},
   loadingEffects = {},
@@ -12,7 +11,7 @@ function useSearchList<T extends object = any>({
   isPush,
   ...props
 }: BaseListHooksProps): [BaseTableProps<T>, BaseFormProps, ActionFunction] {
-  const { dispatch, dataSource = [], filterParams, pagination = {}, selectedRowKeys, computedMatch, preEditId, menuId } = props
+  const { NS, dispatch, dataSource = [], filterParams, pagination = {}, selectedRowKeys, computedMatch, preEditId, menuId } = props
   const { params: matchParams } = computedMatch || {}
   const fetchUrl = `${NS}/fetchData`
   const { pathname } = props.location || {}
@@ -128,6 +127,7 @@ function useSearchList<T extends object = any>({
       rowClassName: record => (stringRowKey && preEditId && String(preEditId) === String(record[stringRowKey]) ? 'table-row-visited' : ''),
       onItemAction,
       ...tableConfig,
+      selectAlert: typeof tableConfig.selectAlert === 'function' ? () => tableConfig.selectAlert(selectedRowKeys, { onItemAction, ...props }) : tableConfig.selectAlert,
       columns: typeof tableConfig.columns === 'function' ? tableConfig.columns(onItemAction, props) : tableConfig.columns,
     } as BaseTableProps<T>)
 

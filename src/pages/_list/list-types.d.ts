@@ -40,7 +40,7 @@ export interface ListPageConfig {
   actions?: (props: any, onItemAction: ActionFunction) => ReactNode // 其他操作区域配置
   isPush?: boolean // 添加编辑是否跳转新页面或弹窗
   NS?: string // 绑定model名，默认list，绑定的Model必须是ListModel
-  otherModels?: string[] // 其他绑定的model，可以在配置是从参数里获取到其他model的sto
+  otherModels?: string[] // 其他绑定的model，可以从参数里获取到其他model的sto
 }
 
 // ---------- Model ----------

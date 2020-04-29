@@ -12,12 +12,12 @@ export const defaultPaginationConfig: PaginationConfig = {
 
 export interface BaseTableProps<T> extends TableProps<T> {
   selectAlert?: {
+    (selectedRowKeys: string[] | number[] | undefined, props: any): ReactChild // alert 其他显示内容
     hide?: boolean // 隐藏显示alert
-    extraContent?: (selectedRowKeys: string[] | number[] | undefined, props: any) => ReactChild // alert 其他显示内容
   }
 }
 
-function TableSelect<RecordType extends object = any>({ pagination, selectAlert = {}, ...props }: BaseTableProps<RecordType>) {
+function TableSelect<RecordType extends object = any>({ pagination, selectAlert, ...props }: BaseTableProps<RecordType>) {
   let pg = pagination
     ? {
         ...defaultPaginationConfig,
@@ -27,12 +27,10 @@ function TableSelect<RecordType extends object = any>({ pagination, selectAlert 
     : pagination
 
   const { rowSelection } = props
-  const { extraContent, hide } = selectAlert
-
   return (
     <>
-      {rowSelection && !hide && (
-        <SelectAlert rowSelection={rowSelection}>{extraContent && extraContent(rowSelection.selectedRowKeys, props)}</SelectAlert>
+      {rowSelection && selectAlert && !selectAlert.hide && (
+        <SelectAlert rowSelection={rowSelection}>{selectAlert && selectAlert(rowSelection.selectedRowKeys, props)}</SelectAlert>
       )}
       <Table rowKey={(_, index) => String(index)} bordered={false} size="middle" {...props} pagination={pg} />
     </>
