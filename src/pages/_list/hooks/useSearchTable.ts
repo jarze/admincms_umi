@@ -84,7 +84,7 @@ function useSearchList<T extends object = any>({
         }
         break
       case 'delete':
-        dispatch({ type: `${NS}/deleteItem`, payload: { ...payload, matchParams } })
+        dispatch({ type: `${NS}/deleteItem`, payload: { ...payload, matchParams }, callback })
         break
       case 'export':
         dispatch({ type: `${NS}/exportData`, payload: { ...payload, matchParams }, callback })
@@ -127,7 +127,10 @@ function useSearchList<T extends object = any>({
       rowClassName: record => (stringRowKey && preEditId && String(preEditId) === String(record[stringRowKey]) ? 'table-row-visited' : ''),
       onItemAction,
       ...tableConfig,
-      selectAlert: typeof tableConfig.selectAlert === 'function' ? () => tableConfig.selectAlert(selectedRowKeys, { onItemAction, ...props }) : tableConfig.selectAlert,
+      selectAlert:
+        typeof tableConfig.selectAlert === 'function'
+          ? () => tableConfig.selectAlert(selectedRowKeys, { onItemAction, ...props })
+          : tableConfig.selectAlert,
       columns: typeof tableConfig.columns === 'function' ? tableConfig.columns(onItemAction, props) : tableConfig.columns,
     } as BaseTableProps<T>)
 

@@ -67,7 +67,7 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
         const res = yield call(service, 'editItem', payload, editId)
         if (res !== undefined) {
           const { filterParams } = yield select((state: { [x: string]: any }) => state[NS])
-          callback && callback()
+          callback && callback(res)
           // 区分添加编辑， 添加刷新搜索参数|编辑只刷新当前页
           if (editId === 'add' || editId === undefined) {
             yield put({
@@ -89,9 +89,10 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
           }
         }
       },
-      *deleteItem({ payload }, { call, put }) {
+      *deleteItem({ payload, callback }, { call, put }) {
         const res = yield call(service, 'deleteListItems', payload)
         if (res !== undefined) {
+          callback && callback(res)
           yield put({
             type: 'restPageFilter',
           })
@@ -122,8 +123,8 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
       },
       *exportData({ payload, callback }, { call, put }) {
         const res = yield call(service, 'exportData', payload)
-        if (res) {
-          callback && callback()
+        if (res !== undefined) {
+          callback && callback(res)
           yield put({
             type: 'save',
             payload: { selectedRowKeys: [] },
