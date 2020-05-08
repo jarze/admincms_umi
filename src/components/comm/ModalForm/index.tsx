@@ -35,7 +35,7 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, can
 
   const handleVisible = (vs?: boolean) => {
     setVisible(!!vs)
-    cancelReset && form!.resetFields()
+    vs && cancelReset && form!.resetFields()
   }
 
   const fmProps: BaseFormProps = {

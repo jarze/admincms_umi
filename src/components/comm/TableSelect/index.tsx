@@ -29,7 +29,7 @@ function TableSelect<RecordType extends object = any>({ pagination, selectAlert,
   const { rowSelection } = props
   return (
     <>
-      {rowSelection && selectAlert && !selectAlert.hide && (
+      {rowSelection && !(selectAlert || {}).hide && (
         <SelectAlert rowSelection={rowSelection}>{selectAlert && selectAlert(rowSelection.selectedRowKeys, props)}</SelectAlert>
       )}
       <Table rowKey={(_, index) => String(index)} bordered={false} size="middle" {...props} pagination={pg} />

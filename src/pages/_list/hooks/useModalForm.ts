@@ -3,11 +3,11 @@ import { debounce } from 'lodash'
 import { BaseListHooksProps, BaseModalFormProps, EditModalFormConfig } from '../list-types'
 
 function useModalForm({ NS, editConfig = {}, loadingEffects = {}, ...props }: BaseListHooksProps): [BaseModalFormProps] {
-  const { dispatch, editId, itemInfo, computedMatch } = props
+  const { dispatch, editId, preEditId, itemInfo, computedMatch } = props
   const { params: matchParams } = computedMatch || {}
   useEffect(() => {
-    if (editId && editId !== 'add') {
-      ;(editConfig as EditModalFormConfig).isFetchData && dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
+    if (editId && editId !== 'add' && (editConfig as EditModalFormConfig).isFetchData) {
+      dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
     } else {
       dispatch({ type: `${NS}/save`, payload: { itemInfo: {} } })
     }
@@ -22,8 +22,11 @@ function useModalForm({ NS, editConfig = {}, loadingEffects = {}, ...props }: Ba
     [],
   )
 
+  // 编辑 ｜｜ 编辑取消
+  const edit = (editId && editId !== 'add') || (preEditId && !editId)
+
   const modalProps = {
-    title: editId !== 'add' ? '编辑' : '添加',
+    title: edit ? '编辑' : '添加',
     visible: editId ? true : false,
     ...editConfig,
     items: typeof editConfig.items === 'function' ? editConfig.items(props) : editConfig.items,
@@ -38,7 +41,7 @@ function useModalForm({ NS, editConfig = {}, loadingEffects = {}, ...props }: Ba
       dispatch({ type: `${NS}/editItem`, payload: payload, editId })
     },
     onCancel: () => {
-      dispatch({ type: `${NS}/save`, payload: { editId: null } })
+      dispatch({ type: `${NS}/save`, payload: { editId: null, preEditId: editId !== 'add' ? editId : null } })
     },
     confirmLoading: loadingEffects[`${NS}/editItem`],
   } as BaseModalFormProps
