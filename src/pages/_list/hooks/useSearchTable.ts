@@ -50,7 +50,7 @@ function useSearchList<T extends object = any>({
   }
 
   const updateFilterParams = (payload?: any) => {
-    dispatch({ type: `${NS}/save`, payload: { filterParams: payload, pagination: { ...pagination, current: 1 } } })
+    dispatch({ type: `${NS}/save`, payload: { filterParams: payload, pagination: { ...pagination, current: 1 }, selectedRowKeys: [] } })
   }
 
   const handlePageChange = (pageNo: number, pageSize?: number): void => {

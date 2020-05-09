@@ -6,8 +6,10 @@ function useModalForm({ NS, editConfig = {}, loadingEffects = {}, ...props }: Ba
   const { dispatch, editId, preEditId, itemInfo, computedMatch } = props
   const { params: matchParams } = computedMatch || {}
   useEffect(() => {
-    if (editId && editId !== 'add' && (editConfig as EditModalFormConfig).isFetchData) {
-      dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
+    if (editId && editId !== 'add') {
+      if ((editConfig as EditModalFormConfig).isFetchData) {
+        dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, id: editId } })
+      }
     } else {
       dispatch({ type: `${NS}/save`, payload: { itemInfo: {} } })
     }
