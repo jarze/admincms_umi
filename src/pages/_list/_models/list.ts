@@ -144,7 +144,7 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
           return
         }
         let { cached = {} } = state
-        menuId && (cached = { dataSource: [], ...cached, [menuId]: { ...state, cached: {} } })
+        menuId && (cached = { ...cached, [menuId]: { ...state, cached: {} } })
         const data = cached[matchParams.menuId]
         yield put({
           type: 'restPageFilter',
