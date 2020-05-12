@@ -3,6 +3,7 @@ import { debounce } from 'lodash'
 import router from 'umi/router'
 import { BaseListHooksProps, ActionType, ActionFunction, BaseTableProps, BaseFormProps } from '../list-types'
 
+// 匹配所有的 :menuId/list,取出menuId
 const reg = /(?<=\/).((?!\/).)*?(?=\/list\/)/gi
 const handlePopPath = (from, to) => {
   const f = `${from}/`.match(reg)
@@ -29,26 +30,26 @@ function useSearchList<T extends object = any>({
     if (isPreData) return
     tableConfig && fetchData()
   }, [filterParams, otherFilterParams])
-    // 切换匹配路由 缓存参数
-    useEffect(() => {
-      dispatch({ type: `${NS}/updateMatchParams`, matchParams })
-    }, [matchParams])
-    // 切换匹配路由 不同目录重置参数缓存
-    useEffect(() => {
-      return () => {
-        const to = window.location.pathname
-        const from = (props.location || {}).pathname
-        if (!to.includes(from)) {
-          // 回退页面，清空缓存
-          const clearedCached = handlePopPath(from, to).reduce((res, menu) => ({ ...res, [menu]: {} }), props.cached)
-          // 若切换栏目，重置列表参数
-          dispatch({
-            type: `${NS}/restPageFilter`,
-            payload: { cached: clearedCached },
-          })
-        }
+  // 切换匹配路由 缓存参数
+  useEffect(() => {
+    dispatch({ type: `${NS}/updateMatchParams`, matchParams })
+  }, [matchParams])
+  // 切换匹配路由 不同目录重置参数缓存
+  useEffect(() => {
+    return () => {
+      const to = window.location.pathname
+      const from = (props.location || {}).pathname
+      if (!to.includes(from)) {
+        // 回退页面，清空缓存
+        const clearedCached = handlePopPath(from, to).reduce((res, menu) => ({ ...res, [menu]: {} }), props.cached)
+        // 若切换栏目，重置列表参数
+        dispatch({
+          type: `${NS}/restPageFilter`,
+          payload: { cached: clearedCached },
+        })
       }
-    }, [matchParams, props.cached])
+    }
+  }, [matchParams, props.cached])
 
   const fetchData = (payload?: {}) => {
     let params = {

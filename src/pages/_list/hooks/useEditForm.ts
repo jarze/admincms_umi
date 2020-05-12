@@ -3,24 +3,16 @@ import router from 'umi/router'
 import { debounce } from 'lodash'
 import { BaseListHooksProps, BaseFormProps, EditFormConfig } from '../list-types'
 
-function useEditForm({
-  NS,
-  editConfig = {},
-  formConfig = {},
-  loadingEffects = {},
-  otherFilterParams,
-  isPush,
-  ...props
-}: BaseListHooksProps): [BaseFormProps] {
-  const { dispatch, itemInfo, computedMatch } = props
+function useEditForm({ editConfig = {}, loadingEffects = {}, otherFilterParams, ...props }: BaseListHooksProps): [BaseFormProps] {
+  const { NS, dispatch, itemInfo, computedMatch } = props
   const { params: matchParams } = computedMatch || {}
   const { id } = matchParams as { id: string }
 
   useEffect(() => {
     if (id) {
-      dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams } })
+      dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, ...otherFilterParams } })
     }
-  }, [NS, dispatch, id])
+  }, [id, otherFilterParams])
 
   const handleValuesChange = useCallback(
     debounce((changedValues: any, allValues: any) => {

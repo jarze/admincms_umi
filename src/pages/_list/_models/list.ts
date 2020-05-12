@@ -192,10 +192,7 @@ export default (model: ListModel, service = normalService) => {
   Object.keys(listModel).forEach(key => {
     let va = listModel[key]
     if (typeof va === 'object') {
-      newModel[key] = {
-        ...va,
-        ...model[key],
-      }
+      newModel[key] = { ...va, ...model[key] }
     }
   })
   return newModel
