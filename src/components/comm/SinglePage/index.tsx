@@ -3,7 +3,7 @@ import { Descriptions } from 'antd'
 import { DescriptionsProps, DescriptionsItemProps } from 'antd/lib/descriptions'
 export interface PageItemProps extends DescriptionsItemProps {
   key: string
-  render?: (value: any, item: object, data: object) => ReactNode
+  render?: (value: any, data: object) => ReactNode
 }
 export interface BasePageProps extends DescriptionsProps {
   itemInfo?: { [key: string]: any }
@@ -17,7 +17,7 @@ export default ({ items = [], itemInfo: data = {}, ...props }: BasePageProps) =>
     let { key, label, render, ...props } = item
     return (
       <Item key={key} label={label} {...props}>
-        {render ? render(data[key], item, data) : data[key]}
+        {render ? render(data[key], data) : data[key]}
       </Item>
     )
   })

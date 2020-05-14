@@ -28,7 +28,7 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
     },
     subscriptions: {
       setup({ history }) {
-        history.listen(_ => {
+        return history.listen(_ => {
           window.scrollTo(0, 0)
         })
       },

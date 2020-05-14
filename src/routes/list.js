@@ -30,12 +30,6 @@ const checkListPageAuth = (config = {}, params, { location }) => {
   const matched = reg.exec(location.pathname) || []
   const routeParams = { menuId: matched[2], type: matched[3], id: matched[4] }
   if (params.menuId !== routeParams.menuId) return false
-  switch (routeParams.type) {
-    case 'edit':
-      return configKeys.includes('editConfig')
-    case 'page':
-      return configKeys.includes('pageConfig')
-    default:
-      return configKeys.includes('tableConfig')
-  }
+  //editConfig|pageConfig|tableConfig
+  return configKeys.includes(`${routeParams.type || 'table'}Config`)
 }
