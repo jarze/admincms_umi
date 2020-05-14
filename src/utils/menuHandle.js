@@ -61,3 +61,26 @@ const menuHandle = (data = [], pid) => {
 //     });
 //   return menu;
 // };
+
+// 是否是目录
+export const isDirectory = (data = [], currentPath) => {
+  let find = false
+  for (let item of data) {
+    let { path, children, hideChildrenInMenu } = item
+    if (path === currentPath) {
+      if (hideChildrenInMenu) {
+        find = !hideChildrenInMenu
+        break
+      }
+      find = !!children
+      break
+    } else if (currentPath.startsWith(path) && children) {
+      if (hideChildrenInMenu) {
+        find = !hideChildrenInMenu
+        break
+      }
+      find = isDirectory(children, currentPath)
+    }
+  }
+  return find
+}
