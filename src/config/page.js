@@ -1,6 +1,12 @@
 // 定义属于list的menus
-const LIST_MENUS = ['2', '5', '7', '15', '9', '3', 'model', 'example_list']
-const PAGE_MENUS = ['30', 'example_page']
+const LIST_MENUS = [
+  /*GEN: APPEND SEARCH LIST HERE*/
+  'example_list',
+]
+const PAGE_MENUS = [
+  /*GEN: APPEND PAGE HERE*/
+  'example_page',
+]
 
 // 获取menu类型
 export const getMenuType = menuId => {

@@ -19,6 +19,7 @@ export default [
         name: '404',
         component: './404',
       },
+      /*GEN: APPEND ROUTER HERE*/
       {
         path: '*/:menuId/list',
         name: '搜索列表',
