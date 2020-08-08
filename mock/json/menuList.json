@@ -5,8 +5,13 @@
     "icon": "smile"
   },
   {
-    "id": "example",
+    "id": "example_list",
     "name": "List",
+    "icon": "table"
+  },
+  {
+    "id": "example_page",
+    "name": "Page",
     "icon": "table"
   },
   {

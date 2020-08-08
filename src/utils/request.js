@@ -62,15 +62,15 @@ export default function request(url, options = {}, errToast) {
 // 返回数据处理
 function checkResponse(response, method, type) {
   if (typeof response !== 'object' || type === File_Buffer) return response
-  let { code, message, data } = response
+  let { code, message: msg, data } = response
   if (code === CODE_SUCCESS) {
-    if (['DELETE', 'POST'].includes(method) && message) {
-      message.success(message)
+    if (['DELETE', 'POST'].includes(method) && msg) {
+      message.success(msg)
     }
     return data
   }
 
-  const error = new Error(message || CODE_MESSAGES[code])
+  const error = new Error(msg || CODE_MESSAGES[code])
   error.response = response
   error.status = code
   throw error
