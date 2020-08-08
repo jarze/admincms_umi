@@ -1,21 +1,23 @@
 {
-	"extends": "eslint-config-umi",
-	// "no-unused-vars": [
-	// 	2,
-	// 	{
-	// 		"vars": "local",
-	// 		"args": "none",
-	// 		"ignoreRestSiblings": true,
-	// 	},
-	// ],
-	"globals": {
-		"API_ENV": true,
-		"API_PREFIX": true,
-		"API_ENV_MOCK": true,
-		"API_ENV_DEV": true,
-		"API_ENV_TEST": true,
-		"API_ENV_PRO": true
-	},
-	"parser": "babel-eslint"
+  "extends": "eslint-config-umi",
+  // "no-unused-vars": [
+  // 	2,
+  // 	{
+  // 		"vars": "local",
+  // 		"args": "none",
+  // 		"ignoreRestSiblings": true,
+  // 	},
+  // ],
+  "rules": {
+    "react-hooks/exhaustive-deps": 0
+  },
+  "globals": {
+    "API_ENV": true,
+    "API_PREFIX": true,
+    "API_ENV_MOCK": true,
+    "API_ENV_DEV": true,
+    "API_ENV_TEST": true,
+    "API_ENV_PRO": true
+  },
+  "parser": "babel-eslint"
 }
-

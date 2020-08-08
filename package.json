@@ -4,14 +4,15 @@
     "start": "umi dev",
     "start:mock": "cross-env API_ENV=mock umi dev",
     "build": "umi build",
-    "build:dev": "cross-env API_ENV=dev umi build",
     "test": "umi test",
     "lint:es": "eslint --ext .js src mock tests",
     "lint:ts": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "gen": "plop --plopfile ./scripts/generators/index.js"
   },
   "dependencies": {
-    "@ant-design/pro-layout": "^4.5.14",
+    "@ant-design/pro-layout": "^4.6.2",
+    "@types/lodash": "^4.14.150",
     "antd": "^3.19.2",
     "cross-env": "^5.2.1",
     "dva": "^2.6.0-beta.4",
@@ -34,6 +35,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
     "mockjs": "^1.0.1-beta3",
+    "plop": "^2.4.0",
     "react-test-renderer": "^16.7.0",
     "tslint": "^5.12.0",
     "tslint-eslint-rules": "^5.4.0",
@@ -43,7 +45,7 @@
     "umi-types": "^0.2.0"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "src/*.{ts,tsx}": [
       "tslint --fix",
       "git add"
     ],

@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "outDir": "./dist",
     "module": "esnext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "jsx": "react",
-    "esModuleInterop": true,
+    "target": "es2016",
     "sourceMap": true,
     "baseUrl": ".",
-    "strict": true,
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "rootDirs": [
+      "/src",
+      "/mock",
+    ],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -18,32 +20,16 @@
     "experimentalDecorators": true,
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@services/*": [
-        "./src/services/*"
-      ],
-      "@models/*": [
-        "./src/models/*"
-      ],
-      "@layouts/*": [
-        "./src/layouts/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ]
     }
   },
   "include": [
-    "./src"
+    "./src",
+    "./"
   ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
