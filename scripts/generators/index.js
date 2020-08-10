@@ -2,12 +2,19 @@ const fs = require('fs')
 
 const PageTypes = fs.readdirSync(`${__dirname}/templates`).filter(f => !f.startsWith('.'))
 
+// 通用搜索列表特殊处理
 const isSearchList = ({ type }) => (type === 'SearchList' ? false : true)
 
 module.exports = plop => {
   plop.setGenerator('page', {
     description: 'generate a new page',
     prompts: [
+      {
+        type: 'list',
+        name: 'type',
+        message: 'which type of page?',
+        choices: PageTypes.map(item => ({ name: item, value: item })),
+      },
       {
         type: 'input',
         name: 'name',
@@ -20,12 +27,6 @@ module.exports = plop => {
         },
       },
       {
-        type: 'list',
-        name: 'type',
-        message: 'which type of page?',
-        choices: PageTypes.map(item => ({ name: item, value: item })),
-      },
-      {
         type: 'input',
         name: 'path',
         message: 'where would you like to put this page? (/src/pages/...)',
@@ -34,7 +35,7 @@ module.exports = plop => {
       {
         type: 'confirm',
         name: 'route',
-        message: 'Whether to add path?',
+        message: 'whether to add path?',
         when: isSearchList,
       },
     ],

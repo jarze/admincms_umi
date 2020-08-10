@@ -31,5 +31,6 @@ const checkListPageAuth = (config = {}, params, { location }) => {
   const routeParams = { menuId: matched[2], type: matched[3], id: matched[4] }
   if (params.menuId !== routeParams.menuId) return false
   //editConfig|pageConfig|tableConfig
-  return configKeys.includes(`${routeParams.type || 'table'}Config`)
+  const configKey = ['edit', 'page'].includes(routeParams.type) ? routeParams.type : 'table'
+  return configKeys.includes(`${configKey}Config`)
 }
