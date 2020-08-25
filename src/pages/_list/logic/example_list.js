@@ -46,7 +46,7 @@ export const formConfig = {
 }
 
 // 操作项
-export const action = (onItemAction, props) => {
+export const actions = (onItemAction, props) => {
   // return (
   //   <Button icon="plus" type="primary" onClick={() => onItemAction('add')}>
   //     添加
