@@ -5,8 +5,8 @@ export const tableConfig = {
   // columns: (onItemAction, props) => [
   columns: [
     { title: '{{name}}', dataIndex: 'a' },
-    { title: '', dataIndex: 'b' },
-    { title: '', dataIndex: 'c', render: (text, record, index) => '自定义column显示' },
+    { title: 'b', dataIndex: 'b' },
+    { title: 'c', dataIndex: 'c', render: (text, record, index) => '自定义column显示' },
     // {
     //   key: 'operation',
     //   title: '操作',
@@ -24,7 +24,10 @@ export const tableConfig = {
     // },
   ],
   rowKey: 'id',
-  //selectAlert: (selectedRowKeys, props) => null
+
+  // 列表选择Alert显示
+  // rowSelection: true,
+  // selectAlert: (selectedRowKeys, props) => '自定义内容显示',
 }
 
 // 搜索项
@@ -35,10 +38,15 @@ export const formConfig = {
     { label: 'b', key: 'b' },
     { render: (form, data) => <div>自定义内容显示</div> },
   ],
+
+  // 搜索输入刷新
+  // onValuesChange: true,
+  // onSubmit: false,
+  // onReset: false,
 }
 
 // 操作项
-export const action = (onItemAction, props) => {
+export const actions = (onItemAction, props) => {
   // return (
   //   <Button icon="plus" type="primary" onClick={() => onItemAction('add')}>
   //     添加
@@ -53,8 +61,8 @@ export const action = (onItemAction, props) => {
 export const editConfig = {
   // items: (props, onItemAction) => [
   items: [
-    { label: 'a', key: 'b', render: (form, data) => <div>自定义表单组件</div> },
-    { label: 'a', key: 'b' },
+    { label: 'a', key: 'a', render: (form, data) => <div>自定义表单组件</div> },
+    { label: 'b', key: 'b' },
     { render: (form, data) => <div>自定义内容显示</div> },
   ],
 }
@@ -63,7 +71,7 @@ export const editConfig = {
 export const pageConfig = {
   // items: props => [
   items: [
-    { label: 'a', key: 'b' },
-    { label: 'a', key: 'b', render: (text, data) => <div>自定义item组件</div> },
+    { label: 'a', key: 'a' },
+    { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> },
   ],
 }

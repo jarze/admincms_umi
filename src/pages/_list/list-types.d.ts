@@ -17,7 +17,7 @@ export interface SearchListFormConfig extends Omit<BaseFormProps, 'items' | 'onV
 }
 // 列表table配置
 export interface SearchListTableConfig extends Omit<BaseTableProps<any>, 'columns'> {
-  columns?: (onItemAction: ActionFunction, props: any) => ColumnProps<any>[] | ColumnProps<any>[]
+  columns?: ((onItemAction: ActionFunction, props: any) => ColumnProps<any>[]) | ColumnProps<any>[]
 }
 // 跳转表单配置
 export interface EditFormConfig extends Omit<BaseFormProps, 'items' | 'onValuesChange'> {

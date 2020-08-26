@@ -14,7 +14,7 @@ files.keys().forEach(key => {
  * @return: 返回对应模块对应请求方式
  */
 export default (type, payload, action) => {
-  const { matchParams, ...params } = payload
+  const { matchParams = {}, ...params } = payload
   const { menuId } = matchParams
   // 如果没有定义menu services; 使用list公用请求
   const service = (models[menuId] || {})[type] || models.list[type]
@@ -24,7 +24,7 @@ export default (type, payload, action) => {
 
 // 处理参数转化
 export const combineServices = services => (type, payload, action) => {
-  const { matchParams, ...params } = payload
+  const { matchParams = {}, ...params } = payload
   const service = services[type]
   return service && service(params, matchParams, action)
 }

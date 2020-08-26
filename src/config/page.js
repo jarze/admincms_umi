@@ -42,14 +42,24 @@ export const getMenuType = menuId => {
 // menu 之外的深层级页面（不显示在menu,会显示在面包屑上 {pid: [{name, children}]}
 export const EXTRA_ROUTES = {
   //example
-  '7': [
+  example_list: [
     {
-      id: 'aa',
-      name: '添加设备',
+      id: 'edit',
+      name: '添加',
       children: [
         {
-          id: 'das',
-          name: '详情查看',
+          id: 'detail',
+          name: '详情',
+        },
+        {
+          id: ':id',
+          name: '编辑',
+          children: [
+            {
+              id: ':id',
+              name: '编辑详情',
+            },
+          ],
         },
       ],
     },
