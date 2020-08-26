@@ -41,8 +41,8 @@ export const formConfig = {
 
   // 搜索输入刷新
   // onValuesChange: true,
-  // onSubmit: false,
-  // onReset: false,
+  // onSubmit: null,
+  // onReset: null,
 }
 
 // 操作项
@@ -61,7 +61,7 @@ export const actions = (onItemAction, props) => {
 export const editConfig = {
   // items: (props, onItemAction) => [
   items: [
-    { label: 'a', key: 'b', render: (form, data) => <div>自定义表单组件</div> },
+    { label: 'a', key: 'a', render: (form, data) => <div>自定义表单组件</div> },
     { label: 'b', key: 'b' },
     { render: (form, data) => <div>自定义内容显示</div> },
   ],
@@ -71,7 +71,7 @@ export const editConfig = {
 export const pageConfig = {
   // items: props => [
   items: [
-    { label: 'a', key: 'b' },
+    { label: 'a', key: 'a' },
     { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> },
   ],
 }

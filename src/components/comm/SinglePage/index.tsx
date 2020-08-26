@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Descriptions } from 'antd'
 import { DescriptionsProps, DescriptionsItemProps } from 'antd/lib/descriptions'
-export interface PageItemProps extends DescriptionsItemProps {
+export interface PageItemProps extends Omit<DescriptionsItemProps, 'children'> {
   key: string
   render?: (value: any, data: object) => ReactNode
 }

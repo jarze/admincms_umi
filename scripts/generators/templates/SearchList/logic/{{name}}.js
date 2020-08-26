@@ -41,8 +41,8 @@ export const formConfig = {
 
   // 搜索输入刷新
   // onValuesChange: true,
-  // onSubmit: false,
-  // onReset: false,
+  // onSubmit: null,
+  // onReset: null,
 }
 
 // 操作项
