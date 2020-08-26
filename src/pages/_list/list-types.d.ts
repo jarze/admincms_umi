@@ -1,6 +1,7 @@
 import { BaseModalFormProps } from './../../components/comm/ModalForm/index'
 import { BaseFormProps, BaseFormItemProps } from '@/components/comm/Form'
 import { BaseTableProps, ColumnProps } from '@/components/comm/TableSelect'
+import { BasePageProps, PageItemProps } from '@/components/comm/SinglePage'
 export { BaseModalFormProps } from '@/components/comm/ModalForm'
 export { BaseFormProps } from '@/components/comm/Form'
 export { BaseTableProps } from '@/components/comm/TableSelect'
@@ -32,6 +33,11 @@ export interface EditModalFormConfig extends Omit<BaseModalFormProps, 'items' | 
   isFetchData?: boolean // 弹窗Edit是否请求ItemInfo
 }
 
+// 详情展示页面配置
+export interface DescPageConfig extends Omit<BasePageProps, 'items'> {
+  items?: ((props: any) => PageItemProps[]) | PageItemProps[]
+}
+
 // 列表通用配置
 export interface ListPageConfig {
   tableConfig?: SearchListTableConfig // 列表配置
@@ -41,6 +47,7 @@ export interface ListPageConfig {
   isPush?: boolean // 添加编辑是否跳转新页面或弹窗
   NS?: string // 绑定model名，默认list，绑定的Model必须是ListModel
   otherModels?: string[] // 其他绑定的model，可以从参数里获取到其他model的sto
+  pageConfig?: DescPageConfig // 跳转详情页展示
 }
 
 // ---------- Model ----------
