@@ -21,6 +21,7 @@ export const validateMessages = {
 export interface BaseFormItemProps extends FormItemProps {
   key?: string
   options?: GetFieldDecoratorOptions
+  optionsFun?: (form?: WrappedFormUtils, data?: { [key: string]: any }) => GetFieldDecoratorOptions
   placeholder?: string
   defaultValue?: any
   disabled?: boolean
@@ -81,7 +82,7 @@ export const CForm = ({
   }
 
   const formContent = items.map(
-    ({ cols, key, label, placeholder, options, render, defaultValue, disabled = false, ...itemProps }: BaseFormItemProps, index) => {
+    ({ cols, key, label, placeholder, options, render, defaultValue, disabled = false, optionsFun, ...itemProps }: BaseFormItemProps, index) => {
       if (render === null || (render && render(form, data) === null)) return null
       return (
         <FormItemWap key={key || index} index={index} {...cols}>
@@ -90,6 +91,7 @@ export const CForm = ({
               {form!.getFieldDecorator(key, {
                 initialValue: data && data[key] !== undefined ? data[key] : defaultValue,
                 ...options,
+                ...(optionsFun && optionsFun(form, data)),
               })(render ? render(form, data) : <Input type="text" disabled={disabled} placeholder={placeholder || (label ? `输入${label}` : '')} />)}
             </FormItem>
           ) : (

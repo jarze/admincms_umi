@@ -3,13 +3,14 @@ import { Modal, Form } from 'antd'
 import { BaseFormProps, BaseFormItemProps, CForm, validateMessages } from '../Form'
 import { BaseModalProps } from '../Modal'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
-export interface BaseModalFormProps extends BaseModalProps {
+export interface BaseModalFormProps extends Omit<BaseModalProps, 'onCancel'> {
   form?: WrappedFormUtils
   items: BaseFormItemProps[]
   data?: { [k: string]: any } // 表单值
   formProps?: BaseFormProps
   cancelReset?: boolean // 弹窗消失是否重置表单
-  onOk?: (value: object, callback: any) => void // 确定提交表单重置
+  onOk?: (value: object, callback: any, form?: WrappedFormUtils) => void // 确定提交表单重置
+  onCancel?: (e: React.MouseEvent<HTMLElement>, callback: any, form?: WrappedFormUtils) => void // 确定提交表单重置
   onValuesChange?: (changedValues: any, allValues: any) => void
 }
 // 默认表单样式， 可被formProps覆盖
@@ -28,7 +29,7 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, can
     if (e) e.stopPropagation()
     form!.validateFields((err, values) => {
       if (!err) {
-        onOk && onOk(values, handleVisible)
+        onOk && onOk(values, handleVisible, form)
       }
     })
   }
@@ -52,9 +53,12 @@ const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, can
         visible={visible}
         maskClosable={false}
         onOk={onOkCallBack}
-        onCancel={() => {
-          handleVisible(false)
-          onCancel && onCancel()
+        onCancel={e => {
+          if (onCancel) {
+            onCancel(e, handleVisible, form)
+          } else {
+            handleVisible(false)
+          }
         }}
         {...props}
       >
