@@ -1,16 +1,20 @@
 import theme from './theme'
 import routes from './routes.js'
 
-import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_GATEWAY, API_PROXY_TARGET } from './constant'
+import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_PROXY_TARGET } from './constant'
 const resolve = require('path').resolve
 
 // 当前环境相关配置  dev | test | pro
 const env = process.env.API_ENV
-const api_gateway = API_GATEWAY[env]
 const API_PROXY = '/api'
 const api_proxy_target = API_PROXY_TARGET[env]
+// 是否代理访问 测试
+const isProxy = env !== ENV_TEST
 
 export default {
+  //gh-pages test配置二级目录
+  base: env === ENV_TEST ? '/admincms_umi/' : '/',
+  publicPath: env === ENV_TEST ? '/admincms_umi/' : '/',
   treeShaking: true,
   plugins: [
     //  // npm 依赖
@@ -84,7 +88,7 @@ export default {
   define: {
     API_ENV: env,
     API_PROXY,
-    API_PREFIX: `${API_PROXY}${api_gateway}`,
+    API_PREFIX: !isProxy ? api_proxy_target : API_PROXY,
     API_ENV_MOCK: ENV_MOCK,
     API_ENV_DEV: ENV_DEV,
     API_ENV_TEST: ENV_TEST,
@@ -109,5 +113,7 @@ export default {
   },
   block: {
     closeFastGithub: true,
+    // defaultGitUrl: 'https://github.com/jarze/umi-blocks.git',
+    // defaultGitUrl: 'https://github.com/ant-design/pro-blocks',
   },
 }

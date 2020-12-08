@@ -5,7 +5,7 @@ export function getListData(payload) {
 }
 
 export function getItemInfo(payload, routeParams) {
-  const id = routeParams.id || payload.id
+  const id = routeParams.id || payload.id || '1'
   return request(`/page/${id}`, { method: 'GET', body: payload })
 }
 

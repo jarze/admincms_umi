@@ -15,7 +15,7 @@ const BasicLayout = ({ children, menuRoute, user, route, ...restProps }) => {
   if (restProps.location.pathname === '/login') return children
   const rightContent = <User user={user} style={{ float: 'right', margin: '0 2em' }} />
   const { breadcrumb } = restProps.location.query
-  const isMenuTop = menuRoute.routes.map(item => item.path).includes(restProps.location.pathname)
+  const isMenuTop = (menuRoute.routes || []).map(item => item.path).includes(restProps.location.pathname)
   const Wrapper = isMenuTop ? Fragment : PageHeaderWrapper
   return (
     <ProLayoutComponents

@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
 export async function fetchMenu() {
-  return request(`/users/menu`)
+  return request(`/menu`)
 }
 
 export async function fetchUserInfo() {
-  return request(`/users/current`)
+  return request(`/userInfo`)
 }
 
 // 修改密码
