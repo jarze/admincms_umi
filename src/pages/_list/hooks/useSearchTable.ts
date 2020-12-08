@@ -71,10 +71,6 @@ function useSearchList<T extends object = any>({
     dispatch({ type: `${NS}/save`, payload: { filterParams: payload, pagination: { ...pagination, current: 1 }, selectedRowKeys: [] } })
   }
 
-  const handlePageChange = (pageNo: number, pageSize?: number): void => {
-    fetchData({ pageNo, pageSize })
-  }
-
   const stringRowKey = typeof tableConfig.rowKey === 'string' ? tableConfig.rowKey : null
 
   const onItemAction: ActionFunction = function(
@@ -141,9 +137,18 @@ function useSearchList<T extends object = any>({
     ({
       dataSource: isPreData ? [] : dataSource,
       loading: loadingEffects[fetchUrl],
-      pagination: { ...pagination, onChange: handlePageChange },
+      pagination,
       rowClassName: record => (stringRowKey && preEditId && String(preEditId) === String(record[stringRowKey]) ? 'table-row-visited' : ''),
       onItemAction,
+      onChange: ({ current, pageSize }, filters, { order, field }, extra) => {
+        dispatch({
+          type: `${NS}/save`,
+          payload: {
+            filterParams: { ...filterParams, order, field: order ? field : undefined },
+            pagination: { ...pagination, current, pageSize },
+          },
+        })
+      },
       ...tableConfig,
       selectAlert:
         typeof tableConfig.selectAlert === 'function'

@@ -21,7 +21,7 @@ export const defaultFormProps: BaseFormProps = {
   col: 24,
 }
 
-const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, cancelReset = true, ...props }: BaseModalFormProps) => {
+export const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, cancelReset = true, ...props }: BaseModalFormProps) => {
   // 有children时可以通过children点击自我控制visible显示
   const [visible, setVisible] = useState(false)
 
