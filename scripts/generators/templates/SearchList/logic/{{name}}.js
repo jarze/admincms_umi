@@ -55,8 +55,6 @@ export const actions = (onItemAction, props) => {
   return null
 }
 
-// export const isPush = true;
-
 // 添加编辑表单
 export const editConfig = {
   // items: (props, onItemAction) => [
@@ -75,3 +73,13 @@ export const pageConfig = {
     { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> },
   ],
 }
+
+// ------------ 其他配置项 无特殊需求不用更改配置 ------
+// 绑定后Model， 默认为list
+// export const NS = 'list'
+
+// 新增编辑是否跳转新页面
+// export const isPush = false
+
+// 是否需获取其他model数据 （默认只获取绑定model的数据）
+// export const otherModels = []
