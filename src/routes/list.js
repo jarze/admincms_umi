@@ -14,6 +14,7 @@ export default props => {
   const [logicParams, setLogicParams] = useState()
   useEffect(() => {
     try {
+      // 配置异步加载打包分离
       import(
         /* webpackChunkName: "list-[request]" */
         /* webpackMode: "lazy" */

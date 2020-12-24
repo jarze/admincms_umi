@@ -11,10 +11,15 @@ const api_proxy_target = API_PROXY_TARGET[env]
 // 是否代理访问 测试
 const isProxy = env !== ENV_TEST
 
+//gh-pages test配置二级目录
+const env_test_params = env === ENV_TEST && {
+  base: '/admincms_umi/',
+  publicPath: '/admincms_umi/',
+  // history: 'hash',
+}
+
 export default {
-  //gh-pages test配置二级目录
-  base: env === ENV_TEST ? '/admincms_umi/' : '/',
-  publicPath: env === ENV_TEST ? '/admincms_umi/' : '/',
+  ...env_test_params,
   treeShaking: true,
   plugins: [
     //  // npm 依赖
