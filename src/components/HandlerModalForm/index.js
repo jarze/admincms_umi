@@ -1,26 +1,29 @@
-import { ModalForm } from '../comm';
-import { useState } from 'react';
+import { ModalForm } from '../comm'
+import { useState } from 'react'
 
 export default ({ children, onOkHandler, onOk, ...props }) => {
-  const [modalLoading, setModalLoading] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false)
   const modalProps = {
-    onOk: (values, cb) => {
+    onOk: (values, cb, form) => {
       if (onOkHandler) {
-        setModalLoading(true);
+        setModalLoading(true)
         onOkHandler(values)
           .then(res => {
             if (res && res.code === 1001) {
-              onOk && onOk(res);
-              cb();
+              if (onOk) {
+                onOk(res, cb, form)
+              } else {
+                cb()
+              }
             }
           })
-          .finally(() => setModalLoading(false));
+          .finally(() => setModalLoading(false))
       } else {
-        onOk && onOk(values, cb);
+        onOk && onOk(values, cb, form)
       }
     },
     ...props,
     confirmLoading: modalLoading,
-  };
-  return <ModalForm {...modalProps}>{children}</ModalForm>;
-};
+  }
+  return <ModalForm {...modalProps}>{children}</ModalForm>
+}

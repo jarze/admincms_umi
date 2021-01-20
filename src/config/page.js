@@ -1,6 +1,7 @@
 // 定义属于list的menus
 const LIST_MENUS = [
   /*GEN: APPEND SEARCH LIST HERE*/
+  'example_list_two',
   'example_list',
 ]
 const PAGE_MENUS = [

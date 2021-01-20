@@ -1,30 +1,22 @@
-import { useEffect, useState, cloneElement } from 'react';
-import { Popconfirm } from 'antd';
+import { useEffect, useState, cloneElement, useRef } from 'react'
+import { Popconfirm } from 'antd'
 
-export default ({
-  handler,
-  params,
-  onComplete,
-  children,
-  handlerKey = 'onClick',
-  isConfirm,
-  ...props
-}) => {
-  const [loading, setLoading] = useState(false);
-  const [mounted, setMounted] = useState(true);
-  useEffect(() => () => setMounted(false), []);
+export default ({ handler, params, onComplete, children, handlerKey = 'onClick', isConfirm, ...props }) => {
+  const [loading, setLoading] = useState(false)
+  const mounted = useRef(true)
+  useEffect(() => () => (mounted.current = false), [])
 
   const onClick = () => {
-    if (!handler) return;
-    setLoading(true);
+    if (!handler) return
+    setLoading({ delay: 200 })
     handler(params)
       .then(res => {
-        onComplete && onComplete(res);
+        onComplete && onComplete(res)
       })
       .finally(() => {
-        mounted && setLoading(false);
-      });
-  };
+        mounted.current && setLoading(false)
+      })
+  }
 
   return isConfirm ? (
     <Popconfirm {...props} onConfirm={onClick}>
@@ -32,5 +24,5 @@ export default ({
     </Popconfirm>
   ) : (
     cloneElement(children, { [handlerKey]: onClick, loading })
-  );
-};
+  )
+}

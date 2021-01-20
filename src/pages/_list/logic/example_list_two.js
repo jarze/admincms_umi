@@ -1,27 +1,28 @@
-// import { Button, Divider } from 'antd'
+import { Button, Divider } from 'antd'
 
 // 列表
 export const tableConfig = {
-  // columns: (onItemAction, props) => [
-  columns: [
-    { title: '{{name}}', dataIndex: 'a' },
+  columns: (onItemAction, props) => [
+    // columns: [
+    { title: 'example_list_two', dataIndex: 'a' },
     { title: 'b', dataIndex: 'b' },
+    { title: 'name', dataIndex: 'name' },
     { title: 'c', dataIndex: 'c', render: (text, record, index) => '自定义column显示' },
-    // {
-    //   key: 'operation',
-    //   title: '操作',
-    //   align: 'center',
-    //   width: 150,
-    //   render: (_, record) => (
-    //     <>
-    //       <Button type="link" onClick={() => onItemAction('detail', record)} icon="eye" />
-    //       <Divider type="vertical" />
-    //       <Button type="link" onClick={() => onItemAction('edit', record)} icon="edit" />
-    //       <Divider type="vertical" />
-    //       <Button type="link" onClick={() => onItemAction('delete', record)} icon="delete" />
-    //     </>
-    //   ),
-    // },
+    {
+      key: 'operation',
+      title: '操作',
+      align: 'center',
+      width: 150,
+      render: (_, record) => (
+        <>
+          <Button type="link" onClick={() => onItemAction('detail', record)} icon="eye" />
+          <Divider type="vertical" />
+          <Button type="link" onClick={() => onItemAction('edit', record)} icon="edit" />
+          <Divider type="vertical" />
+          <Button type="link" onClick={() => onItemAction('delete', record)} icon="delete" />
+        </>
+      ),
+    },
   ],
   rowKey: 'id',
 
@@ -36,7 +37,11 @@ export const formConfig = {
   items: [
     { label: 'a', key: 'a', render: (form, data) => <div>自定义表单组件</div> },
     { label: 'b', key: 'b' },
-    { render: (form, data) => <div>自定义内容显示</div> },
+    { label: 'c', key: 'c' },
+    { label: 'd', key: 'cd' },
+    { label: 'e', key: 'ce' },
+    { label: 'f', key: 'cf' },
+    // { render: (form, data) => <div>自定义内容显示</div> },
   ],
 
   // 搜索输入刷新
@@ -47,12 +52,12 @@ export const formConfig = {
 
 // 操作项
 export const actions = (onItemAction, props) => {
-  // return (
-  //   <Button icon="plus" type="primary" onClick={() => onItemAction('add')}>
-  //     添加
-  //   </Button>
-  // )
-  return null
+  return (
+    <Button icon="plus" type="primary" onClick={() => onItemAction('add')}>
+      添加
+    </Button>
+  )
+  // return null
 }
 
 // 添加编辑表单
@@ -61,6 +66,10 @@ export const editConfig = {
   items: [
     { label: 'a', key: 'a', render: (form, data) => <div>自定义表单组件</div> },
     { label: 'b', key: 'b' },
+    { label: 'c', key: 'c' },
+    { label: 'd', key: 'd' },
+    { label: 'e', key: 'e' },
+    { label: 'f', key: 'f' },
     { render: (form, data) => <div>自定义内容显示</div> },
   ],
 }
@@ -70,6 +79,10 @@ export const pageConfig = {
   // items: props => [
   items: [
     { label: 'a', key: 'a' },
+    { label: 'c', key: 'c' },
+    { label: 'd', key: 'cd' },
+    { label: 'e', key: 'ce' },
+    { label: 'f', key: 'cf' },
     { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> },
   ],
 }

@@ -5,7 +5,7 @@ export interface BaseModalProps extends ModalProps {
   children?: ReactChild
   content?: ReactChild
   onOk?: (callback: any, ...others: any[]) => void
-  onCancel?: VoidFunction
+  onCancel?: (e?: React.MouseEvent<HTMLElement>) => void
 }
 
 export default ({ children, content, onOk, onCancel, ...props }: BaseModalProps) => {

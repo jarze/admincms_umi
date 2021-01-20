@@ -7,6 +7,7 @@ export const defaultPaginationConfig: PaginationConfig = {
   pageSizeOptions: ['50', '100', '150'],
   showQuickJumper: true,
   showSizeChanger: true,
+  onShowSizeChange: () => {},
   showTotal: total => `共 ${total} 条`,
 }
 
@@ -21,7 +22,7 @@ function TableSelect<RecordType extends object = any>({ pagination, selectAlert,
   let pg = pagination
     ? {
         ...defaultPaginationConfig,
-        onShowSizeChange: pagination.onShowSizeChange || pagination.onChange,
+        onShowSizeChange: pagination.onShowSizeChange || pagination.onChange || defaultPaginationConfig.onShowSizeChange,
         ...pagination,
       }
     : pagination

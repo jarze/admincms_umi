@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 export default ({ fetchData, params, handlerData }) => {
   const [loading, setLoading] = useState(false)
-  const [mounted, setMounted] = useState(true)
   const [data, setData] = useState()
-  useEffect(() => () => setMounted(false), [])
+  const mounted = useRef(true)
+
+  useEffect(() => () => (mounted.current = false), [])
+
   useEffect(() => {
     if (!fetchData) return
     setLoading(true)
     fetchData(params)
       .then(res => {
-        mounted && setData(handlerData ? handlerData(res) : res)
+        mounted.current && setData(handlerData ? handlerData(res) : res)
       })
       .finally(() => {
-        mounted && setLoading(false)
+        mounted.current && setLoading(false)
       })
   }, [fetchData, params])
   return { data, loading }

@@ -1,5 +1,6 @@
-import { useMemo, cloneElement } from 'react'
+import { useMemo, cloneElement, useState, useEffect } from 'react'
 import Forbidden from '@/pages/403.js'
+import Loading from '@/components/PageLoading'
 import pathToRegexp from 'path-to-regexp'
 
 /**
@@ -9,15 +10,25 @@ export default props => {
   const {
     match: { params },
   } = props
-  const logicParams = useMemo(() => {
+
+  const [logicParams, setLogicParams] = useState()
+  useEffect(() => {
     try {
-      return require(`@/pages/_list/logic/${params.menuId}.js`)
-    } catch (err) {
-      //alert(err, '\n 请配置相关文件') // 可执行
+      // 配置异步加载打包分离
+      import(
+        /* webpackChunkName: "list-[request]" */
+        /* webpackMode: "lazy" */
+        `@/pages/_list/logic/${params.menuId}.js`
+      ).then(setLogicParams)
+    } catch (error) {
+      setLogicParams(null)
     }
+    return () => {}
   }, [params.menuId])
+
   // 配置权限校验
   const auth = useMemo(() => checkListPageAuth(logicParams, params, props), [logicParams])
+  if (logicParams === undefined) return <Loading />
   return auth ? cloneElement(props.children, logicParams) : <Forbidden>请检查相关权限配置！</Forbidden>
 }
 
@@ -25,6 +36,7 @@ var reg = pathToRegexp('/*/:menuId/list/:type?/:id?')
 
 // 页面配置参数分配权限校验
 const checkListPageAuth = (config = {}, params, { location }) => {
+  if (!config) return false
   const configKeys = Object.keys({ ...config }).filter(key => key.toLowerCase().includes('config') && !!config[key])
   if (!configKeys.length) return false
   const matched = reg.exec(location.pathname) || []
