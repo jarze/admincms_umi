@@ -1,12 +1,13 @@
 // 定义属于list的menus
 const LIST_MENUS = [
   /*GEN: APPEND SEARCH LIST HERE*/
+  'model',
   'example_list_two',
-  'example_list',
+  'example_list'
 ]
 const PAGE_MENUS = [
   /*GEN: APPEND PAGE HERE*/
-  'example_page',
+  'example_page'
 ]
 
 // 获取menu类型
@@ -50,7 +51,7 @@ export const EXTRA_ROUTES = {
       children: [
         {
           id: 'detail',
-          name: '详情',
+          name: '详情'
         },
         {
           id: ':id',
@@ -58,11 +59,11 @@ export const EXTRA_ROUTES = {
           children: [
             {
               id: ':id',
-              name: '编辑详情',
-            },
-          ],
-        },
-      ],
-    },
-  ],
+              name: '编辑详情'
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

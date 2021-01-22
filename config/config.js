@@ -21,6 +21,7 @@ const env_test_params = env === ENV_TEST && {
 export default {
   ...env_test_params,
   treeShaking: true,
+  hash: true,
   plugins: [
     //  // npm 依赖
     //  'umi-plugin-react',
