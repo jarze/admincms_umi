@@ -8,12 +8,12 @@ export const defaultPaginationConfig: PaginationConfig = {
   showQuickJumper: true,
   showSizeChanger: true,
   onShowSizeChange: () => {},
-  showTotal: total => `共 ${total} 条`,
+  showTotal: total => `共 ${total} 条`
 }
 export interface BaseTableProps<T> extends TableProps<T> {
   selectAlert?: {}
 }
-// 统一默认列表分页表现形式
+/** 统一默认列表分页表现形式 */
 export default ({ pagination, rowSelection, selectAlert, ...props }: BaseTableProps<object>) => {
   const [onRowSelect, setOnRowSelect] = useState(false)
 
@@ -25,7 +25,7 @@ export default ({ pagination, rowSelection, selectAlert, ...props }: BaseTablePr
     ? {
         ...defaultPaginationConfig,
         onShowSizeChange: pagination.onShowSizeChange || pagination.onChange || defaultPaginationConfig.onShowSizeChange,
-        ...pagination,
+        ...pagination
       }
     : pagination
 

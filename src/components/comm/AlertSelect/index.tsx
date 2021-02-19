@@ -4,14 +4,14 @@ import { Affix, Alert, Button, Icon, Popover, Tag, Divider, Checkbox } from 'ant
 export interface AlertProps {
   selectAlert?: {
     selectionShowKey?: string
-		extraContent?: (selectedRowKeys: string[], props: any) => ReactNode
-	}
-	[propName: string]: any;
+    extraContent?: (selectedRowKeys: string[], props: any) => ReactNode
+  }
+  [propName: string]: any
 }
 
 /* table 参数 | onRowSelect | onRowSelectChange */
 export default ({ onRowSelect, onRowSelectChange, selectAlert = {}, ...props }: AlertProps) => {
-  // Table API 参数
+  /** Table API 参数 */
   const { rowSelection = {}, dataSource = [], rowKey } = props
   const { selectedRowKeys = [], onChange } = rowSelection
   const count = selectedRowKeys.length
