@@ -45,7 +45,7 @@ function useSearchList<T extends object = any>({
         // 若切换栏目，重置列表参数
         dispatch({
           type: `${NS}/restPageFilter`,
-          payload: { cached: clearedCached },
+          payload: { cached: clearedCached }
         })
       }
     }
@@ -58,7 +58,7 @@ function useSearchList<T extends object = any>({
       pageSize: pagination.pageSize,
       matchParams,
       ...payload,
-      ...otherFilterParams,
+      ...otherFilterParams
     }
     if (tableConfig.pagination === false) {
       delete params.pageNo
@@ -76,7 +76,7 @@ function useSearchList<T extends object = any>({
   const onItemAction: ActionFunction = function(
     type: ActionType | string,
     payload = {},
-    params?: { breadcrumb?: string | null; callback?: Function; id?: string },
+    params?: { breadcrumb?: string | null; callback?: Function; id?: string }
   ) {
     const { breadcrumb, callback, id = stringRowKey && payload[stringRowKey] } = params || {}
     switch (type) {
@@ -128,7 +128,7 @@ function useSearchList<T extends object = any>({
       selectedRowKeys: selectedRowKeys,
       onChange: rowKeys => {
         dispatch({ type: `${NS}/save`, payload: { selectedRowKeys: rowKeys } })
-      },
+      }
     }
   }
 
@@ -145,8 +145,8 @@ function useSearchList<T extends object = any>({
           type: `${NS}/save`,
           payload: {
             filterParams: { ...filterParams, order, field: order ? field : undefined },
-            pagination: { ...pagination, current, pageSize },
-          },
+            pagination: { ...pagination, current, pageSize }
+          }
         })
       },
       ...tableConfig,
@@ -154,14 +154,14 @@ function useSearchList<T extends object = any>({
         typeof tableConfig.selectAlert === 'function'
           ? () => tableConfig.selectAlert(selectedRowKeys, { onItemAction, ...props })
           : tableConfig.selectAlert,
-      columns: typeof tableConfig.columns === 'function' ? tableConfig.columns(onItemAction, props) : tableConfig.columns,
+      columns: typeof tableConfig.columns === 'function' ? tableConfig.columns(props, onItemAction) : tableConfig.columns
     } as BaseTableProps<T>)
 
   const handleValuesChange = useCallback(
     debounce((_: any, allValues: any) => {
       updateFilterParams(allValues)
     }, 0.8e3),
-    [],
+    []
   )
 
   // 配置参数处理转换
@@ -186,7 +186,7 @@ function useSearchList<T extends object = any>({
       onSubmit: updateFilterParams,
       onReset: updateFilterParams,
       ...formConfig,
-      ...handleProps,
+      ...handleProps
     } as unknown) as BaseFormProps)
 
   return [tbProps, fmProps, onItemAction]

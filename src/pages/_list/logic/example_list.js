@@ -2,11 +2,11 @@
 
 // 列表
 export const tableConfig = {
-  // columns: (onItemAction, props) => [
+  // columns: (props, onItemAction) => [
   columns: [
     { title: 'example_list', dataIndex: 'a' },
     { title: 'b', dataIndex: 'b' },
-    { title: 'c', dataIndex: 'c', render: (text, record, index) => '自定义column显示' },
+    { title: 'c', dataIndex: 'c', render: (text, record, index) => '自定义column显示' }
     // {
     //   key: 'operation',
     //   title: '操作',
@@ -23,7 +23,7 @@ export const tableConfig = {
     //   ),
     // },
   ],
-  rowKey: 'id',
+  rowKey: 'id'
 
   // 列表选择Alert显示
   // rowSelection: true,
@@ -36,8 +36,8 @@ export const formConfig = {
   items: [
     { label: 'a', key: 'a', render: (form, data) => <div>自定义表单组件</div> },
     { label: 'b', key: 'b' },
-    { render: (form, data) => <div>自定义内容显示</div> },
-  ],
+    { render: (form, data) => <div>自定义内容显示</div> }
+  ]
 
   // 搜索输入刷新
   // onValuesChange: true,
@@ -63,8 +63,8 @@ export const editConfig = {
   items: [
     { label: 'a', key: 'a', render: (form, data) => <div>自定义表单组件</div> },
     { label: 'b', key: 'b' },
-    { render: (form, data) => <div>自定义内容显示</div> },
-  ],
+    { render: (form, data) => <div>自定义内容显示</div> }
+  ]
 }
 
 // 详情展示
@@ -72,6 +72,6 @@ export const pageConfig = {
   // items: props => [
   items: [
     { label: 'a', key: 'a' },
-    { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> },
-  ],
+    { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> }
+  ]
 }

@@ -2,7 +2,7 @@ import { Button, Divider } from 'antd'
 
 // 列表
 export const tableConfig = {
-  columns: (onItemAction, props) => [
+  columns: (props, onItemAction) => [
     // columns: [
     { title: 'example_list_two', dataIndex: 'a' },
     { title: 'b', dataIndex: 'b' },
@@ -21,10 +21,10 @@ export const tableConfig = {
           <Divider type="vertical" />
           <Button type="link" onClick={() => onItemAction('delete', record)} icon="delete" />
         </>
-      ),
-    },
+      )
+    }
   ],
-  rowKey: 'id',
+  rowKey: 'id'
 
   // 列表选择Alert显示
   // rowSelection: true,
@@ -40,9 +40,9 @@ export const formConfig = {
     { label: 'c', key: 'c' },
     { label: 'd', key: 'cd' },
     { label: 'e', key: 'ce' },
-    { label: 'f', key: 'cf' },
+    { label: 'f', key: 'cf' }
     // { render: (form, data) => <div>自定义内容显示</div> },
-  ],
+  ]
 
   // 搜索输入刷新
   // onValuesChange: true,
@@ -70,8 +70,8 @@ export const editConfig = {
     { label: 'd', key: 'd' },
     { label: 'e', key: 'e' },
     { label: 'f', key: 'f' },
-    { render: (form, data) => <div>自定义内容显示</div> },
-  ],
+    { render: (form, data) => <div>自定义内容显示</div> }
+  ]
 }
 
 // 详情展示
@@ -83,8 +83,8 @@ export const pageConfig = {
     { label: 'd', key: 'cd' },
     { label: 'e', key: 'ce' },
     { label: 'f', key: 'cf' },
-    { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> },
-  ],
+    { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> }
+  ]
 }
 
 // ------------ 其他配置项 无特殊需求不用更改配置 ------

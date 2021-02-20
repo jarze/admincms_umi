@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react'
 import { Table } from 'antd'
 import Alert from '../AlertSelect'
-import { TableProps, PaginationConfig } from 'antd/lib/table/interface'
+import { TableProps, PaginationConfig } from 'antd/es/table'
 
 export const defaultPaginationConfig: PaginationConfig = {
   pageSizeOptions: ['50', '100', '150'],

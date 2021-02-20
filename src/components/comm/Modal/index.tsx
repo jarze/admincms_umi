@@ -1,6 +1,6 @@
 import React, { useState, Fragment, ReactChild } from 'react'
 import { Modal } from 'antd'
-import { ModalProps } from 'antd/lib/modal'
+import { ModalProps } from 'antd/es/modal'
 export interface BaseModalProps extends ModalProps {
   children?: ReactChild
   content?: ReactChild

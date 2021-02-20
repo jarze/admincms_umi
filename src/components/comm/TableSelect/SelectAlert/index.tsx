@@ -1,7 +1,7 @@
 import { Button, Alert, Divider } from 'antd'
 import React, { Fragment, ReactChild } from 'react'
 import styles from './index.less'
-import { TableRowSelection } from 'antd/lib/table/interface'
+import { TableRowSelection } from 'antd/es/table'
 
 interface BaseAlterProps {
   rowSelection: TableRowSelection<any>

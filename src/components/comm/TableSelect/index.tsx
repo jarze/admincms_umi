@@ -1,8 +1,8 @@
 import React, { ReactChild } from 'react'
 import { Table } from 'antd'
 import SelectAlert from './SelectAlert'
-import { TableProps, PaginationConfig } from 'antd/lib/table/interface'
-export { ColumnProps } from 'antd/lib/table/interface'
+import { TableProps, PaginationConfig } from 'antd/es/table'
+
 export const defaultPaginationConfig: PaginationConfig = {
   pageSizeOptions: ['50', '100', '150'],
   showQuickJumper: true,

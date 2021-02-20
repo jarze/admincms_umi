@@ -5,7 +5,7 @@ import { ListPageConfig } from '../list-types'
 const config: ListPageConfig = {
   // 列表
   tableConfig: {
-    // columns: (onItemAction, props) => [
+    // columns: (props, onItemAction) => [
     columns: [
       { title: 'ts', dataIndex: 'a' },
       { title: 'b', dataIndex: 'b' },
@@ -39,10 +39,10 @@ const config: ListPageConfig = {
       { label: 'a', key: 'a', render: (form, data) => <div>自定义表单组件</div> },
       { label: 'b', key: 'b' },
       { render: (form, data) => <div>自定义内容显示</div> }
-    ]
+    ],
 
     // 搜索输入刷新
-    // onValuesChange: true,
+    onValuesChange: (a, b, c) => ({})
     // onSubmit: null,
     // onReset: null,
   },

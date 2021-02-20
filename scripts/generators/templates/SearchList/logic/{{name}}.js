@@ -2,7 +2,7 @@
 
 // 列表
 export const tableConfig = {
-  // columns: (onItemAction, props) => [
+  // columns: (props, onItemAction) => [
   columns: [
     { title: '{{name}}', dataIndex: 'a' },
     { title: 'b', dataIndex: 'b' },

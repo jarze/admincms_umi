@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react'
 import { Modal, Form } from 'antd'
 import { BaseFormProps, BaseFormItemProps, CForm, validateMessages } from '../Form'
 import { BaseModalProps } from '../Modal'
-import { WrappedFormUtils } from 'antd/lib/form/Form'
+import { WrappedFormUtils } from 'antd/es/form/Form'
 export interface BaseModalFormProps extends Omit<BaseModalProps, 'onCancel'> {
   form?: WrappedFormUtils
   items: BaseFormItemProps[]

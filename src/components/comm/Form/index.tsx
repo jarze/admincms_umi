@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect, useMemo, ReactNode } from 'react'
 import { Form, Input, Button, Divider, Row, Col } from 'antd'
-import { FormProps, FormItemProps } from 'antd/lib/form'
-import { GetFieldDecoratorOptions, WrappedFormUtils } from 'antd/lib/form/Form'
-import { ColProps } from 'antd/lib/col'
+import { FormProps, FormItemProps } from 'antd/es/form'
+import { GetFieldDecoratorOptions, WrappedFormUtils } from 'antd/es/form/Form'
+import { ColProps } from 'antd/es/col'
 import styles from './index.less'
 
 const FormItem = Form.Item

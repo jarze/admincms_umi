@@ -1,7 +1,7 @@
-import { BaseModalFormProps } from './../../components/comm/ModalForm/index'
-import { BaseFormProps, BaseFormItemProps } from '@/components/comm/Form'
-import { BaseTableProps, ColumnProps } from '@/components/comm/TableSelect'
-import { BasePageProps, PageItemProps } from '@/components/comm/SinglePage'
+import { BaseModalFormProps } from '@/components/comm/ModalForm/index'
+import { BaseFormProps } from '@/components/comm/Form'
+import { BaseTableProps } from '@/components/comm/TableSelect'
+import { BasePageProps } from '@/components/comm/SinglePage'
 export { BaseModalFormProps } from '@/components/comm/ModalForm'
 export { BaseFormProps } from '@/components/comm/Form'
 export { BaseTableProps } from '@/components/comm/TableSelect'
@@ -11,33 +11,30 @@ import { Model, Effect, EffectWithType } from 'dva'
 import { ReactNode } from 'react'
 
 // ---------- Logic Config ----------
+/** 表单值变化时回调 */
+type FormOnValuesChange = (<T extends { [key: string]: any }>(changedValues: T, allValues: T, props: T) => void) | boolean
+/** 配置项增加可通过方法获取 */
+type ColumnItemGetter<T extends object, K extends keyof T> = Omit<T, K> & { [key in K]: ((props: any, onItemAction?: ActionFunction) => T[K]) | T[K] }
 /** 列表搜索项表单配置 */
-export interface SearchListFormConfig extends Omit<BaseFormProps, 'items' | 'onValuesChange'> {
-  items?: ((props: any, onItemAction?: ActionFunction) => BaseFormItemProps[]) | BaseFormItemProps[]
-  onValuesChange?: ((changedValues: any, allValues: any, props: any) => null | { values: { [k: string]: any } }) | boolean
+export interface SearchListFormConfig extends ColumnItemGetter<Omit<BaseFormProps, 'onValuesChange'>, 'items'> {
+  onValuesChange?: FormOnValuesChange
 }
 /** 列表table配置 */
-export interface SearchListTableConfig extends Omit<BaseTableProps<any>, 'columns'> {
-  columns?: ((onItemAction: ActionFunction, props: any) => ColumnProps<any>[]) | ColumnProps<any>[]
-}
+export type SearchListTableConfig = ColumnItemGetter<BaseTableProps<any>, 'columns'>
 /** 跳转表单配置 */
-export interface EditFormConfig extends Omit<BaseFormProps, 'items' | 'onValuesChange'> {
-  items?: ((props: any, onItemAction?: ActionFunction) => BaseFormItemProps[]) | BaseFormItemProps[]
-  onValuesChange?: ((changedValues: any, allValues: any, props: any) => null | { values: { [k: string]: any } }) | boolean
-  handleFormValues?: (values: { [k: string]: any }) => null | { [k: string]: any }
+export interface EditFormConfig extends ColumnItemGetter<Omit<BaseFormProps, 'onValuesChange'>, 'items'> {
+  onValuesChange?: FormOnValuesChange
+  handleFormValues?: <T extends { [key: string]: any }>(values: T) => null | T
 }
 /** 弹窗表单配置 */
-export interface EditModalFormConfig extends Omit<BaseModalFormProps, 'items' | 'onValuesChange'> {
-  items?: ((props: any, onItemAction?: ActionFunction) => BaseFormItemProps[]) | BaseFormItemProps[]
-  onValuesChange?: ((changedValues: any, allValues: any, props: any) => null | { values: { [k: string]: any } }) | boolean
+export interface EditModalFormConfig extends ColumnItemGetter<Omit<BaseModalFormProps, 'onValuesChange'>, 'items'> {
+  onValuesChange?: FormOnValuesChange
   /** 弹窗Edit是否请求ItemInfo */
   isFetchData?: boolean
 }
 
 /** 详情展示页面配置 */
-export interface DescPageConfig extends Omit<BasePageProps, 'items'> {
-  items?: ((props: any) => PageItemProps[]) | PageItemProps[]
-}
+export type DescPageConfig = ColumnItemGetter<BasePageProps, 'items'>
 
 /** 列表通用配置 */
 export interface ListPageConfig {
@@ -103,7 +100,7 @@ export interface ListModel extends Model {
 /** 定义列表基础service方法名 */
 export type ListModelServices = 'getListData' | 'getItemInfo' | 'editItem' | 'deleteListItems' | 'actionItems' | 'exportData'
 /** 请求service */
-export type ListService = (type: ListModelServices, payload?: { [key: string]: any }, action?: any) => Promise<any>
+export type ListService = <T extends { [key: string]: any }>(type: ListModelServices, payload?: T, action?: any) => Promise<any>
 
 // ---------- HOOKS ----------
 /** 搜索列表自定义操作方法Type */
