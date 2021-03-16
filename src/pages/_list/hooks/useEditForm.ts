@@ -6,7 +6,7 @@ import { BaseListHooksProps, BaseFormProps, EditFormConfig } from '../list-types
 function useEditForm({ editConfig = {}, loadingEffects = {}, otherFilterParams, ...props }: BaseListHooksProps): [BaseFormProps] {
   const { NS, dispatch, itemInfo, computedMatch } = props
   const { params: matchParams } = computedMatch || {}
-  const { id } = matchParams as { id: string }
+  const { id } = matchParams
 
   useEffect(() => {
     if (id) {
@@ -20,7 +20,7 @@ function useEditForm({ editConfig = {}, loadingEffects = {}, otherFilterParams, 
         editConfig.onValuesChange(changedValues, allValues, props)
       }
     }, 0.8e3),
-    [],
+    []
   )
 
   const { handleFormValues, items, ...fmProps } = editConfig as EditFormConfig
@@ -39,7 +39,7 @@ function useEditForm({ editConfig = {}, loadingEffects = {}, otherFilterParams, 
     data: id && itemInfo,
     loading: !!loadingEffects[`${NS}/editItem`],
     fetchLoading: !!loadingEffects[`${NS}/fetchItemInfo`],
-    submitCol: 24,
+    submitCol: 24
   } as BaseFormProps
 
   return [formProps]

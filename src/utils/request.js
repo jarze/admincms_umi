@@ -26,7 +26,7 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options = {}, errToast) {
+export default function request(url, options = {}, errToast = false) {
   // 携带网站cookie信息，用于登录验证
   // options = { ...options, credentials: 'include' };
   if (options) {
@@ -100,7 +100,7 @@ export const exportDownload = (url, payload) => {
   return request(`${url}`, {
     method: 'GET',
     body: payload,
-    type: File_Buffer,
+    type: File_Buffer
   })
     .then(download)
     .catch(e => handleError(e))

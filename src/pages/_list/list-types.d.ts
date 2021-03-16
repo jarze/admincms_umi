@@ -2,9 +2,11 @@ import { BaseModalFormProps } from '@/components/comm/ModalForm/index'
 import { BaseFormProps } from '@/components/comm/Form'
 import { BaseTableProps } from '@/components/comm/TableSelect'
 import { BasePageProps } from '@/components/comm/SinglePage'
+
 export { BaseModalFormProps } from '@/components/comm/ModalForm'
 export { BaseFormProps } from '@/components/comm/Form'
 export { BaseTableProps } from '@/components/comm/TableSelect'
+
 import RouterTypes from 'umi/routerTypes'
 import { DispatchProp } from 'react-redux'
 import { Model, Effect, EffectWithType } from 'dva'
@@ -98,9 +100,15 @@ export interface ListModel extends Model {
 
 // ---------- List Service ----------
 /** 定义列表基础service方法名 */
-export type ListModelServices = 'getListData' | 'getItemInfo' | 'editItem' | 'deleteListItems' | 'actionItems' | 'exportData'
-/** 请求service */
-export type ListService = <T extends { [key: string]: any }>(type: ListModelServices, payload?: T, action?: any) => Promise<any>
+export type ListModelServices = /** 获取列表数据 */ 'getListData' | 'getItemInfo' | 'editItem' | 'deleteListItems' | 'actionItems' | 'exportData'
+/** model请求service */
+export type ListService = <T extends { matchParams?: ListRouteMatchParam }>(type: ListModelServices, payload?: T, action?: any) => ListRequest
+/** 列表请求定义Request */
+export type ListRequest = {
+  /** 请求方法名已约定，从ListModelServices中取出 */
+  readonly name: ListModelServices | string
+  (payload: { [key: string]: any }, routeParams?: ListRouteMatchParam, action?: any): Promise<any>
+}
 
 // ---------- HOOKS ----------
 /** 搜索列表自定义操作方法Type */
@@ -108,6 +116,7 @@ export type ActionType = 'detail' | 'add' | 'edit' | 'delete' | 'export' | 'sear
 /** 搜索列表自定义操作方法（onItemAction） */
 export interface ActionFunction {
   (
+    /** 操作方法标记，可自定义 */
     type: ActionType | string,
     payload?: { [key: string]: any },
     props?: {
@@ -120,8 +129,15 @@ export interface ActionFunction {
     }
   ): void
 }
+/** 列表路由匹配参数 */
+interface ListRouteMatchParam {
+  /** 当前路由参数menu */
+  menuId: string
+  /** 当前路由参数id */
+  id?: string
+}
 /** 列表基本Hook */
-export interface BaseListHooksProps extends ListPageConfig, ListModelState, RouterTypes, DispatchProp {
+export interface BaseListHooksProps extends ListPageConfig, ListModelState, RouterTypes<{}, ListRouteMatchParam>, DispatchProp {
   loadingEffects?: { [key: string]: boolean }
   /** 列表其他搜索参数 */
   otherFilterParams?: { [key: string]: any }

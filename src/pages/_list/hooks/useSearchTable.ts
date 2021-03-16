@@ -11,7 +11,7 @@ const handlePopPath = (from, to) => {
   return (f || []).filter(id => !(t || []).includes(id))
 }
 
-function useSearchList<T extends object = any>({
+function useSearchList<T extends object>({
   tableConfig = {},
   formConfig = {},
   loadingEffects = {},
@@ -24,7 +24,7 @@ function useSearchList<T extends object = any>({
   const fetchUrl = `${NS}/fetchData`
   const { pathname } = props.location || {}
   // 列表复用，menu数据还没更新
-  const isPreData = menuId && menuId !== (matchParams! as { menuId: string }).menuId
+  const isPreData = menuId && menuId !== matchParams.menuId
   // 请求列表数据
   useEffect(() => {
     if (isPreData) return
@@ -179,17 +179,15 @@ function useSearchList<T extends object = any>({
     handleProps.items = formConfig.items(props, onItemAction)
   }
 
-  const fmProps =
-    formConfig &&
-    (({
-      data: filterParams,
-      onSubmit: updateFilterParams,
-      onReset: updateFilterParams,
-      ...formConfig,
-      ...handleProps
-    } as unknown) as BaseFormProps)
+  const fmProps = formConfig && {
+    data: filterParams,
+    onSubmit: updateFilterParams,
+    onReset: updateFilterParams,
+    ...formConfig,
+    ...handleProps
+  }
 
-  return [tbProps, fmProps, onItemAction]
+  return [tbProps, <BaseFormProps>fmProps, onItemAction]
 }
 
 export default useSearchList
