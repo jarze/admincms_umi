@@ -25,7 +25,7 @@ export const defaultFormProps: BaseFormProps = {
   col: 24
 }
 
-export const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, cancelReset = true, ...props }: BaseModalFormProps) => {
+export const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, cancelReset = true, content, ...props }: BaseModalFormProps) => {
   /** 有children时可以通过children点击自我控制visible显示 */
   const [visible, setVisible] = useState(false)
 
@@ -66,7 +66,7 @@ export const ModalForm = ({ items, children, onOk, onCancel, data, form, formPro
         }}
         {...props}
       >
-        <CForm form={form} {...fmProps} />
+        {content || <CForm form={form} {...fmProps} />}
       </Modal>
     </Fragment>
   )
