@@ -8,10 +8,7 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "rootDirs": [
-      "/src",
-      "/mock",
-    ],
+    "rootDirs": ["/src", "/mock"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -19,17 +16,9 @@
     "allowJs": true,
     "experimentalDecorators": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
+      "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "./src",
-    "./"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["./src", "./"],
+  "exclude": ["node_modules", "dist"]
 }

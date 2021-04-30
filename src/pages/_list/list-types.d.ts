@@ -14,22 +14,28 @@ import { ReactNode } from 'react'
 
 // ---------- Logic Config ----------
 /** 表单值变化时回调 */
-type FormOnValuesChange = (<T extends { [key: string]: any }>(changedValues: T, allValues: T, props: T) => void) | boolean
+type FormOnValuesChange =
+  | (<T extends { [key: string]: any }>(changedValues: T, allValues: T, props: T) => void)
+  | boolean
 /** 配置项增加可通过方法获取 */
-type ColumnItemGetter<T extends object, K extends keyof T> = Omit<T, K> & { [key in K]: ((props: any, onItemAction?: ActionFunction) => T[K]) | T[K] }
+type ColumnItemGetter<T extends object, K extends keyof T> = Omit<T, K> &
+  { [key in K]: ((props: any, onItemAction?: ActionFunction) => T[K]) | T[K] }
 /** 列表搜索项表单配置 */
-export interface SearchListFormConfig extends ColumnItemGetter<Omit<BaseFormProps, 'onValuesChange'>, 'items'> {
+export interface SearchListFormConfig
+  extends ColumnItemGetter<Omit<BaseFormProps, 'onValuesChange'>, 'items'> {
   onValuesChange?: FormOnValuesChange
 }
 /** 列表table配置 */
 export type SearchListTableConfig = ColumnItemGetter<BaseTableProps<any>, 'columns'>
 /** 跳转表单配置 */
-export interface EditFormConfig extends ColumnItemGetter<Omit<BaseFormProps, 'onValuesChange'>, 'items'> {
+export interface EditFormConfig
+  extends ColumnItemGetter<Omit<BaseFormProps, 'onValuesChange'>, 'items'> {
   onValuesChange?: FormOnValuesChange
   handleFormValues?: <T extends { [key: string]: any }>(values: T) => null | T
 }
 /** 弹窗表单配置 */
-export interface EditModalFormConfig extends ColumnItemGetter<Omit<BaseModalFormProps, 'onValuesChange'>, 'items'> {
+export interface EditModalFormConfig
+  extends ColumnItemGetter<Omit<BaseModalFormProps, 'onValuesChange'>, 'items'> {
   onValuesChange?: FormOnValuesChange
   /** 弹窗Edit是否请求ItemInfo */
   isFetchData?: boolean
@@ -87,7 +93,14 @@ export interface ListModelState {
 }
 
 /** list model effects 方法名 */
-export type ListModelServersEffects = 'fetchData' | 'fetchItemInfo' | 'editItem' | 'deleteItem' | 'actionItem' | 'exportData' | 'updateMatchParams'
+export type ListModelServersEffects =
+  | 'fetchData'
+  | 'fetchItemInfo'
+  | 'editItem'
+  | 'deleteItem'
+  | 'actionItem'
+  | 'exportData'
+  | 'updateMatchParams'
 // list model reducers 方法名
 // export type ListModelServersReducers = 'save' | 'restPageFilter'
 /** list model */
@@ -100,9 +113,19 @@ export interface ListModel extends Model {
 
 // ---------- List Service ----------
 /** 定义列表基础service方法名 */
-export type ListModelServices = /** 获取列表数据 */ 'getListData' | 'getItemInfo' | 'editItem' | 'deleteListItems' | 'actionItems' | 'exportData'
+export type ListModelServices = /** 获取列表数据 */
+  | 'getListData'
+  | 'getItemInfo'
+  | 'editItem'
+  | 'deleteListItems'
+  | 'actionItems'
+  | 'exportData'
 /** model请求service */
-export type ListService = <T extends { matchParams?: ListRouteMatchParam }>(type: ListModelServices, payload?: T, action?: any) => ListRequest
+export type ListService = <T extends { matchParams?: ListRouteMatchParam }>(
+  type: ListModelServices,
+  payload?: T,
+  action?: any
+) => ListRequest
 /** 列表请求定义Request */
 export type ListRequest = {
   /** 请求方法名已约定，从ListModelServices中取出 */
@@ -112,7 +135,15 @@ export type ListRequest = {
 
 // ---------- HOOKS ----------
 /** 搜索列表自定义操作方法Type */
-export type ActionType = 'detail' | 'add' | 'edit' | 'delete' | 'export' | 'search' | 'refresh' | 'update'
+export type ActionType =
+  | 'detail'
+  | 'add'
+  | 'edit'
+  | 'delete'
+  | 'export'
+  | 'search'
+  | 'refresh'
+  | 'update'
 /** 搜索列表自定义操作方法（onItemAction） */
 export interface ActionFunction {
   (
@@ -137,7 +168,11 @@ interface ListRouteMatchParam {
   id?: string
 }
 /** 列表基本Hook */
-export interface BaseListHooksProps extends ListPageConfig, ListModelState, RouterTypes<{}, ListRouteMatchParam>, DispatchProp {
+export interface BaseListHooksProps
+  extends ListPageConfig,
+    ListModelState,
+    RouterTypes<{}, ListRouteMatchParam>,
+    DispatchProp {
   loadingEffects?: { [key: string]: boolean }
   /** 列表其他搜索参数 */
   otherFilterParams?: { [key: string]: any }

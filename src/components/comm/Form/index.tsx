@@ -68,8 +68,10 @@ export const CForm = ({
   useEffect(() => {
     if (data) form!.resetFields()
   }, [data])
-
-  const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(() => getColWap(type, items, col, submitCol), [items.length, type])
+  const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(
+    () => getColWap(type, items, col, submitCol),
+    [items.length, type]
+  )
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -87,7 +89,21 @@ export const CForm = ({
   }
 
   const formContent = items.map(
-    ({ cols, key, label, placeholder, options, render, defaultValue, disabled = false, optionsFun, ...itemProps }: BaseFormItemProps, index) => {
+    (
+      {
+        cols,
+        key,
+        label,
+        placeholder,
+        options,
+        render,
+        defaultValue,
+        disabled = false,
+        optionsFun,
+        ...itemProps
+      }: BaseFormItemProps,
+      index
+    ) => {
       if (render === null || (render && render(form, data) === null)) return null
       return (
         <FormItemWap key={key || index} index={index} {...cols}>
@@ -97,7 +113,17 @@ export const CForm = ({
                 initialValue: data && data[key] !== undefined ? data[key] : defaultValue,
                 ...options,
                 ...(optionsFun && optionsFun(form, data))
-              })(render ? render(form, data) : <Input type="text" disabled={disabled} placeholder={placeholder || (label ? `输入${label}` : '')} />)}
+              })(
+                render ? (
+                  render(form, data)
+                ) : (
+                  <Input
+                    type="text"
+                    disabled={disabled}
+                    placeholder={placeholder || (label ? `输入${label}` : '')}
+                  />
+                )
+              )}
             </FormItem>
           ) : (
             /** 不指定key， 直接渲染render内容 */
@@ -112,7 +138,11 @@ export const CForm = ({
     <ForSubmitItemWap>
       <FormItem
         style={type === 'center' ? { textAlign: 'center' } : { float: 'right', marginRight: 0 }}
-        wrapperCol={type === 'center' ? { offset: (formProps.labelCol || {}).span, ...formProps.wrapperCol } : {}}
+        wrapperCol={
+          type === 'center'
+            ? { offset: (formProps.labelCol || {}).span, ...formProps.wrapperCol }
+            : {}
+        }
       >
         {onSubmit && (
           <Button type="primary" htmlType="submit" loading={loading}>

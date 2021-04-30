@@ -3,7 +3,12 @@ import router from 'umi/router'
 import { debounce } from 'lodash'
 import { BaseListHooksProps, BaseFormProps, EditFormConfig } from '../list-types'
 
-function useEditForm({ editConfig = {}, loadingEffects = {}, otherFilterParams, ...props }: BaseListHooksProps): [BaseFormProps] {
+function useEditForm({
+  editConfig = {},
+  loadingEffects = {},
+  otherFilterParams,
+  ...props
+}: BaseListHooksProps): [BaseFormProps] {
   const { NS, dispatch, itemInfo, computedMatch } = props
   const { params: matchParams } = computedMatch || {}
   const { id } = matchParams
@@ -27,14 +32,18 @@ function useEditForm({ editConfig = {}, loadingEffects = {}, otherFilterParams, 
 
   const formProps = {
     layout: 'vertical',
-    col: 12,
     ...fmProps,
     items: typeof items === 'function' ? items(props) : items,
     onValuesChange: editConfig.onValuesChange && handleValuesChange,
     onSubmit: values => {
       let va = handleFormValues ? handleFormValues(values) : values
       if (va === null) return
-      dispatch({ type: `${NS}/editItem`, payload: { matchParams, ...va }, editId: id, callback: () => router.goBack() })
+      dispatch({
+        type: `${NS}/editItem`,
+        payload: { matchParams, ...va },
+        editId: id,
+        callback: () => router.goBack()
+      })
     },
     data: id && itemInfo,
     loading: !!loadingEffects[`${NS}/editItem`],
