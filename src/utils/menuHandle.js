@@ -1,4 +1,4 @@
-import { getMenuType, EXTRA_ROUTES } from '@/config/page'
+import { getMenuType, EXTRA_ROUTES, EXTRA_TYPE_ROUTES } from '@/config/page'
 
 export const menuToRouteHandle = (menu, path) => {
   return { path: path || '/', routes: menuHandle(menu, path) }
@@ -6,7 +6,7 @@ export const menuToRouteHandle = (menu, path) => {
 
 const menuHandle = (data = [], pid) => {
   return data.map(item => {
-    const { id, name, icon, children } = item
+    const { id, name, icon, children, exact } = item
     let va = `${pid || ''}/${id}`
     let type = getMenuType(id)
     let key = type ? `${va}/${type}` : `${va}`
@@ -15,9 +15,10 @@ const menuHandle = (data = [], pid) => {
     let unit = {
       id: id,
       key: key,
-      name: name + '-' + id,
+      name: name,
       path: key,
       icon: icon,
+      exact
     }
     children && (unit.children = menuHandle(children, va))
     if (children) {
@@ -26,6 +27,9 @@ const menuHandle = (data = [], pid) => {
       if (EXTRA_ROUTES[id]) {
         unit.hideChildrenInMenu = true
         unit.children = menuHandle(EXTRA_ROUTES[String(id)], key)
+      } else if (type && EXTRA_TYPE_ROUTES[type]) {
+        unit.hideChildrenInMenu = true
+        unit.children = menuHandle(EXTRA_TYPE_ROUTES[type], key)
       }
     }
     return unit

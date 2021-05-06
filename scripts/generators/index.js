@@ -3,7 +3,8 @@ const fs = require('fs')
 const PageTypes = fs.readdirSync(`${__dirname}/templates`).filter(f => !f.startsWith('.'))
 
 // 通用搜索列表特殊处理
-const isSearchList = ({ type }) => (type === 'SearchList' ? false : true)
+const isSearchList = ({ type }) => (type === 'SearchList' ? true : false)
+const isNotSearchList = props => !isSearchList(props)
 
 module.exports = plop => {
   plop.setGenerator('page', {
@@ -13,7 +14,7 @@ module.exports = plop => {
         type: 'list',
         name: 'type',
         message: 'which type of page?',
-        choices: PageTypes.map(item => ({ name: item, value: item })),
+        choices: PageTypes.map(item => ({ name: item, value: item }))
       },
       {
         type: 'input',
@@ -24,23 +25,29 @@ module.exports = plop => {
             return true
           }
           return 'name is required'
-        },
+        }
+      },
+      {
+        type: 'confirm',
+        name: 'ts',
+        message: 'use TS?',
+        when: isSearchList
       },
       {
         type: 'input',
         name: 'path',
         message: 'where would you like to put this page? (/src/pages/...)',
-        when: isSearchList,
+        when: isNotSearchList
       },
       {
         type: 'confirm',
         name: 'route',
         message: 'whether to add path?',
-        when: isSearchList,
-      },
+        when: isNotSearchList
+      }
     ],
     actions: function(data) {
-      const { type, route } = data
+      const { type, route, ts } = data
       var actions = [`${JSON.stringify(data)}`, `😄 start creat page.......\n\n`]
       if (type === 'SearchList') {
         actions = actions.concat([
@@ -50,14 +57,14 @@ module.exports = plop => {
             base: `templates/{{type}}/`,
             stripExtensions: ['tpl'],
             skipIfExists: true,
-            templateFiles: `templates/{{type}}`,
+            templateFiles: ts ? `templates/{{type}}/*/*.ts*` : `templates/{{type}}/*/*.js*`
           },
           {
             type: 'append',
             path: '../../src/config/page.js',
             pattern: /(\/\*GEN: APPEND SEARCH LIST HERE\*\/)/g,
-            template: `'{{name}}',`,
-          },
+            template: `  '{{name}}',`
+          }
         ])
       } else {
         // 复制对应文件夹模版文件
@@ -68,8 +75,8 @@ module.exports = plop => {
             base: `templates/{{type}}`,
             stripExtensions: ['tpl'],
             skipIfExists: true,
-            templateFiles: `templates/{{type}}`,
-          },
+            templateFiles: `templates/{{type}}`
+          }
         ])
         if (route) {
           actions = actions.concat([
@@ -81,12 +88,12 @@ module.exports = plop => {
                 path: '/{{path}}/{{properCase name}}',
                 name: '{{name}}',
                 component: './{{path}}/{{properCase name}}',
-              },`,
-            },
+              },`
+            }
           ])
         }
       }
       return actions
-    },
+    }
   })
 }

@@ -113,7 +113,7 @@ export interface ListModel extends Model {
 
 // ---------- List Service ----------
 /** 定义列表基础service方法名 */
-export type ListModelServices = /** 获取列表数据 */
+export type ListModelServices /** 获取列表数据 */ =
   | 'getListData'
   | 'getItemInfo'
   | 'editItem'

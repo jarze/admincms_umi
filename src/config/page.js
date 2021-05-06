@@ -3,7 +3,8 @@ const LIST_MENUS = [
   /*GEN: APPEND SEARCH LIST HERE*/
   'model',
   'example_list_two',
-  'example_list'
+  'example_list',
+  'example_ts'
 ]
 const PAGE_MENUS = [
   /*GEN: APPEND PAGE HERE*/
@@ -41,21 +42,33 @@ export const getMenuType = menuId => {
 //   return MENU_TABS[menuId]
 // }
 
+export const EXTRA_TYPE_ROUTES = {
+  list: [
+    // { id: 'edit/:id', name: '✍︎', exact: true },
+    {
+      id: 'edit',
+      name: '✍︎',
+      children: [{ id: ':id?' }]
+    },
+    { id: 'page/:id', name: '详情' }
+  ]
+}
+
 // menu 之外的深层级页面（不显示在menu,会显示在面包屑上 {pid: [{name, children}]}
 export const EXTRA_ROUTES = {
   //example
   example_list: [
     {
       id: 'edit',
-      name: '添加',
+      name: '添-加',
       children: [
         {
           id: 'detail',
-          name: '详情'
+          name: '详-情'
         },
         {
           id: ':id',
-          name: '编辑',
+          name: '编-辑',
           children: [
             {
               id: ':id',

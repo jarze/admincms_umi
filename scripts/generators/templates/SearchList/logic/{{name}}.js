@@ -14,11 +14,11 @@ export const tableConfig = {
     //   width: 150,
     //   render: (_, record) => (
     //     <>
-    //       <Button type="link" onClick={() => onItemAction('detail', record)} icon="eye" />
-    //       <Divider type="vertical" />
-    //       <Button type="link" onClick={() => onItemAction('edit', record)} icon="edit" />
-    //       <Divider type="vertical" />
-    //       <Button type="link" onClick={() => onItemAction('delete', record)} icon="delete" />
+    //       <Button type='link' onClick={() => onItemAction('detail', record)} icon='eye' />
+    //       <Divider type='vertical' />
+    //       <Button type='link' onClick={() => onItemAction('edit', record)} icon='edit' />
+    //       <Divider type='vertical' />
+    //       <Button type='link' onClick={() => onItemAction('delete', record)} icon='delete' />
     //     </>
     //   ),
     // },
@@ -48,12 +48,14 @@ export const formConfig = {
 // 操作项
 export const actions = (onItemAction, props) => {
   // return (
-  //   <Button icon="plus" type="primary" onClick={() => onItemAction('add')}>
+  //   <Button icon='plus' type='primary' onClick={() => onItemAction('add')}>
   //     添加
   //   </Button>
   // )
   return null
 }
+
+// export const isPush = true;
 
 // 添加编辑表单
 export const editConfig = {
@@ -73,6 +75,8 @@ export const pageConfig = {
     { label: 'b', key: 'b', render: (text, data) => <div>自定义item组件</div> }
   ]
 }
+// 添加编辑是否跳转新页面
+// export const isPush = true
 
 // ------------ 其他配置项 无特殊需求不用更改配置 ------
 // 绑定后Model， 默认为list

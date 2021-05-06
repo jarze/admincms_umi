@@ -67,12 +67,11 @@ export const formConfig = {
 
 // 操作项
 export const actions = (onItemAction, props) => {
-  // return (
-  //   <Button icon="plus" type="primary" onClick={() => onItemAction('add')}>
-  //     添加
-  //   </Button>
-  // )
-  return null
+  return (
+    <Button icon="plus" type="primary" onClick={() => onItemAction('add')}>
+      添加
+    </Button>
+  )
 }
 
 const db_table_config = {
