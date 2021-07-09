@@ -9,7 +9,7 @@ const File_Buffer = 'arrayBuffer'
 // }
 
 function checkStatus(response) {
-  let status = response.status
+  let status = response.status || response.statusCode;
   if (status >= 200 && status < 300) {
     return response
   }

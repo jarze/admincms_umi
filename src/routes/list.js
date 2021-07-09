@@ -16,7 +16,7 @@ export default props => {
     try {
       // 配置异步加载打包分离
       import(
-        /* webpackChunkName: "list-[request]" */
+        /* webpackChunkName: "list_[request]" */
         /* webpackMode: "lazy" */
         `@/pages/_list/logic/${params.menuId}`
       ).then(res => {
