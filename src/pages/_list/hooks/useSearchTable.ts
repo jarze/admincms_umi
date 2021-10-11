@@ -1,13 +1,6 @@
 import { useEffect, useCallback } from 'react'
 import { debounce } from 'lodash'
 import router from 'umi/router'
-import {
-  BaseListHooksProps,
-  ActionType,
-  ActionFunction,
-  BaseTableProps,
-  BaseFormProps
-} from '../list-types'
 
 // 匹配所有的 :menuId/list,取出menuId
 const reg = /(?<=\/).((?!\/).)*?(?=\/list\/)/gi
@@ -17,14 +10,17 @@ const handlePopPath = (from, to) => {
   return (f || []).filter(id => !(t || []).includes(id))
 }
 
-function useSearchList<T extends object>({
+type UST_HOOK = SearchListHooks<any>
+type UST_RETURN = ReturnType<UST_HOOK>
+
+const useSearchList: UST_HOOK = ({
   tableConfig = {},
   formConfig = {},
   loadingEffects = {},
   otherFilterParams,
   isPush,
   ...props
-}: BaseListHooksProps): [BaseTableProps<T>, BaseFormProps, ActionFunction] {
+}) => {
   const {
     NS,
     dispatch,
@@ -197,7 +193,7 @@ function useSearchList<T extends object>({
         typeof tableConfig.columns === 'function'
           ? tableConfig.columns(props, onItemAction)
           : tableConfig.columns
-    } as BaseTableProps<T>)
+    } as UST_RETURN[0])
 
   const handleValuesChange = useCallback(
     debounce((_: any, allValues: any) => {
@@ -207,7 +203,7 @@ function useSearchList<T extends object>({
   )
 
   // 配置参数处理转换
-  const handleProps: { [k: string]: any } = {}
+  const handleProps: UST_RETURN[1] = {}
   if (typeof formConfig.onSubmit === 'function') {
     handleProps.onSubmit = (values: any) => formConfig.onSubmit!(values, props, onItemAction)
   }
@@ -221,15 +217,17 @@ function useSearchList<T extends object>({
     handleProps.items = formConfig.items(props, onItemAction)
   }
 
-  const fmProps = formConfig && {
-    data: filterParams,
-    onSubmit: updateFilterParams,
-    onReset: updateFilterParams,
-    ...formConfig,
-    ...handleProps
-  }
+  const fmProps =
+    formConfig &&
+    ({
+      data: filterParams,
+      onSubmit: updateFilterParams,
+      onReset: updateFilterParams,
+      ...formConfig,
+      ...handleProps
+    } as UST_RETURN[1])
 
-  return [tbProps, <BaseFormProps>fmProps, onItemAction]
+  return [tbProps, fmProps, onItemAction] as UST_RETURN
 }
 
 export default useSearchList
