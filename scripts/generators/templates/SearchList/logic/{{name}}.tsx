@@ -1,5 +1,4 @@
 import React from 'react'
-import { ListPageConfig } from '@/pages/_list/list-types'
 // import { Button, Divider } from 'antd'
 
 const config: ListPageConfig = {

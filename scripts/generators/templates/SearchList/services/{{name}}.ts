@@ -1,5 +1,4 @@
 import request, { exportDownload } from '@/utils/request'
-import { ListRequest } from '@/pages/_list/list-types'
 
 // Example 通用列表请求
 export function getListData(payload): ListRequest {
