@@ -15,6 +15,11 @@
     "icon": "table"
   },
   {
+    "id": "comp",
+    "name": "组件",
+    "icon": "table"
+  },
+  {
     "id": "1",
     "name": "List",
     "icon": "table",

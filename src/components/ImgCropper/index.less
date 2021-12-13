@@ -1,0 +1,27 @@
+.cropper {
+  position: relative;
+
+  .uploadBtn {
+    position: relative;
+    input[type='file'] {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: alpha(opacity=0);
+      -moz-opacity: 0;
+      opacity: 0;
+    }
+  }
+
+  .cropContent {
+    margin: 10px 0;
+    position: relative;
+    img {
+      max-width: 100%;
+      max-height: 160px;
+    }
+  }
+}
