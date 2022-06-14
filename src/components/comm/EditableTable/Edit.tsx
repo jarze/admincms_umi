@@ -9,7 +9,7 @@ interface BaseEditEditTableProps<T> extends BaseEditTableProps<T> {
 }
 
 export default forwardRef(({ value, onChange, ...props }: BaseEditEditTableProps<any>, ref) => {
-  const { rowKey = 'index' } = props
+  const { rowKey = 'id' } = props
   const [dataSource, setDataSource] = useState(value || [])
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [editable, setEditable] = useState(false)
@@ -42,10 +42,16 @@ export default forwardRef(({ value, onChange, ...props }: BaseEditEditTableProps
   }
 
   const tbProps = {
+    rowKey,
     editable,
     title: () => (
       <div style={{ direction: 'rtl' }}>
-        <Button onClick={triggerEditable} icon="edit" shape="circle" type="dashed" />
+        <Button
+          onClick={triggerEditable}
+          icon={editable ? 'save' : 'edit'}
+          shape="circle"
+          type="dashed"
+        />
       </div>
     ),
     dataSource,
