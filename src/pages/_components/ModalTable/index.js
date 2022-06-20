@@ -1,7 +1,7 @@
-import { SearchList, Modal } from '@components/comm'
+import { SearchList, Modal } from '@/components/comm'
 import { message } from 'antd'
 import { Fragment, useState, useMemo, cloneElement } from 'react'
-import useSearchTable from '@/path/useSearchTable'
+import useSearchTable from '@/pages/_list/hooks/useSearchTable'
 import { connect } from 'dva'
 
 export default connect((sto, { NS }) => ({ ...sto[NS], NS, loadingEffects: sto.loading.effects }))(
@@ -16,7 +16,7 @@ export default connect((sto, { NS }) => ({ ...sto[NS], NS, loadingEffects: sto.l
       isRequest,
       computedMatch,
       ...props,
-      ...logic,
+      ...logic
     })
 
     const { onOk, ...mP } = modalProps || {}
@@ -57,8 +57,8 @@ export default connect((sto, { NS }) => ({ ...sto[NS], NS, loadingEffects: sto.l
       },
       confirmLoading: modalLoading,
       afterClose: () => setIsRequest(false),
-      ...mP,
+      ...mP
     }
     return <Modal {...mbProps}>{cloneElement(children, { onClick: handleClick })}</Modal>
-  },
+  }
 )
