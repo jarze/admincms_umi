@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useMemo, ReactNode } from 'react'
 import { Form, Input, Button, Divider, Row, Col } from 'antd'
 import { FormProps, FormItemProps } from 'antd/es/form'
-import { GetFieldDecoratorOptions, WrappedFormUtils } from 'antd/es/form/Form'
+import { GetFieldDecoratorOptions, WrappedFormUtils, FormComponentProps } from 'antd/es/form/Form'
 import { ColProps } from 'antd/es/col'
 import styles from './index.less'
 
@@ -106,7 +106,7 @@ export const CForm = ({
     ) => {
       if (render === null || (render && render(form, data) === null)) return null
       return (
-        <FormItemWap key={key || index} index={index} {...cols}>
+        <FormItemWap key={key || index} {...(type == 'col' ? { index, ...cols } : {})}>
           {key ? (
             <FormItem label={label} key={key} {...itemProps}>
               {form!.getFieldDecorator(key, {
@@ -177,7 +177,7 @@ export const CForm = ({
   )
 }
 
-export default Form.create({
+export default Form.create<BaseFormProps & FormComponentProps>({
   onValuesChange: ({ onValuesChange }: any, changedValues, allValues) => {
     onValuesChange && onValuesChange(changedValues, allValues)
   },
