@@ -16,6 +16,7 @@
     "@ant-design/pro-layout": "^4.6.2",
     "@types/lodash": "^4.14.150",
     "antd": "^3.26.15",
+    "classnames": "^2.3.1",
     "cross-env": "^5.2.1",
     "dva": "^2.6.0-beta.4",
     "lodash.debounce": "^4.0.8",
@@ -48,7 +49,7 @@
     "umi-types": "^0.2.0"
   },
   "lint-staged": {
-    "src/*.{ts,tsx}": [
+    "*.{ts,tsx}": [
       "tslint --fix",
       "git add"
     ],
