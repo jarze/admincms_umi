@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect, useMemo, ReactNode } from 'react'
 import { Form, Input, Button, Divider, Row, Col } from 'antd'
+import classnames from 'classnames'
 import { FormProps, FormItemProps } from 'antd/es/form'
 import { GetFieldDecoratorOptions, WrappedFormUtils, FormComponentProps } from 'antd/es/form/Form'
 import { ColProps } from 'antd/es/col'
@@ -8,11 +8,34 @@ import styles from './index.less'
 
 const FormItem = Form.Item
 
+const getColWap = (type: ColType, col?: number, submitCol?: number) => {
+  switch (type) {
+    case 'col': {
+      return getColWrapper(col, submitCol)
+    }
+    default: {
+      return [Fragment, Fragment, Fragment]
+    }
+  }
+}
+
+const DefaultCols: ColProps = { xxl: 6, lg: 8, md: 12, xs: 24 }
+
+/** 计算Col换行 */
+const getColWrapper = (col?: number, submitCol?: number) => {
+  const submitCols = submitCol ? { span: submitCol } : DefaultCols
+  const defaultCol = col ? { span: col } : { ...DefaultCols }
+  const FormContentWap = (props: any) => <Row gutter={16} {...props} />
+  const FormItemWap = ({ cols, ...props }) => <Col {...(cols || defaultCol)} {...props} />
+  const ForSubmitItemWap = (props: any) => <Col {...submitCols} {...props} />
+  return [FormContentWap, FormItemWap, ForSubmitItemWap]
+}
+
 /** 布局类型 */
-export type ColType = 'follow' | 'col' | 'center'
+export type ColType = 'col'
 
 export const validateMessages = {
-  required: () => '必填',
+  required: () => '请输入',
   string: {
     max: (a: any, b: any) => `不超过${b}个字符`
   }
@@ -46,6 +69,8 @@ export interface BaseFormProps extends FormProps {
   onValuesChange?: (changedValues: any, allValues: any) => void
   onSubmit?: (values: { [k: string]: any }, ...others: any[]) => void
   onReset?: (...others: any[]) => void
+  /* 表单提交部分 */
+  submitWrapperProps?: Record<string, any>
 }
 
 export const CForm = ({
@@ -57,20 +82,20 @@ export const CForm = ({
   loading,
   okText = '确定',
   cancelText = '取消',
-  type = 'col',
+  type,
   col,
   submitCol,
   onValuesChange,
-  style,
   className,
+  submitWrapperProps,
   ...formProps
 }: BaseFormProps) => {
   useEffect(() => {
     if (data) form!.resetFields()
   }, [data])
   const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(
-    () => getColWap(type, items, col, submitCol),
-    [items.length, type]
+    () => getColWap(type, col, submitCol),
+    [type]
   )
 
   const handleSubmit = (e: any) => {
@@ -106,11 +131,12 @@ export const CForm = ({
     ) => {
       if (render === null || (render && render(form, data) === null)) return null
       return (
-        <FormItemWap key={key || index} {...(type == 'col' ? { index, ...cols } : {})}>
+        <FormItemWap key={key || index} {...(type == 'col' ? { cols } : {})}>
           {key ? (
             <FormItem label={label} key={key} {...itemProps}>
               {form!.getFieldDecorator(key, {
                 initialValue: data && data[key] !== undefined ? data[key] : defaultValue,
+                validateFirst: true,
                 ...options,
                 ...(optionsFun && optionsFun(form, data))
               })(
@@ -120,7 +146,7 @@ export const CForm = ({
                   <Input
                     type="text"
                     disabled={disabled}
-                    placeholder={placeholder || (label ? `输入${label}` : '')}
+                    placeholder={placeholder || `请输入${label || ''}`}
                   />
                 )
               )}
@@ -135,15 +161,8 @@ export const CForm = ({
   )
 
   const formSubmit = (onSubmit || onReset) && (
-    <ForSubmitItemWap>
-      <FormItem
-        style={type === 'center' ? { textAlign: 'center' } : { float: 'right', marginRight: 0 }}
-        wrapperCol={
-          type === 'center'
-            ? { offset: (formProps.labelCol || {}).span, ...formProps.wrapperCol }
-            : {}
-        }
-      >
+    <ForSubmitItemWap {...(type === 'col' ? submitWrapperProps : {})}>
+      <FormItem {...(type !== 'col' ? submitWrapperProps : {})}>
         {onSubmit && (
           <Button type="primary" htmlType="submit" loading={loading}>
             {okText}
@@ -152,7 +171,7 @@ export const CForm = ({
         {onReset && (
           <>
             {onSubmit && <Divider type="vertical" />}
-            <Button onClick={handleClear}>{cancelText}</Button>
+            <Button htmlType="reset">{cancelText}</Button>
           </>
         )}
       </FormItem>
@@ -163,10 +182,9 @@ export const CForm = ({
 
   return (
     <Form
-      className={`${styles[type === 'col' ? 'ant-advanced-search-form' : '']} ${className}`}
-      layout="inline"
-      style={{ overflow: 'hidden', marginBottom: '1em', ...style }}
+      className={classnames({ [styles['form']]: type === 'col' }, className)}
       onSubmit={handleSubmit}
+      onReset={handleClear}
       {...formProps}
     >
       <FormContentWap>
@@ -183,45 +201,3 @@ export default Form.create<BaseFormProps & FormComponentProps>({
   },
   validateMessages
 })(CForm)
-
-const getColWap = (type: ColType, items: BaseFormItemProps[], col?: number, submitCol?: number) => {
-  switch (type) {
-    case 'col': {
-      return getColWrapper(items, col, submitCol)
-    }
-    default: {
-      return [Fragment, Fragment, Fragment]
-    }
-  }
-}
-
-const DefaultCols: ColProps = { xxl: 6, lg: 8, md: 12, xs: 24 }
-
-const handleCol = (cols, handleCols = {}) => {
-  Object.keys(cols).forEach(key => (handleCols[key] = 24 - (cols[key] % 24)))
-  return handleCols
-}
-
-/** 计算Col换行 */
-const getColWrapper = (items: BaseFormItemProps[], col?: number, submitCol?: number) => {
-  const count = items.length
-  const submitCols = { span: submitCol }
-  const defaultCol = col ? { span: col } : { ...DefaultCols }
-  const handlerCols = items.reduce((res, { cols = { ...defaultCol } }, index) => {
-    const preCols = res[`${index - 1}`] || {}
-    const itemCols = {}
-    Object.keys(cols).forEach(key => {
-      let sum: number = cols[key] + (preCols[key] || 0)
-      /** 换行 */
-      itemCols[key] = sum > 24 ? cols[key] : sum
-    })
-    if (!submitCol && index === count - 1) {
-      handleCol(itemCols, submitCols)
-    }
-    return { ...res, [`${index}`]: itemCols, [`${index}-col`]: cols }
-  }, {})
-  const FormContentWap = (props: any) => <Row gutter={16} {...props} />
-  const FormItemWap = ({ index, ...props }) => <Col {...handlerCols[`${index}-col`]} {...props} />
-  const ForSubmitItemWap = (props: any) => <Col {...submitCols} {...props} />
-  return [FormContentWap, FormItemWap, ForSubmitItemWap]
-}
