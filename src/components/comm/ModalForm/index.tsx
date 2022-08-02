@@ -3,9 +3,10 @@ import { Modal, Form } from 'antd'
 import { BaseFormProps, BaseFormItemProps, CForm, validateMessages } from '../Form'
 import { BaseModalProps } from '../Modal'
 import { WrappedFormUtils, FormComponentProps } from 'antd/es/form/Form'
+
 export interface BaseModalFormProps extends Omit<BaseModalProps, 'onCancel'> {
   form?: WrappedFormUtils
-  items: BaseFormItemProps[]
+  items?: BaseFormItemProps[]
   /** 表单值 */
   data?: { [k: string]: any }
   formProps?: BaseFormProps
@@ -20,9 +21,8 @@ export interface BaseModalFormProps extends Omit<BaseModalProps, 'onCancel'> {
 /** 默认表单样式， 可被formProps覆盖 */
 export const defaultFormProps: BaseFormProps = {
   layout: 'horizontal',
-  labelCol: { span: 4 },
-  wrapperCol: { span: 20 },
-  col: 24
+  labelCol: { span: 6 },
+  wrapperCol: { span: 18 }
 }
 
 export const ModalForm = ({
@@ -77,13 +77,13 @@ export const ModalForm = ({
         }}
         {...props}
       >
-        {content || <CForm form={form} {...fmProps} />}
+        {content || (items && <CForm form={form} {...fmProps} />)}
       </Modal>
     </Fragment>
   )
 }
 
-export default Form.create<BaseModalProps & FormComponentProps>({
+export default Form.create<BaseModalFormProps & FormComponentProps>({
   onValuesChange: ({ onValuesChange }: any, changedValues, allValues) => {
     onValuesChange && onValuesChange(changedValues, allValues)
   },

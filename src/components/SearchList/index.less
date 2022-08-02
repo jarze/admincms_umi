@@ -1,0 +1,38 @@
+.table {
+  td button {
+    padding: 0;
+    border: none;
+    &::before {
+      content: none;
+    }
+    & + button {
+      margin-left: 1em;
+    }
+  }
+  td:empty::before {
+    content: '--';
+  }
+
+  :global {
+    .ant-table-title {
+      padding: 16px 24px;
+    }
+  }
+}
+
+.ellipsisText() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+}
+
+.ellipsis {
+  table {
+    overflow: hidden;
+    table-layout: fixed;
+    td {
+      .ellipsisText();
+    }
+  }
+}
