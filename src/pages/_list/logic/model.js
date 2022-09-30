@@ -1,5 +1,6 @@
 import { Button, Divider } from 'antd'
 import ModelTable from '@/components/comm/EditableTable/Edit'
+import EditTable from '@/components/comm/EditTable/Edit'
 
 const FULL_COL = { xxl: 24, lg: 24, md: 24, xs: 24 }
 
@@ -76,7 +77,7 @@ export const actions = (onItemAction, props) => {
 
 const db_table_config = {
   columns: [
-    { dataIndex: 'index', title: '字段类型', disableEdit: true, width: 80 },
+    { dataIndex: 'id', title: '字段类型', disableEdit: true, width: 80 },
     {
       dataIndex: 'rowKey',
       title: <span className="ant-form-item-required">字段名</span>,
@@ -89,7 +90,7 @@ const db_table_config = {
       title: '字段长度',
       children: [
         { title: 'a', dataIndex: 'len' },
-        { title: 'b', dataIndex: 'len1', disableEdit: true }
+        { title: 'b', dataIndex: 'len1' }
       ]
     },
     { dataIndex: 'desc', title: '备注' },
@@ -116,6 +117,12 @@ export const editConfig = {
       key: 'model_tb',
       options: { rules: [{ required: true }, { type: 'array', min: 3 }] },
       render: form => <ModelTable form={form} {...db_table_config} formKey="model_tb" />,
+      cols: FULL_COL
+    },
+    {
+      key: 'model_tb_1',
+      options: { rules: [{ required: true }, { type: 'array', min: 3 }] },
+      render: form => <EditTable form={form} {...db_table_config} formKey="model_tb" />,
       cols: FULL_COL
     },
     {
