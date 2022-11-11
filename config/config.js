@@ -1,7 +1,7 @@
 import theme from './theme'
-import routes from './routes.js'
+// import routes from './routes.js'
 
-import { ENV_MOCK, ENV_DEV, ENV_TEST, ENV_PRO, API_PROXY_TARGET } from './constant'
+import { ENV_MOCK, ENV_TEST, API_PROXY_TARGET } from './constant'
 const resolve = require('path').resolve
 
 // 当前环境相关配置  dev | test | pro
@@ -62,7 +62,7 @@ export default {
   ],
 
   // 路由 优先使用配置式路由，且约定式路由会不生效
-  routes,
+  // routes,
   // 禁用 redirect 上提
   // disableRedirectHoist: true,
   // 指定 history 类型，可选 browser、hash 和 memory; 默认browser。
@@ -101,10 +101,6 @@ export default {
     API_ENV: env,
     API_PROXY,
     API_PREFIX: !isProxy ? api_proxy_target : API_PROXY,
-    API_ENV_MOCK: ENV_MOCK,
-    API_ENV_DEV: ENV_DEV,
-    API_ENV_TEST: ENV_TEST,
-    API_ENV_PRO: ENV_PRO
   },
 
   // 配置 react 和 react-dom 不打入代码

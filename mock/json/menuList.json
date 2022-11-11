@@ -1,5 +1,10 @@
 [
   {
+    "id": "searchList",
+    "name": "SearchList",
+    "icon": "smile"
+  },
+  {
     "id": "404",
     "name": "404",
     "icon": "smile"

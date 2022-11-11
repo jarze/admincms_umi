@@ -57,7 +57,7 @@ export interface ListPageConfig<T> {
     /* 获取列表数据 */
     getList: (params: any) => Promise<({ data?: Array<T> } & Record<string, any>) | Array<T>>;
     /* 添加编辑 */
-    editItem: (
+    editItem?: (
       /* 表单值 */ params: Partial<T>,
       /* 表单初始数据 */ current: Partial<T>,
     ) => Promise<any>;
