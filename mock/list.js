@@ -12,7 +12,7 @@ export default {
           pageSize: Number(req.query.pageSize),
           pages: '@integer(60, 100)',
           total: '@integer(60, 100)',
-          'data|50': [
+          [`data|${req.query.pageSize}`]: [
             {
               'id|+1': Number(req.query.pageNo * req.query.pageSize) + 100,
               name: '@cname',
