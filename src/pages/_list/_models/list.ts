@@ -1,10 +1,9 @@
-import { ListModel, ListService } from '../list-types'
 import normalService, { combineServices } from './service.js'
 
 const defaultPagination = {
   current: 1,
   pageSize: 50,
-  total: 0,
+  total: 0
 }
 
 function listCommonModel(service: ListService, NS = 'list'): ListModel {
@@ -24,19 +23,23 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
       preEditId: null,
 
       cached: {}, // 缓存数据
-      others: {}, // 列表其他数据
+      others: {} // 列表其他数据
     },
     subscriptions: {
       setup({ history }) {
         return history.listen(_ => {
           window.scrollTo(0, 0)
         })
-      },
+      }
     },
 
     effects: {
       *fetchData({ payload }, { call, put, select }) {
-        const { data, pageNum: current, pageSize, total, pages, ...others } = yield call(service, 'getListData', payload)
+        const { data, pageNum: current, pageSize, total, pages, ...others } = yield call(
+          service,
+          'getListData',
+          payload
+        )
         // 列表复用model，更新数据前先校验menuId
         const { menuId } = yield select((state: { [x: string]: any }) => state[NS])
         if (menuId && menuId !== (payload.matchParams || {}).menuId) {
@@ -50,17 +53,17 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
               current,
               pageSize: pageSize || defaultPagination.pageSize,
               total,
-              pages,
+              pages
             },
-            others,
-          },
+            others
+          }
         })
       },
       *fetchItemInfo({ payload }, { call, put }) {
         const data = yield call(service, 'getItemInfo', payload)
         yield put({
           type: 'save',
-          payload: { itemInfo: data || {} },
+          payload: { itemInfo: data || {} }
         })
       },
       *editItem({ payload, editId, callback }, { call, put, select }) {
@@ -74,8 +77,8 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
               type: 'restPageFilter',
               payload: {
                 editId: null,
-                preEditId: null,
-              },
+                preEditId: null
+              }
             })
           } else {
             yield put({
@@ -83,8 +86,8 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
               payload: {
                 editId: null,
                 preEditId: editId,
-                filterParams: { ...filterParams },
-              },
+                filterParams: { ...filterParams }
+              }
             })
           }
         }
@@ -94,7 +97,7 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
         if (res !== undefined) {
           callback && callback(res)
           yield put({
-            type: 'restPageFilter',
+            type: 'restPageFilter'
           })
         }
       },
@@ -106,7 +109,7 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
           // 是否重置页面参数
           if (isResetPage) {
             yield put({
-              type: 'restPageFilter',
+              type: 'restPageFilter'
             })
           } else {
             const { filterParams } = yield select((state: { [x: string]: any }) => state[NS])
@@ -115,8 +118,8 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
               payload: {
                 // 清空选中
                 selectedRowKeys: [],
-                filterParams: { ...filterParams },
-              },
+                filterParams: { ...filterParams }
+              }
             })
           }
         }
@@ -127,7 +130,7 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
           callback && callback(res)
           yield put({
             type: 'save',
-            payload: { selectedRowKeys: [] },
+            payload: { selectedRowKeys: [] }
           })
         }
       },
@@ -139,7 +142,7 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
         if (menuId === null) {
           yield put({
             type: 'save',
-            payload: { menuId: matchParams.menuId },
+            payload: { menuId: matchParams.menuId }
           })
           return
         }
@@ -153,17 +156,17 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
             itemInfo: {},
             ...data,
             menuId: matchParams.menuId,
-            cached: { ...cached },
-          },
+            cached: { ...cached }
+          }
         })
-      },
+      }
     },
 
     reducers: {
       save(state, { payload }: any) {
         return {
           ...state,
-          ...payload,
+          ...payload
         }
       },
       /* 切换页面重置选择条件 */
@@ -174,10 +177,10 @@ function listCommonModel(service: ListService, NS = 'list'): ListModel {
           selectedRowKeys: [],
           pagination: { ...defaultPagination },
           editId: null,
-          ...payload,
+          ...payload
         }
-      },
-    },
+      }
+    }
   }
 }
 

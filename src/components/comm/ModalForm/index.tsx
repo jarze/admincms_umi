@@ -75,6 +75,10 @@ export const ModalForm = ({
             handleVisible(false)
           }
         }}
+        okButtonProps={{
+          disabled:
+            !form.isFieldsTouched() || !!Object.values(form?.getFieldsError()).find(i => Boolean(i))
+        }}
         {...props}
       >
         {content || (items && <CForm form={form} {...fmProps} />)}

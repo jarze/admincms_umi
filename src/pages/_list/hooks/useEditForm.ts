@@ -13,6 +13,12 @@ const useEditForm: EditFormHooks = ({
   const { id } = matchParams
 
   useEffect(() => {
+    return () => {
+      dispatch({ type: `${NS}/save`, payload: { editId: null, itemInfo: {} } })
+    }
+  }, [])
+
+  useEffect(() => {
     if (id) {
       dispatch({ type: `${NS}/fetchItemInfo`, payload: { matchParams, ...otherFilterParams } })
     }
