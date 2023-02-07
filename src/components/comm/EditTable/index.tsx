@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { Form, Table } from 'antd'
+import { FormComponentProps } from 'antd/es/form/Form'
 import EditableCell, { handleColumn } from './Cell'
 import { EditTableProps } from './type'
+import style from './index.less'
+
+export { handleColumn } from './Cell'
 
 const components = { body: { cell: EditableCell } }
 
@@ -65,13 +69,13 @@ export function EditTable<T extends Record<string, any>>({
 
   const [isAdding, handleAdd, cancelAdd, handleRemove] = useMemo(
     () => [
-      Boolean(dataSource?.find(i => i[rowKey]?.startsWith(ADD_ROW_KEY))),
+      Boolean(dataSource?.find(i => i[rowKey]?.startsWith?.(ADD_ROW_KEY))),
       () => {
         addRowKeyRef.current += 1
         setDataSource([{ [rowKey]: `${ADD_ROW_KEY}${addRowKeyRef.current}` } as T, ...dataSource])
       },
       () => {
-        setDataSource([...dataSource.filter(item => !item[rowKey]?.startsWith(ADD_ROW_KEY))])
+        setDataSource([...dataSource.filter(item => !item[rowKey]?.startsWith?.(ADD_ROW_KEY))])
       },
       keys => {
         setDataSource([...dataSource.filter(item => !(keys || []).includes(item[rowKey]))])
@@ -104,7 +108,7 @@ export function EditTable<T extends Record<string, any>>({
               reject(err)
             } else {
               const v = rowKeys.reduce((r, i) => ({ ...r, [i]: values[formatRowKey(i, key)] }), {})
-              !key?.startsWith(ADD_ROW_KEY) &&
+              !key?.startsWith?.(ADD_ROW_KEY) &&
                 (v[rowKey] = dataSource.find(i => i[rowKey] === key)?.[rowKey])
               resolve(v as any)
             }
@@ -143,7 +147,7 @@ export function EditTable<T extends Record<string, any>>({
               (r, i) => ({ ...r, [i]: values[formatRowKey(i, item)] }),
               {}
             )
-            if (!item[rowKey]?.startsWith(ADD_ROW_KEY)) {
+            if (!item[rowKey]?.startsWith?.(ADD_ROW_KEY)) {
               row[rowKey] = item[rowKey]
             }
             return row
@@ -155,7 +159,8 @@ export function EditTable<T extends Record<string, any>>({
 
   // 处理格式化columns
   const tbColumns = useMemo(() => {
-    const columns = originColumns || getColumns({ form, cancelAdd, isAdding, editTableForm })
+    const columns =
+      originColumns || getColumns({ form, cancelAdd, isAdding, editTableForm, ADD_ROW_KEY })
     columnKeysRef.current = getColumnsKeys(columns)
     return !editable ? columns : handleColumn(columns, { form, rowKey, split })
   }, [originColumns, getColumns, editable, rowKey, split, dataSource])
@@ -176,10 +181,14 @@ export function EditTable<T extends Record<string, any>>({
     />
   )
 }
-export const EditFormTable = props => (
-  <Form layout="inline">
-    <EditTable {...props} />
-  </Form>
-)
+export function EditFormTable<T extends Record<string, any>>(props: EditTableProps<T>) {
+  return (
+    <Form layout="inline" className={style.formWrapper}>
+      <EditTable {...props} />
+    </Form>
+  )
+}
 
-export default Form.create({ validateMessages })(EditFormTable)
+export default Form.create<EditTableProps<any> & FormComponentProps>({ validateMessages })(
+  EditFormTable
+)

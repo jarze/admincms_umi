@@ -63,6 +63,7 @@ export interface EditTableProps<T extends Record<string, any>>
     editTableForm?: EditForm<T>
     handleAdd?
     handleRemove?
+    ADD_ROW_KEY?
     [k: string]: any
   }) => EditColumnProps<T>[]
   /** 是否重置表单 */

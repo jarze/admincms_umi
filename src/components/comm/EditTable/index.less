@@ -1,0 +1,21 @@
+.formWrapper {
+  td button {
+    padding: 0;
+    border: none;
+    & + button {
+      margin-left: 1em;
+    }
+    &::before {
+      content: none !important;
+    }
+  }
+
+  :global {
+    table .ant-form-item-with-help {
+      margin-bottom: 0;
+    }
+    table .ant-form-explain {
+      position: absolute;
+    }
+  }
+}

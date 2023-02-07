@@ -3,33 +3,37 @@ import { mock } from 'mockjs'
 export default {
   // 获取列表信息
   'GET /api/list/:id': (req, res) => {
+    const d = mock({
+      [`data|${req.query.pageSize || '5-10'}`]: [{
+        id: '@id',
+        'index|+1': Number(req.query.pageNo * req.query.pageSize || 0),
+        name: '@cname',
+        title: '@title',
+        desc: '@ctitle',
+        a: '@ctitle',
+        b: '@word',
+        c: '@word',
+        d: '@word',
+        e: '@word',
+        f: '@word',
+        g: '@word',
+      },],
+    }).data;
     res.send(
       mock({
         code: 1001,
         message: 'success',
-        data: {
-          pageNum: Number(req.query.pageNo),
-          pageSize: Number(req.query.pageSize),
-          pages: '@integer(60, 100)',
-          total: '@integer(60, 100)',
-          [`data|${req.query.pageSize}`]: [
-            {
-              'id|+1': Number(req.query.pageNo * req.query.pageSize) + 100,
-              name: '@cname',
-              title: '@title',
-              desc: '@ctitle',
-              a: '@ctitle',
-              b: '@word',
-              c: '@word',
-              d: '@word',
-              e: '@word',
-              f: '@word',
-              g: '@word',
-            },
-          ],
-        },
+        data: req.query.pageSize
+          ? {
+            pageNum: Number(req.query.pageNo),
+            pageSize: Number(req.query.pageSize),
+            pages: '@integer(60, 100)',
+            total: '@integer(60, 100)',
+            data: d,
+          }
+          : d,
       }),
-    )
+    );
   },
   'GET /api/page/:id': (req, res) => {
     res.send(
