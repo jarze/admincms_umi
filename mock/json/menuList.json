@@ -5,6 +5,16 @@
     "icon": "smile"
   },
   {
+    "id": "editTable",
+    "name": "EditTable",
+    "icon": "smile"
+  },
+  {
+    "id": "formComponents",
+    "name": "FormComponents",
+    "icon": "smile"
+  },
+  {
     "id": "404",
     "name": "404",
     "icon": "smile"

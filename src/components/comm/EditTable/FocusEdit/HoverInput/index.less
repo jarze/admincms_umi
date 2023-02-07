@@ -1,0 +1,27 @@
+.text {
+  position: relative;
+  width: 100%;
+  min-height: 32px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 24px;
+  cursor: pointer;
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid @primary-color;
+    // border: 1px solid #49596f;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 200ms;
+    content: '';
+  }
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.focusTable {
+  :global {
+    tr th:nth-of-type(1) {
+      padding-left: 16px !important;
+    }
+    .ant-table-empty .ant-table-placeholder {
+      display: none;
+    }
+    .ant-form-explain {
+      z-index: 1;
+    }
+    td > button {
+      border: none;
+    }
+    table .ant-form-item-with-help {
+      margin-bottom: 0;
+    }
+    table .ant-form-explain {
+      position: absolute;
+    }
+  }
+}
+
+.footer {
+  text-align: center;
+  button {
+    width: 60%;
+    border-style: dashed;
+    opacity: 0.7;
+  }
+  &:empty {
+    display: none;
+  }
+}
+
+:global(.has-error) .focusTable {
+  border: 1px solid #f34000;
+}
