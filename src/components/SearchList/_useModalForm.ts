@@ -1,25 +1,33 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react'
 
 /* 弹窗表单逻辑 */
 function useModalForm<T extends Record<string, any>>({ editConfig, S, rowKey = 'id' }) {
-  const [current, setCurrent] = useState<Partial<T>>(null);
+  const [current, setCurrent] = useState<Partial<T>>(null)
 
-  const { title, items, ...edit } = editConfig;
+  const { title, items, ...edit } = editConfig
+
+  const visible = !!current
+  const [formData, setFormData] = useState(current)
+
+  useEffect(() => {
+    if (!visible) return
+    setFormData(current)
+  }, [current, visible])
 
   const modalFormProps = useMemo(
     () => ({
-      visible: !!current,
-      data: current,
-      title: (current?.[rowKey] ? '编辑' : '添加') + (title || ''),
+      visible: visible,
+      data: formData,
+      title: (formData?.[rowKey] ? '编辑' : '添加') + (title || ''),
       ...edit,
-      items: typeof items === 'function' ? items({ current }) : items,
-      onOkHandler: values => S?.editItem(values, current),
+      items: typeof items === 'function' ? items({ formData }) : items,
+      onOkHandler: values => S?.editItem(values, formData),
       onCancel: () => setCurrent(null),
-      onOk: () => setCurrent(null),
+      onOk: () => setCurrent(null)
     }),
-    [current],
-  );
-  return { current, setCurrent, modalFormProps };
+    [visible, formData]
+  )
+  return { current, setCurrent, modalFormProps }
 }
 
-export default useModalForm;
+export default useModalForm

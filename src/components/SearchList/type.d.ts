@@ -41,6 +41,10 @@ export interface ListPageConfig<T> {
           TableProps<T>['title'],
           { onItemAction: ActionFunction; props?: any }
         >;
+        onRow: InsertArgument<
+          TableProps<T>['onRow'],
+          { onItemAction: ActionFunction; props?: any }
+        >;
       }
     >,
     'columns'
@@ -63,6 +67,8 @@ export interface ListPageConfig<T> {
     ) => Promise<any>;
     [k: string]: any;
   };
+  /** 额外组件 */
+  extras?: (props: ReturnType<SearchListHooks<T>>) => React.ReactNode;
 }
 
 /** 搜索列表hook */
@@ -76,7 +82,10 @@ export type SearchListHooks<T> = {
     formProps?: BaseFormProps;
     onItemAction: ActionFunction;
     /* 其他数据 */
-    other?: any;
+    other?: { current: Partial<T>; rowSelection: TableProps<T>['rowSelection'] } & Record<
+      string,
+      any
+    >;
   };
 };
 

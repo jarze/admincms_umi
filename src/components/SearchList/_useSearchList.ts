@@ -18,7 +18,7 @@ function useSearchList<T extends Record<string, any>>({
   editConfig = {},
   formConfig = {}
 }: ListPageConfig<T>): SearchListHooksReturn<T> {
-  const { pagination: p, columns, title, ...table } = tableConfig
+  const { pagination: p, columns, title, onRow, rowSelection: selection, ...table } = tableConfig
 
   const defaultFilter = useMemo<any>(() => (p === false || p === null ? {} : defaultPagination), [
     p
@@ -26,6 +26,18 @@ function useSearchList<T extends Record<string, any>>({
   const rowKey = useMemo<string>(
     () => (typeof tableConfig.rowKey === 'string' ? tableConfig.rowKey : 'id'),
     [tableConfig?.rowKey]
+  )
+
+  const [selectedRowKeys, setSelectedRowKeys] = useState(null)
+
+  const rowSelection = useMemo(
+    () =>
+      selection && {
+        selectedRowKeys,
+        onChange: setSelectedRowKeys,
+        ...selection
+      },
+    [selection, selectedRowKeys]
   )
 
   const [filter, setFilter] = useState<any>(defaultFilter)
@@ -65,9 +77,11 @@ function useSearchList<T extends Record<string, any>>({
         setCurrent({})
         break
       case 'refresh':
+        setSelectedRowKeys(null)
         setFilter({ ...defaultFilter, ...payload })
         break
       case 'reload':
+        setSelectedRowKeys(null)
         setFilter(pre => ({ ...pre, ...payload }))
         break
       case 'edit':
@@ -79,17 +93,32 @@ function useSearchList<T extends Record<string, any>>({
   }, [])
 
   const tableProps: SearchListHooksReturn<T>['tableProps'] = {
+    rowKey: 'id',
     ...data,
+    rowSelection,
     loading,
     onChange:
       p === false || p === null
         ? undefined
-        : ({ current, pageSize }) => {
-            setFilter(pre => ({ ...pre, pageNo: current, pageSize }))
+        : ({ current, pageSize }, filters, { order, field }) => {
+            setFilter(pre => ({
+              ...pre,
+              pageNo: current,
+              pageSize,
+              order,
+              field: order ? field : undefined
+            }))
           },
-    title: title && ((...t) => title({ onItemAction, props: { filter, data, current } }, ...t)),
+    title:
+      title &&
+      ((...t) => title({ onItemAction, props: { filter, data, current, rowSelection } }, ...t)),
+    onRow:
+      onRow &&
+      ((...t) => onRow({ onItemAction, props: { filter, data, current, rowSelection } }, ...t)),
     columns:
-      typeof columns === 'function' ? columns({ filter, data, current }, onItemAction) : columns,
+      typeof columns === 'function'
+        ? columns({ filter, data, current, rowSelection }, onItemAction)
+        : columns,
     ...table
   }
 
@@ -121,7 +150,7 @@ function useSearchList<T extends Record<string, any>>({
     ...formConfig,
     items:
       typeof formConfig?.items === 'function'
-        ? formConfig?.items({ current, filter, data }, onItemAction)
+        ? formConfig?.items({ current, filter, data, rowSelection }, onItemAction)
         : formConfig?.items,
     onValuesChange: formConfig?.onValuesChange && handleValuesChange
   }
@@ -130,7 +159,7 @@ function useSearchList<T extends Record<string, any>>({
     tableProps,
     formProps,
     onItemAction,
-    other: { filter, current, data, setData }
+    other: { filter, current, setCurrent, data, setData, rowSelection }
   }
 }
 

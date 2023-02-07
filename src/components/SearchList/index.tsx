@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useImperativeHandle, forwardRef } from 'react'
 import { Table } from 'antd'
 import classnames from 'classnames'
 import HandlerModalForm from '../HandlerModalForm'
@@ -10,8 +10,17 @@ import styles from './index.less'
 
 const components = { body: { cell: TooltipTd } }
 
-function SearchList<T extends Record<string, any>>({ actions, ...props }: ListPageConfig<T>) {
+function SearchList<T extends Record<string, any>>({ actions, ...props }: ListPageConfig<T>, ref) {
   const { tableProps, modalFormProps, onItemAction, formProps, other } = useSearchList<T>(props)
+
+  useImperativeHandle(ref, () => ({
+    tableProps,
+    modalFormProps,
+    onItemAction,
+    formProps,
+    other
+  }))
+
   return (
     <>
       {props?.formConfig && (
@@ -27,8 +36,9 @@ function SearchList<T extends Record<string, any>>({ actions, ...props }: ListPa
         {...tableProps}
       />
       {props?.editConfig && <HandlerModalForm {...modalFormProps} />}
+      {props?.extras?.({ tableProps, modalFormProps, onItemAction, formProps, other })}
     </>
   )
 }
 
-export default SearchList
+export default forwardRef(SearchList)
