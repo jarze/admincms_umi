@@ -5,8 +5,6 @@ import { EditTableProps } from './type'
 
 const components = { body: { cell: EditableCell } }
 
-export const ADD_ROW_KEY = 'ADD'
-
 export const validateMessages = {
   required: () => '必填',
   string: {
@@ -40,7 +38,8 @@ export function EditTable<T extends Record<string, any>>({
   rowKey = 'id',
   split = '-',
   title,
-  shouldResetFields = false,
+  shouldResetFields = true,
+  ADD_ROW_KEY = 'ADD',
   ...props
 }: EditTableProps<T>) {
   const [dataSource, setDataSource] = useState(data || [])
@@ -168,12 +167,15 @@ export function EditTable<T extends Record<string, any>>({
       columns={tbColumns}
       dataSource={dataSource}
       components={components}
-      title={title ? () => title({ handleAdd, handleSave, isAdding, handleRemove, form }) : null}
+      title={
+        title
+          ? (...p) => title({ handleAdd, handleSave, isAdding, handleRemove, form }, ...p)
+          : null
+      }
       {...props}
     />
   )
 }
-
 export const EditFormTable = props => (
   <Form layout="inline">
     <EditTable {...props} />
