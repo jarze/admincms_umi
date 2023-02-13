@@ -3,11 +3,11 @@ import { useState, useMemo, useEffect } from 'react'
 /* 弹窗表单逻辑 */
 function useModalForm<T extends Record<string, any>>({ editConfig, S, rowKey = 'id' }) {
   const [current, setCurrent] = useState<Partial<T>>(null)
+  const [formData, setFormData] = useState(current)
 
   const { title, items, ...edit } = editConfig
 
-  const visible = !!current
-  const [formData, setFormData] = useState(current)
+  const visible = useMemo(() => !!current, [current])
 
   useEffect(() => {
     if (!visible) return
@@ -23,7 +23,8 @@ function useModalForm<T extends Record<string, any>>({ editConfig, S, rowKey = '
       items: typeof items === 'function' ? items({ formData }) : items,
       onOkHandler: values => S?.editItem(values, formData),
       onCancel: () => setCurrent(null),
-      onOk: () => setCurrent(null)
+      onOk: () => setCurrent(null),
+      afterClose: () => setFormData(null)
     }),
     [visible, formData]
   )
