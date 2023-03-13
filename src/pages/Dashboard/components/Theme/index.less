@@ -1,0 +1,26 @@
+// :root {
+//   --screen-theme-color: #24fcff;
+//   --screen-font-size: 16;
+
+//   --screen-up-color: #f34000;
+//   --screen-down-color: #21e897;
+
+//   --screen-text-color: #fff;
+//   --screen-bg-color: #060e16;
+//   --screen-bg-color-1: rgba(0, 0, 0, 0.2);
+// }
+
+.screen {
+  overflow: auto;
+  color: var(--screen-text-color, #fff);
+  font-size: calc(var(--screen-font-size, 14) * 1px);
+  background-color: var(--screen-bg-color, #060e16);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: var(--screen-text-color, #fff);
+  }
+}

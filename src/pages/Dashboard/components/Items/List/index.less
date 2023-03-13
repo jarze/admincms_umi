@@ -1,0 +1,41 @@
+.container {
+  position: relative;
+  height: 100%;
+
+  :global {
+    .ant-spin-container {
+      height: 100%;
+    }
+  }
+}
+
+.wrapper {
+  font-size: 1em;
+  line-height: 2.3em;
+  :global {
+    .ant-progress-inner {
+      background-color: currentColor;
+    }
+  }
+  &-l {
+    font-size: 1.15em;
+    line-height: 2.9em;
+  }
+  &-s {
+    font-size: 0.85em;
+    line-height: 1.7em;
+  }
+}
+
+.up,
+.down {
+  padding-left: 1.5em;
+}
+
+.up {
+  background: url(../assets/up.png) no-repeat left center;
+}
+
+.down {
+  background: url(../assets/down.png) no-repeat left center;
+}

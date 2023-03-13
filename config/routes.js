@@ -1,4 +1,12 @@
 export default [
+  // {
+  //   path: '/charts',
+  //   component: 'Dashboard'
+  // },
+  {
+    path: '/charts/demo',
+    component: 'Dashboard/Demo'
+  },
   {
     path: '/login',
     component: './Login/index.js',

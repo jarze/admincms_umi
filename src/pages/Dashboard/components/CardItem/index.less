@@ -1,0 +1,21 @@
+@titleH: calc(var(--screen-font-size, 14) * 2.6px);
+
+.title {
+  height: @titleH;
+  padding: 0 1em;
+  font-weight: 600;
+  font-size: calc(var(--screen-font-size, 14) * 1.3px);
+  mask-image: linear-gradient(to top, black 40%, var(--screen-theme-bg-color-3));
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.title + .content {
+  top: @titleH;
+}
