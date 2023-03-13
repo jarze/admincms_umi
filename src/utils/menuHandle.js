@@ -78,7 +78,7 @@ export const isDirectory = (data = [], currentPath) => {
       }
       find = !!children
       break
-    } else if (currentPath.startsWith(path) && children) {
+    } else if (currentPath?.startsWith?.(path) && children) {
       if (hideChildrenInMenu) {
         find = !hideChildrenInMenu
         break

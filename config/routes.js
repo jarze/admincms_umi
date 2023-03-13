@@ -1,5 +1,9 @@
 export default [
   {
+    path: '/demo',
+    component: './Demo/index',
+  },
+  {
     path: '/login',
     component: './Login/index.js',
     Routes: ['./src/routes/auth.js']
