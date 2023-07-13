@@ -9,7 +9,7 @@ const File_Buffer = 'arrayBuffer'
 // }
 
 function checkStatus(response) {
-  let status = response.status || response.statusCode;
+  let status = response.status || response.statusCode
   if (status >= 200 && status < 300) {
     return response
   }
@@ -30,15 +30,12 @@ export default function request(url, options = {}, errToast = false) {
   // 携带网站cookie信息，用于登录验证
   // options = { ...options, credentials: 'include' };
   if (options) {
-    const { method = 'GET', body } = options
-    if (body) {
-      if (method.toUpperCase() === 'GET') {
-        url = `${url}?${stringify(body)}`
-        delete options.body
-      } else {
-        options.body = JSON.stringify(body)
-        // options.body = convertObjToFormData(body);
-      }
+    const { data, params } = options
+    if (params) {
+      url = `${url}?${stringify(params)}`
+    }
+    if (data) {
+      options.body = JSON.stringify(data)
     }
   }
 
@@ -99,7 +96,7 @@ export function convertObjToFormData(object) {
 export const exportDownload = (url, payload) => {
   return request(`${url}`, {
     method: 'GET',
-    body: payload,
+    data: payload,
     type: File_Buffer
   })
     .then(download)
@@ -118,7 +115,9 @@ export async function download(response) {
   if (!response.headers) {
     throw new Error('文件有误！！')
   }
-  const fileName = response.headers.get('content-disposition') && response.headers.get('content-disposition').match(/filename=(.*)/)[1]
+  const fileName =
+    response.headers.get('content-disposition') &&
+    response.headers.get('content-disposition').match(/filename=(.*)/)[1]
   const res = await response.blob()
   downloadFile(res, fileName)
 }
