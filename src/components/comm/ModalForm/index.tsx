@@ -1,8 +1,10 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useCallback } from 'react'
 import { Modal, Form } from 'antd'
 import { BaseFormProps, BaseFormItemProps, CForm, validateMessages } from '../Form'
 import { BaseModalProps } from '../Modal'
 import { WrappedFormUtils } from 'antd/es/form/Form'
+import { throttle } from 'lodash'
+
 export interface BaseModalFormProps extends Omit<BaseModalProps, 'onCancel'> {
   form?: WrappedFormUtils
   items: BaseFormItemProps[]
@@ -25,13 +27,31 @@ export const defaultFormProps: BaseFormProps = {
   col: 24
 }
 
-export const ModalForm = ({ items, children, onOk, onCancel, data, form, formProps, cancelReset = true, content, ...props }: BaseModalFormProps) => {
+export const ModalForm = ({
+  items,
+  children,
+  onOk,
+  onCancel,
+  data,
+  form,
+  formProps,
+  cancelReset = true,
+  content,
+  ...props
+}: BaseModalFormProps) => {
   /** 有children时可以通过children点击自我控制visible显示 */
   const [visible, setVisible] = useState(false)
 
+  // 按钮重复点击问题
+  const submit = useCallback<any>(
+    throttle(form!.validateFields, 3000, { leading: true, trailing: false }),
+    []
+  )
+
   const onOkCallBack = (e: any) => {
     if (e) e.stopPropagation()
-    form!.validateFields((err, values) => {
+    if (props?.confirmLoading) return
+    submit?.((err, values) => {
       if (!err) {
         onOk && onOk(values, handleVisible, form)
       }
