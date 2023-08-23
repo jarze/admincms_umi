@@ -11,6 +11,7 @@ export default [
     routes: [
       { path: '/', name: 'home', component: './index' },
       { path: '/404', name: '404', component: './404' },
+      { path: 'comp', name: '@antd-xx/comp', component: 'Comp' },
       /*GEN: APPEND ROUTER HERE*/
       {
         path: '*/:menuId/list',

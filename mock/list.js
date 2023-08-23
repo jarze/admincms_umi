@@ -3,32 +3,40 @@ import { mock } from 'mockjs'
 export default {
   // 获取列表信息
   'GET /api/list/:id': (req, res) => {
+    const { pageNo, pageSize } = req.query
+    const d = mock({
+      [`data|${pageSize || 10}`]: [
+        {
+          id: '@id',
+          'index|+1': Number(pageNo * pageSize) + 1,
+          name: '@cname',
+          title: '@title',
+          desc: '@ctitle',
+          a: '@ctitle',
+          b: '@word',
+          c: '@word',
+          d: '@word',
+          e: '@word',
+          f: '@word',
+          g: '@word'
+        }
+      ]
+    }).data
+
     res.send(
       mock({
         code: 1001,
         message: 'success',
-        data: {
-          pageNum: Number(req.query.pageNo),
-          pageSize: Number(req.query.pageSize),
-          pages: '@integer(60, 100)',
-          total: '@integer(60, 100)',
-          'data|50': [
-            {
-              'id|+1': Number(req.query.pageNo * req.query.pageSize) + 100,
-              name: '@cname',
-              title: '@title',
-              desc: '@ctitle',
-              a: '@ctitle',
-              b: '@word',
-              c: '@word',
-              d: '@word',
-              e: '@word',
-              f: '@word',
-              g: '@word',
-            },
-          ],
-        },
-      }),
+        data: pageSize
+          ? {
+              pageNum: Number(pageNo),
+              pageSize: Number(pageSize),
+              pages: '@integer(60, 100)',
+              total: '@integer(60, 100)',
+              data: d
+            }
+          : d
+      })
     )
   },
   'GET /api/page/:id': (req, res) => {
@@ -40,9 +48,9 @@ export default {
           name: '@cname',
           title: '@ctitle',
           content: '@paragraph',
-          ...req.query,
-        },
-      }),
+          ...req.query
+        }
+      })
     )
   },
   'DELETE /api/delete/:id': (req, res) => {
@@ -50,8 +58,8 @@ export default {
       mock({
         code: 1001,
         message: '删除成功',
-        data: null,
-      }),
+        data: null
+      })
     )
   },
   'POST /api/edit/:id': (req, res) => {
@@ -59,8 +67,8 @@ export default {
       mock({
         code: 1001,
         message: '编辑成功',
-        data: null,
-      }),
+        data: null
+      })
     )
   },
   'PUT /api/edit/:id': (req, res) => {
@@ -68,8 +76,8 @@ export default {
       mock({
         code: 1001,
         message: '编辑成功',
-        data: null,
-      }),
+        data: null
+      })
     )
   },
   'POST /api/action/:id': (req, res) => {
@@ -77,8 +85,8 @@ export default {
       mock({
         code: 1001,
         message: 'action成功',
-        data: null,
-      }),
+        data: null
+      })
     )
   },
   'GET /api/menu/55': (req, res) => {
@@ -87,9 +95,9 @@ export default {
         code: 1001,
         message: 'success',
         data: {
-          data: require('./json/menu_privilege.json').children,
-        },
-      }),
+          data: require('./json/menu_privilege.json').children
+        }
+      })
     )
-  },
+  }
 }
