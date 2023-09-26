@@ -5,6 +5,7 @@ import { FormProps, FormItemProps } from 'antd/es/form'
 import { GetFieldDecoratorOptions, WrappedFormUtils, FormComponentProps } from 'antd/es/form/Form'
 import { ColProps } from 'antd/es/col'
 import styles from './index.less'
+import { get } from 'lodash'
 
 const FormItem = Form.Item
 
@@ -130,12 +131,13 @@ export const CForm = ({
       index
     ) => {
       if (render === null || (render && render(form, data) === null)) return null
+      const value = get(data, key)
       return (
         <FormItemWap key={key || index} {...(type == 'col' ? { cols } : {})}>
           {key ? (
             <FormItem label={label} key={key} {...itemProps}>
               {form!.getFieldDecorator(key, {
-                initialValue: data && data[key] !== undefined ? data[key] : defaultValue,
+                initialValue: data && value !== undefined ? value : defaultValue,
                 validateFirst: true,
                 ...options,
                 ...(optionsFun && optionsFun(form, data))

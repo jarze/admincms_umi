@@ -1,40 +1,63 @@
-import { forwardRef, useEffect, useState, useRef, cloneElement } from 'react';
+import { cloneElement, forwardRef, useEffect, useRef, useState } from 'react'
 
 // 缓存数据
-const FetchWrapperCache = {};
+const FetchWrapperCache: Record<string, any> = {}
 
-interface FetchSelectPros {
-  fetch?: () => Promise<any>;
+interface FetchWrapperProps<T> {
+  fetch?: (params?: any) => Promise<T>
   /** 缓存Key 注意项目唯一 */
-  cacheKey?: 'KA' | string;
-  render: (data: any, loading: boolean) => React.ReactElement;
-  [key: string]: any;
+  cacheKey?: string
+  render: (
+    data: any,
+    loading: boolean,
+    other: {
+      params: any
+      setParams: any
+    }
+  ) => React.ReactElement
+  /** 请求参数 */
+  params?: any
+  [key: string]: any
 }
 
-export default forwardRef((props: FetchSelectPros, ref) => {
-  const { fetch, cacheKey, render, ...restProps } = props;
-  const [data, setData] = useState([] as any);
-  const [loading, setLoading] = useState(false as any);
-  const mounted = useRef(true);
+function FetchWrapper<T extends any>(props: FetchWrapperProps<T>, ref: any) {
+  const { fetch, cacheKey, render, params: originParams, ...restProps } = props
+  const [data, setData] = useState<T>()
+  const [params, setParams] = useState<any>(originParams)
+  const [loading, setLoading] = useState(false as any)
+  const mounted = useRef(true)
 
   useEffect(() => {
-    if (cacheKey && FetchWrapperCache[cacheKey]?.length > 0) {
-      setData(FetchWrapperCache[cacheKey] || []);
-      return;
+    setParams(originParams)
+  }, [originParams])
+
+  useEffect(() => {
+    return () => {
+      mounted.current = false
     }
-    if (!fetch) return;
-    setLoading({ delay: 200 });
-    fetch()
+  }, [])
+
+  useEffect(() => {
+    if (cacheKey && FetchWrapperCache[cacheKey]) {
+      setData(FetchWrapperCache[cacheKey])
+      return
+    }
+    if (!fetch) return
+    setLoading({ delay: 200 })
+    fetch(params)
       .then(res => {
-        mounted.current && setData(res || []);
-        cacheKey && res && (FetchWrapperCache[cacheKey] = res);
+        mounted.current && setData(res)
+        cacheKey && res && (FetchWrapperCache[cacheKey] = res)
       })
       .finally(() => {
-        mounted.current && setLoading(false);
-      });
-    return () => {
-      mounted.current = false;
-    };
-  }, []);
-  return cloneElement(render(data, loading), { ref, ...restProps });
-});
+        mounted.current && setLoading(false)
+      })
+  }, [params])
+
+  return cloneElement(render(data, loading, { params, setParams }), {
+    ref,
+    ...restProps
+  })
+}
+
+export default forwardRef(FetchWrapper)
