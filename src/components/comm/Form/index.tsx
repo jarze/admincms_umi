@@ -8,7 +8,7 @@ import styles from './index.less'
 
 const FormItem = Form.Item
 
-const getColWap = (type: ColType, col?: number, submitCol?: number) => {
+const getColWap = (type: ColType, col?: number | ColProps, submitCol?: number | ColProps) => {
   switch (type) {
     case 'col': {
       return getColWrapper(col, submitCol)
@@ -22,9 +22,13 @@ const getColWap = (type: ColType, col?: number, submitCol?: number) => {
 const DefaultCols: ColProps = { xxl: 6, lg: 8, md: 12, xs: 24 }
 
 /** 计算Col换行 */
-const getColWrapper = (col?: number, submitCol?: number) => {
-  const submitCols = submitCol ? { span: submitCol } : DefaultCols
-  const defaultCol = col ? { span: col } : { ...DefaultCols }
+const getColWrapper = (col?: number | ColProps, submitCol?: number | ColProps) => {
+  const submitCols = submitCol
+    ? typeof submitCol === 'number'
+      ? { span: submitCol }
+      : submitCol
+    : DefaultCols
+  const defaultCol = col ? (typeof col === 'number' ? { span: col } : col) : { ...DefaultCols }
   const FormContentWap = (props: any) => <Row gutter={16} {...props} />
   const FormItemWap = ({ cols, ...props }) => <Col {...(cols || defaultCol)} {...props} />
   const ForSubmitItemWap = (props: any) => <Col {...submitCols} {...props} />
@@ -56,9 +60,9 @@ export interface BaseFormProps extends FormProps {
   type?: ColType
   loading?: boolean
   /** 固定排版 24 8,type = 'col'时有效 */
-  col?: number
+  col?: number | ColProps
   /** 提交按钮固定排版, type = 'col'时有效 */
-  submitCol?: number
+  submitCol?: number | ColProps
   /** 确定按钮 */
   okText?: string
   /** 取消按钮 */
