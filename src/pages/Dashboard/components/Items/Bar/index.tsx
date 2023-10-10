@@ -1,27 +1,27 @@
-import React, { forwardRef, memo, useMemo, Fragment } from 'react';
-import EchartsReact from 'echarts-for-react';
-import { isNil } from 'lodash';
-import useIntervalRequestChange from '../useIntervalRequestChange';
-import { ResponseOfComponentType } from '../../../type';
-import ChartConfig from '../config';
+import React, { forwardRef, memo, useMemo, Fragment } from 'react'
+import EchartsReact from 'echarts-for-react'
+import { isNil } from 'lodash'
+import useIntervalRequestChange from '../useIntervalRequestChange'
+import { ResponseOfComponentType } from '../../../type'
+import ChartConfig from '../config'
 
 interface BarProps {
   /** 请求数据 返回[图表数据，搜索项] */
-  fetch?: (params?: any) => Promise<ResponseOfComponentType<'BAR_CHART'>>;
+  fetch?: (params?: any) => Promise<ResponseOfComponentType<'BAR_CHART'>>
   /** 刷新接口请求频率， 若为空或0 不做定时刷新 */
-  interval?: number;
+  interval?: number
   /** 边距 */
   grid?: {
-    left?: any;
-    right?: any;
-    top?: any;
-    bottom?: any;
-  };
+    left?: any
+    right?: any
+    top?: any
+    bottom?: any
+  }
   // /** 图表定义 */
   // option?: Record<string, any>;
   /** 显示总计 */
-  total?: boolean;
-  [key: string]: any;
+  total?: boolean
+  [key: string]: any
 }
 
 const Total = ({ value, unit }) => {
@@ -36,35 +36,35 @@ const Total = ({ value, unit }) => {
         {unit || ''}
       </span>
     </div>
-  );
-};
+  )
+}
 
 const Bar = memo<BarProps>(
   forwardRef<any, BarProps>((params, ref) => {
-    const { fetch, stack, interval, total, grid } = params;
+    const { fetch, stack, interval, total, grid } = params
 
     const { dataSource, loading, search } = useIntervalRequestChange<
       ResponseOfComponentType<'BAR_CHART'>
     >({
       fetch,
-      interval,
-    });
+      interval
+    })
 
     const handler = useMemo(() => {
-      const { data, unit } = (dataSource as any) || {};
+      const { data, unit } = (dataSource as any) || {}
       return ChartConfig.chartOptionMergeDefault('bar', {
         series:
           data?.data?.map?.(i => ({
             stack: stack ? 'bar' : undefined,
-            ...i,
+            ...i
           })) || [],
         xAxis: data?.xAxis,
         yAxis: { name: unit },
-        grid,
-      });
-    }, [dataSource, stack, grid]);
+        grid
+      })
+    }, [dataSource, stack, grid])
 
-    const h = `${(total ? 3 : 0) + (search ? 2 : 0)}em`;
+    const h = `${(total ? 3 : 0) + (search ? 2 : 0)}em`
     return (
       <>
         {search}
@@ -80,9 +80,9 @@ const Bar = memo<BarProps>(
           opts={{ devicePixelRatio: 2 }}
         />
       </>
-    );
-  }),
-);
+    )
+  })
+)
 
 //@ts-ignore
 Bar.defaultProps = {
@@ -93,8 +93,8 @@ Bar.defaultProps = {
     top: 40,
     bottom: 40,
     left: '10%',
-    right: '10%',
-  },
-};
+    right: '10%'
+  }
+}
 
-export default Bar;
+export default Bar

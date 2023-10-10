@@ -7,7 +7,6 @@ import Wrapper from './components/Wrapper'
 
 export const MockData = mock({
   [`data|${ScreenComponentsTypes.length + 1}`]: [
-    // data: [
     {
       'type|+1': [...ScreenComponentsTypes.map(i => i.value), null],
       'setting|+1': [
@@ -19,14 +18,26 @@ export const MockData = mock({
         { content: '<h2>示例内容</h2>' },
         null
       ],
+      // sourceId: '@string',
       'sourceId|+1': [null],
-      'title|+1': [...ScreenComponentsTypes.map(i => i.label), null]
+      'title|+1': [...ScreenComponentsTypes.map(i => i.value), null]
+      // 'background|1': [
+      //   'bg1-none',
+      //   'bg1-topLeft',
+      //   'bg1-bottomLeft',
+      //   'bg1-topRight',
+      //   'bg1-bottomRight',
+      // ],
     }
   ]
 }).data
 
 let theme = mock({
   fontSize: 14,
+  // '@integer(10, 25)',
+  // 'themeColor|1': ['#21E897', '#24FCFF', '@color'],
+  // 'bgColor|1': ['#060e16', 'aliceblue', 'cadetblue', 'darkgrey'],
+  // themeColor: '@color',
   upColor: '@color',
   downColor: '@color'
 })
@@ -69,7 +80,7 @@ export default function Demo() {
           theme={themeData}
           editable={editable}
           onChangeTheme={v => {
-            // console.debug('theme配置变更:v')
+            // console.log('theme配置变更:v')
             setThemeData(v)
           }}
         >

@@ -1,21 +1,21 @@
-import React, { memo, forwardRef, useMemo } from 'react';
-import EchartsReact from 'echarts-for-react';
-import useIntervalRequestChange from '../useIntervalRequestChange';
-import { ResponseOfComponentType } from '../../../type';
+import React, { memo, forwardRef, useMemo } from 'react'
+import EchartsReact from 'echarts-for-react'
+import useIntervalRequestChange from '../useIntervalRequestChange'
+import { ResponseOfComponentType } from '../../../type'
 
-import ChartConfig, { parseSeriesData } from '../config';
+import ChartConfig, { parseSeriesData } from '../config'
 
-type ProgressDataType = ResponseOfComponentType<'PROGRESS_CHART'>;
+type ProgressDataType = ResponseOfComponentType<'PROGRESS_CHART'>
 
 interface ProgressProps {
   /** 请求数据 返回[图表数据，搜索项] */
-  fetch?: (params?: any) => Promise<ProgressDataType>;
+  fetch?: (params?: any) => Promise<ProgressDataType>
   /** 刷新接口请求频率， 若为空或0 不做定时刷新 */
-  interval?: number;
+  interval?: number
   /** 搜索项自动切换, 默认false */
-  tabAutoChange?: boolean;
+  tabAutoChange?: boolean
   /** TODO: */
-  [key: string]: any;
+  [key: string]: any
 }
 
 const Progress = forwardRef<any, ProgressProps>(
@@ -26,30 +26,29 @@ const Progress = forwardRef<any, ProgressProps>(
       tabAutoChange = true,
       showLegend,
       title,
-      color = ChartConfig.CHART_CONST.themeColor,
+      color = ChartConfig.CHART_CONST.themeColor
     },
-    ref,
+    ref
   ) => {
     const { dataSource, loading, search } = useIntervalRequestChange<ProgressDataType>({
       fetch,
       interval,
       tabAutoChange,
       timer: false,
-      animationHighlightDuration: 3000,
-    });
+      animationHighlightDuration: 3000
+    })
 
     const option = useMemo(() => {
-      const center = showLegend ? ['25%', '50%'] : ['50%', '50%'];
+      const center = showLegend ? ['25%', '50%'] : ['50%', '50%']
       const text =
         showLegend &&
-        `总计：{value|${dataSource?.data?.total || ''} ${dataSource?.unit || ''}}\n\n当前：{value|${
-          dataSource?.data?.value || ''
-        } ${dataSource?.unit || ''}}`;
+        `总计：{value|${dataSource?.data?.total || ''} ${dataSource?.unit ||
+          ''}}\n\n当前：{value|${dataSource?.data?.value || ''} ${dataSource?.unit || ''}}`
 
       const radius = 60,
         centerPieOffset = 22,
-        radiusOffset = 8;
-      const { CHART_CONST, rich, chartOptionMergeDefault } = ChartConfig;
+        radiusOffset = 8
+      const { CHART_CONST, rich, chartOptionMergeDefault } = ChartConfig
       return chartOptionMergeDefault('progress', {
         color: [color],
         title: { show: Boolean(text), text },
@@ -65,12 +64,11 @@ const Progress = forwardRef<any, ProgressProps>(
               lineHeight: CHART_CONST.fontSize * 1.5,
               fontSize: CHART_CONST.fontSize,
               rich,
-              formatter:
-                title || `{text|{b}}\n{value| {c} ${dataSource?.unit || ''}}\n{value|{d}%}`,
+              formatter: title || `{text|{b}}\n{value| {c} ${dataSource?.unit || ''}}\n{value|{d}%}`
             },
             data: dataSource?.data && parseSeriesData([dataSource?.data], true),
             z: 2,
-            hoverAnimation: false,
+            hoverAnimation: false
           },
           //中心圆环
           {
@@ -81,7 +79,7 @@ const Progress = forwardRef<any, ProgressProps>(
             radius: [0, `${radius - centerPieOffset}%`],
             data: [{ value: 1 }],
             z: -1,
-            animation: false,
+            animation: false
           },
           {
             type: 'pie',
@@ -92,11 +90,11 @@ const Progress = forwardRef<any, ProgressProps>(
             label: { show: false },
             data: [1],
             z: -2,
-            animation: false,
-          },
-        ],
-      });
-    }, [dataSource, color, showLegend, title]);
+            animation: false
+          }
+        ]
+      })
+    }, [dataSource, color, showLegend, title])
 
     return (
       <>
@@ -112,8 +110,8 @@ const Progress = forwardRef<any, ProgressProps>(
           opts={{ devicePixelRatio: 2 }}
         />
       </>
-    );
-  },
-);
+    )
+  }
+)
 
-export default memo<ProgressProps>(Progress);
+export default memo<ProgressProps>(Progress)

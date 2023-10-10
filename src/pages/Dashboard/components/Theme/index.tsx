@@ -1,18 +1,18 @@
-import React, { forwardRef } from 'react';
-import { Button, Divider } from 'antd';
-import classnames from 'classnames';
-import SettingDrawer from '../SettingDrawer';
-import Setting from '../setting';
-import { ThemeVarsType, themeInstance } from './_theme';
-import { config } from './_setting';
-import styles from './index.less';
+import React, { forwardRef } from 'react'
+import { Button, Divider } from 'antd'
+import classnames from 'classnames'
+import SettingDrawer from '../SettingDrawer'
+import Setting from '../setting'
+import { ThemeVarsType, themeInstance } from './_theme'
+import { config } from './_setting'
+import styles from './index.less'
 
-import useTheme from './_useTheme';
+import useTheme from './_useTheme'
 
 export interface ThemeProps extends Omit<React.HTMLAttributes<any>, 'onChange'> {
-  theme?: Partial<ThemeVarsType>;
-  onChange?: Function;
-  editable?: boolean;
+  theme?: Partial<ThemeVarsType>
+  onChange?: Function
+  editable?: boolean
 }
 
 export const EditTheme = ({ changeTheme, data, onSave, onReset }) => {
@@ -26,7 +26,7 @@ export const EditTheme = ({ changeTheme, data, onSave, onReset }) => {
       }
       onCancel={onReset}
       onSave={() => {
-        onSave?.(data);
+        onSave?.(data)
       }}
     >
       <div>
@@ -41,12 +41,12 @@ export const EditTheme = ({ changeTheme, data, onSave, onReset }) => {
         data={data}
         items={config?.items}
         onChange={v => {
-          changeTheme?.(v);
+          changeTheme?.(v)
         }}
       />
     </SettingDrawer>
-  );
-};
+  )
+}
 
 export const ThemeVars = forwardRef(
   ({ children, theme = null, className, style, styleVars, ...props }: any, ref) => (
@@ -58,14 +58,14 @@ export const ThemeVars = forwardRef(
     >
       {children}
     </div>
-  ),
-);
+  )
+)
 
 export default ({ children, theme = null, ...props }: ThemeProps) => {
-  const { styleVars } = useTheme({ theme });
+  const { styleVars } = useTheme({ theme })
   return (
     <ThemeVars styleVars={styleVars} {...props}>
       {children}
     </ThemeVars>
-  );
-};
+  )
+}

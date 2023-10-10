@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from 'react';
-import { Drawer, Button, Tooltip } from 'antd';
+import React, { useState, Fragment } from 'react'
+import { Drawer, Button, Tooltip } from 'antd'
 
 const SettingDrawer = ({
   children,
@@ -8,20 +8,20 @@ const SettingDrawer = ({
   icon = 'setting',
   text = null,
   setting = null,
-  title = '设置',
+  title = '设置'
 }) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
 
   const handleVisible = (v, e) => {
-    e?.stopPropagation?.();
-    setVisible(v);
-  };
+    e?.stopPropagation?.()
+    setVisible(v)
+  }
   return (
     <Fragment>
       {setting ? (
         <span
           onClick={e => {
-            handleVisible(true, e);
+            handleVisible(true, e)
           }}
         >
           {setting}
@@ -36,12 +36,12 @@ const SettingDrawer = ({
             opacity: 0.6,
             zIndex: 100,
             border: 'none',
-            transform: 'scale(1.5)',
+            transform: 'scale(1.5)'
           }}
           ghost={true}
           icon={icon}
           onClick={e => {
-            handleVisible(true, e);
+            handleVisible(true, e)
           }}
         >
           {text}
@@ -51,12 +51,13 @@ const SettingDrawer = ({
         width={450}
         title={title}
         placement="right"
+        mask={false}
         maskClosable={false}
         closable={false}
         onClose={e => handleVisible(false, e)}
         visible={visible}
         bodyStyle={{
-          paddingBottom: 100,
+          paddingBottom: 100
         }}
       >
         {children}
@@ -70,17 +71,17 @@ const SettingDrawer = ({
             textAlign: 'right',
             left: 0,
             background: '#fff',
-            borderRadius: '0 0 4px 4px',
+            borderRadius: '0 0 4px 4px'
           }}
         >
           <Tooltip title="将不会保存本次修改">
             <Button
               style={{
-                marginRight: 8,
+                marginRight: 8
               }}
               onClick={e => {
-                handleVisible(false, e);
-                onCancel?.();
+                handleVisible(false, e)
+                onCancel?.()
               }}
             >
               取消
@@ -88,8 +89,8 @@ const SettingDrawer = ({
           </Tooltip>
           <Button
             onClick={e => {
-              handleVisible(false, e);
-              onSave?.();
+              handleVisible(false, e)
+              onSave?.()
             }}
             type="primary"
           >
@@ -98,7 +99,7 @@ const SettingDrawer = ({
         </div>
       </Drawer>
     </Fragment>
-  );
-};
+  )
+}
 
-export default SettingDrawer;
+export default SettingDrawer

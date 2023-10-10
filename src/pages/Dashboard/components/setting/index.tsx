@@ -1,8 +1,12 @@
 import React from 'react'
-import Form from '@/components/comm/Form'
+import Form, { BaseFormProps } from '@/components/comm/Form'
 import style from './index.less'
 
-export default function Setting({ data, onChange, items, ...options }) {
+interface SettingProps extends BaseFormProps {
+  onChange?: (allValue: any, changeValue?: any) => void
+}
+
+export default function Setting({ data, onChange, items, ...options }: SettingProps) {
   /** TODO: 拓展层级多配置 */
   return (
     <div className={style.wrapper}>
