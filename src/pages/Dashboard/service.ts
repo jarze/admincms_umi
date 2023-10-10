@@ -16,3 +16,11 @@ export const fetchComponentData = ({ component, id }, url = '/big-screen/data') 
     })
   })
 }
+
+export const fetchDetail = id => {
+  return request(`/big-screen/page/detail/${id}`)
+}
+
+export const fetchUpdateData = data => {
+  return request(`/big-screen/page`, { data, method: 'PUT' })
+}
