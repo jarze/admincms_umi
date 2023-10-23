@@ -1,0 +1,24 @@
+.wrapper {
+  height: calc(100vh - 160px);
+  min-height: 500px;
+  background: #fff;
+  border: 1px dashed #b9bcc6;
+  :global {
+    .bjs-powered-by {
+      display: none;
+    }
+  }
+}
+
+:global {
+  #properties-panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 260px;
+    z-index: 10;
+    border-left: 1px solid #ccc;
+    overflow: auto;
+  }
+}

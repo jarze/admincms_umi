@@ -1,8 +1,8 @@
 export default [
-  // {
-  //   path: '/charts',
-  //   component: 'Dashboard'
-  // },
+  {
+    path: '/',
+    redirect: '/bpmn'
+  },
   {
     path: '/charts/demo',
     component: 'Dashboard/Demo'
@@ -19,6 +19,8 @@ export default [
     routes: [
       { path: '/', name: 'home', component: './index' },
       { path: '/404', name: '404', component: './404' },
+      { path: '/bpmn', name: 'BPMN.io', component: './bpmn' },
+      { path: '/bpmn/view', name: 'BPMN.io', component: './bpmn/view' },
       /*GEN: APPEND ROUTER HERE*/
       {
         path: '*/:menuId/list',
