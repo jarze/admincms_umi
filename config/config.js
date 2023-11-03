@@ -60,7 +60,7 @@ export default {
       }
     ]
   ],
-
+  extraBabelIncludes: [/node_modules\/lezer-feel/, /node_modules\/feelers/],
   // 路由 优先使用配置式路由，且约定式路由会不生效
   routes,
   // 禁用 redirect 上提
@@ -100,7 +100,7 @@ export default {
   define: {
     API_ENV: env,
     API_PROXY,
-    API_PREFIX: !isProxy ? api_proxy_target : API_PROXY,
+    API_PREFIX: !isProxy ? api_proxy_target : API_PROXY
   },
 
   // 配置 react 和 react-dom 不打入代码
@@ -109,7 +109,10 @@ export default {
   //   "react-dom": "window.ReactDOM"
   // }
   alias: {
-    '@': resolve(__dirname, '../src/')
+    '@': resolve(__dirname, '../src/'),
+    feelers: resolve(__dirname, '../node_modules/feelers/dist/index.js')
+    // 'htm/preact': resolve(__dirname, '../node_modules/htm/dist/index.js'),
+    // htm: resolve(__dirname, '../node_modules/htm/dist/index.js')
   },
 
   proxy: {

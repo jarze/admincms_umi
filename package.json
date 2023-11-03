@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "start": "umi dev",
     "start:mock": "cross-env API_ENV=mock umi dev",
@@ -14,18 +15,27 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^4.6.2",
+    "@bpmn-io/properties-panel": "^3.11.0",
     "@types/lodash": "^4.14.150",
     "antd": "^3.26.15",
+    "bpmn-js": "^14.2.0",
+    "bpmn-js-i18n": "^1.2.0",
+    "bpmn-js-properties-panel": "5.5.0",
+    "bpmn-js-properties-panel-flowable": "^1.0.0",
+    "bpmn-moddle": "^8.0.1",
+    "camunda-bpmn-moddle": "^7.0.1",
     "classnames": "^2.3.1",
     "color": "^4.2.3",
     "cross-env": "^5.2.1",
     "dva": "^2.6.0-beta.4",
     "echarts": "^4.7.0",
     "echarts-for-react": "^3.0.2",
+    "i18next": "^23.6.0",
     "lodash.debounce": "^4.0.8",
     "react": "^16.8.6",
     "react-cropper": "^2.1.8",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "zeebe-bpmn-moddle": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",

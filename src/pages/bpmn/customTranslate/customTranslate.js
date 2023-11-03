@@ -1,0 +1,13 @@
+import { get } from 'lodash'
+import translations from './translations'
+
+export default function customTranslate(template, replacements) {
+  replacements = replacements || {}
+
+  // Translate
+  template = get(translations, template) || template
+  // Replace
+  return template?.replace?.(/{([^}]+)}/g, function(_, key) {
+    return replacements[key] || '{' + key + '}'
+  })
+}

@@ -3,6 +3,7 @@ declare module '*.png'
 declare module '*.svg'
 declare module '*.less'
 declare module '*.js'
+declare module '*.xml'
 
 declare const API_PREFIX: string
 /** 环境 */
