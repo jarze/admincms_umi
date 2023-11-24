@@ -1,0 +1,26 @@
+.viewport-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  // background-image: linear-gradient(transparent 14px, #c7c7c7 0),
+  //   linear-gradient(90deg, transparent 14px, #c7c7c7 0);
+  // background-size: 15px 15px, 15px 15px;
+  overflow: auto;
+}
+.zoomable-viewport {
+  cursor: grab;
+  display: block;
+  padding: 16px 800px 800px;
+  min-width: 5200px;
+  min-height: 1200px;
+}
+.zoomable-inner {
+  transform-origin: 0px 0px;
+}
+
+.set {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
