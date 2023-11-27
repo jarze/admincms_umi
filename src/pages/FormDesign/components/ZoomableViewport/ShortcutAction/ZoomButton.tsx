@@ -24,11 +24,13 @@ export const ZoomButtons = memo(({ zoom, onZoomChange }: any) => {
 
   return (
     <>
-      <Button icon="plus" onClick={handleZoomIn}></Button>
-      <Tooltip title="重置">
-        <Button onClick={handleReset}>{zoom}</Button>
+      <Button icon="plus" onClick={handleZoomIn} type="link" size="large" />
+      <Tooltip title="重置" placement="left">
+        <Button onClick={handleReset} type="link" size="large">
+          {+Number(zoom).toFixed(1)}
+        </Button>
       </Tooltip>
-      <Button icon="minus" onClick={handleZoomOut}></Button>
+      <Button icon="minus" onClick={handleZoomOut} type="link" size="large" />
     </>
   )
 })

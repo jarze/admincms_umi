@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import styles from './index.less'
+import { DRAG_TRANSFER_ELEMENT_ID } from './constants'
 
 const DragItem = ({ children, item }) => {
   const itemRef = useRef<HTMLSpanElement>()
@@ -21,7 +22,7 @@ const DragItem = ({ children, item }) => {
       onDragStart={event => {
         setParams({ dragging: true })
         event.stopPropagation()
-        event.dataTransfer.setData('element', JSON.stringify(item))
+        event.dataTransfer.setData(DRAG_TRANSFER_ELEMENT_ID, item.id)
       }}
       onDragEnd={event => {
         setParams({ dragging: false })

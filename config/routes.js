@@ -13,6 +13,16 @@ export default [
     Routes: ['./src/routes/auth.js']
   },
   {
+    path: '/design/form/frame',
+    component: 'FormDesign/Frame'
+  },
+  {
+    path: 'design',
+    component: 'FormDesign/layout',
+    routes: [{ path: '', component: 'FormDesign/index' }]
+  },
+
+  {
     path: '/',
     component: '../layouts/index',
     Routes: ['./src/routes/auth.js'],

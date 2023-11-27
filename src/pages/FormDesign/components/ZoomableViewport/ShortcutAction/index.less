@@ -1,5 +1,21 @@
+@import '~antd/lib/style/themes/default.less';
+
 .action {
   position: absolute;
   top: 0;
   right: 0;
+  display: flex;
+  flex-flow: column;
+  -webkit-box-align: center;
+  align-items: center;
+  box-shadow: @box-shadow-base;
+  // background-color: @black;
+  background-color: @text-color;
+  border-radius: @border-radius-base;
+  border: 1px solid @border-color-base;
+  :global {
+    button {
+      padding: 0;
+    }
+  }
 }

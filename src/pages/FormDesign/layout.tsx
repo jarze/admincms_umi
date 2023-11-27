@@ -1,15 +1,7 @@
 import React, { createContext, useState, useCallback, useMemo } from 'react'
-import config from './config'
 import MenuComponent from './components/MenuComponent'
-import HandlerModalForm from '@/components/HandlerModalForm'
-
-const groups = Array.from(
-  new Set(config.elements.reduce((p, i) => [...p, ...i.groups], []))
-).reduce((p, i) => {
-  const item = { name: i, items: config.elements.filter(j => j.groups.includes(i)) }
-  p.push(item)
-  return p
-}, [])
+// import HandlerModalForm from '@/components/HandlerModalForm'
+import { groups } from './constants'
 
 export interface FormContextProps {
   canvasConfig?: any
@@ -26,7 +18,8 @@ export default function layout(params) {
     //画布高度
     canvasHeight: 800,
     //实际屏宽，用于设置iframe的scale
-    screenWidth: 1280
+
+    screenWidth: 1480
   })
 
   const showMenu = useCallback(() => {
