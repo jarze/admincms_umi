@@ -1,20 +1,22 @@
 import React, { ReactChild } from 'react'
 import { Table } from 'antd'
 import SelectAlert from './SelectAlert'
-import { TableProps, PaginationConfig } from 'antd/lib/table/interface'
-export { ColumnProps } from 'antd/lib/table/interface'
+import { TableProps, PaginationConfig } from 'antd/es/table'
+
 export const defaultPaginationConfig: PaginationConfig = {
   pageSizeOptions: ['50', '100', '150'],
   showQuickJumper: true,
   showSizeChanger: true,
   onShowSizeChange: () => {},
-  showTotal: total => `共 ${total} 条`,
+  showTotal: total => `共 ${total} 条`
 }
 
 export interface BaseTableProps<T> extends TableProps<T> {
   selectAlert?: {
-    (selectedRowKeys: string[] | number[] | undefined, props: any): ReactChild // alert 其他显示内容
-    hide?: boolean // 隐藏显示alert
+    /** alert 其他显示内容 */
+    (selectedRowKeys: string[] | number[] | undefined, props: any): ReactChild
+    /** 隐藏显示alert */
+    hide?: boolean
   }
 }
 
@@ -23,7 +25,7 @@ function TableSelect<RecordType extends object = any>({ pagination, selectAlert,
     ? {
         ...defaultPaginationConfig,
         onShowSizeChange: pagination.onShowSizeChange || pagination.onChange || defaultPaginationConfig.onShowSizeChange,
-        ...pagination,
+        ...pagination
       }
     : pagination
 

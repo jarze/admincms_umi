@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect, useMemo, ReactNode } from 'react'
 import { Form, Input, Button, Divider, Row, Col } from 'antd'
-import { FormProps, FormItemProps } from 'antd/lib/form'
-import { GetFieldDecoratorOptions, WrappedFormUtils } from 'antd/lib/form/Form'
-import { ColProps } from 'antd/lib/col'
+import { FormProps, FormItemProps } from 'antd/es/form'
+import { GetFieldDecoratorOptions, WrappedFormUtils } from 'antd/es/form/Form'
+import { ColProps } from 'antd/es/col'
 import styles from './index.less'
 
 const FormItem = Form.Item
 
-// 布局类型
+/** 布局类型 */
 export type ColType = 'follow' | 'col' | 'center'
 
 export const validateMessages = {
   required: () => '必填',
   string: {
-    max: (a: any, b: any) => `不超过${b}个字符`,
-  },
+    max: (a: any, b: any) => `不超过${b}个字符`
+  }
 }
 
 export interface BaseFormItemProps extends FormItemProps {
@@ -32,11 +32,16 @@ export interface BaseFormItemProps extends FormItemProps {
 export interface BaseFormProps extends FormProps {
   type?: ColType
   loading?: boolean
-  col?: number // 固定排版 24 8,type = 'col'时有效
-  submitCol?: number // 提交按钮固定排版, type = 'col'时有效
-  okText?: string // 确定按钮
-  cancelText?: string // 取消按钮
-  data?: { [k: string]: any } // 表单值
+  /** 固定排版 24 8,type = 'col'时有效 */
+  col?: number
+  /** 提交按钮固定排版, type = 'col'时有效 */
+  submitCol?: number
+  /** 确定按钮 */
+  okText?: string
+  /** 取消按钮 */
+  cancelText?: string
+  /** 表单值 */
+  data?: { [k: string]: any }
   items?: BaseFormItemProps[]
   onValuesChange?: (changedValues: any, allValues: any) => void
   onSubmit?: (values: { [k: string]: any }, ...others: any[]) => void
@@ -63,8 +68,10 @@ export const CForm = ({
   useEffect(() => {
     if (data) form!.resetFields()
   }, [data])
-
-  const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(() => getColWap(type, items, col, submitCol), [items.length, type])
+  const [FormContentWap, FormItemWap, ForSubmitItemWap] = useMemo(
+    () => getColWap(type, items, col, submitCol),
+    [items.length, type]
+  )
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -82,7 +89,21 @@ export const CForm = ({
   }
 
   const formContent = items.map(
-    ({ cols, key, label, placeholder, options, render, defaultValue, disabled = false, optionsFun, ...itemProps }: BaseFormItemProps, index) => {
+    (
+      {
+        cols,
+        key,
+        label,
+        placeholder,
+        options,
+        render,
+        defaultValue,
+        disabled = false,
+        optionsFun,
+        ...itemProps
+      }: BaseFormItemProps,
+      index
+    ) => {
       if (render === null || (render && render(form, data) === null)) return null
       return (
         <FormItemWap key={key || index} index={index} {...cols}>
@@ -91,23 +112,37 @@ export const CForm = ({
               {form!.getFieldDecorator(key, {
                 initialValue: data && data[key] !== undefined ? data[key] : defaultValue,
                 ...options,
-                ...(optionsFun && optionsFun(form, data)),
-              })(render ? render(form, data) : <Input type="text" disabled={disabled} placeholder={placeholder || (label ? `输入${label}` : '')} />)}
+                ...(optionsFun && optionsFun(form, data))
+              })(
+                render ? (
+                  render(form, data)
+                ) : (
+                  <Input
+                    type="text"
+                    disabled={disabled}
+                    placeholder={placeholder || (label ? `输入${label}` : '')}
+                  />
+                )
+              )}
             </FormItem>
           ) : (
-            // 不指定key， 直接渲染render内容
+            /** 不指定key， 直接渲染render内容 */
             render && render(form, data)
           )}
         </FormItemWap>
       )
-    },
+    }
   )
 
   const formSubmit = (onSubmit || onReset) && (
     <ForSubmitItemWap>
       <FormItem
         style={type === 'center' ? { textAlign: 'center' } : { float: 'right', marginRight: 0 }}
-        wrapperCol={type === 'center' ? { offset: (formProps.labelCol || {}).span, ...formProps.wrapperCol } : {}}
+        wrapperCol={
+          type === 'center'
+            ? { offset: (formProps.labelCol || {}).span, ...formProps.wrapperCol }
+            : {}
+        }
       >
         {onSubmit && (
           <Button type="primary" htmlType="submit" loading={loading}>
@@ -146,7 +181,7 @@ export default Form.create({
   onValuesChange: ({ onValuesChange }: any, changedValues, allValues) => {
     onValuesChange && onValuesChange(changedValues, allValues)
   },
-  validateMessages,
+  validateMessages
 })(CForm)
 
 const getColWap = (type: ColType, items: BaseFormItemProps[], col?: number, submitCol?: number) => {
@@ -167,7 +202,7 @@ const handleCol = (cols, handleCols = {}) => {
   return handleCols
 }
 
-// 计算Col换行
+/** 计算Col换行 */
 const getColWrapper = (items: BaseFormItemProps[], col?: number, submitCol?: number) => {
   const count = items.length
   const submitCols = { span: submitCol }
@@ -177,7 +212,7 @@ const getColWrapper = (items: BaseFormItemProps[], col?: number, submitCol?: num
     const itemCols = {}
     Object.keys(cols).forEach(key => {
       let sum: number = cols[key] + (preCols[key] || 0)
-      // 换行
+      /** 换行 */
       itemCols[key] = sum > 24 ? cols[key] : sum
     })
     if (!submitCol && index === count - 1) {

@@ -14,13 +14,14 @@ const isProxy = env !== ENV_TEST
 //gh-pages test配置二级目录
 const env_test_params = env === ENV_TEST && {
   base: '/admincms_umi/',
-  publicPath: '/admincms_umi/',
+  publicPath: '/admincms_umi/'
   // history: 'hash',
 }
 
 export default {
   ...env_test_params,
   treeShaking: true,
+  hash: true,
   plugins: [
     //  // npm 依赖
     //  'umi-plugin-react',
@@ -37,21 +38,27 @@ export default {
         dva: true,
         dynamicImport: {
           webpackChunkName: true,
-          loadingComponent: './components/PageLoading/index',
+          loadingComponent: './components/PageLoading/index'
         },
         title: 'AdminCms_umi',
         // dll: true,
         locale: {
           enable: true,
-          default: 'zh-CN',
+          default: 'zh-CN'
         },
 
         // 路由
         routes: {
-          exclude: [/models\//, /services\//, /model\.(t|j)sx?$/, /service\.(t|j)sx?$/, /components\//],
-        },
-      },
-    ],
+          exclude: [
+            /models\//,
+            /services\//,
+            /model\.(t|j)sx?$/,
+            /service\.(t|j)sx?$/,
+            /components\//
+          ]
+        }
+      }
+    ]
   ],
 
   // 路由 优先使用配置式路由，且约定式路由会不生效
@@ -78,14 +85,14 @@ export default {
   // 配置浏览器最低版本，会自动引入 polyfill 和做语法转换，配置的 targets 会和合并到默认值，所以不需要重复配置。
   // Default: { chrome: 49, firefox: 45, safari: 10, edge: 13, ios: 10 }
   targets: {
-    ie: 11,
+    ie: 11
   },
   // 	context
   // 类型：Object
   // 默认值：{}
   // 配置全局 context，会覆盖到每个 pages 里的 context。
   mock: {
-    exclude: env === ENV_MOCK ? [] : ['mock/*'],
+    exclude: env === ENV_MOCK ? [] : ['mock/*']
   },
   // 配置主题
   theme: theme,
@@ -97,7 +104,7 @@ export default {
     API_ENV_MOCK: ENV_MOCK,
     API_ENV_DEV: ENV_DEV,
     API_ENV_TEST: ENV_TEST,
-    API_ENV_PRO: ENV_PRO,
+    API_ENV_PRO: ENV_PRO
   },
 
   // 配置 react 和 react-dom 不打入代码
@@ -106,19 +113,19 @@ export default {
   //   "react-dom": "window.ReactDOM"
   // }
   alias: {
-    '@': resolve(__dirname, '../src/'),
+    '@': resolve(__dirname, '../src/')
   },
 
   proxy: {
     [API_PROXY]: {
       target: api_proxy_target,
       changeOrigin: true,
-      pathRewrite: { [`^${API_PROXY}`]: '' },
-    },
+      pathRewrite: { [`^${API_PROXY}`]: '' }
+    }
   },
   block: {
-    closeFastGithub: true,
+    closeFastGithub: true
     // defaultGitUrl: 'https://github.com/jarze/umi-blocks.git',
     // defaultGitUrl: 'https://github.com/ant-design/pro-blocks',
-  },
+  }
 }
