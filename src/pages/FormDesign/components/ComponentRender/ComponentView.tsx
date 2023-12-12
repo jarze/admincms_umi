@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, memo } from 'react'
 import { usePreviewComponent } from '../../hooks/usePreviewComponent'
 import { useLocked } from '../../hooks/useLocked'
 import { NodeContext } from '../../context/contexts'
 import { Locked } from './Locked'
 
-export const ComponentView = props => {
+export const ComponentView = memo<any>(props => {
   const { node } = props
 
   const Component = usePreviewComponent(node.componentName)
@@ -22,10 +22,10 @@ export const ComponentView = props => {
       </Component>
     ) : (
       <Locked lock={locked}>
-        <Component></Component>
+        <Component key={node.id} {...(node.props || {})} />
       </Locked>
     )
   }, [node])
 
   return <NodeContext.Provider value={node}>{render()}</NodeContext.Provider>
-}
+})

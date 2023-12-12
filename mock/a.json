@@ -1,0 +1,7466 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Api Documentation",
+    "description": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://172.16.11.85:38709",
+      "description": "Inferred Url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "业务分类表管理{915023BFD91A4763947BB28C59D1F291}",
+      "description": "Business Type Controller"
+    },
+    {
+      "name": "业务过程表管理{1F12ACD246D444ECB5227105AF6932D2}",
+      "description": "Business Process Controller"
+    },
+    {
+      "name": "主题域表管理{6BC75E30EF954F8185CFB2D883C4AA6F}",
+      "description": "Subject Domain Controller"
+    },
+    {
+      "name": "字段标准表管理{B63FC59D032840C0A6AA048929CBB588}",
+      "description": "Field Std Controller"
+    },
+    {
+      "name": "数据分层表管理{0DD01497CA0D457993985E1B025C0CA7}",
+      "description": "Data Warehouse Hierarchy Controller"
+    },
+    {
+      "name": "数据域表管理{B8BA7BDEF2CF49C0A1A2B0E20FFA2FF8}",
+      "description": "Data Domain Controller"
+    },
+    {
+      "name": "数据集市表管理{B72AC744EA834104A0C6B4519C397956}",
+      "description": "Data Mart Controller"
+    },
+    {
+      "name": "标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}",
+      "description": "Code Std Controller"
+    },
+    {
+      "name": "标准单位表管理{FD1EFE0D219E44B7B7FDD476F5D7E7F8}",
+      "description": "Unit Std Controller"
+    },
+    {
+      "name": "模型规则表管理{39AFAE639E8442FD8B594F64D583E924}",
+      "description": "Mode Rule Controller"
+    },
+    {
+      "name": "维度建模-维度管理{7D18C969D78647E8B269F9E3499D31A6}",
+      "description": "Dimension Controller"
+    },
+    {
+      "name": "维度建模-表管理{91C271B0D8B544D6B743F41B8A2E0D63}",
+      "description": "Mode Table Controller"
+    },
+    {
+      "name": "词典表管理{440270D50C5B4168AAB767B28252411E}",
+      "description": "Dwh Dictionary Controller"
+    }
+  ],
+  "paths": {
+    "/dc/business-process": {
+      "put": {
+        "tags": ["业务过程表管理{1F12ACD246D444ECB5227105AF6932D2}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_10",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessProcessEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["业务过程表管理{1F12ACD246D444ECB5227105AF6932D2}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_10",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessProcessInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["业务过程表管理{1F12ACD246D444ECB5227105AF6932D2}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_12",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/business-process/detail/{id}": {
+      "get": {
+        "tags": ["业务过程表管理{1F12ACD246D444ECB5227105AF6932D2}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessProcessDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/business-process/list": {
+      "get": {
+        "tags": ["业务过程表管理{1F12ACD246D444ECB5227105AF6932D2}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_3",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "createBy",
+            "in": "query",
+            "description": "创建人",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataId",
+            "in": "query",
+            "description": "数据域id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "director",
+            "in": "query",
+            "description": "负责人",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enName",
+            "in": "query",
+            "description": "英文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«BusinessProcessListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/business-type": {
+      "put": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessTypeEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessTypeInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_13",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/business-type/data/{id}": {
+      "get": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "获取业务类型的数据域",
+        "operationId": "typeDataUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DataDomainSelectVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "修改业务类型的数据域",
+        "operationId": "updateTypeDataUsingPUT",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/business-type/detail/{id}": {
+      "get": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessTypeDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/business-type/list": {
+      "get": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_4",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "上级ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«BusinessTypeListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/business-type/tree": {
+      "get": {
+        "tags": ["业务分类表管理{915023BFD91A4763947BB28C59D1F291}"],
+        "summary": "树形列表",
+        "operationId": "treeListUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BusinessTypeTreeListVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/code-std": {
+      "put": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_12",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeStdEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_12",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeStdInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_14",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/code-std/detail/{id}": {
+      "get": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeStdDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/code-std/folder": {
+      "post": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "创建目录",
+        "operationId": "addFolderUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DirDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/code-std/folder/tree": {
+      "get": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "获取目录树",
+        "operationId": "folderTreeUsingGET",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "keyword",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DirVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/code-std/folder/{id}": {
+      "delete": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "删除目录",
+        "operationId": "deleteFolderUsingDELETE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/code-std/list": {
+      "get": {
+        "tags": ["标准代码管理{18FC794A2B9D493E9000480EAC7A0C25}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_5",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dirId",
+            "in": "query",
+            "description": "目录ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enName",
+            "in": "query",
+            "description": "英文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "remark",
+            "in": "query",
+            "description": "描述",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«CodeStdListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/data-domain": {
+      "put": {
+        "tags": ["数据域表管理{B8BA7BDEF2CF49C0A1A2B0E20FFA2FF8}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_13",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataDomainEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["数据域表管理{B8BA7BDEF2CF49C0A1A2B0E20FFA2FF8}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_13",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataDomainInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["数据域表管理{B8BA7BDEF2CF49C0A1A2B0E20FFA2FF8}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_15",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/data-domain/detail/{id}": {
+      "get": {
+        "tags": ["数据域表管理{B8BA7BDEF2CF49C0A1A2B0E20FFA2FF8}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataDomainDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/data-domain/list": {
+      "get": {
+        "tags": ["数据域表管理{B8BA7BDEF2CF49C0A1A2B0E20FFA2FF8}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_6",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "director",
+            "in": "query",
+            "description": "负责人",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enName",
+            "in": "query",
+            "description": "英文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«DataDomainListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/data-mart": {
+      "put": {
+        "tags": ["数据集市表管理{B72AC744EA834104A0C6B4519C397956}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_14",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataMartEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["数据集市表管理{B72AC744EA834104A0C6B4519C397956}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_14",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataMartInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["数据集市表管理{B72AC744EA834104A0C6B4519C397956}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_16",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/data-mart/detail/{id}": {
+      "get": {
+        "tags": ["数据集市表管理{B72AC744EA834104A0C6B4519C397956}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataMartDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/data-mart/list": {
+      "get": {
+        "tags": ["数据集市表管理{B72AC744EA834104A0C6B4519C397956}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_7",
+        "parameters": [
+          {
+            "name": "busTypeId",
+            "in": "query",
+            "description": "业务分类ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "martType",
+            "in": "query",
+            "description": "集市类型：PUBLIC-公共集市、BUSINESS-业务集市、APPLICATION-应用集市",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "enum": ["APPLICATION", "BUSINESS", "PUBLIC"]
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "上级ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«DataMartListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/data-mart/tree": {
+      "get": {
+        "tags": ["数据集市表管理{B72AC744EA834104A0C6B4519C397956}"],
+        "summary": "树形列表",
+        "operationId": "treeListUsingGET_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DataMartTreeListVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/warehouse-hierarchy": {
+      "put": {
+        "tags": ["数据分层表管理{0DD01497CA0D457993985E1B025C0CA7}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_15",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataWarehouseHierarchyEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["数据分层表管理{0DD01497CA0D457993985E1B025C0CA7}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_15",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataWarehouseHierarchyInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["数据分层表管理{0DD01497CA0D457993985E1B025C0CA7}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_17",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/warehouse-hierarchy/detail/{id}": {
+      "get": {
+        "tags": ["数据分层表管理{0DD01497CA0D457993985E1B025C0CA7}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataWarehouseHierarchyDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/warehouse-hierarchy/list": {
+      "get": {
+        "tags": ["数据分层表管理{0DD01497CA0D457993985E1B025C0CA7}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_8",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enName",
+            "in": "query",
+            "description": "英文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modelList",
+            "in": "query",
+            "required": false,
+            "style": "pipeDelimited",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "modelType",
+            "in": "query",
+            "description": "模型类型",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "APPLICATION",
+                "DETAIL",
+                "DIM",
+                "DIMENSION",
+                "DIMENSION_DIM",
+                "SOURCE",
+                "SUMMARY"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "分层类型：DIM-贴源层、DWD-公共层、ADS-应用层",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "enum": ["ADS", "DIM", "DWD"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«DataWarehouseHierarchyListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/dimension": {
+      "put": {
+        "tags": ["维度建模-维度管理{7D18C969D78647E8B269F9E3499D31A6}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_16",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DimensionEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["维度建模-维度管理{7D18C969D78647E8B269F9E3499D31A6}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_16",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DimensionInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["维度建模-维度管理{7D18C969D78647E8B269F9E3499D31A6}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_18",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/dimension/detail/{id}": {
+      "get": {
+        "tags": ["维度建模-维度管理{7D18C969D78647E8B269F9E3499D31A6}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DimensionDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/dimension/list": {
+      "get": {
+        "tags": ["维度建模-维度管理{7D18C969D78647E8B269F9E3499D31A6}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_9",
+        "parameters": [
+          {
+            "name": "busTypeId",
+            "in": "query",
+            "description": "业务分类ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "模型名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataId",
+            "in": "query",
+            "description": "数据域ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "director",
+            "in": "query",
+            "description": "负责人",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dwhId",
+            "in": "query",
+            "description": "数仓分层id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "submitFlag",
+            "in": "query",
+            "description": "是否提交",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "updateBy",
+            "in": "query",
+            "description": "描述",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«DimensionListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/dictionary": {
+      "put": {
+        "tags": ["词典表管理{440270D50C5B4168AAB767B28252411E}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_17",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DictionaryEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["词典表管理{440270D50C5B4168AAB767B28252411E}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_17",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DictionaryInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["词典表管理{440270D50C5B4168AAB767B28252411E}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_19",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/dictionary/detail/{id}": {
+      "get": {
+        "tags": ["词典表管理{440270D50C5B4168AAB767B28252411E}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DictionaryDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/dictionary/list": {
+      "get": {
+        "tags": ["词典表管理{440270D50C5B4168AAB767B28252411E}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_10",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enName",
+            "in": "query",
+            "description": "英文名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«DictionaryListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/field-std": {
+      "put": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_18",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldStdEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_18",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldStdInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_20",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/field-std/detail/{id}": {
+      "get": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_10",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldStdDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/field-std/folder": {
+      "put": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "编辑目录名称",
+        "operationId": "updateFolderNameUsingPUT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DirEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "创建目录",
+        "operationId": "addFolderUsingPOST_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DirDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/field-std/folder/tree": {
+      "get": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "获取目录树",
+        "operationId": "folderTreeUsingGET_1",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "keyword",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DirVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/field-std/folder/{id}": {
+      "delete": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "删除目录",
+        "operationId": "deleteFolderUsingDELETE_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/field-std/list": {
+      "get": {
+        "tags": ["字段标准表管理{B63FC59D032840C0A6AA048929CBB588}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_11",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "编码",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dirId",
+            "in": "query",
+            "description": "所属目录ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "enName",
+            "in": "query",
+            "description": "英文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FieldStdListVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/mode-rule": {
+      "put": {
+        "tags": ["模型规则表管理{39AFAE639E8442FD8B594F64D583E924}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_19",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModeRuleEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["模型规则表管理{39AFAE639E8442FD8B594F64D583E924}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_19",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModeRuleInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["模型规则表管理{39AFAE639E8442FD8B594F64D583E924}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/mode-rule/detail/{id}": {
+      "get": {
+        "tags": ["模型规则表管理{39AFAE639E8442FD8B594F64D583E924}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_11",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModeRuleListVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/mode-rule/list": {
+      "get": {
+        "tags": ["模型规则表管理{39AFAE639E8442FD8B594F64D583E924}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_12",
+        "parameters": [
+          {
+            "name": "dwhId",
+            "in": "query",
+            "description": "数仓分层ID",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ruleName",
+            "in": "query",
+            "description": "规则名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ruleType",
+            "in": "query",
+            "description": "规则类型：TABLE-表名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "enum": ["TABLE"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModeRuleListVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/mode-table": {
+      "put": {
+        "tags": ["维度建模-表管理{91C271B0D8B544D6B743F41B8A2E0D63}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_20",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModeTableEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["维度建模-表管理{91C271B0D8B544D6B743F41B8A2E0D63}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_20",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModeTableInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["维度建模-表管理{91C271B0D8B544D6B743F41B8A2E0D63}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_22",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/mode-table/detail/{id}": {
+      "get": {
+        "tags": ["维度建模-表管理{91C271B0D8B544D6B743F41B8A2E0D63}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_12",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModeTableDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/mode-table/list": {
+      "get": {
+        "tags": ["维度建模-表管理{91C271B0D8B544D6B743F41B8A2E0D63}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_13",
+        "parameters": [
+          {
+            "name": "busTypeId",
+            "in": "query",
+            "description": "业务分类ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "模型名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataId",
+            "in": "query",
+            "description": "数据域ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "director",
+            "in": "query",
+            "description": "负责人",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dwhId",
+            "in": "query",
+            "description": "数仓分层id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dwhType",
+            "in": "query",
+            "description": "数仓分层id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "enum": ["ADS", "DIM", "DWD"]
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "submitFlag",
+            "in": "query",
+            "description": "是否提交",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "updateBy",
+            "in": "query",
+            "description": "描述",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«ModeTableListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/mode-table/tree": {
+      "get": {
+        "tags": ["维度建模-表管理{91C271B0D8B544D6B743F41B8A2E0D63}"],
+        "summary": "列表",
+        "operationId": "treeListUsingGET_2",
+        "parameters": [
+          {
+            "name": "busTypeId",
+            "in": "query",
+            "description": "业务分类ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataId",
+            "in": "query",
+            "description": "数据域ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dwhType",
+            "in": "query",
+            "description": "数仓分层类别",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "enum": ["ADS", "DIM", "DWD"]
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "selectMode",
+            "in": "query",
+            "description": "查询模式：1-按业务分类查询，2-按数据域查询",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "enum": ["1", "2"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TreeVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/subject-domain": {
+      "put": {
+        "tags": ["主题域表管理{6BC75E30EF954F8185CFB2D883C4AA6F}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubjectDomainEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["主题域表管理{6BC75E30EF954F8185CFB2D883C4AA6F}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubjectDomainInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["主题域表管理{6BC75E30EF954F8185CFB2D883C4AA6F}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_23",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/subject-domain/detail/{id}": {
+      "get": {
+        "tags": ["主题域表管理{6BC75E30EF954F8185CFB2D883C4AA6F}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_13",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubjectDomainDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/subject-domain/list": {
+      "get": {
+        "tags": ["主题域表管理{6BC75E30EF954F8185CFB2D883C4AA6F}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_14",
+        "parameters": [
+          {
+            "name": "cnName",
+            "in": "query",
+            "description": "中文名",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "martId",
+            "in": "query",
+            "description": "数据集市ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "当前页码，默认值1",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页显示数量, 默认值10",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "上级主题",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResult«SubjectDomainListVo»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/subject-domain/tree": {
+      "get": {
+        "tags": ["主题域表管理{6BC75E30EF954F8185CFB2D883C4AA6F}"],
+        "summary": "树形列表",
+        "operationId": "treeListUsingGET_3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DataMartTreeListVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/unit-std": {
+      "put": {
+        "tags": ["标准单位表管理{FD1EFE0D219E44B7B7FDD476F5D7E7F8}"],
+        "summary": "编辑",
+        "operationId": "updateUsingPUT_22",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitStdEditDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": ["标准单位表管理{FD1EFE0D219E44B7B7FDD476F5D7E7F8}"],
+        "summary": "新增",
+        "operationId": "addUsingPOST_22",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitStdInsertDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["标准单位表管理{FD1EFE0D219E44B7B7FDD476F5D7E7F8}"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_24",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/dc/unit-std/detail/{id}": {
+      "get": {
+        "tags": ["标准单位表管理{FD1EFE0D219E44B7B7FDD476F5D7E7F8}"],
+        "summary": "详情",
+        "operationId": "detailInfoUsingGET_14",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitStdDetailVo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/unit-std/dir/list": {
+      "get": {
+        "tags": ["标准单位表管理{FD1EFE0D219E44B7B7FDD476F5D7E7F8}"],
+        "summary": "目录列表",
+        "operationId": "selectDirListUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValue"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/dc/unit-std/list": {
+      "get": {
+        "tags": ["标准单位表管理{FD1EFE0D219E44B7B7FDD476F5D7E7F8}"],
+        "summary": "列表",
+        "operationId": "selectListUsingGET_15",
+        "parameters": [
+          {
+            "name": "dirId",
+            "in": "query",
+            "description": "分类目录ID",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "关键字",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnitStdListVo"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BusinessProcessDetailVo": {
+        "title": "BusinessProcessDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dataId": {
+            "type": "string",
+            "description": "数据域id"
+          },
+          "dataName": {
+            "type": "string",
+            "description": "数据域名称"
+          },
+          "defaultFlag": {
+            "type": "integer",
+            "description": "是否系统默认（1为是，其他为不是）",
+            "format": "int32"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "BusinessProcessEditDto": {
+        "title": "BusinessProcessEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "BusinessProcessInsertDto": {
+        "title": "BusinessProcessInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "dataId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据域id"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "BusinessProcessListVo": {
+        "title": "BusinessProcessListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dataId": {
+            "type": "string",
+            "description": "数据域id"
+          },
+          "dataName": {
+            "type": "string",
+            "description": "数据域名称"
+          },
+          "defaultFlag": {
+            "type": "integer",
+            "description": "是否系统默认（1为是，其他为不是）",
+            "format": "int32"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "BusinessTypeDetailVo": {
+        "title": "BusinessTypeDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级ID"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "reviewer": {
+            "type": "string",
+            "description": "评审人（多个则逗号隔开）"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "BusinessTypeEditDto": {
+        "title": "BusinessTypeEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          },
+          "reviewer": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "评审人（多个则逗号隔开）"
+          }
+        }
+      },
+      "BusinessTypeInsertDto": {
+        "title": "BusinessTypeInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "上级ID"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          },
+          "reviewer": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "评审人（多个则逗号隔开）"
+          }
+        }
+      },
+      "BusinessTypeListVo": {
+        "title": "BusinessTypeListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级ID"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "reviewer": {
+            "type": "string",
+            "description": "评审人（多个则逗号隔开）"
+          }
+        }
+      },
+      "BusinessTypeTreeListVo": {
+        "title": "BusinessTypeTreeListVo",
+        "type": "object",
+        "properties": {
+          "children": {
+            "type": "array",
+            "description": "子数据",
+            "items": {
+              "$ref": "#/components/schemas/BusinessTypeTreeListVo"
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级ID"
+          }
+        }
+      },
+      "CodeDetailDto": {
+        "title": "CodeDetailDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码名称"
+          },
+          "code": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "代码编码"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码英文名称"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码取值"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码含义"
+          }
+        }
+      },
+      "CodeDetailVo": {
+        "title": "CodeDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "编码名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "代码编码"
+          },
+          "enName": {
+            "type": "string",
+            "description": "编码英文名称"
+          },
+          "name": {
+            "type": "string",
+            "description": "编码取值"
+          },
+          "remark": {
+            "type": "string",
+            "description": "编码含义"
+          }
+        }
+      },
+      "CodeStdDetailVo": {
+        "title": "CodeStdDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "detailList": {
+            "type": "array",
+            "description": "详情列表",
+            "items": {
+              "$ref": "#/components/schemas/CodeDetailVo"
+            }
+          },
+          "dirId": {
+            "type": "string",
+            "description": "目录ID"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "描述"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "CodeStdEditDto": {
+        "title": "CodeStdEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "detailList": {
+            "type": "array",
+            "description": "代码编码值",
+            "items": {
+              "$ref": "#/components/schemas/CodeDetailDto"
+            }
+          },
+          "dirId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "目录ID"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称(代码编号)"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          }
+        }
+      },
+      "CodeStdInsertDto": {
+        "title": "CodeStdInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "detailList": {
+            "type": "array",
+            "description": "代码编码值列表",
+            "items": {
+              "$ref": "#/components/schemas/CodeDetailDto"
+            }
+          },
+          "dirId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "目录ID"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称(代码编号)"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          }
+        }
+      },
+      "CodeStdListVo": {
+        "title": "CodeStdListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dirId": {
+            "type": "string",
+            "description": "目录ID"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "描述"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DataDomainDetailVo": {
+        "title": "DataDomainDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "defaultFlag": {
+            "type": "integer",
+            "description": "是否系统默认（1为是，其他为不是）",
+            "format": "int32"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "reviewer": {
+            "type": "string",
+            "description": "评审人（多个则逗号隔开）"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DataDomainEditDto": {
+        "title": "DataDomainEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          },
+          "reviewer": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "评审人（多个则逗号隔开）"
+          }
+        }
+      },
+      "DataDomainInsertDto": {
+        "title": "DataDomainInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          },
+          "reviewer": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "评审人（多个则逗号隔开）"
+          }
+        }
+      },
+      "DataDomainListVo": {
+        "title": "DataDomainListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "defaultFlag": {
+            "type": "integer",
+            "description": "是否系统默认（1为是，其他为不是）",
+            "format": "int32"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DataDomainSelectVo": {
+        "title": "DataDomainSelectVo",
+        "type": "object",
+        "properties": {
+          "checked": {
+            "type": "string",
+            "description": "是否选中：1-checked,2-unchecked"
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "DataMartDetailVo": {
+        "title": "DataMartDetailVo",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "busTypeName": {
+            "type": "string",
+            "description": "业务分类名称"
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "martType": {
+            "type": "string",
+            "description": "集市类型：PUBLIC-公共集市、BUSINESS-业务集市、APPLICATION-应用集市",
+            "enum": ["APPLICATION", "BUSINESS", "PUBLIC"]
+          },
+          "martTypeName": {
+            "type": "string",
+            "description": "集市类型：PUBLIC-公共集市、BUSINESS-业务集市、APPLICATION-应用集市名称"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级ID"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DataMartEditDto": {
+        "title": "DataMartEditDto",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "martType": {
+            "type": "string",
+            "description": "集市类型：PUBLIC-公共集市、BUSINESS-业务集市、APPLICATION-应用集市",
+            "enum": ["APPLICATION", "BUSINESS", "PUBLIC"]
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "DataMartInsertDto": {
+        "title": "DataMartInsertDto",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "martType": {
+            "type": "string",
+            "description": "集市类型：PUBLIC-公共集市、BUSINESS-业务集市、APPLICATION-应用集市",
+            "enum": ["APPLICATION", "BUSINESS", "PUBLIC"]
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级ID"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "DataMartListVo": {
+        "title": "DataMartListVo",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "martType": {
+            "type": "string",
+            "description": "集市类型：PUBLIC-公共集市、BUSINESS-业务集市、APPLICATION-应用集市",
+            "enum": ["APPLICATION", "BUSINESS", "PUBLIC"]
+          },
+          "martTypeName": {
+            "type": "string",
+            "description": "集市类型：PUBLIC-公共集市、BUSINESS-业务集市、APPLICATION-应用集市名称"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "parentId"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "DataMartTreeListVo": {
+        "title": "DataMartTreeListVo",
+        "type": "object",
+        "properties": {
+          "children": {
+            "type": "array",
+            "description": "子集",
+            "items": {
+              "$ref": "#/components/schemas/DataMartTreeListVo"
+            }
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "parentId"
+          },
+          "type": {
+            "type": "string",
+            "description": "类型，MART-数据集市，SUBJECT-主题域"
+          }
+        }
+      },
+      "DataWarehouseHierarchyDetailVo": {
+        "title": "DataWarehouseHierarchyDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "modelType": {
+            "type": "string",
+            "description": "模型类型",
+            "enum": [
+              "APPLICATION",
+              "DETAIL",
+              "DIM",
+              "DIMENSION",
+              "DIMENSION_DIM",
+              "SOURCE",
+              "SUMMARY"
+            ]
+          },
+          "modelTypeName": {
+            "type": "string",
+            "description": "模型类型名称"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "type": {
+            "type": "string",
+            "description": "分层类型：DIM-贴源层、DWD-公共层、ADS-应用层、OTHER-其他",
+            "enum": ["ADS", "DIM", "DWD"]
+          },
+          "typeName": {
+            "type": "string",
+            "description": "分层类型名称"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DataWarehouseHierarchyEditDto": {
+        "title": "DataWarehouseHierarchyEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名称"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "DataWarehouseHierarchyInsertDto": {
+        "title": "DataWarehouseHierarchyInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名称"
+          },
+          "modelType": {
+            "type": "string",
+            "description": "模型类型",
+            "enum": [
+              "APPLICATION",
+              "DETAIL",
+              "DIM",
+              "DIMENSION",
+              "DIMENSION_DIM",
+              "SOURCE",
+              "SUMMARY"
+            ]
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          },
+          "type": {
+            "type": "string",
+            "description": "分层类型：DIM-贴源层、DWD-公共层、ADS-应用层、OTHER-其他",
+            "enum": ["ADS", "DIM", "DWD"]
+          }
+        }
+      },
+      "DataWarehouseHierarchyListVo": {
+        "title": "DataWarehouseHierarchyListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "modelType": {
+            "type": "string",
+            "description": "模型类型",
+            "enum": [
+              "APPLICATION",
+              "DETAIL",
+              "DIM",
+              "DIMENSION",
+              "DIMENSION_DIM",
+              "SOURCE",
+              "SUMMARY"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "remark"
+          },
+          "type": {
+            "type": "string",
+            "description": "分层类型：DIM-贴源层、DWD-公共层、ADS-应用层、OTHER-其他",
+            "enum": ["ADS", "DIM", "DWD"]
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DictionaryDetailVo": {
+        "title": "DictionaryDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名称"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名称"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DictionaryEditDto": {
+        "title": "DictionaryEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名称"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名称"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          }
+        }
+      },
+      "DictionaryInsertDto": {
+        "title": "DictionaryInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名称"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名称"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          }
+        }
+      },
+      "DictionaryListVo": {
+        "title": "DictionaryListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名称"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名称"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DimensionDetailVo": {
+        "title": "DimensionDetailVo",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名称"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dataId": {
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "dwhId": {
+            "type": "string",
+            "description": "数仓分层id"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称（英文缩写）"
+          },
+          "remark": {
+            "type": "string",
+            "description": "描述"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DimensionEditDto": {
+        "title": "DimensionEditDto",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名称"
+          },
+          "dataId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "martId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据集市ID"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称（英文缩写）"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          }
+        }
+      },
+      "DimensionInsertDto": {
+        "title": "DimensionInsertDto",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名称"
+          },
+          "dataId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "dwhId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数仓分层id"
+          },
+          "martId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据集市ID"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称（英文缩写）"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          }
+        }
+      },
+      "DimensionListVo": {
+        "title": "DimensionListVo",
+        "type": "object",
+        "properties": {
+          "busBelong": {
+            "type": "string",
+            "description": "业务归属"
+          },
+          "busTypeId": {
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名称"
+          },
+          "dataId": {
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "dwhId": {
+            "type": "string",
+            "description": "数仓分层id"
+          },
+          "dwhName": {
+            "type": "string",
+            "description": "数仓分层名称"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称（英文缩写）"
+          },
+          "tableType": {
+            "type": "string",
+            "description": "模型表类型:为空时表示是维度",
+            "enum": ["APPLICATION", "DETAIL", "DIM", "DIMENSION", "SOURCE", "SUMMARY"]
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "DirDto": {
+        "title": "DirDto",
+        "type": "object",
+        "properties": {
+          "dirType": {
+            "type": "string",
+            "description": "目录类型",
+            "enum": ["CODE", "FOLDER", "STANDARD", "STANDARD_SET"]
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "目录名称"
+          },
+          "parentId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "上级目录"
+          }
+        }
+      },
+      "DirEditDto": {
+        "title": "DirEditDto",
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "目录名称"
+          }
+        }
+      },
+      "DirVo": {
+        "title": "DirVo",
+        "type": "object",
+        "properties": {
+          "children": {
+            "type": "array",
+            "description": "下级目录",
+            "items": {
+              "$ref": "#/components/schemas/DirVo"
+            }
+          },
+          "dirType": {
+            "type": "string",
+            "description": "目录类型：FOLDER-文件夹，STANDARD-标准集",
+            "enum": ["CODE", "FOLDER", "STANDARD", "STANDARD_SET"]
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "目录名称"
+          }
+        }
+      },
+      "FieldStdDetailVo": {
+        "title": "FieldStdDetailVo",
+        "type": "object",
+        "properties": {
+          "businessDefinition": {
+            "type": "string",
+            "description": "业务定义"
+          },
+          "canNull": {
+            "type": "boolean",
+            "description": "是否可以为空-1（true）可以为空，0（否）不能为空",
+            "example": false
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "code": {
+            "type": "string",
+            "description": "编码"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dataType": {
+            "type": "string",
+            "description": "数据类型",
+            "enum": [
+              "ARRAY",
+              "BIGINT",
+              "BOOLEAN",
+              "DATE",
+              "DATETIME",
+              "DECIMAL",
+              "INT",
+              "JSON",
+              "MAP",
+              "STRING",
+              "STRUCT",
+              "TIMESTAMP"
+            ]
+          },
+          "defaultValue": {
+            "type": "string",
+            "description": "默认值"
+          },
+          "dirId": {
+            "type": "string",
+            "description": "所属目录ID"
+          },
+          "dirName": {
+            "type": "string",
+            "description": "所属目录名称"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "length": {
+            "type": "integer",
+            "description": "长度",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentStd": {
+            "type": "string",
+            "description": "上级标准"
+          },
+          "precision": {
+            "type": "integer",
+            "description": "精度",
+            "format": "int32"
+          },
+          "reference": {
+            "type": "string",
+            "description": "引用代码"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "FieldStdEditDto": {
+        "title": "FieldStdEditDto",
+        "type": "object",
+        "properties": {
+          "businessDefinition": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务定义"
+          },
+          "canNull": {
+            "type": "boolean",
+            "description": "是否可以为空-1（true）可以为空，0（否）不能为空",
+            "example": false
+          },
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "dataType": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据类型"
+          },
+          "defaultValue": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "默认值"
+          },
+          "dirId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "所属目录ID"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "length": {
+            "type": "integer",
+            "description": "长度",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "parentStd": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "上级标准"
+          },
+          "precision": {
+            "type": "integer",
+            "description": "精度",
+            "format": "int32"
+          },
+          "reference": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "引用代码"
+          }
+        }
+      },
+      "FieldStdInsertDto": {
+        "title": "FieldStdInsertDto",
+        "type": "object",
+        "properties": {
+          "businessDefinition": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务定义"
+          },
+          "canNull": {
+            "type": "boolean",
+            "description": "是否可以为空-1（true）可以为空，0（否）不能为空",
+            "example": false
+          },
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "code": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码"
+          },
+          "dataType": {
+            "type": "string",
+            "description": "数据类型",
+            "enum": [
+              "ARRAY",
+              "BIGINT",
+              "BOOLEAN",
+              "DATE",
+              "DATETIME",
+              "DECIMAL",
+              "INT",
+              "JSON",
+              "MAP",
+              "STRING",
+              "STRUCT",
+              "TIMESTAMP"
+            ]
+          },
+          "defaultValue": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "默认值"
+          },
+          "dirId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "所属目录ID"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "英文名"
+          },
+          "length": {
+            "type": "integer",
+            "description": "长度",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "parentStd": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "上级标准"
+          },
+          "precision": {
+            "type": "integer",
+            "description": "精度",
+            "format": "int32"
+          },
+          "reference": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "description": "引用代码"
+          }
+        }
+      },
+      "FieldStdListVo": {
+        "title": "FieldStdListVo",
+        "type": "object",
+        "properties": {
+          "businessDefinition": {
+            "type": "string",
+            "description": "业务定义"
+          },
+          "canNull": {
+            "type": "boolean",
+            "description": "是否可以为空-1（true）可以为空，0（否）不能为空",
+            "example": false
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dataType": {
+            "type": "string",
+            "description": "数据类型",
+            "enum": [
+              "ARRAY",
+              "BIGINT",
+              "BOOLEAN",
+              "DATE",
+              "DATETIME",
+              "DECIMAL",
+              "INT",
+              "JSON",
+              "MAP",
+              "STRING",
+              "STRUCT",
+              "TIMESTAMP"
+            ]
+          },
+          "defaultValue": {
+            "type": "string",
+            "description": "默认值"
+          },
+          "dirId": {
+            "type": "string",
+            "description": "所属目录ID"
+          },
+          "enName": {
+            "type": "string",
+            "description": "英文名"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "length": {
+            "type": "integer",
+            "description": "长度",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentStd": {
+            "type": "string",
+            "description": "上级标准"
+          },
+          "precision": {
+            "type": "integer",
+            "description": "精度",
+            "format": "int32"
+          },
+          "reference": {
+            "type": "string",
+            "description": "引用代码"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "KeyValue": {
+        "title": "KeyValue",
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "键"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "value": {
+            "type": "string",
+            "description": "值"
+          }
+        }
+      },
+      "ModeRuleEditDto": {
+        "title": "ModeRuleEditDto",
+        "type": "object",
+        "properties": {
+          "composition": {
+            "type": "array",
+            "description": "规则类型组成",
+            "items": {
+              "type": "string",
+              "enum": [
+                "BUSINESS_TYPE",
+                "CUSTOM",
+                "DATA_DOMAIN",
+                "MANY_WORDS_ROOT",
+                "STORAGE_POLICY",
+                "WORD_ROOT"
+              ]
+            }
+          },
+          "defaultFlag": {
+            "type": "boolean",
+            "description": "是否默认规则1（true）-是，0（false）-否",
+            "example": false
+          },
+          "dwhId": {
+            "type": "string",
+            "description": "数仓分层ID"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "remark": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          },
+          "ruleName": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "规则名称"
+          },
+          "rulePrefix": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "规则前缀"
+          },
+          "ruleStrength": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "description": "规则强弱：strong-强，weak-弱"
+          },
+          "ruleType": {
+            "type": "string",
+            "description": "规则类型：TABLE-表名",
+            "enum": ["TABLE"]
+          }
+        }
+      },
+      "ModeRuleInsertDto": {
+        "title": "ModeRuleInsertDto",
+        "type": "object",
+        "properties": {
+          "composition": {
+            "type": "array",
+            "description": "规则类型组成",
+            "items": {
+              "type": "string",
+              "enum": [
+                "BUSINESS_TYPE",
+                "CUSTOM",
+                "DATA_DOMAIN",
+                "MANY_WORDS_ROOT",
+                "STORAGE_POLICY",
+                "WORD_ROOT"
+              ]
+            }
+          },
+          "dwhId": {
+            "type": "string",
+            "description": "数仓分层ID"
+          },
+          "remark": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          },
+          "ruleName": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "规则名称"
+          },
+          "rulePrefix": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "规则前缀"
+          },
+          "ruleType": {
+            "type": "string",
+            "description": "规则类型：TABLE-表名",
+            "enum": ["TABLE"]
+          }
+        }
+      },
+      "ModeRuleListVo": {
+        "title": "ModeRuleListVo",
+        "type": "object",
+        "properties": {
+          "composition": {
+            "type": "array",
+            "description": "规则组成",
+            "items": {
+              "$ref": "#/components/schemas/KeyValue"
+            }
+          },
+          "defaultFlag": {
+            "type": "boolean",
+            "description": "是否默认规则1（true）-是，0（false）-否",
+            "example": false
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "remark": {
+            "type": "string",
+            "description": "描述"
+          },
+          "ruleComposition": {
+            "type": "string",
+            "description": "规则组成字符串"
+          },
+          "ruleName": {
+            "type": "string",
+            "description": "规则名称"
+          },
+          "rulePrefix": {
+            "type": "string",
+            "description": "规则前缀"
+          },
+          "ruleStrength": {
+            "type": "string",
+            "description": "规则强弱：strong-强，weak-弱"
+          },
+          "ruleType": {
+            "type": "string",
+            "description": "规则类型：TABLE-表名",
+            "enum": ["TABLE"]
+          }
+        }
+      },
+      "ModeTableDetailVo": {
+        "title": "ModeTableDetailVo",
+        "type": "object",
+        "properties": {
+          "busProcessId": {
+            "type": "string",
+            "description": "业务过程ID"
+          },
+          "busTypeId": {
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名称"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dataId": {
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "dimId": {
+            "type": "string",
+            "description": "维度ID"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "dwhId": {
+            "type": "string",
+            "description": "数仓分层id"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "lifeCycle": {
+            "type": "integer",
+            "description": "生命周期（单位：天）",
+            "format": "int32"
+          },
+          "modeTbFields": {
+            "type": "array",
+            "description": "表字段列表",
+            "items": {
+              "$ref": "#/components/schemas/ModeTbField"
+            }
+          },
+          "modifier": {
+            "type": "string",
+            "description": "修饰词"
+          },
+          "name": {
+            "type": "string",
+            "description": "表名"
+          },
+          "nameRuleId": {
+            "type": "string",
+            "description": "表名规则ID"
+          },
+          "remark": {
+            "type": "string",
+            "description": "描述"
+          },
+          "storagePolicy": {
+            "type": "string",
+            "description": "存储策略",
+            "enum": [
+              "DF",
+              "DI",
+              "HF",
+              "HH",
+              "HI",
+              "HM",
+              "MF",
+              "MI",
+              "QF",
+              "QHF",
+              "QHI",
+              "QI",
+              "RF",
+              "RI",
+              "WH",
+              "WI",
+              "YF",
+              "YI"
+            ]
+          },
+          "storagePolicyName": {
+            "type": "string",
+            "description": "存储策略名称"
+          },
+          "submitFlag": {
+            "type": "boolean",
+            "description": "是否提交：:1（true）-是，0（false）-否",
+            "example": false
+          },
+          "tableType": {
+            "type": "string",
+            "description": "模型表类型（枚举）",
+            "enum": ["APPLICATION", "DETAIL", "DIM", "DIMENSION", "SOURCE", "SUMMARY"]
+          },
+          "tableTypeName": {
+            "type": "string",
+            "description": "模型表类型（枚举）名称"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "ModeTableEditDto": {
+        "title": "ModeTableEditDto",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名称"
+          },
+          "composition": {
+            "type": "array",
+            "description": "表名组成部分",
+            "items": {
+              "$ref": "#/components/schemas/ModeTbNameComposition"
+            }
+          },
+          "dataId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "dimId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "维度ID"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "lifeCycle": {
+            "type": "integer",
+            "description": "生命周期（单位：天）",
+            "format": "int32"
+          },
+          "modeTbFields": {
+            "type": "array",
+            "description": "表字段列表",
+            "items": {
+              "$ref": "#/components/schemas/ModeTbField"
+            }
+          },
+          "modifier": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "修饰词"
+          },
+          "name": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "表名"
+          },
+          "nameRuleId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "表名规则ID"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          },
+          "storagePolicy": {
+            "type": "string",
+            "description": "存储策略",
+            "enum": [
+              "DF",
+              "DI",
+              "HF",
+              "HH",
+              "HI",
+              "HM",
+              "MF",
+              "MI",
+              "QF",
+              "QHF",
+              "QHI",
+              "QI",
+              "RF",
+              "RI",
+              "WH",
+              "WI",
+              "YF",
+              "YI"
+            ]
+          }
+        }
+      },
+      "ModeTableInsertDto": {
+        "title": "ModeTableInsertDto",
+        "type": "object",
+        "properties": {
+          "busTypeId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名称"
+          },
+          "composition": {
+            "type": "array",
+            "description": "表名组成部分",
+            "items": {
+              "$ref": "#/components/schemas/ModeTbNameComposition"
+            }
+          },
+          "dataId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "dimId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "维度ID"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "dwhId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数仓分层id"
+          },
+          "lifeCycle": {
+            "type": "integer",
+            "description": "生命周期（单位：天）",
+            "format": "int32"
+          },
+          "modeTbFields": {
+            "type": "array",
+            "description": "表字段列表",
+            "items": {
+              "$ref": "#/components/schemas/ModeTbField"
+            }
+          },
+          "modifier": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "修饰词"
+          },
+          "name": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "description": "表名"
+          },
+          "nameRuleId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "表名规则ID"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "描述"
+          },
+          "storagePolicy": {
+            "type": "string",
+            "description": "存储策略",
+            "enum": [
+              "DF",
+              "DI",
+              "HF",
+              "HH",
+              "HI",
+              "HM",
+              "MF",
+              "MI",
+              "QF",
+              "QHF",
+              "QHI",
+              "QI",
+              "RF",
+              "RI",
+              "WH",
+              "WI",
+              "YF",
+              "YI"
+            ]
+          },
+          "tableType": {
+            "type": "string",
+            "description": "模型表类型",
+            "enum": ["APPLICATION", "DETAIL", "DIM", "DIMENSION", "SOURCE", "SUMMARY"]
+          }
+        }
+      },
+      "ModeTableListVo": {
+        "title": "ModeTableListVo",
+        "type": "object",
+        "properties": {
+          "busBelong": {
+            "type": "string",
+            "description": "业务归属"
+          },
+          "busProcessId": {
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "busTypeId": {
+            "type": "string",
+            "description": "业务分类ID"
+          },
+          "cnName": {
+            "type": "string",
+            "description": "中文名称"
+          },
+          "dataId": {
+            "type": "string",
+            "description": "数据域ID"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "dwhName": {
+            "type": "string",
+            "description": "数仓分层"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "martId": {
+            "type": "string",
+            "description": "数据集市ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "表名"
+          },
+          "subjectId": {
+            "type": "string",
+            "description": "主题域ID"
+          },
+          "submitFlag": {
+            "type": "boolean",
+            "description": "是否提交：:1（true）-是，0（false）-否",
+            "example": false
+          },
+          "tableType": {
+            "type": "string",
+            "description": "模型类型",
+            "enum": ["APPLICATION", "DETAIL", "DIM", "DIMENSION", "SOURCE", "SUMMARY"]
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "ModeTbField": {
+        "title": "ModeTbField",
+        "type": "object",
+        "properties": {
+          "canNull": {
+            "type": "boolean"
+          },
+          "cnName": {
+            "type": "string"
+          },
+          "codeStdId": {
+            "type": "string"
+          },
+          "createBy": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataType": {
+            "type": "string",
+            "enum": [
+              "ARRAY",
+              "BIGINT",
+              "BOOLEAN",
+              "DATE",
+              "DATETIME",
+              "DECIMAL",
+              "INT",
+              "JSON",
+              "MAP",
+              "STRING",
+              "STRUCT",
+              "TIMESTAMP"
+            ]
+          },
+          "fieldStdId": {
+            "type": "string"
+          },
+          "fieldType": {
+            "type": "string",
+            "enum": ["DIMENSION", "MEASUREMENT", "PROPERTY"]
+          },
+          "id": {
+            "type": "string"
+          },
+          "length": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "precision": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "primaryFlag": {
+            "type": "boolean"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "sourceField": {
+            "type": "string"
+          },
+          "sourceTb": {
+            "type": "string"
+          },
+          "tableId": {
+            "type": "string"
+          },
+          "unitId": {
+            "type": "string"
+          },
+          "updateBy": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ModeTbNameComposition": {
+        "title": "ModeTbNameComposition",
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "实际填入内容"
+          },
+          "type": {
+            "type": "string",
+            "description": "表名组成规则类型",
+            "enum": [
+              "BUSINESS_TYPE",
+              "CUSTOM",
+              "DATA_DOMAIN",
+              "MANY_WORDS_ROOT",
+              "STORAGE_POLICY",
+              "WORD_ROOT"
+            ]
+          }
+        }
+      },
+      "PageResult«BusinessProcessListVo»": {
+        "title": "PageResult«BusinessProcessListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/BusinessProcessListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«BusinessTypeListVo»": {
+        "title": "PageResult«BusinessTypeListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/BusinessTypeListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«CodeStdListVo»": {
+        "title": "PageResult«CodeStdListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/CodeStdListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«DataDomainListVo»": {
+        "title": "PageResult«DataDomainListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/DataDomainListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«DataMartListVo»": {
+        "title": "PageResult«DataMartListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/DataMartListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«DataWarehouseHierarchyListVo»": {
+        "title": "PageResult«DataWarehouseHierarchyListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/DataWarehouseHierarchyListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«DictionaryListVo»": {
+        "title": "PageResult«DictionaryListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/DictionaryListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«DimensionListVo»": {
+        "title": "PageResult«DimensionListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/DimensionListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«ModeTableListVo»": {
+        "title": "PageResult«ModeTableListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/ModeTableListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«SubjectDomainListVo»": {
+        "title": "PageResult«SubjectDomainListVo»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "当前页数据",
+            "items": {
+              "$ref": "#/components/schemas/SubjectDomainListVo"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数据量",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数据量",
+            "format": "int64"
+          }
+        }
+      },
+      "SubjectDomainDetailVo": {
+        "title": "SubjectDomainDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "martId": {
+            "type": "string",
+            "description": "数据集市ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级主题"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "SubjectDomainEditDto": {
+        "title": "SubjectDomainEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "martId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据集市ID"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "SubjectDomainInsertDto": {
+        "title": "SubjectDomainInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "中文名"
+          },
+          "director": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "负责人"
+          },
+          "martId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "数据集市ID"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "上级主题"
+          },
+          "remark": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "SubjectDomainListVo": {
+        "title": "SubjectDomainListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "中文名"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "director": {
+            "type": "string",
+            "description": "负责人"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "martId": {
+            "type": "string",
+            "description": "数据集市ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级主题"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "TreeVo": {
+        "title": "TreeVo",
+        "type": "object",
+        "properties": {
+          "children": {
+            "type": "array",
+            "description": "子级数据",
+            "items": {
+              "$ref": "#/components/schemas/TreeVo"
+            }
+          },
+          "count": {
+            "type": "integer",
+            "description": "子级数量",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "显示名称"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "父级id"
+          },
+          "submitFlag": {
+            "type": "boolean",
+            "description": "是否已提交",
+            "example": false
+          },
+          "type": {
+            "type": "string",
+            "description": "目录类型：1-业务分类，2-数据域，3-主题域，4-数据集市，5-目录,6-业务过程，DIM-维度，其他参考模型表类型"
+          }
+        }
+      },
+      "UnitStdDetailVo": {
+        "title": "UnitStdDetailVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "编码名称"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "dirId": {
+            "type": "string",
+            "description": "分类目录ID"
+          },
+          "dirName": {
+            "type": "string",
+            "description": "分类名称"
+          },
+          "enName": {
+            "type": "string",
+            "description": "编码英文名称"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "编码取值"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      },
+      "UnitStdEditDto": {
+        "title": "UnitStdEditDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码名称"
+          },
+          "dirId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "分类目录ID"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码英文名称"
+          },
+          "id": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码取值"
+          }
+        }
+      },
+      "UnitStdInsertDto": {
+        "title": "UnitStdInsertDto",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码名称"
+          },
+          "dirId": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "description": "分类目录ID"
+          },
+          "enName": {
+            "maxLength": 2048,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码英文名称"
+          },
+          "name": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "编码取值"
+          }
+        }
+      },
+      "UnitStdListVo": {
+        "title": "UnitStdListVo",
+        "type": "object",
+        "properties": {
+          "cnName": {
+            "type": "string",
+            "description": "编码名称"
+          },
+          "createBy": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "enName": {
+            "type": "string",
+            "description": "编码英文名称"
+          },
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "编码取值"
+          },
+          "updateBy": {
+            "type": "string",
+            "description": "最后更新人"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "最后更新时间",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

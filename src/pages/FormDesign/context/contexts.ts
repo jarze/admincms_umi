@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-export const DesignerEngineContext = createContext<undefined>(undefined)
+export const DesignerEngineContext = createContext<any | undefined>(undefined)
 
 export const PreviewComponentsContext = createContext({})
 
